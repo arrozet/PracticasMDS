@@ -13,6 +13,20 @@ associationclass Contrato between
         Aerolinea [1..*]
     attributes
         numMesesContrato : Integer
-        pricePerMonth : Real
-        totalPrice : Real
+        precioMes : Real
+        precioTotal : Real derived
 end
+
+
+
+------------- Invariants -------------
+constraints
+
+context Aerolinea
+    -- Cada Aerolinea tiene un nombre distinto
+    inv NombreAerolineaDistinto :
+          Aerolinea.allInstances()->isUnique(nombre)
+
+context Contrato
+    --
+    deriv precioTotal : self.precioMes * self.numMesesContrato --ESTO NO SE SI ESTÁ BIEN
