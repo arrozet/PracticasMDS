@@ -1,0 +1,18 @@
+
+-------------- Classes ------------------
+class Aerolinea
+    attributes
+        Nombre : String
+end
+
+class Avion
+end
+
+associationclass Contrato between 
+        Avion [1..*]
+        Aerolinea [1..*]
+    attributes
+        numMesesContrato : Integer
+        pricePerMonth : Real
+        totalPrice : Real
+end
