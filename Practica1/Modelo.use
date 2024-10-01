@@ -1,23 +1,87 @@
-
+model SistemaAviacion
+-------------- Enumerations ------------
+enum EstadoAvion {Volando, Hangar, Desguace}
 -------------- Classes ------------------
 class Aerolinea
     attributes
-        Nombre : String
+        nombre : String
 end
 
 class Avion
+    attributes
+        estado : EstadoAvion
+        viajesCompletados : Integer
 end
 
 associationclass Contrato between 
-        Avion [1..*]
-        Aerolinea [1..*]
+        Avion [1..*] role Pertenece
+        Aerolinea [1] role Tiene
     attributes
         numMesesContrato : Integer
         precioMes : Real
-        precioTotal : Real derived
+        precioTotal : Real derive :
+            self.precioMes * self.numMesesContrato --ESTO NO SE SI ESTÁ BIEN  
 end
 
+class Aeropuerto
+    attributes
+        nombre : String 
+end
 
+class Hangar
+    attributes
+        capacidad : Integer
+end 
+
+composition hangarAeropuerto between
+    Aeropuerto [1]
+    Hangar [0..1]
+end
+
+class Desguace
+    attributes
+        capacidad : Integer
+end 
+
+composition desguaceAeropuerto between
+    Aeropuerto [1]
+    Desguace [0..1]
+end
+
+class Ciudad
+    attributes
+        nombre : String
+end
+
+class Piloto
+    attributes
+        nombre : String
+        edad : Integer
+        viajesComoPrincipal : Integer
+        viajesComoSecundario : Integer
+        kmRecorridosTotales : Integer
+end
+
+class PilotoPro < Piloto
+end
+
+association Trabajan between 
+    Piloto [1] role Trabaja
+    Aerolinea [1..*] role Pertenece
+end
+
+class Vuelo 
+    attributes
+        identificador : String
+        distancia : Integer
+
+end
+
+class Pasajero 
+    attributes
+        nombre : String
+        edad : Integer
+end
 
 ------------- Invariants -------------
 constraints
@@ -27,6 +91,11 @@ context Aerolinea
     inv NombreAerolineaDistinto :
           Aerolinea.allInstances()->isUnique(nombre)
 
-context Contrato
-    --
-    deriv precioTotal : self.precioMes * self.numMesesContrato --ESTO NO SE SI ESTÁ BIEN
+context PilotoPro
+    -- Cada PilotoPro debe tener al menos 1000 vuelos como Principal y 2000 como Secundario
+    inv esPilotoPro:
+        (self.viajesComoPrincipal >= 1000 and self.viajesComoSecundario >= 2000)
+
+context Aeropuerto
+    -- Cada Aeropuerto solo puede tener un Hangar y un Desguace
+    
