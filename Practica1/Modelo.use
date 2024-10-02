@@ -11,7 +11,7 @@ class Avion
     attributes
         estado : EstadoAvion
         viajesCompletados : Integer
-        kmRecorridos : Real derive : self
+        kmRecorridos : Real derive : -- Falta hacer esto
 end
 
 associationclass Contrato between 
