@@ -71,13 +71,13 @@ class Vuelo
 end
 
 association PilotoPrimario between 
-    Piloto [1] 
-    Vuelo [1] 
+    Piloto [1] role Pilota
+    Vuelo [1] role Es_Pilotado
 end
 
 association PilotoSecundario between 
-    Piloto [0..1] 
-    Vuelo [1] 
+    Piloto [1] role Pilota
+    Vuelo [0..1] role Es_Pilotado
 end
 
 association AvionVolando between
