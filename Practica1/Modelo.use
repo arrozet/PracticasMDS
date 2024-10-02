@@ -26,6 +26,7 @@ end
 class Aeropuerto
     attributes
         nombre : String 
+        ciudad : String
 end
 
 class Hangar
@@ -48,11 +49,6 @@ composition desguaceAeropuerto between
     Desguace [0..1]
 end
 
-class Ciudad
-    attributes
-        nombre : String
-end
-
 class Piloto
     attributes
         nombre : String
@@ -60,9 +56,7 @@ class Piloto
         viajesComoPrincipal : Integer
         viajesComoSecundario : Integer
         kmRecorridosTotales : Integer
-end
-
-class PilotoPro < Piloto
+        esPro : Boolean
 end
 
 association Trabajan between 
@@ -97,22 +91,31 @@ class Pasajero
         edad : Integer
 end
 
+association ViajandoCon between
+    Avion[1]
+    Pasajero[0..1]
+and
 ------------- Invariants -------------
 constraints
 
 context Aerolinea
-    -- Cada Aerolinea tiene un nombre distinto
+    -- Nombre de la Aerolinea único
     inv NombreAerolineaDistinto :
           Aerolinea.allInstances()->isUnique(nombre)
 
-context PilotoPro
+context Piloto
     -- Cada PilotoPro debe tener al menos 1000 vuelos como Principal y 2000 como Secundario
     inv esPilotoPro:
-        (self.viajesComoPrincipal >= 1000 and self.viajesComoSecundario >= 2000)
+        self.viajesComoPrincipal >= 1000 and self.viajesComoSecundario >= 2000
 
 context Aeropuerto
     -- Cada Aeropuerto solo puede tener un Hangar y un Desguace
+
+    -- Nombre de la ciudad del aeropuerto es único
+    inv NombreAerolineaDistinto :
+          Aeropuerto.allInstances()->isUnique(ciudad)
+
 context Vuelo
     inv IdentificadorVueloDistinto :
-          Vuelo.allInstances()->isUnique(nombre)
+          Vuelo.allInstances()->isUnique(identificador)
     
