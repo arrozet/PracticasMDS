@@ -76,6 +76,21 @@ class Vuelo
         distancia : Integer
 end
 
+association PilotoPrimario between 
+    Piloto [1] 
+    Vuelo [1] 
+end
+
+association PilotoSecundario between 
+    Piloto [0..1] 
+    Vuelo [1] 
+end
+
+association AvionVolando between
+    Avion [1]
+    Vuelo [1] 
+end
+
 class Pasajero 
     attributes
         nombre : String
@@ -97,4 +112,7 @@ context PilotoPro
 
 context Aeropuerto
     -- Cada Aeropuerto solo puede tener un Hangar y un Desguace
+context Vuelo
+    inv IdentificadorVueloDistinto :
+          Vuelo.allInstances()->isUnique(nombre)
     
