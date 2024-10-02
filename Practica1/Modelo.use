@@ -11,6 +11,7 @@ class Avion
     attributes
         estado : EstadoAvion
         viajesCompletados : Integer
+        kmRecorridos : Real derive : self
 end
 
 associationclass Contrato between 
@@ -19,8 +20,7 @@ associationclass Contrato between
     attributes
         numMesesContrato : Integer
         precioMes : Real
-        precioTotal : Real derive :
-            self.precioMes * self.numMesesContrato --ESTO NO SE SI ESTÁ BIEN  
+        precioTotal : Real derive : self.precioMes * self.numMesesContrato --ESTO NO SE SI ESTÁ BIEN  
 end
 
 class Aeropuerto
@@ -74,7 +74,6 @@ class Vuelo
     attributes
         identificador : String
         distancia : Integer
-
 end
 
 class Pasajero 
