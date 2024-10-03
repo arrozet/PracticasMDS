@@ -99,20 +99,53 @@ and
 constraints
 
 context Aerolinea
-    -- Nombre de la Aerolinea único
+    ---
+    -- Cada Aerolínea tiene un nombre que debe ser distinto al de las demás => 
+    -- Nombre de la Aerolínea es único
+    ---
     inv NombreAerolineaDistinto :
           Aerolinea.allInstances()->isUnique(nombre)
 
+    ---
+    -- Todo Avión debe encontrarse volando, estacionado en un Hangar o ha sido ya relegado a un Desguace.
+    ---
+    
+    ---
+    -- Los Aviones que deben encontrarse en un Desguace son aquellos que han completado los 1000 viajes.
+    ---
+
+    ---
+    -- Cada avión puede ser usado por varias aerolíneas.
+    ---
+    -- No tengo ni idea de si esto siquiera se puede modelar como restricción
+
 context Piloto
+    ---
+    -- Los pilotos principal y secundario deben ser personas distintas.
+    ---
+
+    ---
     -- Cada PilotoPro debe tener al menos 1000 vuelos como Principal y 2000 como Secundario
+    ---
     inv esPilotoPro:
         self.viajesComoPrincipal >= 1000 and self.viajesComoSecundario >= 2000
-
+    
+    ---
+    -- No se permite a un piloto trabajar o haber trabajado para más de dos aerolíneas diferentes. 
+    ---
+    -- esto es lo que nos dijo de quitar una relación y después trazarlo desde el otro camino usando el modelo de objetos (no tengo ni idea de cómo se hace)
+    
 context Aeropuerto
-    -- Cada Aeropuerto solo puede tener un Hangar y un Desguace
+    ---
+    -- Cada Aeropuerto solo puede tener, como máximo, un Desguace (no dice nada sobre Hangares)
+    ---
+    -- esto en teoría se modela con la multiplicidad de la relación
 
+    ---
+    -- Los aeropuertos se ubican en ciudades, no pudiendo haber más de un aeropuerto en cada ciudad => 
     -- Nombre de la ciudad del aeropuerto es único
-    inv NombreAerolineaDistinto :
+    ---
+    inv CiudadAeropuertoDistinta :
           Aeropuerto.allInstances()->isUnique(ciudad)
 
 context Vuelo
