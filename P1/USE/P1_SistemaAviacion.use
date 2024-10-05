@@ -140,6 +140,8 @@ context Piloto
     -- Los pilotos principal y secundario deben ser personas distintas.
     ---
     -- ni idea de como hacerlo
+        inv PilotosDiferentes:
+        self.pilotaPrincipal <> self.pilotaSecundario
 
     ---
     -- Cada PilotoPro debe tener al menos 1000 vuelos como Principal y 2000 como Secundario
