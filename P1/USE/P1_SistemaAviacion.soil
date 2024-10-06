@@ -1,0 +1,82 @@
+reset
+
+!new Aerolinea('Iberia')
+!Iberia.nombre := 'Iberia'
+
+!new Aerolinea('AirEuropa')
+!AirEuropa.nombre := 'AirEuropa'
+
+!new Aeropuerto('Barajas')
+!Barajas.ciudad := 'Madrid'
+
+!new Aeropuerto('ElPrat')
+!ElPrat.ciudad := 'Barcelona'
+
+!new Avion('A320')
+!A320.viajesCompletados := 950
+
+!new Avion('B737')
+!B737.viajesCompletados := 1001
+
+!new Piloto('Carlos')
+!Carlos.nombre := 'Carlos'
+!Carlos.edad := 45
+!Carlos.esPro := true
+
+!new Piloto('Lucia')
+!Lucia.nombre := 'Lucia'
+!Lucia.edad := 39
+!Lucia.esPro := false
+
+!new Pasajero('Pedro')
+!Pedro.nombre := 'Pedro'
+!Pedro.edad := 30
+
+!new Vuelo('Vuelo1')
+!Vuelo1.identificador := 1001
+!Vuelo1.numKm := 1200.0
+
+!new Vuelo('Vuelo2')
+!Vuelo2.identificador := 1002
+!Vuelo2.numKm := 1800.0
+
+!new Hangar('Hangar1')
+!Hangar1.capacidadMax := 5
+
+!new Desguace('Desguace1')
+!Desguace1.capacidadMax := 3
+
+-- Relacionar Aviones y Aerolíneas a través de contratos
+!new Contrato(A320, Iberia)
+!Contrato1.numMesesContrato := 12
+!Contrato1.precioMes := 100000
+
+!new Contrato(B737, AirEuropa)
+!Contrato2.numMesesContrato := 24
+!Contrato2.precioMes := 150000
+
+-- Relacionar Aerolíneas y Aviones
+!insert(A320, Iberia) into Contrato -- Esto ya está implícito en la creación del contrato pero por alguna razón hay que ponerlo para que aparezca la relación
+!insert(B737, AirEuropa) into Contrato -- Esto ya está implícito en la creación del contrato pero por alguna razón hay que ponerlo para que aparezca la relación
+
+-- Relacionar aviones con vuelos
+!insert(A320, Vuelo1) into AvionVuelo
+!insert(B737, Vuelo2) into AvionVuelo
+
+-- Relacionar piloto principal con vuelos
+!insert(Vuelo1, Carlos) into PilotoPrincipalVuela
+!insert(Vuelo2, Lucia) into PilotoPrincipalVuela
+
+-- Relacionar piloto secundario con vuelos (Lucia es la secundaria en Vuelo1)
+!insert(Vuelo1, Lucia) into PilotoSecundarioVuela
+
+-- Relacionar pasajeros con vuelos
+!insert(Pedro, Vuelo1) into PasajeroVuelo
+
+-- Asignar aviones a hangar y desguace
+!insert(Hangar1, A320) into AvionHangar
+!insert(Desguace1, B737) into AvionDesguace
+
+-- Asignar hangar y desguace a aeropuertos
+!insert(Barajas, Hangar1) into hangarAeropuerto
+!insert(ElPrat, Desguace1) into desguaceAeropuerto
