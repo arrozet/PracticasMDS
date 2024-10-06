@@ -27,7 +27,7 @@ class Aeropuerto
         ciudad : String
 end
 
-class Almacen --  Los hangares y los desguaces tienen una capacidad máxima. No pone que sea la misma de aviones que pueden acoger
+class Almacen --  Los hangares y los desguaces tienen una capacidad máxima. No pone que sea la misma de aviones que pueden acoger, da igual es es un atributo heredado, a ver si estudiamos un poco...
     attributes
         capacidadMax : Integer
 end 
@@ -112,7 +112,7 @@ constraints
 
 context Aerolinea
 
-    -- Cada Aerolínea tiene un nombre que debe ser distinto al de las demás => 
+    -- 1. Cada Aerolínea tiene un nombre que debe ser distinto al de las demás => 
     -- Nombre de la Aerolínea es único
     ---
     inv NombreAerolineaDistinto :
@@ -120,46 +120,54 @@ context Aerolinea
 
 context Avion
     
-    -- Todo Avión debe encontrarse volando, estacionado en un Hangar o ha sido ya relegado a un Desguace.
+    -- 2. Todo Avión debe encontrarse volando, estacionado en un Hangar o ha sido ya relegado a un Desguace.
     ---
-    -- esto ya esta implicito en el propio modelado, no?
+    -- esto ya esta implicito en el propio modelado, no? 
+    -- Juanma: no se voy a intentar implementarlo pero el problema que hay aquí, 
+    -- es que el avión mantiene un registro de los vuelos realizados
+    -- entonces no pudes ver si el avión se encuentra actualmente volando.
+    -- lo más mejorcillo que puedes hacer creo que es esto:
+    inv avionEstado:
+        self.tansporte -> notEmpty() or -- esto hace referencia si ha realizado algún vuelo, por eso está mal
+        AvionHangar.allInstances()->exists(ha | ha.contenidoHangar = self) or -- esto pregunta si el avion esta en el hangar
+        AvionDesguace.allInstances()->exists(de | de.contenidoDesguace = self) -- esto pregunta si el avion esta en el desguace
+
+
 
     ---
-    -- Los Aviones que deben encontrarse en un Desguace son aquellos que han completado los 1000 viajes.
+    -- 3. Los Aviones que deben encontrarse en un Desguace son aquellos que han completado los 1000 viajes.
     ---
     inv Avion1000ViajesVaDesguace : 
         self.viajesCompletados < 1000 or self.estanciaDesguace->isEmpty() -- no estoy seguro de si debo usar isEmpty pq no se si es una coleccion
-
-    ---
-    -- Cada avión puede ser usado por varias aerolíneas.
-    ---
-    -- No tengo ni idea de si esto siquiera se puede modelar como restricción. Creo que está modelado como relación
+        -- Juanma: creo que isEmpty se puede usar (segun chatgpt)
 
 context Piloto
 
     ---
-    -- Cada PilotoPro debe tener al menos 1000 vuelos como Principal y 2000 como Secundario
+    -- 5. Cada PilotoPro debe tener al menos 1000 vuelos como Principal y 2000 como Secundario
     ---
     inv esPilotoPro:
         self.pilotaPrincipal->size() >= 1000 and self.pilotaSecundario->size() >= 2000 
     
     ---
-    -- No se permite a un piloto trabajar o haber trabajado para más de dos aerolíneas diferentes. 
+    -- 6. No se permite a un piloto trabajar o haber trabajado para más de dos aerolíneas diferentes. 
     --inv maxDosAerolineas:
     --    let aerolineasPilotadas: Set(Aerolinea) = --Creo una variable, que es un conjunto de todos los viajes que ha hecho el piloto
     --        self.pilotaPrincipal.viaja->union(self.pilotaSecundario.viaja)->collect(v | v.vehiculo.contratado.contratante)->asSet() 
     --    in aerolineasPilotadas->size() <= 2
     -- esto es lo que nos dijo de quitar una relación y después trazarlo desde el otro camino usando el modelo de objetos (no tengo ni idea de cómo se hace)
+    -- Juanma: esto es una calentada, debería habernos dejado hacer una relación más y yasta pero bueno
+    -- según chatgpt esto está ok
     
 context Aeropuerto
     ---
-    -- Cada Aeropuerto solo puede tener, como máximo, un Desguace (no dice nada sobre Hangares)
+    -- 7. Cada Aeropuerto solo puede tener, como máximo, un Desguace (no dice nada sobre Hangares)
     inv soloUnDesguace:
-        self.desguace->size() <= 1
+        self.desguaceAeropuerto->size() <= 1
     --
 
     ---
-    -- Los aeropuertos se ubican en ciudades, no pudiendo haber más de un aeropuerto en cada ciudad => 
+    -- 8. Los aeropuertos se ubican en ciudades, no pudiendo haber más de un aeropuerto en cada ciudad => 
     -- Nombre de la ciudad del aeropuerto es único
     ---
     inv CiudadAeropuertoDistinta :
@@ -169,7 +177,11 @@ context Vuelo
     inv IdentificadorVueloDistinto :
         Vuelo.allInstances()->isUnique(identificador) 
 
-    -- Los pilotos principal y secundario deben ser personas distintas.
-    --inv pilotosDiferentes:
-    --    self.pilotaSecundario.isEmpty() or self.pilotaPrincipal <> self.pilotaSecundario
-    -- ni idea de como hacerlo   
+    -- 9. Los pilotos principal y secundario deben ser personas distintas.
+    inv pilotosDiferentes:
+        self.pilotaSecundario.isEmpty() or self.pilotaPrincipal <> self.pilotaSecundario
+    -- Juanma respuesta:
+    -- La implementación es correcta, realmente el self.pilotaSecundario.isEmpty()
+    -- no es necesario, pero si quereis mantenerlo por claridad y para entender 
+    -- que el que puede estar ausente es el piloto secundario me parece bien
+    
