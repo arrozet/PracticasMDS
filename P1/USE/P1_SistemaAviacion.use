@@ -155,7 +155,8 @@ context Piloto
 context Aeropuerto
     ---
     -- Cada Aeropuerto solo puede tener, como máximo, un Desguace (no dice nada sobre Hangares)
-    ---
+    inv soloUnDesguace:
+        self.desguace->size() <= 1
     -- esto en teoría se modela con la multiplicidad de la relación
 
     ---
