@@ -27,7 +27,7 @@ class Aeropuerto
         ciudad : String
 end
 
-class Almacen
+class Almacen --  Los hangares y los desguaces tienen una capacidad máxima. No pone que sea la misma de aviones que pueden acoger
     attributes
         capacidadMax : Integer
 end 
@@ -111,7 +111,7 @@ end
 constraints
 
 context Aerolinea
-    ---
+
     -- Cada Aerolínea tiene un nombre que debe ser distinto al de las demás => 
     -- Nombre de la Aerolínea es único
     ---
@@ -119,7 +119,7 @@ context Aerolinea
         Aerolinea.allInstances()->isUnique(nombre)
 
 context Avion
-    ---
+    
     -- Todo Avión debe encontrarse volando, estacionado en un Hangar o ha sido ya relegado a un Desguace.
     ---
     -- esto ya esta implicito en el propio modelado, no?
@@ -136,10 +136,6 @@ context Avion
     -- No tengo ni idea de si esto siquiera se puede modelar como restricción. Creo que está modelado como relación
 
 context Piloto
-    ---
-    -- Los pilotos principal y secundario deben ser personas distintas.
-    ---
-    -- ni idea de como hacerlo
 
     ---
     -- Cada PilotoPro debe tener al menos 1000 vuelos como Principal y 2000 como Secundario
@@ -149,7 +145,10 @@ context Piloto
     
     ---
     -- No se permite a un piloto trabajar o haber trabajado para más de dos aerolíneas diferentes. 
-    ---
+    --inv maxDosAerolineas:
+    --    let aerolineasPilotadas: Set(Aerolinea) = --Creo una variable, que es un conjunto de todos los viajes que ha hecho el piloto
+    --        self.pilotaPrincipal.viaja->union(self.pilotaSecundario.viaja)->collect(v | v.vehiculo.contratado.contratante)->asSet() 
+    --    in aerolineasPilotadas->size() <= 2
     -- esto es lo que nos dijo de quitar una relación y después trazarlo desde el otro camino usando el modelo de objetos (no tengo ni idea de cómo se hace)
     
 context Aeropuerto
@@ -157,7 +156,7 @@ context Aeropuerto
     -- Cada Aeropuerto solo puede tener, como máximo, un Desguace (no dice nada sobre Hangares)
     inv soloUnDesguace:
         self.desguace->size() <= 1
-    -- esto en teoría se modela con la multiplicidad de la relación
+    --
 
     ---
     -- Los aeropuertos se ubican en ciudades, no pudiendo haber más de un aeropuerto en cada ciudad => 
@@ -168,5 +167,9 @@ context Aeropuerto
 
 context Vuelo
     inv IdentificadorVueloDistinto :
-        Vuelo.allInstances()->isUnique(identificador)
-    
+        Vuelo.allInstances()->isUnique(identificador) 
+
+    -- Los pilotos principal y secundario deben ser personas distintas.
+    --inv pilotosDiferentes:
+    --    self.pilotaSecundario.isEmpty() or self.pilotaPrincipal <> self.pilotaSecundario
+    -- ni idea de como hacerlo   
