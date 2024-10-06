@@ -128,7 +128,7 @@ context Avion
     -- entonces no pudes ver si el avión se encuentra actualmente volando.
     -- lo más mejorcillo que puedes hacer creo que es esto:
     inv avionEstado:
-        self.tansporte -> notEmpty() or -- esto hace referencia si ha realizado algún vuelo, por eso está mal
+        self.transporte -> notEmpty() or -- esto hace referencia si ha realizado algún vuelo, por eso está mal
         AvionHangar.allInstances()->exists(ha | ha.contenidoHangar = self) or -- esto pregunta si el avion esta en el hangar
         AvionDesguace.allInstances()->exists(de | de.contenidoDesguace = self) -- esto pregunta si el avion esta en el desguace
 
@@ -161,9 +161,9 @@ context Piloto
     
 context Aeropuerto
     ---
-    -- 7. Cada Aeropuerto solo puede tener, como máximo, un Desguace (no dice nada sobre Hangares)
-    inv soloUnDesguace:
-        self.desguaceAeropuerto->size() <= 1
+    -- 7. Cada Aeropuerto solo puede tener, como máximo, un Desguace (no dice nada sobre Hangares) (Diría que esto no hace falta ponerlo porque está en la relación)
+    --inv soloUnDesguace:
+    --    self.desguaceAeropuerto->size() <= 1
     --
 
     ---
@@ -179,7 +179,7 @@ context Vuelo
 
     -- 9. Los pilotos principal y secundario deben ser personas distintas.
     inv pilotosDiferentes:
-        self.pilotaSecundario.isEmpty() or self.pilotaPrincipal <> self.pilotaSecundario
+        self.esPilotadoSecundario->isEmpty() or self.esPilotadoPrincipal <> self.esPilotadoSecundario
     -- Juanma respuesta:
     -- La implementación es correcta, realmente el self.pilotaSecundario.isEmpty()
     -- no es necesario, pero si quereis mantenerlo por claridad y para entender 
