@@ -1,0 +1,8 @@
+!new Aerolinea ('Ae1')
+!Ae1.nombre := 'Iberia'
+
+!new Aerolinea ('Ae2')
+!Ae2.nombre := 'Iberia'
+
+--Alguien me explica por que carajo estando el invariante de que los nombres son unique 
+--esto se puede crear voy a hacer kaboom
