@@ -8,8 +8,8 @@ end
 
 class Avion
     attributes
-        viajesCompletados : Integer derive : self.transporte->size()            -- No estoy seguro de si esta bien
-        kmRecorridos : Real derive : self.transporte->collect(t|t.numKm)->sum() -- No estoy seguro de si esta bien
+        viajesCompletados : Integer derive : self.vuelosAvion->size()            -- No estoy seguro de si esta bien
+        kmRecorridos : Real derive : self.vuelosAvion->collect(t|t.numKm)->sum() -- No estoy seguro de si esta bien
 end
 
 associationclass Contrato between 
@@ -49,9 +49,10 @@ end
 class Piloto < Persona
     attributes
         kmVolados : Real derive : -- no se si esta bien
-            self.pilotaPrincipal->collect(v | v.numKm)->sum() + 
-            self.pilotaSecundario->collect(v | v.numKm)->sum()
-        esPro : Boolean
+            self.vueloPrincipal->collect(v | v.numKm)->sum() + 
+            self.vueloSecundario->collect(v | v.numKm)->sum()
+        esPro : Boolean derive :
+            self.vueloPrincipal->size() >= 1000 and self.vueloSecundario->size() >= 2000
 end
 
 class Pasajero < Persona
@@ -60,26 +61,25 @@ end
 
 class Vuelo 
     attributes
-        identificador : Integer
         numKm : Real
 end
 
 -------------- Relationships ------------------
 association AvionVuelo between
     Avion [1] role vehiculo
-    Vuelo [0..*] role transporte
+    Vuelo [0..*] role vuelosAvion
 end
 
 -- AvionAerolinea la modela la associationClass de Contrato
 
 association AvionHangar between
     Hangar [0..1] role estanciaHangar
-    Avion [0..*] role contenidoHangar
+    Avion [0..*] role almacenamientoHangar
 end
 
 association AvionDesguace between
     Desguace [0..1] role estanciaDesguace
-    Avion [0..*] role contenidoDesguace
+    Avion [0..*] role almacenamientoDesguace
 end
 
 composition hangarAeropuerto between
@@ -93,18 +93,18 @@ composition desguaceAeropuerto between
 end
 
 association PilotoPrincipalVuela between 
-    Vuelo [0..*] role pilotaPrincipal -- un piloto, a lo largo de su vida, pilota varios vuelos
-    Piloto [1] role esPilotadoPrincipal -- pero un vuelo es solo pilotado por un piloto
+    Vuelo [0..*] role vueloPrincipal -- un piloto, a lo largo de su vida, pilota varios vuelos
+    Piloto [1] role pilotoPrincipal -- pero un vuelo es solo pilotado por un piloto
 end
 
 association PilotoSecundarioVuela between 
-    Vuelo [0..*] role pilotaSecundario  -- un piloto, a lo largo de su vida, pilota varios vuelos
-    Piloto [0..1] role esPilotadoSecundario -- pero un vuelo es solo pilotado por un piloto
+    Vuelo [0..*] role vueloSecundario  -- un piloto, a lo largo de su vida, pilota varios vuelos
+    Piloto [0..1] role pilotoSecundario -- pero un vuelo es solo pilotado por un piloto
 end
 
 association PasajeroVuelo between
-    Pasajero [0..*] role transporta
-    Vuelo [0..1] role viaja
+    Pasajero [0..*] role pasajeros
+    Vuelo [0..1] role vuelosPasajeros
 end
 
 ------------- Invariants -------------
@@ -128,9 +128,9 @@ context Avion
     -- entonces no pudes ver si el avión se encuentra actualmente volando.
     -- lo más mejorcillo que puedes hacer creo que es esto:
     inv avionEstado:
-        self.transporte -> notEmpty() or -- esto hace referencia si ha realizado algún vuelo, por eso está mal
-        AvionHangar.allInstances()->exists(ha | ha.contenidoHangar = self) or -- esto pregunta si el avion esta en el hangar
-        AvionDesguace.allInstances()->exists(de | de.contenidoDesguace = self) -- esto pregunta si el avion esta en el desguace
+        self.vuelosAvion -> notEmpty() or -- esto hace referencia si ha realizado algún vuelo, por eso está mal
+        AvionHangar.allInstances()->exists(ha | ha.almacenamientoHangar = self) or -- esto pregunta si el avion esta en el hangar
+        AvionDesguace.allInstances()->exists(de | de.almacenamientoDesguace = self) -- esto pregunta si el avion esta en el desguace
 
 
 
@@ -146,14 +146,15 @@ context Piloto
     ---
     -- 5. Cada PilotoPro debe tener al menos 1000 vuelos como Principal y 2000 como Secundario
     ---
+    -- ESTE INVARIANTE NO HACE NADA YA QUE EL ATRIBUTO BOOLEANO SE DERIVA CON EXACTAMENTE ESTA EXPRESION
     inv esPilotoPro:
-        self.pilotaPrincipal->size() >= 1000 and self.pilotaSecundario->size() >= 2000 
+        self.vueloPrincipal->size() >= 1000 and self.vueloSecundario->size() >= 2000 
     
     ---
     -- 6. No se permite a un piloto trabajar o haber trabajado para más de dos aerolíneas diferentes. 
     --inv maxDosAerolineas:
     --    let aerolineasPilotadas: Set(Aerolinea) = --Creo una variable, que es un conjunto de todos los viajes que ha hecho el piloto
-    --        self.pilotaPrincipal.viaja->union(self.pilotaSecundario.viaja)->collect(v | v.vehiculo.contratado.contratante)->asSet() 
+    --        self.vueloPrincipal.vuelosPasajeros->union(self.vueloSecundario.vuelosPasajeros)->collect(v | v.vehiculo.contratado.contratante)->asSet() 
     --    in aerolineasPilotadas->size() <= 2
     -- esto es lo que nos dijo de quitar una relación y después trazarlo desde el otro camino usando el modelo de objetos (no tengo ni idea de cómo se hace)
     -- Juanma: esto es una calentada, debería habernos dejado hacer una relación más y yasta pero bueno
@@ -174,13 +175,11 @@ context Aeropuerto
         Aeropuerto.allInstances()->isUnique(ciudad)
 
 context Vuelo
-    inv IdentificadorVueloDistinto :
-        Vuelo.allInstances()->isUnique(identificador) 
 
     -- 9. Los pilotos principal y secundario deben ser personas distintas.
     inv pilotosDiferentes:
-        self.esPilotadoSecundario->isEmpty() or self.esPilotadoPrincipal <> self.esPilotadoSecundario
+        self.pilotoSecundario->isEmpty() or self.pilotoPrincipal <> self.pilotoSecundario
     -- Juanma respuesta:
-    -- La implementación es correcta, realmente el self.pilotaSecundario.isEmpty()
+    -- La implementación es correcta, realmente el self.vueloSecundario.isEmpty()
     -- no es necesario, pero si quereis mantenerlo por claridad y para entender 
     -- que el que puede estar ausente es el piloto secundario me parece bien
