@@ -18,15 +18,16 @@ reset
 !new Avion('B737')
 !B737.viajesCompletados := 1001
 
+!new Avion('ElPilotador')
+!ElPilotador.viajesCompletados := 10000
+
 !new Piloto('Carlos')
 !Carlos.nombre := 'Carlos'
 !Carlos.edad := 45
-!Carlos.esPro := true
 
 !new Piloto('Lucia')
 !Lucia.nombre := 'Lucia'
 !Lucia.edad := 39
-!Lucia.esPro := false
 
 !new Pasajero('Pedro')
 !Pedro.nombre := 'Pedro'
@@ -39,6 +40,10 @@ reset
 !new Vuelo('Vuelo2')
 !Vuelo2.identificador := 1002
 !Vuelo2.numKm := 1800.0
+
+!new Vuelo('Vuelo3')
+!Vuelo3.identificador := 1003
+!Vuelo3.numKm := 100000
 
 !new Hangar('Hangar1')
 !Hangar1.capacidadMax := 5
@@ -60,8 +65,8 @@ reset
 !insert(B737, AirEuropa) into Contrato -- Esto ya está implícito en la creación del contrato pero por alguna razón hay que ponerlo para que aparezca la relación
 
 -- Relacionar aviones con vuelos
-!insert(A320, Vuelo1) into AvionVuelo
-!insert(B737, Vuelo2) into AvionVuelo
+!insert(A320, Vuelo1) into Realiza
+!insert(B737, Vuelo2) into Realiza
 
 -- Relacionar piloto principal con vuelos
 !insert(Vuelo1, Carlos) into PilotoPrincipalVuela
@@ -71,11 +76,11 @@ reset
 !insert(Vuelo1, Lucia) into PilotoSecundarioVuela
 
 -- Relacionar pasajeros con vuelos
-!insert(Pedro, Vuelo1) into PasajeroVuelo
+!insert(Vuelo1, Pedro) into Transporta
 
 -- Asignar aviones a hangar y desguace
-!insert(Hangar1, A320) into AvionHangar
-!insert(Desguace1, B737) into AvionDesguace
+!insert(A320, Hangar1) into Estacionado
+!insert(B737, Desguace1) into Inutilizado
 
 -- Asignar hangar y desguace a aeropuertos
 !insert(Barajas, Hangar1) into hangarAeropuerto
