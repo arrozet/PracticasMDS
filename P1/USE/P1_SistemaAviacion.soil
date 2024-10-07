@@ -103,12 +103,12 @@ reset
 !Mohamed.nombre := 'Mohamed Mohamed el-Amir Awad el-Sayed Atta'
 !Mohamed edad := 33
 
-!new Pasajero('Kanye')
+!new Piloto('Kanye')
 !Kanye.nombre := 'Kanye West'
 !Kanye.edad := 24 
 -- durante el 11s claro
 
-!new Piloto('Maggie')
+!new Pasajero('Maggie')
 !Maggie.nombre := 'Maggie Simpson'
 !Maggie.edad := 13
 
@@ -120,13 +120,42 @@ reset
 !Stanley.nombre := 'Stanley Martin Lieber'
 !Stanley.edad := 78
 
-!new Piloto('Carlos')
-!Carlos.nombre := 'Carlos'
-!Carlos.edad := 45
+!new Piloto('Son')
+!Son.nombre := 'Son Goku'
+!Son.edad := 17
 
-!new Piloto('Carlos')
-!Carlos.nombre := 'Carlos'
-!Carlos.edad := 45
+!new Piloto('Kratos')
+!Kratos.nombre := 'Kratos Ghost of Sparta'
+!Kratos.edad := 1067
+
+!new Piloto('Bob')
+!Bob.nombre := 'Bob Esponja'
+!Bob.edad := 38
+
+!new Piloto('Pedro')
+!Pedro.nombre := 'Pedro Sanchez'
+!Pedro.edad := 29
+
+!new Pasajero('Ruben')
+!Ruben.nombre := 'Ruben Oliva Zamora'
+!Ruben.edad := -3
+
+!new Piloto('Cristobal')
+!Cristobal.nombre := 'Cristobal Barba'
+!Cristobal.edad := 88
+
+!new Piloto('Agustin')
+!Agustin.nombre := 'Agustin Valverde'
+!Agustin.edad := 100000
+-- Es un ser milenario
+
+!new Pasajero('Frodo')
+!Frodo.nombre := 'Frodo Bolsón'
+!Frodo.edad := 20
+
+!new Pasajero('Snake')
+!Snake.nombre := 'Solid Snake'
+!Snake.edad := 35
 
 !new Vuelo('Vuelo1')
 !Vuelo1.identificador := 1001
