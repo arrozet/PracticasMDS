@@ -1,0 +1,10 @@
+
+
+--Este .soil prueba el correcto funcionamiento de los invariantes de la clase Aerolinea
+
+!new Aerolinea ('Ae1')
+!Ae1.nombre := 'Iberia'
+
+!new Aerolinea ('Ae2')
+!Ae2.nombre := 'Iberia'
+
