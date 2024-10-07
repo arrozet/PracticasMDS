@@ -6,6 +6,9 @@ reset
 !new Aerolinea('AirEuropa')
 !AirEuropa.nombre := 'AirEuropa'
 
+!new Aerolinea('Japones')
+!Japones.nombre := 'Servicio Aerero de la Armada Imperial Japonesa'
+
 !new Aeropuerto('Barajas')
 !Barajas.ciudad := 'Madrid'
 
@@ -18,8 +21,15 @@ reset
 !new Avion('B737')
 !B737.viajesCompletados := 1001
 
-!new Avion('ElPilotador')
+!new Avion('Boeing 767-222')
 !ElPilotador.viajesCompletados := 10000
+
+!new Avion('Mitsubishi A6M Zero')
+!Mitsubishi A6M Zero.viajesCompletados := 1
+
+!new Piloto('Hiroyoshi')
+!Hiroyoshi.nombre := 'Hiroyoshi Nishizawa'
+!Hiroyoshi.edad := 24
 
 !new Piloto('Carlos')
 !Carlos.nombre := 'Carlos'
@@ -28,6 +38,10 @@ reset
 !new Piloto('Lucia')
 !Lucia.nombre := 'Lucia'
 !Lucia.edad := 39
+
+!new Piloto('Mohamed')
+!Mohamed.nombre := 'Mohamed Mohamed el-Amir Awad el-Sayed Atta'
+!Mohamed edad := 33
 
 !new Pasajero('Pedro')
 !Pedro.nombre := 'Pedro'
