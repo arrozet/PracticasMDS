@@ -122,6 +122,7 @@ context Aerolinea
 context Avion
     
     -- 2. Todo Avión debe encontrarse volando, estacionado en un Hangar o ha sido ya relegado a un Desguace.
+    -- Es decir, no puede a la vez estar en un desguace y en un hangar, o volando y en un hangar, o volando y en un desguace...
     ---
     -- esto ya esta implicito en el propio modelado, no? 
     -- Juanma: no se voy a intentar implementarlo pero el problema que hay aquí, 
@@ -168,9 +169,8 @@ context Piloto
 context Aeropuerto
     ---
     -- 7. Cada Aeropuerto solo puede tener, como máximo, un Desguace (no dice nada sobre Hangares) (Diría que esto no hace falta ponerlo porque está en la relación)
-    --inv soloUnDesguace:
-    --    self.desguaceAeropuerto->size() <= 1
     --
+    -- NO HACE FALTA MODELARLA, SE MODELA CON LA MULITPLICIDAD DE LA RELACIÓN
 
     ---
     -- 8. Los aeropuertos se ubican en ciudades, no pudiendo haber más de un aeropuerto en cada ciudad => 
