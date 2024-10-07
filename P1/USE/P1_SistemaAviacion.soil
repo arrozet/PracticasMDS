@@ -77,19 +77,56 @@ reset
 
 !new Piloto('Dorothy')
 !Dorothy.nombre := 'Dorothy DeAraujo'
-!Dorothy.edad := 49
+!Dorothy.edad := 82
 
-!new Piloto('Lucia')
-!Lucia.nombre := 'Lucia'
-!Lucia.edad := 39
+!new Piloto('Ana')
+!Ana.nombre := 'Ana Gloria Pocasangre De Barrera'
+!Ana.edad := 49
+
+!new Piloto('Lisa')
+!Lisa.nombre := 'Lisa Anne Frost'
+!Lisa.edad := 22
+
+!new Piloto('Lynn')
+!Lynn.nombre := 'Lynn Catherine Goodchild'
+!Lynn.edad := 25
+
+!new Piloto('Francis')
+!Francis.nombre := 'Francis Edward Grogan'
+!Francis.edad := 76
+
+!new Piloto('Carl')
+!Carl.nombre := 'Carl Max Hammond, Jr.'
+!Carl.edad := 37
 
 !new Piloto('Mohamed')
 !Mohamed.nombre := 'Mohamed Mohamed el-Amir Awad el-Sayed Atta'
 !Mohamed edad := 33
 
-!new Pasajero('Pedro')
-!Pedro.nombre := 'Pedro'
-!Pedro.edad := 30
+!new Pasajero('Kanye')
+!Kanye.nombre := 'Kanye West'
+!Kanye.edad := 24 
+-- durante el 11s claro
+
+!new Piloto('Maggie')
+!Maggie.nombre := 'Maggie Simpson'
+!Maggie.edad := 13
+
+!new Piloto('Walter')
+!Walter.nombre := 'Walter White'
+!Walter.edad := 43
+
+!new Piloto('Stanley')
+!Stanley.nombre := 'Stanley Martin Lieber'
+!Stanley.edad := 78
+
+!new Piloto('Carlos')
+!Carlos.nombre := 'Carlos'
+!Carlos.edad := 45
+
+!new Piloto('Carlos')
+!Carlos.nombre := 'Carlos'
+!Carlos.edad := 45
 
 !new Vuelo('Vuelo1')
 !Vuelo1.identificador := 1001
