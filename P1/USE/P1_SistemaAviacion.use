@@ -122,17 +122,19 @@ context Aerolinea
 context Avion
     
     -- 2. Todo Avión debe encontrarse volando, estacionado en un Hangar o ha sido ya relegado a un Desguace.
+    -- Es decir, no puede a la vez estar en un desguace y en un hangar, o volando y en un hangar, o volando y en un desguace...
     ---
     -- esto ya esta implicito en el propio modelado, no? 
     -- Juanma: no se voy a intentar implementarlo pero el problema que hay aquí, 
     -- es que el avión mantiene un registro de los vuelos realizados
     -- entonces no pudes ver si el avión se encuentra actualmente volando.
     -- lo más mejorcillo que puedes hacer creo que es esto:
+    /*
     inv avionEstado:
         self.vuelosAvion -> notEmpty() or -- esto hace referencia si ha realizado algún vuelo, por eso está mal
         Estacionado.allInstances()->exists(ha | ha.almacenamientoHangar = self) or -- esto pregunta si el avion esta en el hangar
         Inutilizado.allInstances()->exists(de | de.almacenamientoDesguace = self) -- esto pregunta si el avion esta en el desguace
-
+    */
 
 
     ---
@@ -143,13 +145,6 @@ context Avion
         -- Juanma: creo que isEmpty se puede usar (segun chatgpt)
 
 context Piloto
-
-    ---
-    -- 5. Cada PilotoPro debe tener al menos 1000 vuelos como Principal y 2000 como Secundario
-    ---
-    -- ESTE INVARIANTE NO HACE NADA YA QUE EL ATRIBUTO BOOLEANO SE DERIVA CON EXACTAMENTE ESTA EXPRESION
-    inv esPilotoPro:
-        self.vueloPrincipal->size() >= 1000 and self.vueloSecundario->size() >= 2000 
     
     ---
     -- 6. No se permite a un piloto trabajar o haber trabajado para más de dos aerolíneas diferentes. 
@@ -164,9 +159,8 @@ context Piloto
 context Aeropuerto
     ---
     -- 7. Cada Aeropuerto solo puede tener, como máximo, un Desguace (no dice nada sobre Hangares) (Diría que esto no hace falta ponerlo porque está en la relación)
-    --inv soloUnDesguace:
-    --    self.desguaceAeropuerto->size() <= 1
     --
+    -- NO HACE FALTA MODELARLA, SE MODELA CON LA MULITPLICIDAD DE LA RELACIÓN
 
     ---
     -- 8. Los aeropuertos se ubican en ciudades, no pudiendo haber más de un aeropuerto en cada ciudad => 
