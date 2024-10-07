@@ -22,9 +22,21 @@ reset
 !B737.viajesCompletados := 1001
 
 !new Avion('Boeing 767-222')
-!ElPilotador.viajesCompletados := 10000
+!ElPilotador.viajesCompletados := 175
 
 !new Avion('Mitsubishi A6M Zero')
+!Mitsubishi A6M Zero.viajesCompletados := 1
+
+!new Avion('Mitsubishi A5M Zero')
+!Mitsubishi A6M Zero.viajesCompletados := 1
+
+!new Avion('Kawanishi N1K-J/N1K2-J')
+!Mitsubishi A6M Zero.viajesCompletados := 1
+
+!new Avion('Mitsubishi J2M')
+!Mitsubishi A6M Zero.viajesCompletados := 1
+
+!new Avion('Nakajima J1N1-S')
 !Mitsubishi A6M Zero.viajesCompletados := 1
 
 !new Piloto('Hiroyoshi')
@@ -34,6 +46,38 @@ reset
 !new Piloto('Carlos')
 !Carlos.nombre := 'Carlos'
 !Carlos.edad := 45
+
+!new Piloto('Lucia')
+!Lucia.nombre := 'Lucia'
+!Lucia.edad := 39
+
+!new Piloto('Graham')
+!Graham.nombre := 'Graham Berkely'
+!Graham.edad := 37
+
+!new Piloto('Touri')
+!Touri.nombre := 'Touri Boulourchi'
+!Touri.edad := 69
+
+!new Piloto('Klaus')
+!Klaus.nombre := 'Klaus Bothe'
+!Klaus.edad := 39
+
+!new Piloto('Paco')
+!Paco.nombre := 'Paco de la Torre'
+!Paco.edad := 81
+
+!new Piloto('John')
+!John.nombre := 'John Brett Cahill'
+!John.edad := 56
+
+!new Piloto('Christoffer')
+!Christoffer.nombre := 'Christoffer Carstanjen'
+!Christoffer.edad := 33
+
+!new Piloto('Dorothy')
+!Dorothy.nombre := 'Dorothy DeAraujo'
+!Dorothy.edad := 49
 
 !new Piloto('Lucia')
 !Lucia.nombre := 'Lucia'
