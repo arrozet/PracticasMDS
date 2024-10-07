@@ -140,8 +140,11 @@ context Avion
     -- 3. Los Aviones que deben encontrarse en un Desguace son aquellos que han completado los 1000 viajes.
     ---
     inv Avion1000ViajesVaDesguace : 
-        self.viajesCompletados < 1000 or self.estanciaDesguace->isEmpty() -- no estoy seguro de si debo usar isEmpty pq no se si es una coleccion
-        -- Juanma: creo que isEmpty se puede usar (segun chatgpt)
+        self.viajesCompletados < 1000 or self.estanciaDesguace->oclIsUndefined() -- debe ser oclIsUndefined porque debe comprobar si es nulo, no vacío
+        
+    --Este invariante está creado para comprobar el de arriba sin meter 1000 aviones. Se comprueba en pruebaInvarianteVuelo.soil
+    --inv Avion2ViajesVaDesguace : 
+        --self.viajesCompletados < 2 or self.estanciaDesguace->oclIsUndefined() --Usado para probar que funciona el invariante de los 1000 vuelos
 
 context Piloto
 
