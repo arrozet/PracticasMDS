@@ -128,10 +128,10 @@ context Avion
     -- es que el avión mantiene un registro de los vuelos realizados
     -- entonces no pudes ver si el avión se encuentra actualmente volando.
     -- lo más mejorcillo que puedes hacer creo que es esto:
-    inv avionEstado:
-        self.vuelosAvion -> notEmpty() or -- esto hace referencia si ha realizado algún vuelo, por eso está mal
-        Estacionado.allInstances()->exists(ha | ha.almacenamientoHangar = self) or -- esto pregunta si el avion esta en el hangar
-        Inutilizado.allInstances()->exists(de | de.almacenamientoDesguace = self) -- esto pregunta si el avion esta en el desguace
+   -- inv avionEstado:
+    --    self.vuelosAvion -> notEmpty() or -- esto hace referencia si ha realizado algún vuelo, por eso está mal
+    --   Estacionado.allInstances()->exists(ha | ha.almacenamientoHangar = self) or -- esto pregunta si el avion esta en el hangar
+    --    Inutilizado.allInstances()->exists(de | de.almacenamientoDesguace = self) -- esto pregunta si el avion esta en el desguace
 
 
 
@@ -146,11 +146,15 @@ context Piloto
 
     ---
     -- 5. Cada PilotoPro debe tener al menos 1000 vuelos como Principal y 2000 como Secundario
-    ---
-    -- ESTE INVARIANTE NO HACE NADA YA QUE EL ATRIBUTO BOOLEANO SE DERIVA CON EXACTAMENTE ESTA EXPRESION
-    inv esPilotoPro:
-        self.vueloPrincipal->size() >= 1000 and self.vueloSecundario->size() >= 2000 
+    ---Juanma: esto no hay que ponerlo, ya se calcula solo con, al ser un atributo derivado
+
     
+    -- ESTE INVARIANTE NO HACE NADA YA QUE EL ATRIBUTO BOOLEANO SE DERIVA CON EXACTAMENTE ESTA EXPRESION
+    --inv esPilotoPro:
+    --    self.vueloPrincipal->size() >= 1000 and self.vueloSecundario->size() >= 2000 
+    
+
+
     ---
     -- 6. No se permite a un piloto trabajar o haber trabajado para más de dos aerolíneas diferentes. 
     --inv maxDosAerolineas:

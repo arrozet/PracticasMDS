@@ -24,12 +24,10 @@ reset
 !new Piloto('Carlos')
 !Carlos.nombre := 'Carlos'
 !Carlos.edad := 45
-!Carlos.esPro := true
 
 !new Piloto('Lucia')
 !Lucia.nombre := 'Lucia'
 !Lucia.edad := 39
-!Lucia.esPro := false
 
 !new Pasajero('Pedro')
 !Pedro.nombre := 'Pedro'
