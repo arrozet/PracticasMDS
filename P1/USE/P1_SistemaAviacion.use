@@ -65,29 +65,30 @@ class Vuelo
 end
 
 -------------- Relationships ------------------
-association AvionVuelo between
+association Realiza between
     Avion [1] role vehiculo
     Vuelo [0..*] role vuelosAvion
 end
 
 -- AvionAerolinea la modela la associationClass de Contrato
 
-association AvionHangar between
-    Hangar [0..1] role estanciaHangar
+association Estacionado between
     Avion [0..*] role almacenamientoHangar
+    Hangar [0..1] role estanciaHangar
+    
 end
 
-association AvionDesguace between
-    Desguace [0..1] role estanciaDesguace
+association Inutilizado between
     Avion [0..*] role almacenamientoDesguace
+    Desguace [0..1] role estanciaDesguace
 end
 
-composition hangarAeropuerto between
+composition HangarAeropuerto between
     Aeropuerto [1]
     Hangar [0..*]
 end
 
-composition desguaceAeropuerto between
+composition DesguaceAeropuerto between
     Aeropuerto [1]
     Desguace [0..1]
 end
@@ -102,9 +103,9 @@ association PilotoSecundarioVuela between
     Piloto [0..1] role pilotoSecundario -- pero un vuelo es solo pilotado por un piloto
 end
 
-association PasajeroVuelo between
-    Pasajero [0..*] role pasajeros
+association Transporta between
     Vuelo [0..1] role vuelosPasajeros
+    Pasajero [0..*] role pasajeros
 end
 
 ------------- Invariants -------------
@@ -129,8 +130,8 @@ context Avion
     -- lo más mejorcillo que puedes hacer creo que es esto:
     inv avionEstado:
         self.vuelosAvion -> notEmpty() or -- esto hace referencia si ha realizado algún vuelo, por eso está mal
-        AvionHangar.allInstances()->exists(ha | ha.almacenamientoHangar = self) or -- esto pregunta si el avion esta en el hangar
-        AvionDesguace.allInstances()->exists(de | de.almacenamientoDesguace = self) -- esto pregunta si el avion esta en el desguace
+        Estacionado.allInstances()->exists(ha | ha.almacenamientoHangar = self) or -- esto pregunta si el avion esta en el hangar
+        Inutilizado.allInstances()->exists(de | de.almacenamientoDesguace = self) -- esto pregunta si el avion esta en el desguace
 
 
 
