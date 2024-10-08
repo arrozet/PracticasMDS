@@ -162,7 +162,7 @@ context Aeropuerto
 context Vuelo
     ---
     -- Los pilotos principal y secundario deben ser personas distintas.
-     ---
+    ---
     inv PilotosDiferentes:
         self.pilotoSecundario->isEmpty() or self.pilotoPrincipal <> self.pilotoSecundario -- o no hay o son distintos
     
