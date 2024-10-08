@@ -178,11 +178,11 @@ context Hangar
     -- En el hangar no puede haber más aviones que la capacidad maxima
     ---
     inv CapacidadMaxHangar :
-        self.almacenamientoHangar -> size() <= self.capacidadMax
+        self.almacenamientoHangar -> size() <= self.capacidadMax -- tiene que haber menos aviones relacionados con hangar que su capacidadMax
 
 context Desguace
     ---
     -- En el hangar no puede haber más aviones que la capacidad maxima
     ---
     inv CapacidadMaxDesguace :
-        self.almacenamientoDesguace -> size() <= self.capacidadMax
+        self.almacenamientoDesguace -> size() <= self.capacidadMax -- tiene que haber menos aviones relacionados con desguace que su capacidadMax
