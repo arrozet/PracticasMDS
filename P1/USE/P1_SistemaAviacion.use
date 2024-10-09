@@ -159,7 +159,7 @@ context Vuelo
     -- Los pilotos principal y secundario deben ser personas distintas.
     ---
     inv PilotosDiferentes:
-        self.pilotoSecundario->oclIsUndefined() or self.pilotoPrincipal <> self.pilotoSecundario -- o no hay o son distintos
+        self.pilotoSecundario.oclIsUndefined() or self.pilotoPrincipal <> self.pilotoSecundario -- o no hay o son distintos
     
     ---
     -- En cuanto a los vuelos que realizan los aviones, de cada vuelo que realiza cada avión se registra su identificador, que ha de ser único para cada vuelo,

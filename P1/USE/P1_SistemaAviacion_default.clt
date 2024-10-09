@@ -111,50 +111,6 @@
         <target>Desguace</target>
         <name>DesguaceAeropuerto</name>
         <properties>
-            <edgeproperty id="DesguaceAeropuerto::source::rolename"
-                sizeCalculated="true" type="rolename"
-                userDefined="false" visible="true">
-                <name>aeropuerto</name>
-                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
-                    <userOffsetX>0.0</userOffsetX>
-                    <userOffsetY>0.0</userOffsetY>
-                    <attached>DesguaceAeropuerto::WayPoint::0</attached>
-                    <offset_x>8</offset_x>
-                    <offset_y>8</offset_y>
-                    <placement>TOP</placement>
-                </strategy>
-                <hidden>false</hidden>
-            </edgeproperty>
-            <edgeproperty id="DesguaceAeropuerto::source::multiplicity"
-                sizeCalculated="true" type="multiplicity"
-                userDefined="false" visible="true">
-                <name>1</name>
-                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
-                    <userOffsetX>0.0</userOffsetX>
-                    <userOffsetY>0.0</userOffsetY>
-                    <attached>DesguaceAeropuerto::WayPoint::0</attached>
-                    <offset_x>8</offset_x>
-                    <offset_y>8</offset_y>
-                    <placement>BOTTOM</placement>
-                </strategy>
-                <hidden>false</hidden>
-            </edgeproperty>
-            <edgeproperty id="DesguaceAeropuerto::AssociationName"
-                sizeCalculated="true" type="associationName"
-                userDefined="false" visible="true">
-                <name>DesguaceAeropuerto</name>
-                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyInBetween">
-                    <userOffsetX>0.0</userOffsetX>
-                    <userOffsetY>0.0</userOffsetY>
-                    <offsetX>0.0</offsetX>
-                    <offsetY>-10.0</offsetY>
-                    <related length="2">
-                        <related0>DesguaceAeropuerto::WayPoint::0</related0>
-                        <related1>DesguaceAeropuerto::WayPoint::1</related1>
-                    </related>
-                </strategy>
-                <hidden>false</hidden>
-            </edgeproperty>
             <edgeproperty id="DesguaceAeropuerto::target::multiplicity"
                 sizeCalculated="true" type="multiplicity"
                 userDefined="false" visible="true">
@@ -180,6 +136,50 @@
                     <offset_x>8</offset_x>
                     <offset_y>8</offset_y>
                     <placement>TOP</placement>
+                </strategy>
+                <hidden>false</hidden>
+            </edgeproperty>
+            <edgeproperty id="DesguaceAeropuerto::source::multiplicity"
+                sizeCalculated="true" type="multiplicity"
+                userDefined="false" visible="true">
+                <name>1</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                    <attached>DesguaceAeropuerto::WayPoint::0</attached>
+                    <offset_x>8</offset_x>
+                    <offset_y>8</offset_y>
+                    <placement>BOTTOM</placement>
+                </strategy>
+                <hidden>false</hidden>
+            </edgeproperty>
+            <edgeproperty id="DesguaceAeropuerto::source::rolename"
+                sizeCalculated="true" type="rolename"
+                userDefined="false" visible="true">
+                <name>aeropuerto</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                    <attached>DesguaceAeropuerto::WayPoint::0</attached>
+                    <offset_x>8</offset_x>
+                    <offset_y>8</offset_y>
+                    <placement>TOP</placement>
+                </strategy>
+                <hidden>false</hidden>
+            </edgeproperty>
+            <edgeproperty id="DesguaceAeropuerto::AssociationName"
+                sizeCalculated="true" type="associationName"
+                userDefined="false" visible="true">
+                <name>DesguaceAeropuerto</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyInBetween">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                    <offsetX>0.0</offsetX>
+                    <offsetY>-10.0</offsetY>
+                    <related length="2">
+                        <related0>DesguaceAeropuerto::WayPoint::0</related0>
+                        <related1>DesguaceAeropuerto::WayPoint::1</related1>
+                    </related>
                 </strategy>
                 <hidden>false</hidden>
             </edgeproperty>
@@ -217,6 +217,34 @@
         <target>Vuelo</target>
         <name>Realiza</name>
         <properties>
+            <edgeproperty id="Realiza::target::multiplicity"
+                sizeCalculated="true" type="multiplicity"
+                userDefined="false" visible="true">
+                <name>*</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                    <attached>Realiza::WayPoint::1</attached>
+                    <offset_x>8</offset_x>
+                    <offset_y>8</offset_y>
+                    <placement>BOTTOM</placement>
+                </strategy>
+                <hidden>false</hidden>
+            </edgeproperty>
+            <edgeproperty id="Realiza::target::rolename"
+                sizeCalculated="true" type="rolename"
+                userDefined="false" visible="true">
+                <name>vuelosAvion</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                    <attached>Realiza::WayPoint::1</attached>
+                    <offset_x>8</offset_x>
+                    <offset_y>8</offset_y>
+                    <placement>TOP</placement>
+                </strategy>
+                <hidden>false</hidden>
+            </edgeproperty>
             <edgeproperty id="Realiza::source::rolename"
                 sizeCalculated="true" type="rolename"
                 userDefined="false" visible="true">
@@ -261,34 +289,6 @@
                 </strategy>
                 <hidden>false</hidden>
             </edgeproperty>
-            <edgeproperty id="Realiza::target::rolename"
-                sizeCalculated="true" type="rolename"
-                userDefined="false" visible="true">
-                <name>vuelosAvion</name>
-                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
-                    <userOffsetX>0.0</userOffsetX>
-                    <userOffsetY>0.0</userOffsetY>
-                    <attached>Realiza::WayPoint::1</attached>
-                    <offset_x>8</offset_x>
-                    <offset_y>8</offset_y>
-                    <placement>TOP</placement>
-                </strategy>
-                <hidden>false</hidden>
-            </edgeproperty>
-            <edgeproperty id="Realiza::target::multiplicity"
-                sizeCalculated="true" type="multiplicity"
-                userDefined="false" visible="true">
-                <name>*</name>
-                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
-                    <userOffsetX>0.0</userOffsetX>
-                    <userOffsetY>0.0</userOffsetY>
-                    <attached>Realiza::WayPoint::1</attached>
-                    <offset_x>8</offset_x>
-                    <offset_y>8</offset_y>
-                    <placement>BOTTOM</placement>
-                </strategy>
-                <hidden>false</hidden>
-            </edgeproperty>
         </properties>
         <waypoints>
             <edgeproperty id="Realiza::WayPoint::0"
@@ -323,47 +323,17 @@
         <target>Hangar</target>
         <name>HangarAeropuerto</name>
         <properties>
-            <edgeproperty id="HangarAeropuerto::source::multiplicity"
+            <edgeproperty id="HangarAeropuerto::target::multiplicity"
                 sizeCalculated="true" type="multiplicity"
                 userDefined="false" visible="true">
-                <name>1</name>
+                <name>*</name>
                 <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
                     <userOffsetX>0.0</userOffsetX>
                     <userOffsetY>0.0</userOffsetY>
-                    <attached>HangarAeropuerto::WayPoint::0</attached>
+                    <attached>HangarAeropuerto::WayPoint::1</attached>
                     <offset_x>8</offset_x>
                     <offset_y>8</offset_y>
                     <placement>BOTTOM</placement>
-                </strategy>
-                <hidden>false</hidden>
-            </edgeproperty>
-            <edgeproperty id="HangarAeropuerto::source::rolename"
-                sizeCalculated="true" type="rolename"
-                userDefined="false" visible="true">
-                <name>aeropuerto</name>
-                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
-                    <userOffsetX>0.0</userOffsetX>
-                    <userOffsetY>0.0</userOffsetY>
-                    <attached>HangarAeropuerto::WayPoint::0</attached>
-                    <offset_x>8</offset_x>
-                    <offset_y>8</offset_y>
-                    <placement>TOP</placement>
-                </strategy>
-                <hidden>false</hidden>
-            </edgeproperty>
-            <edgeproperty id="HangarAeropuerto::AssociationName"
-                sizeCalculated="true" type="associationName"
-                userDefined="false" visible="true">
-                <name>HangarAeropuerto</name>
-                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyInBetween">
-                    <userOffsetX>0.0</userOffsetX>
-                    <userOffsetY>0.0</userOffsetY>
-                    <offsetX>0.0</offsetX>
-                    <offsetY>-10.0</offsetY>
-                    <related length="2">
-                        <related0>HangarAeropuerto::WayPoint::0</related0>
-                        <related1>HangarAeropuerto::WayPoint::1</related1>
-                    </related>
                 </strategy>
                 <hidden>false</hidden>
             </edgeproperty>
@@ -381,17 +351,47 @@
                 </strategy>
                 <hidden>false</hidden>
             </edgeproperty>
-            <edgeproperty id="HangarAeropuerto::target::multiplicity"
-                sizeCalculated="true" type="multiplicity"
+            <edgeproperty id="HangarAeropuerto::source::rolename"
+                sizeCalculated="true" type="rolename"
                 userDefined="false" visible="true">
-                <name>*</name>
+                <name>aeropuerto</name>
                 <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
                     <userOffsetX>0.0</userOffsetX>
                     <userOffsetY>0.0</userOffsetY>
-                    <attached>HangarAeropuerto::WayPoint::1</attached>
+                    <attached>HangarAeropuerto::WayPoint::0</attached>
+                    <offset_x>8</offset_x>
+                    <offset_y>8</offset_y>
+                    <placement>TOP</placement>
+                </strategy>
+                <hidden>false</hidden>
+            </edgeproperty>
+            <edgeproperty id="HangarAeropuerto::source::multiplicity"
+                sizeCalculated="true" type="multiplicity"
+                userDefined="false" visible="true">
+                <name>1</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                    <attached>HangarAeropuerto::WayPoint::0</attached>
                     <offset_x>8</offset_x>
                     <offset_y>8</offset_y>
                     <placement>BOTTOM</placement>
+                </strategy>
+                <hidden>false</hidden>
+            </edgeproperty>
+            <edgeproperty id="HangarAeropuerto::AssociationName"
+                sizeCalculated="true" type="associationName"
+                userDefined="false" visible="true">
+                <name>HangarAeropuerto</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyInBetween">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                    <offsetX>0.0</offsetX>
+                    <offsetY>-10.0</offsetY>
+                    <related length="2">
+                        <related0>HangarAeropuerto::WayPoint::0</related0>
+                        <related1>HangarAeropuerto::WayPoint::1</related1>
+                    </related>
                 </strategy>
                 <hidden>false</hidden>
             </edgeproperty>
@@ -429,47 +429,17 @@
         <target>Pasajero</target>
         <name>Transporta</name>
         <properties>
-            <edgeproperty id="Transporta::source::multiplicity"
+            <edgeproperty id="Transporta::target::multiplicity"
                 sizeCalculated="true" type="multiplicity"
                 userDefined="false" visible="true">
-                <name>0..1</name>
+                <name>*</name>
                 <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
                     <userOffsetX>0.0</userOffsetX>
                     <userOffsetY>0.0</userOffsetY>
-                    <attached>Transporta::WayPoint::0</attached>
+                    <attached>Transporta::WayPoint::1</attached>
                     <offset_x>8</offset_x>
                     <offset_y>8</offset_y>
                     <placement>BOTTOM</placement>
-                </strategy>
-                <hidden>false</hidden>
-            </edgeproperty>
-            <edgeproperty id="Transporta::source::rolename"
-                sizeCalculated="true" type="rolename"
-                userDefined="false" visible="true">
-                <name>vuelosPasajeros</name>
-                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
-                    <userOffsetX>0.0</userOffsetX>
-                    <userOffsetY>0.0</userOffsetY>
-                    <attached>Transporta::WayPoint::0</attached>
-                    <offset_x>8</offset_x>
-                    <offset_y>8</offset_y>
-                    <placement>TOP</placement>
-                </strategy>
-                <hidden>false</hidden>
-            </edgeproperty>
-            <edgeproperty id="Transporta::AssociationName"
-                sizeCalculated="true" type="associationName"
-                userDefined="false" visible="true">
-                <name>Transporta</name>
-                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyInBetween">
-                    <userOffsetX>0.0</userOffsetX>
-                    <userOffsetY>0.0</userOffsetY>
-                    <offsetX>0.0</offsetX>
-                    <offsetY>-10.0</offsetY>
-                    <related length="2">
-                        <related0>Transporta::WayPoint::0</related0>
-                        <related1>Transporta::WayPoint::1</related1>
-                    </related>
                 </strategy>
                 <hidden>false</hidden>
             </edgeproperty>
@@ -487,17 +457,47 @@
                 </strategy>
                 <hidden>false</hidden>
             </edgeproperty>
-            <edgeproperty id="Transporta::target::multiplicity"
-                sizeCalculated="true" type="multiplicity"
+            <edgeproperty id="Transporta::source::rolename"
+                sizeCalculated="true" type="rolename"
                 userDefined="false" visible="true">
-                <name>*</name>
+                <name>vuelosPasajeros</name>
                 <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
                     <userOffsetX>0.0</userOffsetX>
                     <userOffsetY>0.0</userOffsetY>
-                    <attached>Transporta::WayPoint::1</attached>
+                    <attached>Transporta::WayPoint::0</attached>
+                    <offset_x>8</offset_x>
+                    <offset_y>8</offset_y>
+                    <placement>TOP</placement>
+                </strategy>
+                <hidden>false</hidden>
+            </edgeproperty>
+            <edgeproperty id="Transporta::source::multiplicity"
+                sizeCalculated="true" type="multiplicity"
+                userDefined="false" visible="true">
+                <name>0..1</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                    <attached>Transporta::WayPoint::0</attached>
                     <offset_x>8</offset_x>
                     <offset_y>8</offset_y>
                     <placement>BOTTOM</placement>
+                </strategy>
+                <hidden>false</hidden>
+            </edgeproperty>
+            <edgeproperty id="Transporta::AssociationName"
+                sizeCalculated="true" type="associationName"
+                userDefined="false" visible="true">
+                <name>Transporta</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyInBetween">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                    <offsetX>0.0</offsetX>
+                    <offsetY>-10.0</offsetY>
+                    <related length="2">
+                        <related0>Transporta::WayPoint::0</related0>
+                        <related1>Transporta::WayPoint::1</related1>
+                    </related>
                 </strategy>
                 <hidden>false</hidden>
             </edgeproperty>
@@ -535,14 +535,28 @@
         <target>Hangar</target>
         <name>Estacionado</name>
         <properties>
-            <edgeproperty id="Estacionado::source::rolename"
-                sizeCalculated="true" type="rolename"
+            <edgeproperty id="Estacionado::target::multiplicity"
+                sizeCalculated="true" type="multiplicity"
                 userDefined="false" visible="true">
-                <name>almacenamientoHangar</name>
+                <name>0..1</name>
                 <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
                     <userOffsetX>0.0</userOffsetX>
                     <userOffsetY>0.0</userOffsetY>
-                    <attached>Estacionado::WayPoint::0</attached>
+                    <attached>Estacionado::WayPoint::1</attached>
+                    <offset_x>8</offset_x>
+                    <offset_y>8</offset_y>
+                    <placement>BOTTOM</placement>
+                </strategy>
+                <hidden>false</hidden>
+            </edgeproperty>
+            <edgeproperty id="Estacionado::target::rolename"
+                sizeCalculated="true" type="rolename"
+                userDefined="false" visible="true">
+                <name>estanciaHangar</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                    <attached>Estacionado::WayPoint::1</attached>
                     <offset_x>8</offset_x>
                     <offset_y>8</offset_y>
                     <placement>TOP</placement>
@@ -563,6 +577,20 @@
                 </strategy>
                 <hidden>false</hidden>
             </edgeproperty>
+            <edgeproperty id="Estacionado::source::rolename"
+                sizeCalculated="true" type="rolename"
+                userDefined="false" visible="true">
+                <name>almacenamientoHangar</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                    <attached>Estacionado::WayPoint::0</attached>
+                    <offset_x>8</offset_x>
+                    <offset_y>8</offset_y>
+                    <placement>TOP</placement>
+                </strategy>
+                <hidden>false</hidden>
+            </edgeproperty>
             <edgeproperty id="Estacionado::AssociationName"
                 sizeCalculated="true" type="associationName"
                 userDefined="false" visible="true">
@@ -576,34 +604,6 @@
                         <related0>Estacionado::WayPoint::0</related0>
                         <related1>Estacionado::WayPoint::1</related1>
                     </related>
-                </strategy>
-                <hidden>false</hidden>
-            </edgeproperty>
-            <edgeproperty id="Estacionado::target::rolename"
-                sizeCalculated="true" type="rolename"
-                userDefined="false" visible="true">
-                <name>estanciaHangar</name>
-                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
-                    <userOffsetX>0.0</userOffsetX>
-                    <userOffsetY>0.0</userOffsetY>
-                    <attached>Estacionado::WayPoint::1</attached>
-                    <offset_x>8</offset_x>
-                    <offset_y>8</offset_y>
-                    <placement>TOP</placement>
-                </strategy>
-                <hidden>false</hidden>
-            </edgeproperty>
-            <edgeproperty id="Estacionado::target::multiplicity"
-                sizeCalculated="true" type="multiplicity"
-                userDefined="false" visible="true">
-                <name>0..1</name>
-                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
-                    <userOffsetX>0.0</userOffsetX>
-                    <userOffsetY>0.0</userOffsetY>
-                    <attached>Estacionado::WayPoint::1</attached>
-                    <offset_x>8</offset_x>
-                    <offset_y>8</offset_y>
-                    <placement>BOTTOM</placement>
                 </strategy>
                 <hidden>false</hidden>
             </edgeproperty>
@@ -641,50 +641,6 @@
         <target>Piloto</target>
         <name>PilotoPrincipalVuela</name>
         <properties>
-            <edgeproperty
-                id="PilotoPrincipalVuela::source::multiplicity"
-                sizeCalculated="true" type="multiplicity"
-                userDefined="false" visible="true">
-                <name>*</name>
-                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
-                    <userOffsetX>0.0</userOffsetX>
-                    <userOffsetY>0.0</userOffsetY>
-                    <attached>PilotoPrincipalVuela::WayPoint::0</attached>
-                    <offset_x>8</offset_x>
-                    <offset_y>8</offset_y>
-                    <placement>BOTTOM</placement>
-                </strategy>
-                <hidden>false</hidden>
-            </edgeproperty>
-            <edgeproperty id="PilotoPrincipalVuela::source::rolename"
-                sizeCalculated="true" type="rolename" userDefined="true" visible="true">
-                <name>vueloPrincipal</name>
-                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
-                    <userOffsetX>55.0</userOffsetX>
-                    <userOffsetY>0.0</userOffsetY>
-                    <attached>PilotoPrincipalVuela::WayPoint::0</attached>
-                    <offset_x>8</offset_x>
-                    <offset_y>8</offset_y>
-                    <placement>TOP</placement>
-                </strategy>
-                <hidden>false</hidden>
-            </edgeproperty>
-            <edgeproperty id="PilotoPrincipalVuela::AssociationName"
-                sizeCalculated="true" type="associationName"
-                userDefined="false" visible="true">
-                <name>PilotoPrincipalVuela</name>
-                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyInBetween">
-                    <userOffsetX>0.0</userOffsetX>
-                    <userOffsetY>0.0</userOffsetY>
-                    <offsetX>0.0</offsetX>
-                    <offsetY>-10.0</offsetY>
-                    <related length="2">
-                        <related0>PilotoPrincipalVuela::WayPoint::0</related0>
-                        <related1>PilotoPrincipalVuela::WayPoint::1</related1>
-                    </related>
-                </strategy>
-                <hidden>false</hidden>
-            </edgeproperty>
             <edgeproperty id="PilotoPrincipalVuela::target::rolename"
                 sizeCalculated="true" type="rolename"
                 userDefined="false" visible="true">
@@ -711,6 +667,50 @@
                     <offset_x>8</offset_x>
                     <offset_y>8</offset_y>
                     <placement>BOTTOM</placement>
+                </strategy>
+                <hidden>false</hidden>
+            </edgeproperty>
+            <edgeproperty id="PilotoPrincipalVuela::source::rolename"
+                sizeCalculated="true" type="rolename" userDefined="true" visible="true">
+                <name>vueloPrincipal</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
+                    <userOffsetX>55.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                    <attached>PilotoPrincipalVuela::WayPoint::0</attached>
+                    <offset_x>8</offset_x>
+                    <offset_y>8</offset_y>
+                    <placement>TOP</placement>
+                </strategy>
+                <hidden>false</hidden>
+            </edgeproperty>
+            <edgeproperty
+                id="PilotoPrincipalVuela::source::multiplicity"
+                sizeCalculated="true" type="multiplicity"
+                userDefined="false" visible="true">
+                <name>*</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                    <attached>PilotoPrincipalVuela::WayPoint::0</attached>
+                    <offset_x>8</offset_x>
+                    <offset_y>8</offset_y>
+                    <placement>BOTTOM</placement>
+                </strategy>
+                <hidden>false</hidden>
+            </edgeproperty>
+            <edgeproperty id="PilotoPrincipalVuela::AssociationName"
+                sizeCalculated="true" type="associationName"
+                userDefined="false" visible="true">
+                <name>PilotoPrincipalVuela</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyInBetween">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                    <offsetX>0.0</offsetX>
+                    <offsetY>-10.0</offsetY>
+                    <related length="2">
+                        <related0>PilotoPrincipalVuela::WayPoint::0</related0>
+                        <related1>PilotoPrincipalVuela::WayPoint::1</related1>
+                    </related>
                 </strategy>
                 <hidden>false</hidden>
             </edgeproperty>
@@ -748,6 +748,35 @@
         <target>Piloto</target>
         <name>PilotoSecundarioVuela</name>
         <properties>
+            <edgeproperty
+                id="PilotoSecundarioVuela::target::multiplicity"
+                sizeCalculated="true" type="multiplicity"
+                userDefined="false" visible="true">
+                <name>0..1</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                    <attached>PilotoSecundarioVuela::WayPoint::1</attached>
+                    <offset_x>8</offset_x>
+                    <offset_y>8</offset_y>
+                    <placement>BOTTOM</placement>
+                </strategy>
+                <hidden>false</hidden>
+            </edgeproperty>
+            <edgeproperty id="PilotoSecundarioVuela::target::rolename"
+                sizeCalculated="true" type="rolename"
+                userDefined="false" visible="true">
+                <name>pilotoSecundario</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                    <attached>PilotoSecundarioVuela::WayPoint::1</attached>
+                    <offset_x>8</offset_x>
+                    <offset_y>8</offset_y>
+                    <placement>TOP</placement>
+                </strategy>
+                <hidden>false</hidden>
+            </edgeproperty>
             <edgeproperty id="PilotoSecundarioVuela::source::rolename"
                 sizeCalculated="true" type="rolename"
                 userDefined="false" visible="true">
@@ -793,35 +822,6 @@
                 </strategy>
                 <hidden>false</hidden>
             </edgeproperty>
-            <edgeproperty id="PilotoSecundarioVuela::target::rolename"
-                sizeCalculated="true" type="rolename"
-                userDefined="false" visible="true">
-                <name>pilotoSecundario</name>
-                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
-                    <userOffsetX>0.0</userOffsetX>
-                    <userOffsetY>0.0</userOffsetY>
-                    <attached>PilotoSecundarioVuela::WayPoint::1</attached>
-                    <offset_x>8</offset_x>
-                    <offset_y>8</offset_y>
-                    <placement>TOP</placement>
-                </strategy>
-                <hidden>false</hidden>
-            </edgeproperty>
-            <edgeproperty
-                id="PilotoSecundarioVuela::target::multiplicity"
-                sizeCalculated="true" type="multiplicity"
-                userDefined="false" visible="true">
-                <name>0..1</name>
-                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
-                    <userOffsetX>0.0</userOffsetX>
-                    <userOffsetY>0.0</userOffsetY>
-                    <attached>PilotoSecundarioVuela::WayPoint::1</attached>
-                    <offset_x>8</offset_x>
-                    <offset_y>8</offset_y>
-                    <placement>BOTTOM</placement>
-                </strategy>
-                <hidden>false</hidden>
-            </edgeproperty>
         </properties>
         <waypoints>
             <edgeproperty id="PilotoSecundarioVuela::WayPoint::0"
@@ -856,50 +856,6 @@
         <target>Desguace</target>
         <name>Inutilizado</name>
         <properties>
-            <edgeproperty id="Inutilizado::source::rolename"
-                sizeCalculated="true" type="rolename"
-                userDefined="false" visible="true">
-                <name>almacenamientoDesguace</name>
-                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
-                    <userOffsetX>0.0</userOffsetX>
-                    <userOffsetY>0.0</userOffsetY>
-                    <attached>Inutilizado::WayPoint::0</attached>
-                    <offset_x>8</offset_x>
-                    <offset_y>8</offset_y>
-                    <placement>TOP</placement>
-                </strategy>
-                <hidden>false</hidden>
-            </edgeproperty>
-            <edgeproperty id="Inutilizado::source::multiplicity"
-                sizeCalculated="true" type="multiplicity"
-                userDefined="false" visible="true">
-                <name>*</name>
-                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
-                    <userOffsetX>0.0</userOffsetX>
-                    <userOffsetY>0.0</userOffsetY>
-                    <attached>Inutilizado::WayPoint::0</attached>
-                    <offset_x>8</offset_x>
-                    <offset_y>8</offset_y>
-                    <placement>BOTTOM</placement>
-                </strategy>
-                <hidden>false</hidden>
-            </edgeproperty>
-            <edgeproperty id="Inutilizado::AssociationName"
-                sizeCalculated="true" type="associationName"
-                userDefined="false" visible="true">
-                <name>Inutilizado</name>
-                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyInBetween">
-                    <userOffsetX>0.0</userOffsetX>
-                    <userOffsetY>0.0</userOffsetY>
-                    <offsetX>0.0</offsetX>
-                    <offsetY>-10.0</offsetY>
-                    <related length="2">
-                        <related0>Inutilizado::WayPoint::0</related0>
-                        <related1>Inutilizado::WayPoint::1</related1>
-                    </related>
-                </strategy>
-                <hidden>false</hidden>
-            </edgeproperty>
             <edgeproperty id="Inutilizado::target::multiplicity"
                 sizeCalculated="true" type="multiplicity"
                 userDefined="false" visible="true">
@@ -925,6 +881,50 @@
                     <offset_x>8</offset_x>
                     <offset_y>8</offset_y>
                     <placement>TOP</placement>
+                </strategy>
+                <hidden>false</hidden>
+            </edgeproperty>
+            <edgeproperty id="Inutilizado::source::multiplicity"
+                sizeCalculated="true" type="multiplicity"
+                userDefined="false" visible="true">
+                <name>*</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                    <attached>Inutilizado::WayPoint::0</attached>
+                    <offset_x>8</offset_x>
+                    <offset_y>8</offset_y>
+                    <placement>BOTTOM</placement>
+                </strategy>
+                <hidden>false</hidden>
+            </edgeproperty>
+            <edgeproperty id="Inutilizado::source::rolename"
+                sizeCalculated="true" type="rolename"
+                userDefined="false" visible="true">
+                <name>almacenamientoDesguace</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                    <attached>Inutilizado::WayPoint::0</attached>
+                    <offset_x>8</offset_x>
+                    <offset_y>8</offset_y>
+                    <placement>TOP</placement>
+                </strategy>
+                <hidden>false</hidden>
+            </edgeproperty>
+            <edgeproperty id="Inutilizado::AssociationName"
+                sizeCalculated="true" type="associationName"
+                userDefined="false" visible="true">
+                <name>Inutilizado</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyInBetween">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                    <offsetX>0.0</offsetX>
+                    <offsetY>-10.0</offsetY>
+                    <related length="2">
+                        <related0>Inutilizado::WayPoint::0</related0>
+                        <related1>Inutilizado::WayPoint::1</related1>
+                    </related>
                 </strategy>
                 <hidden>false</hidden>
             </edgeproperty>
@@ -962,46 +962,17 @@
         <target>Aerolinea</target>
         <name>Contrato</name>
         <properties>
-            <edgeproperty id="Contrato::source::multiplicity"
+            <edgeproperty id="Contrato::target::multiplicity"
                 sizeCalculated="true" type="multiplicity"
                 userDefined="false" visible="true">
                 <name>1..*</name>
                 <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
                     <userOffsetX>0.0</userOffsetX>
                     <userOffsetY>0.0</userOffsetY>
-                    <attached>Contrato::WayPoint::0</attached>
+                    <attached>Contrato::WayPoint::1</attached>
                     <offset_x>8</offset_x>
                     <offset_y>8</offset_y>
                     <placement>BOTTOM</placement>
-                </strategy>
-                <hidden>false</hidden>
-            </edgeproperty>
-            <edgeproperty id="Contrato::source::rolename"
-                sizeCalculated="true" type="rolename" userDefined="true" visible="true">
-                <name>contratado</name>
-                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
-                    <userOffsetX>8.0</userOffsetX>
-                    <userOffsetY>-20.0</userOffsetY>
-                    <attached>Contrato::WayPoint::0</attached>
-                    <offset_x>8</offset_x>
-                    <offset_y>8</offset_y>
-                    <placement>TOP</placement>
-                </strategy>
-                <hidden>false</hidden>
-            </edgeproperty>
-            <edgeproperty id="Contrato::AssociationName"
-                sizeCalculated="true" type="associationName"
-                userDefined="false" visible="true">
-                <name>Contrato</name>
-                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyInBetween">
-                    <userOffsetX>0.0</userOffsetX>
-                    <userOffsetY>0.0</userOffsetY>
-                    <offsetX>0.0</offsetX>
-                    <offsetY>-10.0</offsetY>
-                    <related length="2">
-                        <related0>Contrato::WayPoint::0</related0>
-                        <related1>Contrato::WayPoint::1</related1>
-                    </related>
                 </strategy>
                 <hidden>false</hidden>
             </edgeproperty>
@@ -1018,17 +989,46 @@
                 </strategy>
                 <hidden>false</hidden>
             </edgeproperty>
-            <edgeproperty id="Contrato::target::multiplicity"
+            <edgeproperty id="Contrato::source::rolename"
+                sizeCalculated="true" type="rolename" userDefined="true" visible="true">
+                <name>contratado</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
+                    <userOffsetX>8.0</userOffsetX>
+                    <userOffsetY>-20.0</userOffsetY>
+                    <attached>Contrato::WayPoint::0</attached>
+                    <offset_x>8</offset_x>
+                    <offset_y>8</offset_y>
+                    <placement>TOP</placement>
+                </strategy>
+                <hidden>false</hidden>
+            </edgeproperty>
+            <edgeproperty id="Contrato::source::multiplicity"
                 sizeCalculated="true" type="multiplicity"
                 userDefined="false" visible="true">
                 <name>1..*</name>
                 <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
                     <userOffsetX>0.0</userOffsetX>
                     <userOffsetY>0.0</userOffsetY>
-                    <attached>Contrato::WayPoint::1</attached>
+                    <attached>Contrato::WayPoint::0</attached>
                     <offset_x>8</offset_x>
                     <offset_y>8</offset_y>
                     <placement>BOTTOM</placement>
+                </strategy>
+                <hidden>false</hidden>
+            </edgeproperty>
+            <edgeproperty id="Contrato::AssociationName"
+                sizeCalculated="true" type="associationName"
+                userDefined="false" visible="true">
+                <name>Contrato</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyInBetween">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                    <offsetX>0.0</offsetX>
+                    <offsetY>-10.0</offsetY>
+                    <related length="2">
+                        <related0>Contrato::WayPoint::0</related0>
+                        <related1>Contrato::WayPoint::1</related1>
+                    </related>
                 </strategy>
                 <hidden>false</hidden>
             </edgeproperty>
