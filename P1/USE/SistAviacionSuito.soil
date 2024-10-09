@@ -40,15 +40,23 @@
 !ElPrat.ciudad := 'Barcelona'
 
 
+
+!new Vuelo('Vuelo3')
+!Vuelo1.id := 1003
+!Vuelo1.numKm := 1200.0
+
+!new Vuelo('Vuelo4')
+!Vuelo2.id := 1003
+!Vuelo2.numKm := 1800.0
+
+
 -- INVARIANTE PILOTO_PRINCIPAL != PILOTO_SECUNDARIO  
 !insert(Vuelo1, Kanye) into PilotoPrincipalVuela
 !insert(Vuelo1, Mohamed) into PilotoSecundarioVuela
 
 -- INVARIANTE PILOTO_SECUNDARIO 
-!insert(Vuelo2, Kanye) into PilotoPrincipalVuela
+!insert(Vuelo2, Kanye) into PilotoSecundarioVuela
 
-
-
---
+-- INAVARIANTES DE AEROLINEAS --
 
 
