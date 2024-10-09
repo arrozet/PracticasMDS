@@ -117,7 +117,7 @@ context Aerolinea
     -- Nombre de la Aerolínea es único
     ---
     inv NombreAerolineaDistinto :
-        Aerolinea.allInstances()->isUnique(nombre)
+        Aerolinea.allInstances()->isUnique(self.nombre)
 
 context Avion
     ---
