@@ -6,9 +6,6 @@ reset
 
 !new Aerolinea('AirEuropa')
 !AirEuropa.nombre := 'AirEuropa'
-
-!new Aerolinea('Japones')
-!Japones.nombre := 'Servicio Aerero de la Armada Imperial Japonesa'
 ----------------------- FIN AEROLINEAS -----------------------
 
 ----------------------- AEROPUERTOS -----------------------
@@ -176,10 +173,6 @@ reset
 !Vuelo2.id := 1002
 !Vuelo2.numKm := 1800.0
 
-!new Vuelo('Vuelo3')
-!Vuelo3.id := 1003
-!Vuelo3.numKm := 100000
-
 !new Vuelo('Vuelo4')
 !Vuelo4.id := 1004
 !Vuelo4.numKm := 10000
@@ -206,8 +199,8 @@ reset
 !Contrato2.precioMes := 150000
 
 !new Contrato(Boeing767_222, Iberia)
-!new Contrato2.numMesesContrato := 10
-!new Contrato2.precioMes := 14000
+!Contrato3.numMesesContrato := 10
+!Contrato3.precioMes := 14000
 
 -- Relacionar Aerolíneas y Aviones
 !insert(A320, Iberia) into Contrato -- Esto ya está implícito en la creación del contrato pero por alguna razón hay que ponerlo para que aparezca la relación
