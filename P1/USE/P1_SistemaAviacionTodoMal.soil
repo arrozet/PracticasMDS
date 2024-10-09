@@ -81,8 +81,11 @@ reset
 
 -- Relacionar Aerolíneas y Aviones
 !insert(A320, Iberia) into Contrato
-!insert(B737, AirEuropa) into Contrato -- Esto ya está implícito en la creación del contrato pero por alguna razón hay que ponerlo para que aparezca la relación
+!insert(B737, AirEuropa) into Contrato
 !insert(B344, Emirates) into Contrato
+!insert(B345, Emirates) into Contrato
+!insert(B346, Emirates) into Contrato
+
 
 -- Relacionar aviones con vuelos
 !insert(A320, Vuelo1) into Realiza
@@ -91,21 +94,18 @@ reset
 !insert(B344, Vuelo4) into Realiza
 !insert(B344, Vuelo5) into Realiza
 
-
 -- Relacionar piloto principal con vuelos
 !insert(Vuelo1, Carlos) into PilotoPrincipalVuela
 !insert(Vuelo2, Lucia) into PilotoPrincipalVuela
 !insert(Vuelo3, Lucia) into PilotoPrincipalVuela
 !insert(Vuelo4, Carlos ) into PilotoPrincipalVuela
-!insert(Vuelo4, Lucia ) into PilotoPrincipalVuela
-
 
 -- Relacionar piloto secundario con vuelos
 !insert(Vuelo1, Lucia) into PilotoSecundarioVuela
 !insert(Vuelo2, Lucia) into PilotoSecundarioVuela
 !insert(Vuelo3, Carlos) into PilotoSecundarioVuela
-!insert(Vuelo4, Lucia ) into PilotoSecundarioVuela
-!insert(Vuelo5, Carlos ) into PilotoSecundarioVuela
+!insert(Vuelo4, Lucia) into PilotoSecundarioVuela
+!insert(Vuelo5, Carlos) into PilotoSecundarioVuela
 
 -- Asignar Avion a Hangar
 !insert(B345, HangarMalaga) into Estacionado
@@ -118,4 +118,3 @@ reset
 -- Asignar Hangar a Aeropuerto
 !insert(Malaga, HangarMalaga) into HangarAeropuerto
 !insert(Malaga, DesguaceMalaga) into DesguaceAeropuerto 
-
