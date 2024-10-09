@@ -165,7 +165,7 @@ context Vuelo
     -- En cuanto a los vuelos que realizan los aviones, de cada vuelo que realiza cada avión se registra su identificador, que ha de ser único para cada vuelo,
     ---
     inv IdVueloDiferentes:
-        Vuelo.allInstances()->isUnique(id) 
+        Vuelo.allInstances()->isUnique(self.id) 
 
     
 context Hangar
