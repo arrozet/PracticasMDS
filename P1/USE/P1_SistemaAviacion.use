@@ -125,7 +125,7 @@ context Avion
     -- Es decir, no puede a la vez estar en un desguace y en un hangar, o volando y en un hangar, o volando y en un desguace...
     ---
     inv AvionUnicoEstado:   -- o esta en desguace, o esta en hangar, o no esta en ninguno (esta volando)
-        (self.estanciaHangar.oclIsUndefined() xor self.estanciaDesguace.oclIsUndefined()) or (self.estanciaHangar.oclIsUndefined() and self.estanciaDesguace.oclIsUndefined())
+        (self.estanciaHangar.oclIsUndefined() or self.estanciaDesguace.oclIsUndefined())
 
     ---
     -- Los Aviones que deben encontrarse en un Desguace son aquellos que han completado los 1000 viajes.
