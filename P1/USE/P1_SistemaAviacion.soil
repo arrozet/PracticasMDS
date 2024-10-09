@@ -21,7 +21,7 @@ reset
 !new Avion('B737')
 !B737.viajesCompletados := 1001
 
-!new Avion('Boeing 767-222')
+!new Avion('Boeing767_222')
 !ElPilotador.viajesCompletados := 175
 
 !new Avion('Mitsubishi A6M Zero')
@@ -51,51 +51,51 @@ reset
 !Lucia.nombre := 'Lucia'
 !Lucia.edad := 39
 
-!new Piloto('Graham')
+!new Pasajero('Graham')
 !Graham.nombre := 'Graham Berkely'
 !Graham.edad := 37
 
-!new Piloto('Touri')
+!new Pasajero('Touri')
 !Touri.nombre := 'Touri Boulourchi'
 !Touri.edad := 69
 
-!new Piloto('Klaus')
+!new Pasajero('Klaus')
 !Klaus.nombre := 'Klaus Bothe'
 !Klaus.edad := 39
 
-!new Piloto('Paco')
+!new Pasajero('Paco')
 !Paco.nombre := 'Paco de la Torre'
 !Paco.edad := 81
 
-!new Piloto('John')
+!new Pasajero('John')
 !John.nombre := 'John Brett Cahill'
 !John.edad := 56
 
-!new Piloto('Christoffer')
+!new Pasajero('Christoffer')
 !Christoffer.nombre := 'Christoffer Carstanjen'
 !Christoffer.edad := 33
 
-!new Piloto('Dorothy')
+!new Pasajero('Dorothy')
 !Dorothy.nombre := 'Dorothy DeAraujo'
 !Dorothy.edad := 82
 
-!new Piloto('Ana')
+!new Pasajero('Ana')
 !Ana.nombre := 'Ana Gloria Pocasangre De Barrera'
 !Ana.edad := 49
 
-!new Piloto('Lisa')
+!new Pasajero('Lisa')
 !Lisa.nombre := 'Lisa Anne Frost'
 !Lisa.edad := 22
 
-!new Piloto('Lynn')
+!new Pasajero('Lynn')
 !Lynn.nombre := 'Lynn Catherine Goodchild'
 !Lynn.edad := 25
 
-!new Piloto('Francis')
+!new Pasajero('Francis')
 !Francis.nombre := 'Francis Edward Grogan'
 !Francis.edad := 76
 
-!new Piloto('Carl')
+!new Pasajero('Carl')
 !Carl.nombre := 'Carl Max Hammond, Jr.'
 !Carl.edad := 37
 
@@ -158,16 +158,20 @@ reset
 !Snake.edad := 35
 
 !new Vuelo('Vuelo1')
-!Vuelo1.identificador := 1001
+!Vuelo1.id := 1001
 !Vuelo1.numKm := 1200.0
 
 !new Vuelo('Vuelo2')
-!Vuelo2.identificador := 1002
+!Vuelo2.id := 1002
 !Vuelo2.numKm := 1800.0
 
 !new Vuelo('Vuelo3')
-!Vuelo3.identificador := 1003
+!Vuelo3.id := 1003
 !Vuelo3.numKm := 100000
+
+!new Vuelo('Vuelo4')
+!Vuelo4.id := 1004
+!Vuelo4.numKm := 10000
 
 !new Hangar('Hangar1')
 !Hangar1.capacidadMax := 5
@@ -184,23 +188,51 @@ reset
 !Contrato2.numMesesContrato := 24
 !Contrato2.precioMes := 150000
 
+!new Contrato(Boeing767_222, Iberia)
+!new Contrato2.numMesesContrato := 10
+!new Contrato2.precioMes := 14000
+
 -- Relacionar Aerolíneas y Aviones
 !insert(A320, Iberia) into Contrato -- Esto ya está implícito en la creación del contrato pero por alguna razón hay que ponerlo para que aparezca la relación
 !insert(B737, AirEuropa) into Contrato -- Esto ya está implícito en la creación del contrato pero por alguna razón hay que ponerlo para que aparezca la relación
+!insert(Boeing767_222, Iberia) into Contrato
 
 -- Relacionar aviones con vuelos
 !insert(A320, Vuelo1) into Realiza
 !insert(B737, Vuelo2) into Realiza
+!insert(Boeing767_222, Vuelo4) into Realiza
 
 -- Relacionar piloto principal con vuelos
 !insert(Vuelo1, Carlos) into PilotoPrincipalVuela
 !insert(Vuelo2, Lucia) into PilotoPrincipalVuela
+!insert(Vuelo4, Mohamed) into PilotoPrincipalVuela
 
 -- Relacionar piloto secundario con vuelos (Lucia es la secundaria en Vuelo1)
 !insert(Vuelo1, Lucia) into PilotoSecundarioVuela
+!insert(Vuelo4, Kanye) into PilotoSecundarioVuela
+
 
 -- Relacionar pasajeros con vuelos
 !insert(Vuelo1, Pedro) into Transporta
+!insert(Vuelo4, Bob) into Transporta
+!insert(Vuelo4, Lucia) into Transporta
+!insert(Vuelo4, Klaus) into Transporta
+!insert(Vuelo4, Paco) into Transporta
+!insert(Vuelo4, John) into Transporta
+!insert(Vuelo4, Christoffer) into Transporta
+!insert(Vuelo4, Dorothy) into Transporta
+!insert(Vuelo4, Ana) into Transporta
+!insert(Vuelo4, Lisa) into Transporta
+!insert(Vuelo4, Francis) into Transporta
+!insert(Vuelo4, Lynn) into Transporta
+!insert(Vuelo4, Carl) into Transporta
+!insert(Vuelo4, Graham) into Transporta
+!insert(Vuelo4, Touri) into Transporta
+!insert(Vuelo4, Ruben) into Transporta
+!insert(Vuelo4, Cristobal) into Transporta
+!insert(Vuelo4, Agustin) into Transporta
+!insert(Vuelo4, Frodo) into Transporta
+!insert(Vuelo4, Snake) into Transporta
 
 -- Asignar aviones a hangar y desguace
 !insert(A320, Hangar1) into Estacionado
