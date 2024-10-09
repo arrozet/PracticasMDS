@@ -5,10 +5,10 @@ reset
 !Malaga.ciudad := 'Malaga'
 
 !new Aeropuerto('Granada')
-!Malaga.ciudad := 'Malaga'
+!Granada.ciudad := 'Malaga'
 
-!new Hangar('HangarMalga')
-!HangarMalga.capacidadMax := 1
+!new Hangar('HangarMalaga')
+!HangarMalaga.capacidadMax := 1
 
 !new Desguace('DesguaceMalaga')
 !DesguaceMalaga.capacidadMax := 1
@@ -27,7 +27,7 @@ reset
 !Emirates.nombre := 'Fly Emirates'
 
 !new Aerolinea('Emirates_FAKE')
-!Emirates.nombre := 'Fly Emirates'
+!Emirates_FAKE.nombre := 'Fly Emirates'
 
 -- AVIONES
 !new Avion('A320')
@@ -37,6 +37,12 @@ reset
 !B737.viajesCompletados := 1001
 
 !new Avion('B344')
+!B344.viajesCompletados := 909
+
+!new Avion('B345')
+!B344.viajesCompletados := 909
+
+!new Avion('B346')
 !B344.viajesCompletados := 909
 
 -- VUELOS
@@ -101,5 +107,18 @@ reset
 !insert(Vuelo4, Lucia ) into PilotoSecundarioVuela
 !insert(Vuelo5, Carlos ) into PilotoSecundarioVuela
 
+-- Asignar Avion a Hangar
+!insert(B345, HangarMalaga) into Estacionado
+!insert(B346, HangarMalaga) into Estacionado
 
+-- Asignar Avion a Desguace
+!insert(B345, DesguaceMalaga) into Inutilizado
+!insert(B346, DesguaceMalaga) into Inutilizado
+
+
+
+
+-- Asignar Hangar a Aeropuerto
+!insert(Malaga, HangarMalaga) into HangarAeropuerto
+!insert(Malaga, DesguaceMalaga) into DesguaceAeropuerto 
 
