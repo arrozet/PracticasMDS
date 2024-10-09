@@ -45,7 +45,7 @@
 !insert(Vuelo1, Mohamed) into PilotoSecundarioVuela
 
 -- INVARIANTE PILOTO_SECUNDARIO 
-!insert(Vuelo2, Kanye) into PilotoPrincipalVuela
+!insert(Vuelo2, Kanye) into PilotoSecundarioVuela
 
 
 
