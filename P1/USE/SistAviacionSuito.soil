@@ -1,0 +1,54 @@
+!new Piloto('Mohamed')
+!Mohamed.nombre := 'Mohamed Mohamed el-Amir Awad el-Sayed Atta'
+!Mohamed edad := 33
+
+!new Piloto('Kanye')
+!Kanye.nombre := 'Kanye West'
+!Kanye.edad := 24 
+
+!new Pasajero('Frodo')
+!Frodo.nombre := 'Frodo Bolsón'
+!Frodo.edad := 20
+
+!new Pasajero('Snake')
+!Snake.nombre := 'Solid Snake'
+!Snake.edad := 35
+
+!new Vuelo('Vuelo1')
+!Vuelo1.id := 1001
+!Vuelo1.numKm := 1200.0
+
+!new Vuelo('Vuelo2')
+!Vuelo2.id := 1002
+!Vuelo2.numKm := 1800.0
+
+!new Hangar('Hangar1')
+!Hangar1.capacidadMax := 5
+
+!new Desguace('Desguace1')
+!Desguace1.capacidadMax := 3
+
+!new Contrato(A320, Iberia)
+!Contrato1.numMesesContrato := 12
+!Contrato1.precioMes := 100000
+
+!new Contrato(B737, AirEuropa)
+!Contrato2.numMesesContrato := 24
+!Contrato2.precioMes := 150000
+
+!new Aeropuerto('ElPrat')
+!ElPrat.ciudad := 'Barcelona'
+
+
+-- INVARIANTE PILOTO_PRINCIPAL != PILOTO_SECUNDARIO  
+!insert(Vuelo1, Kanye) into PilotoPrincipalVuela
+!insert(Vuelo1, Mohamed) into PilotoSecundarioVuela
+
+-- INVARIANTE PILOTO_SECUNDARIO 
+!insert(Vuelo2, Kanye) into PilotoPrincipalVuela
+
+
+
+--
+
+

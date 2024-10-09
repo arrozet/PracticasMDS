@@ -1,5 +1,6 @@
 reset
 
+----------------------- AEROLINEAS -----------------------
 !new Aerolinea('Iberia')
 !Iberia.nombre := 'Iberia'
 
@@ -8,13 +9,17 @@ reset
 
 !new Aerolinea('Japones')
 !Japones.nombre := 'Servicio Aerero de la Armada Imperial Japonesa'
+----------------------- FIN AEROLINEAS -----------------------
 
+----------------------- AEROPUERTOS -----------------------
 !new Aeropuerto('Barajas')
 !Barajas.ciudad := 'Madrid'
 
 !new Aeropuerto('ElPrat')
 !ElPrat.ciudad := 'Barcelona'
+----------------------- FIN AEROPUERTOS -----------------------
 
+----------------------- AVIONES -----------------------
 !new Avion('A320')
 !A320.viajesCompletados := 950
 
@@ -38,7 +43,9 @@ reset
 
 !new Avion('Nakajima J1N1-S')
 !Mitsubishi A6M Zero.viajesCompletados := 1
+----------------------- FIN AVIONES -----------------------
 
+----------------------- PILOTOS -----------------------
 !new Piloto('Hiroyoshi')
 !Hiroyoshi.nombre := 'Hiroyoshi Nishizawa'
 !Hiroyoshi.edad := 24
@@ -51,6 +58,50 @@ reset
 !Lucia.nombre := 'Lucia'
 !Lucia.edad := 39
 
+!new Piloto('Mohamed')
+!Mohamed.nombre := 'Mohamed Mohamed el-Amir Awad el-Sayed Atta'
+!Mohamed edad := 33
+
+!new Piloto('Kanye')
+!Kanye.nombre := 'Kanye West'
+!Kanye.edad := 24 
+-- durante el 11s claro
+
+!new Piloto('Walter')
+!Walter.nombre := 'Walter White'
+!Walter.edad := 43
+
+!new Piloto('Stanley')
+!Stanley.nombre := 'Stanley Martin Lieber'
+!Stanley.edad := 78
+
+!new Piloto('Son')
+!Son.nombre := 'Son Goku'
+!Son.edad := 17
+
+!new Piloto('Kratos')
+!Kratos.nombre := 'Kratos Ghost of Sparta'
+!Kratos.edad := 1067
+
+!new Piloto('Bob')
+!Bob.nombre := 'Bob Esponja'
+!Bob.edad := 38
+
+!new Piloto('Pedro')
+!Pedro.nombre := 'Pedro Sanchez'
+!Pedro.edad := 29
+
+!new Piloto('Cristobal')
+!Cristobal.nombre := 'Cristobal Barba'
+!Cristobal.edad := 88
+
+!new Piloto('Agustin')
+!Agustin.nombre := 'Agustin Valverde'
+!Agustin.edad := 100000
+-- Es un ser milenario
+----------------------- FIN PILOTOS -----------------------
+
+----------------------- PASAJEROS -----------------------
 !new Pasajero('Graham')
 !Graham.nombre := 'Graham Berkely'
 !Graham.edad := 37
@@ -99,55 +150,13 @@ reset
 !Carl.nombre := 'Carl Max Hammond, Jr.'
 !Carl.edad := 37
 
-!new Piloto('Mohamed')
-!Mohamed.nombre := 'Mohamed Mohamed el-Amir Awad el-Sayed Atta'
-!Mohamed edad := 33
-
-!new Piloto('Kanye')
-!Kanye.nombre := 'Kanye West'
-!Kanye.edad := 24 
--- durante el 11s claro
-
 !new Pasajero('Maggie')
 !Maggie.nombre := 'Maggie Simpson'
 !Maggie.edad := 13
 
-!new Piloto('Walter')
-!Walter.nombre := 'Walter White'
-!Walter.edad := 43
-
-!new Piloto('Stanley')
-!Stanley.nombre := 'Stanley Martin Lieber'
-!Stanley.edad := 78
-
-!new Piloto('Son')
-!Son.nombre := 'Son Goku'
-!Son.edad := 17
-
-!new Piloto('Kratos')
-!Kratos.nombre := 'Kratos Ghost of Sparta'
-!Kratos.edad := 1067
-
-!new Piloto('Bob')
-!Bob.nombre := 'Bob Esponja'
-!Bob.edad := 38
-
-!new Piloto('Pedro')
-!Pedro.nombre := 'Pedro Sanchez'
-!Pedro.edad := 29
-
 !new Pasajero('Ruben')
 !Ruben.nombre := 'Ruben Oliva Zamora'
 !Ruben.edad := -3
-
-!new Piloto('Cristobal')
-!Cristobal.nombre := 'Cristobal Barba'
-!Cristobal.edad := 88
-
-!new Piloto('Agustin')
-!Agustin.nombre := 'Agustin Valverde'
-!Agustin.edad := 100000
--- Es un ser milenario
 
 !new Pasajero('Frodo')
 !Frodo.nombre := 'Frodo Bolsón'
@@ -156,7 +165,9 @@ reset
 !new Pasajero('Snake')
 !Snake.nombre := 'Solid Snake'
 !Snake.edad := 35
+----------------------- FIN PASAJEROS -----------------------
 
+----------------------- VUELOS -----------------------
 !new Vuelo('Vuelo1')
 !Vuelo1.id := 1001
 !Vuelo1.numKm := 1200.0
@@ -172,12 +183,18 @@ reset
 !new Vuelo('Vuelo4')
 !Vuelo4.id := 1004
 !Vuelo4.numKm := 10000
+----------------------- FIN VUELOS -----------------------
 
+----------------------- HANGAR -----------------------
 !new Hangar('Hangar1')
 !Hangar1.capacidadMax := 5
+----------------------- FIN HANGAR -----------------------
 
+----------------------- DESGUACE -----------------------
 !new Desguace('Desguace1')
 !Desguace1.capacidadMax := 3
+----------------------- FIN DESGUACES 
+
 
 -- Relacionar Aviones y Aerolíneas a través de contratos
 !new Contrato(A320, Iberia)
@@ -229,8 +246,8 @@ reset
 !insert(Vuelo4, Graham) into Transporta
 !insert(Vuelo4, Touri) into Transporta
 !insert(Vuelo4, Ruben) into Transporta
-!insert(Vuelo4, Cristobal) into Transporta
-!insert(Vuelo4, Agustin) into Transporta
+--!insert(Vuelo4, Cristobal) into Transporta
+--!insert(Vuelo4, Agustin) into Transporta
 !insert(Vuelo4, Frodo) into Transporta
 !insert(Vuelo4, Snake) into Transporta
 
@@ -239,5 +256,5 @@ reset
 !insert(B737, Desguace1) into Inutilizado
 
 -- Asignar hangar y desguace a aeropuertos
-!insert(Barajas, Hangar1) into hangarAeropuerto
-!insert(ElPrat, Desguace1) into desguaceAeropuerto
+!insert(Barajas, Hangar1) into HangarAeropuerto
+!insert(ElPrat, Desguace1) into DesguaceAeropuerto
