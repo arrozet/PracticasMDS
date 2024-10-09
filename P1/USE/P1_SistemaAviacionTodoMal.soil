@@ -80,7 +80,7 @@ reset
 !Lucia.edad := 39
 
 -- Relacionar Aerolíneas y Aviones
-!insert(A320, Iberia) into Contrato -- Esto ya está implícito en la creación del contrato pero por alguna razón hay que ponerlo para que aparezca la relación
+!insert(A320, Iberia) into Contrato
 !insert(B737, AirEuropa) into Contrato -- Esto ya está implícito en la creación del contrato pero por alguna razón hay que ponerlo para que aparezca la relación
 !insert(B344, Emirates) into Contrato
 
@@ -100,7 +100,7 @@ reset
 !insert(Vuelo4, Lucia ) into PilotoPrincipalVuela
 
 
--- Relacionar piloto secundario con vuelos (Lucia es la secundaria en Vuelo1)
+-- Relacionar piloto secundario con vuelos
 !insert(Vuelo1, Lucia) into PilotoSecundarioVuela
 !insert(Vuelo2, Lucia) into PilotoSecundarioVuela
 !insert(Vuelo3, Carlos) into PilotoSecundarioVuela
@@ -114,9 +114,6 @@ reset
 -- Asignar Avion a Desguace
 !insert(B345, DesguaceMalaga) into Inutilizado
 !insert(B346, DesguaceMalaga) into Inutilizado
-
-
-
 
 -- Asignar Hangar a Aeropuerto
 !insert(Malaga, HangarMalaga) into HangarAeropuerto
