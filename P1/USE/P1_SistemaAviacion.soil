@@ -36,22 +36,19 @@ reset
 !B737.viajesCompletados := 1001
 
 !new Avion('Boeing767_222')
-!ElPilotador.viajesCompletados := 175
+!Boeing767_222.viajesCompletados := 175
 
-!new Avion('Mitsubishi A6M Zero')
-!Mitsubishi A6M Zero.viajesCompletados := 1
+!new Avion('Mitsubishi_A6M_Zero')
+!Mitsubishi_A6M_Zero.viajesCompletados := 1
 
-!new Avion('Mitsubishi A5M Zero')
-!Mitsubishi A6M Zero.viajesCompletados := 1
+!new Avion('Mitsubishi_A5M_Zero')
+!Mitsubishi_A5M_Zero.viajesCompletados := 1
 
-!new Avion('Kawanishi N1K-J/N1K2-J')
-!Mitsubishi A6M Zero.viajesCompletados := 1
+!new Avion('Mitsubishi_J2M')
+!Mitsubishi_J2M.viajesCompletados := 1
 
-!new Avion('Mitsubishi J2M')
-!Mitsubishi A6M Zero.viajesCompletados := 1
-
-!new Avion('Nakajima J1N1-S')
-!Mitsubishi A6M Zero.viajesCompletados := 1
+!new Avion('Nakajima_J1N1_S')
+!Nakajima_J1N1_S.viajesCompletados := 1
 ----------------------- FIN AVIONES -----------------------
 
 ----------------------- PILOTOS ---------------------------
@@ -69,7 +66,7 @@ reset
 
 !new Piloto('Mohamed')
 !Mohamed.nombre := 'Mohamed Mohamed el-Amir Awad el-Sayed Atta'
-!Mohamed edad := 33
+!Mohamed.edad := 33
 
 !new Piloto('Kanye')
 !Kanye.nombre := 'Kanye West'
@@ -202,23 +199,23 @@ reset
 
 
 -- Relacionar Aviones y Aerolíneas a través de contratos
-!new Contrato (A320, Iberia)
+!insert(A320, Iberia) into Contrato
 !Contrato1.numMesesContrato := 12
 !Contrato1.precioMes := 100000
 
-!new Contrato(B737, AirEuropa)
+!insert(B737, AirEuropa) into Contrato
 !Contrato2.numMesesContrato := 24
 !Contrato2.precioMes := 150000
 
-!new Contrato(Boeing767_222, Iberia)
+!insert(Boeing767_222, Iberia) into Contrato
 !Contrato3.numMesesContrato := 10
 !Contrato3.precioMes := 14000
 
 
 -- Relacionar Aerolíneas y Aviones
-!insert(A320, Iberia) into Contrato -- Esto ya está implícito en la creación del contrato pero por alguna razón hay que ponerlo para que aparezca la relación
-!insert(B737, AirEuropa) into Contrato -- Esto ya está implícito en la creación del contrato pero por alguna razón hay que ponerlo para que aparezca la relación
-!insert(Boeing767_222, Iberia) into Contrato
+ -- Esto ya está implícito en la creación del contrato pero por alguna razón hay que ponerlo para que aparezca la relación
+ -- Esto ya está implícito en la creación del contrato pero por alguna razón hay que ponerlo para que aparezca la relación
+
 
 
 
