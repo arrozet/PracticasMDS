@@ -1,6 +1,6 @@
 reset
 
------------------------ AEROLINEAS -----------------------
+----------------------- AEROLINEAS ---------------------------
 !new Aerolinea('Iberia')
 !Iberia.nombre := 'Iberia'
 
@@ -8,7 +8,7 @@ reset
 !AirEuropa.nombre := 'AirEuropa'
 ----------------------- FIN AEROLINEAS -----------------------
 
------------------------ AEROPUERTOS -----------------------
+----------------------- AEROPUERTOS --------------------------
 !new Aeropuerto('Barajas')
 !Barajas.ciudad := 'Madrid'
 
@@ -16,7 +16,7 @@ reset
 !ElPrat.ciudad := 'Barcelona'
 ----------------------- FIN AEROPUERTOS -----------------------
 
------------------------ AVIONES -----------------------
+----------------------- AVIONES -------------------------------
 !new Avion('A320')
 !A320.viajesCompletados := 950
 
@@ -42,7 +42,7 @@ reset
 !Mitsubishi A6M Zero.viajesCompletados := 1
 ----------------------- FIN AVIONES -----------------------
 
------------------------ PILOTOS -----------------------
+----------------------- PILOTOS ---------------------------
 !new Piloto('Hiroyoshi')
 !Hiroyoshi.nombre := 'Hiroyoshi Nishizawa'
 !Hiroyoshi.edad := 24
@@ -62,7 +62,7 @@ reset
 !new Piloto('Kanye')
 !Kanye.nombre := 'Kanye West'
 !Kanye.edad := 24 
--- durante el 11s claro
+
 
 !new Piloto('Walter')
 !Walter.nombre := 'Walter White'
@@ -98,7 +98,7 @@ reset
 -- Es un ser milenario
 ----------------------- FIN PILOTOS -----------------------
 
------------------------ PASAJEROS -----------------------
+----------------------- PASAJEROS -------------------------
 !new Pasajero('Graham')
 !Graham.nombre := 'Graham Berkely'
 !Graham.edad := 37
@@ -164,7 +164,7 @@ reset
 !Snake.edad := 35
 ----------------------- FIN PASAJEROS -----------------------
 
------------------------ VUELOS -----------------------
+----------------------- VUELOS ------------------------------
 !new Vuelo('Vuelo1')
 !Vuelo1.id := 1001
 !Vuelo1.numKm := 1200.0
@@ -178,19 +178,19 @@ reset
 !Vuelo4.numKm := 10000
 ----------------------- FIN VUELOS -----------------------
 
------------------------ HANGAR -----------------------
+----------------------- HANGAR ---------------------------
 !new Hangar('Hangar1')
 !Hangar1.capacidadMax := 5
 ----------------------- FIN HANGAR -----------------------
 
------------------------ DESGUACE -----------------------
+----------------------- DESGUACE -------------------------
 !new Desguace('Desguace1')
 !Desguace1.capacidadMax := 3
------------------------ FIN DESGUACES 
+----------------------- FIN DESGUACES --------------------
 
 
 -- Relacionar Aviones y Aerolíneas a través de contratos
-!new Contrato(A320, Iberia)
+!new Contrato (A320, Iberia)
 !Contrato1.numMesesContrato := 12
 !Contrato1.precioMes := 100000
 
