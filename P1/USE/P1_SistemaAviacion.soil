@@ -1,22 +1,34 @@
 reset
 
 ----------------------- AEROLINEAS ---------------------------
+
+-- El nombre de las aerolineas es unico
+-- (inv NombreAerolineaDistinto)
+
 !new Aerolinea('Iberia')
 !Iberia.nombre := 'Iberia'
 
 !new Aerolinea('AirEuropa')
 !AirEuropa.nombre := 'AirEuropa'
+
 ----------------------- FIN AEROLINEAS -----------------------
 
 ----------------------- AEROPUERTOS --------------------------
+
+-- El nombre de las ciudades de los aeropuertos 
+-- es unico (inv CiudadAeropuertoDistinta)
+
 !new Aeropuerto('Barajas')
 !Barajas.ciudad := 'Madrid'
 
 !new Aeropuerto('ElPrat')
 !ElPrat.ciudad := 'Barcelona'
+
 ----------------------- FIN AEROPUERTOS -----------------------
 
 ----------------------- AVIONES -------------------------------
+
+
 !new Avion('A320')
 !A320.viajesCompletados := 950
 
@@ -202,15 +214,37 @@ reset
 !Contrato3.numMesesContrato := 10
 !Contrato3.precioMes := 14000
 
+
 -- Relacionar Aerolíneas y Aviones
 !insert(A320, Iberia) into Contrato -- Esto ya está implícito en la creación del contrato pero por alguna razón hay que ponerlo para que aparezca la relación
 !insert(B737, AirEuropa) into Contrato -- Esto ya está implícito en la creación del contrato pero por alguna razón hay que ponerlo para que aparezca la relación
 !insert(Boeing767_222, Iberia) into Contrato
 
+
+
+
+----------------------- ESTADO AVIÓN ----------------------
+
+-- Se define si un avion tiene un estado distinto 
+-- a estar volando (Hangar o Inutilizado), 
+-- el estado default es volar
+-- (inv AvionUnicoEstado)
+
+-- Asignar aviones a hangar y desguace
+!insert(A320, Hangar1) into Estacionado 
+
+-- El avion B737 es el único con 
+-- viajesCompletados >= 1000 y  esta situado en el desguace
+-- inv (AvionCorrectamenteDesguace_1000)
+!insert(B737, Desguace1) into Inutilizado
+
+----------------------- FIN ESTADO AVIÓN ------------------
+
 -- Relacionar aviones con vuelos
-!insert(A320, Vuelo1) into Realiza
+!insert(A320, Vuelo1) into Realiza  
 !insert(B737, Vuelo2) into Realiza
 !insert(Boeing767_222, Vuelo4) into Realiza
+
 
 -- Relacionar piloto principal con vuelos
 !insert(Vuelo1, Carlos) into PilotoPrincipalVuela
@@ -223,9 +257,7 @@ reset
 
 
 -- Relacionar pasajeros con vuelos
-!insert(Vuelo1, Pedro) into Transporta
-!insert(Vuelo4, Bob) into Transporta
-!insert(Vuelo4, Lucia) into Transporta
+
 !insert(Vuelo4, Klaus) into Transporta
 !insert(Vuelo4, Paco) into Transporta
 !insert(Vuelo4, John) into Transporta
@@ -243,11 +275,7 @@ reset
 --!insert(Vuelo4, Agustin) into Transporta
 !insert(Vuelo4, Frodo) into Transporta
 !insert(Vuelo4, Snake) into Transporta
-!insert(Vuelo4, Kratos) into Transporta
 
--- Asignar aviones a hangar y desguace
-!insert(A320, Hangar1) into Estacionado
-!insert(B737, Desguace1) into Inutilizado
 
 -- Asignar hangar y desguace a aeropuertos
 !insert(Barajas, Hangar1) into HangarAeropuerto
