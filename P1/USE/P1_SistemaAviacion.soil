@@ -182,6 +182,10 @@ reset
 !Vuelo2.id := 1002
 !Vuelo2.numKm := 1800.0
 
+!new Vuelo('Vuelo3')
+!Vuelo3.id := 1003
+!Vuelo3.numKm := 1900.0
+
 !new Vuelo('Vuelo4')
 !Vuelo4.id := 1004
 !Vuelo4.numKm := 10000
@@ -240,6 +244,7 @@ reset
 -- Relacionar aviones con vuelos
 !insert(A320, Vuelo1) into Realiza  
 !insert(B737, Vuelo2) into Realiza
+!insert(B737, Vuelo3) into Realiza
 !insert(Boeing767_222, Vuelo4) into Realiza
 
 
