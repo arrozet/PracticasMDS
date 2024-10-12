@@ -243,6 +243,7 @@ reset
 --!insert(Vuelo4, Agustin) into Transporta
 !insert(Vuelo4, Frodo) into Transporta
 !insert(Vuelo4, Snake) into Transporta
+!insert(Vuelo4, Kratos) into Transporta
 
 -- Asignar aviones a hangar y desguace
 !insert(A320, Hangar1) into Estacionado
