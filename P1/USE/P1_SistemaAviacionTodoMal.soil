@@ -4,7 +4,7 @@ reset
 !new Aeropuerto('Malaga')
 !Malaga.ciudad := 'Malaga'
 
-!new Aeropuerto('Granada')
+!new Aeropuerto('Granada')      -- Creamos nuevo Aeropuerto, este está en la misma ciudad que otro existente, rompe el invariante CiudadAeropuertoDistinta
 !Granada.ciudad := 'Malaga'
 
 !new Hangar('HangarMalaga')
@@ -26,7 +26,7 @@ reset
 !new Aerolinea('Emirates')
 !Emirates.nombre := 'Fly Emirates'
 
-!new Aerolinea('Emirates_FAKE')
+!new Aerolinea('Emirates_FAKE')       -- Creamos esta nueva aerolinea con el nombre de una ya existente, rompe el invarinte NombreAerolineaDistinto
 !Emirates_FAKE.nombre := 'Fly Emirates'
 
 -- AVIONES
@@ -58,7 +58,7 @@ reset
 !Vuelo2.id := 1003
 !Vuelo2.numKm := 18044.0
 
-!new Vuelo('Vuelo4')
+!new Vuelo('Vuelo4')        -- Mismo identificador que "Vuelo1"
 !Vuelo2.id := 1001
 !Vuelo2.numKm := 0.0
 
@@ -102,18 +102,18 @@ reset
 
 -- Relacionar piloto secundario con vuelos
 !insert(Vuelo1, Lucia) into PilotoSecundarioVuela
-!insert(Vuelo2, Lucia) into PilotoSecundarioVuela
+!insert(Vuelo2, Lucia) into PilotoSecundarioVuela   -- Lucia es piloto principal y secundario del Vuelo2 , no cumple reestricción: PilotosDiferentes
 !insert(Vuelo3, Carlos) into PilotoSecundarioVuela
-!insert(Vuelo4, Lucia) into PilotoSecundarioVuela
+!insert(Vuelo4, Lucia) into PilotoSecundarioVuela   -- Con este viaje Lucia estaríia trabajando para 3 aerolíneas, no cumple reestricción: maxDosAerolineasPorPiloto
 !insert(Vuelo5, Carlos) into PilotoSecundarioVuela
 
--- Asignar Avion a Hangar
-!insert(B345, HangarMalaga) into Estacionado
-!insert(B346, HangarMalaga) into Estacionado
-
 -- Asignar Avion a Desguace
-!insert(B345, DesguaceMalaga) into Inutilizado
-!insert(B346, DesguaceMalaga) into Inutilizado
+!insert(B345, DesguaceMalaga) into Inutilizado  -- Estos 2 aviones no deberían estar en el desguae, no tienen ningún viaje
+!insert(B346, DesguaceMalaga) into Inutilizado  -- No cumplen AvionCorrectamenteDesguace_1000, ni AvionCorrectamenteDesguace_2
+
+-- Asignar Avion a Hangar
+!insert(B345, HangarMalaga) into Estacionado    -- No pueden estar los aviones en un hangar y en un desguace a la vez
+!insert(B346, HangarMalaga) into Estacionado    -- No cumplen la reestricción: AvionUnicoEstado
 
 -- Asignar Hangar a Aeropuerto
 !insert(Malaga, HangarMalaga) into HangarAeropuerto
