@@ -20,9 +20,6 @@ reset
 !new Aerolinea('AirEuropa')
 !AirEuropa.nombre := 'AirEuropa'
 
-!new Aerolinea('Vuelin')
-!Vuelin.nombre := 'Vuelin'
-
 !new Aerolinea('Emirates')
 !Emirates.nombre := 'Fly Emirates'
 
@@ -63,8 +60,8 @@ reset
 !Vuelo2.numKm := 0.0
 
 !new Vuelo('Vuelo5')
-!Vuelo2.id := 1005
-!Vuelo2.numKm := 1000.0
+!Vuelo5.id := 1005
+!Vuelo5.numKm := 1000.0
 
 -- PILOTOS
 !new Piloto('Juan')
@@ -82,9 +79,10 @@ reset
 -- Relacionar Aerolíneas y Aviones
 !insert(A320, Iberia) into Contrato
 !insert(B737, AirEuropa) into Contrato
-!insert(B344, Emirates) into Contrato
+!insert(B344, Emirates_FAKE) into Contrato
 !insert(B345, Emirates) into Contrato
 !insert(B346, Emirates) into Contrato
+
 
 
 -- Relacionar aviones con vuelos

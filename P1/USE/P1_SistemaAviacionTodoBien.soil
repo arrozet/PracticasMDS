@@ -181,8 +181,8 @@ reset
 !Vuelo4.numKm := 10000
 
 !new Vuelo('Vuelo5')
-!Vuelo4.id := 1005
-!Vuelo4.numKm := 9350
+!Vuelo5.id := 1005
+!Vuelo5.numKm := 9350
 ----------------------- FIN VUELOS -----------------------
 
 ----------------------- HANGAR ---------------------------
