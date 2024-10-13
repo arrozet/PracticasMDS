@@ -11,6 +11,9 @@ reset
 !new Aerolinea('AirEuropa')
 !AirEuropa.nombre := 'AirEuropa'
 
+!new Aerolinea('Fuerzas_Aereas_Japon')
+!Fuerzas_Aereas_Japon.nombre := 'Servicio Aéreo del Ejército Imperial Japonés'
+
 ----------------------- FIN AEROLINEAS -----------------------
 
 ----------------------- AEROPUERTOS --------------------------
@@ -30,25 +33,13 @@ reset
 
 
 !new Avion('A320')
-!A320.viajesCompletados := 950
 
 !new Avion('B737')
-!B737.viajesCompletados := 1001
 
 !new Avion('Boeing767_222')
-!Boeing767_222.viajesCompletados := 175
 
 !new Avion('Mitsubishi_A6M_Zero')
-!Mitsubishi_A6M_Zero.viajesCompletados := 1
 
-!new Avion('Mitsubishi_A5M_Zero')
-!Mitsubishi_A5M_Zero.viajesCompletados := 1
-
-!new Avion('Mitsubishi_J2M')
-!Mitsubishi_J2M.viajesCompletados := 1
-
-!new Avion('Nakajima_J1N1_S')
-!Nakajima_J1N1_S.viajesCompletados := 1
 ----------------------- FIN AVIONES -----------------------
 
 ----------------------- PILOTOS ---------------------------
@@ -71,7 +62,6 @@ reset
 !new Piloto('Kanye')
 !Kanye.nombre := 'Kanye West'
 !Kanye.edad := 24 
-
 
 !new Piloto('Walter')
 !Walter.nombre := 'Walter White'
@@ -189,6 +179,10 @@ reset
 !new Vuelo('Vuelo4')
 !Vuelo4.id := 1004
 !Vuelo4.numKm := 10000
+
+!new Vuelo('Vuelo5')
+!Vuelo4.id := 1005
+!Vuelo4.numKm := 9350
 ----------------------- FIN VUELOS -----------------------
 
 ----------------------- HANGAR ---------------------------
@@ -214,6 +208,10 @@ reset
 !insert(Boeing767_222, Iberia) into Contrato
 !Contrato3.numMesesContrato := 10
 !Contrato3.precioMes := 14000
+
+!insert(Mitsubishi_A6M_Zero, Fuerzas_Aereas_Japon) into Contrato
+!Contrato4.numMesesContrato := 1
+!Contrato4.precioMes := 1
 
 
 -- Relacionar Aerolíneas y Aviones
@@ -246,12 +244,15 @@ reset
 !insert(B737, Vuelo2) into Realiza
 !insert(B737, Vuelo3) into Realiza
 !insert(Boeing767_222, Vuelo4) into Realiza
+!insert(Mitsubishi_A6M_Zero, Vuelo5) into Realiza
 
 
 -- Relacionar piloto principal con vuelos
 !insert(Vuelo1, Carlos) into PilotoPrincipalVuela
 !insert(Vuelo2, Lucia) into PilotoPrincipalVuela
+!insert(Vuelo3, Kanye) into PilotoPrincipalVuela
 !insert(Vuelo4, Mohamed) into PilotoPrincipalVuela
+!insert(Vuelo5, Hiroyoshi) into PilotoPrincipalVuela
 
 -- Relacionar piloto secundario con vuelos (Lucia es la secundaria en Vuelo1)
 !insert(Vuelo1, Lucia) into PilotoSecundarioVuela
