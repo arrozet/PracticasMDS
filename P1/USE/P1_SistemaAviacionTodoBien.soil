@@ -97,71 +97,71 @@ reset
 -- Es un ser milenario
 ----------------------- FIN PILOTOS -----------------------
 
------------------------ PASAJEROS -------------------------
-!new Pasajero('Graham')
+----------------------- PersonaS -------------------------
+!new Persona('Graham')
 !Graham.nombre := 'Graham Berkely'
 !Graham.edad := 37
 
-!new Pasajero('Touri')
+!new Persona('Touri')
 !Touri.nombre := 'Touri Boulourchi'
 !Touri.edad := 69
 
-!new Pasajero('Klaus')
+!new Persona('Klaus')
 !Klaus.nombre := 'Klaus Bothe'
 !Klaus.edad := 39
 
-!new Pasajero('Paco')
+!new Persona('Paco')
 !Paco.nombre := 'Paco de la Torre'
 !Paco.edad := 81
 
-!new Pasajero('John')
+!new Persona('John')
 !John.nombre := 'John Brett Cahill'
 !John.edad := 56
 
-!new Pasajero('Christoffer')
+!new Persona('Christoffer')
 !Christoffer.nombre := 'Christoffer Carstanjen'
 !Christoffer.edad := 33
 
-!new Pasajero('Dorothy')
+!new Persona('Dorothy')
 !Dorothy.nombre := 'Dorothy DeAraujo'
 !Dorothy.edad := 82
 
-!new Pasajero('Ana')
+!new Persona('Ana')
 !Ana.nombre := 'Ana Gloria Pocasangre De Barrera'
 !Ana.edad := 49
 
-!new Pasajero('Lisa')
+!new Persona('Lisa')
 !Lisa.nombre := 'Lisa Anne Frost'
 !Lisa.edad := 22
 
-!new Pasajero('Lynn')
+!new Persona('Lynn')
 !Lynn.nombre := 'Lynn Catherine Goodchild'
 !Lynn.edad := 25
 
-!new Pasajero('Francis')
+!new Persona('Francis')
 !Francis.nombre := 'Francis Edward Grogan'
 !Francis.edad := 76
 
-!new Pasajero('Carl')
+!new Persona('Carl')
 !Carl.nombre := 'Carl Max Hammond, Jr.'
 !Carl.edad := 37
 
-!new Pasajero('Maggie')
+!new Persona('Maggie')
 !Maggie.nombre := 'Maggie Simpson'
 !Maggie.edad := 13
 
-!new Pasajero('Ruben')
+!new Persona('Ruben')
 !Ruben.nombre := 'Ruben Oliva Zamora'
 !Ruben.edad := 3
 
-!new Pasajero('Frodo')
+!new Persona('Frodo')
 !Frodo.nombre := 'Frodo Bolsón'
 !Frodo.edad := 20
 
-!new Pasajero('Snake')
+!new Persona('Snake')
 !Snake.nombre := 'Solid Snake'
 !Snake.edad := 35
------------------------ FIN PASAJEROS -----------------------
+----------------------- FIN PersonaS -----------------------
 
 ----------------------- VUELOS ------------------------------
 !new Vuelo('Vuelo1')
@@ -252,7 +252,7 @@ reset
 !insert(Vuelo4, Kanye) into PilotoSecundarioVuela
 
 
--- Relacionar pasajeros con vuelos
+-- Relacionar Personas con vuelos
 
 !insert(Vuelo4, Klaus) into Transporta
 !insert(Vuelo4, Paco) into Transporta
