@@ -1,0 +1,81 @@
+model sistemaCoches
+
+ -- CLASES DEL MODELO 
+class Clock 
+  attributes
+    NOW : Integer init = 0 -- POSIX representation starting at 0
+    resolution: Integer init = 1 
+  operations
+    tick() 
+
+    run (n:Integer)
+end
+
+abstract class ActiveObject -- real-time objects 
+  operations
+    tick()
+end
+
+association Time between 
+  Clock [1] role clock
+  ActiveObject [*] role ao ordered
+end
+
+class Car < ActiveObject
+  attributes
+    fechaMatriculacion : String
+    kmRecorridos : Integer
+    enGarantia : Boolean
+    necesitaMantenimiento : Boolean
+    speed : Real init: 5
+    position : Real init: 0
+    isMoving : Boolean init: false
+  operations
+    accelerate() 
+      begin 
+        self.speed := self.speed + 1
+      end
+      post IncreasSpeed: self.speed = self.speed@pre + 1
+    decelerate()      
+      begin 
+        if self.speed > 0 then 
+          self.speed := self.speed - 1
+      end
+      pre 
+      post DecresesSpeed: self.speed@pre > 0 implies
+                                      self.speed = self.speed@pre - 1
+    startMoving()
+      begin 
+      end 
+      pre isNotMoving : not self.isMoving
+      post Moving : self.isMoving
+    stopMoving()
+      begin
+        self.isMoving := false
+      end
+      pre isMoving : self.isMoving
+      post notMoving : not self.isMoving
+    tick()
+      begin 
+       if self.isMoving then
+        self.position := self.position + self.speed*self.clock.resolution
+      end;
+    end
+    post carMoved : self.isMoving@pre implies
+                    self.position = self.position@pre + self.speed*self.clock.resolution
+
+
+end
+
+class Ciudad
+    attributes
+        Nombre : String
+end
+
+associationclass Distancia between
+        Ciudad [1] role ciudad1
+        Ciudad [1] role ciudad2
+    attributes
+        distancia : Integer
+end
+-- FIN DE LAS CLASES DEL MODELO
