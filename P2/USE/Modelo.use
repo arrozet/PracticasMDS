@@ -24,7 +24,7 @@ association Time between
   ActiveObject [*] role ao ordered
 end
 
-class Car < ActiveObject
+class Coche < ActiveObject
   attributes
     fechaMatriculacion : String
     kmRecorridos : Integer
@@ -39,14 +39,6 @@ class Car < ActiveObject
         self.speed := self.speed + 1
       end
       post IncreasSpeed: self.speed = self.speed@pre + 1
-    decelerate()      
-      begin 
-        if self.speed > 0 then 
-          self.speed := self.speed - 1
-      end
-      pre 
-      post DecresesSpeed: self.speed@pre > 0 implies
-                                      self.speed = self.speed@pre - 1
     startMoving()
       begin 
       end 
@@ -76,14 +68,14 @@ class Ciudad
     Poblacion : Integer
 end
 
-class Camino between
+associationclass Camino between    -- CiudadOrigen y CiudadFinal, creo que deberemos realizar 2 caminos por cada 2 ciudades
+    Ciudad [0..1] role ciudadOrigen -- Esto es para facilitar el modelador
+    Ciudad [0..*] role ciudadFinal
   attributes
     distancia : Integer
 end
 
-associationclass Viaje between
-    Camino [0..1] role caminoCoche
-    Coche [0..*] role vehiculo
+class Viaje
   attributes
     fechaSalida : Integer
     fechaLlegada : Integer
@@ -98,50 +90,62 @@ associationclass Revision between
     tipoRevision : TipoRevision
 end 
 
-associationclass Realiza between
-        Coche [1] role Coche
-        Ciudad [1] role ciudad
-      attributes
-        fechaSalida : String
-        fechaLlegada : String
-end
 
-
-class Taller between
+class Taller
 end -- chatgpt dice que se pone así una relación sin atirbutos
 
-class TallerOficial between
+class TallerOficial < Taller
   attributes
     tiempoGarantia : Integer
 end
 
-class TallerNoOficial between
-end
-
-class TallerOficial < Taller
-end
-
-class TallerOficial < Taller
+class TallerNoOficial < Taller
 end
 
 
 -------------- Relationships ------------------
 association EstOficial between
     TallerOficial [0..1] role tallerOficial
-    Ciudad [1] role ciudadTallerOficial
+    Ciudad [1] role ciudadOficial
 end
 
 association EstaNoOficial between
-    TallerNoOficial [0..*] role tallerNoOficial
-    Ciudad [1] role ciudadTallerNoOficial
+    TallerNoOficial [0..*] role ciudadTallerNoOficial
+    Ciudad [1] role ciudadNoOficial
 end
 
 association Ubicado between
-    Coche [0..*] role vehiculo
-    Ciudad [0..1] role ciudadCoche
+    Coche [0..*] role coche
+    Ciudad [0..1] role ciudad
 end
 
-association Ubicado between
-    Camino [0..*] role caminoCiudad -- aquí no se poner lo que habeis puesto (nada mas *)
-    Ciudad [2] role ciudad
+association Arreglando between
+    Coche [0..*] role cocheArreglando
+    Taller [0..*] role tallerReparando
 end
+
+association Viajado between
+    Coche [1]
+    Viaje [1]
+end
+
+association ViajeCamino between
+    Camino [1]
+    Viaje [1]
+end
+
+-- END OF THE Relationships ---------------------------------
+-- INVARIANTES ----------------------------------------------
+
+constraints
+
+context TallerNoOficial
+-- Si está en un taller, el coche y el taller están en la misma ciudad
+inv CocheYCiudadMismaQueTalleNoOficial:
+    self.cocheArreglando->isEmpty() or
+        self.cocheArreglando->forAll(coche | coche.ciudad = self.ciudadNoOficial)
+
+context TallerOficial
+inv CocheYCiudadMismaQueTalleOficial:
+    self.cocheArreglando->isEmpty() or
+        self.cocheArreglando->forAll(coche | coche.ciudad = self.ciudadOficial)
