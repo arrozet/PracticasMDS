@@ -1,6 +1,9 @@
 model sistemaCoches
 
  -- CLASES DEL MODELO 
+
+enum TipoRevision { Mantenimiento, Reparacion }
+
 class Clock 
   attributes
     NOW : Integer init = 0 -- POSIX representation starting at 0
@@ -70,12 +73,30 @@ end
 class Ciudad
   attributes
     Nombre : String
+    Poblacion : Integer
 end
 
 class Camino between
   attributes
     distancia : Integer
 end
+
+associationclass Viaje between
+    Camino [0..1] role caminoCoche
+    Coche [0..*] role vehiculo
+  attributes
+    fechaSalida : Integer
+    fechaLlegada : Integer
+end
+
+associationclass Revision between
+    Taller [0..*] role tallerCoche
+    Coche [0..*] role vehiculo
+  attributes
+    fechaInicio : Integer
+    fechaFin : Integer
+    tipoRevision : TipoRevision
+end 
 
 associationclass Realiza between
         Coche [1] role Coche
@@ -86,9 +107,41 @@ associationclass Realiza between
 end
 
 
-class Talleres between
+class Taller between
+end -- chatgpt dice que se pone así una relación sin atirbutos
+
+class TallerOficial between
   attributes
-    oficial : Boolean
+    tiempoGarantia : Integer
 end
 
--- FIN DE LAS CLASES DEL MODELO
+class TallerNoOficial between
+end
+
+class TallerOficial < Taller
+end
+
+class TallerOficial < Taller
+end
+
+
+-------------- Relationships ------------------
+association EstOficial between
+    TallerOficial [0..1] role tallerOficial
+    Ciudad [1] role ciudadTallerOficial
+end
+
+association EstaNoOficial between
+    TallerNoOficial [0..*] role tallerNoOficial
+    Ciudad [1] role ciudadTallerNoOficial
+end
+
+association Ubicado between
+    Coche [0..*] role vehiculo
+    Ciudad [0..1] role ciudadCoche
+end
+
+association Ubicado between
+    Camino [0..*] role caminoCiudad -- aquí no se poner lo que habeis puesto (nada mas *)
+    Ciudad [2] role ciudad
+end
