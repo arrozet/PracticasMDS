@@ -68,14 +68,27 @@ class Car < ActiveObject
 end
 
 class Ciudad
-    attributes
-        Nombre : String
+  attributes
+    Nombre : String
 end
 
-associationclass Distancia between
-        Ciudad [1] role ciudad1
-        Ciudad [1] role ciudad2
-    attributes
-        distancia : Integer
+class Camino between
+  attributes
+    distancia : Integer
 end
+
+associationclass Realiza between
+        Coche [1] role Coche
+        Ciudad [1] role ciudad
+      attributes
+        fechaSalida : String
+        fechaLlegada : String
+end
+
+
+class Talleres between
+  attributes
+    oficial : Boolean
+end
+
 -- FIN DE LAS CLASES DEL MODELO
