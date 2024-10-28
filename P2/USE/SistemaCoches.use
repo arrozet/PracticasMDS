@@ -142,6 +142,7 @@ end
 constraints
 
 context TallerNoOficial
+-- 3
     ---
     -- [Texto que describe el invariante]
     ---
@@ -158,6 +159,7 @@ context TallerOficial
         self.cocheArreglando->isEmpty() or
             self.cocheArreglando->forAll(coche | coche.ciudad = self.ciudadOficial)
 
+--  4
 --Todas las revisiones deben tener lugar después de que el coche se matriculase
 context Revision
     ---
@@ -167,7 +169,7 @@ context Revision
       self.vehiculo.fechaMatriculacion.toInteger() < self.fechaInicio
 
 
-
+-- 8
 --Si el coche está realizando actualmente algún viaje, dicho
 --viaje únicamente tendrá fecha de salida, pero no de llegada.
 context Viaje
@@ -177,7 +179,7 @@ context Viaje
     inv viajeEnCurso:
       self.coche.isMoving implies self.fechaLlegada.isUndefined()
 
-
+-- 9
 --Un coche se encontrará en todo momento bien realizando un viaje determinado o bien en
 --una ciudad.
 context Coche
@@ -188,9 +190,28 @@ context Coche
       (self.viaje.isDefined() implies self.ciudad.isUndefined()) and
       (self.ciudad.isDefined() implies self.viaje.isUndefined())
 
+-- 10
 --Si el coche ha completado al menos un viaje y no se encuentra viajando, entonces debe
 --encontrarse en la ciudad a la que llegó en su último viaje.
 -- ESTA INVARIANTE ESTÁ CHUNGA, CREO QUE HAY QUE MEZCLAR CAMINO Y VIAJE EN UNO
+
+-- 11
+-- Dos viajes no pueden solaparse en el tiempo, es decir, un viaje debe ocurrir siempre 
+-- después de otro, pudiendo la fecha de llegada de un viaje coincidir con la fecha de salida 
+-- del siguiente. 
+context Coche
+  inv viajesNoSeSolapan:
+  self.viaje.isDefined implies (self.viaje-> forAll(v1,v2 | v1 <> implies (
+	(v1.fechaFin <= v2.fechaInicio)
+        	)
+	)
+    )
+end
+-- Esto comprueba del listado de viajes, con cada viaje, si se cumplen los invariantes bien
+--de v1 comprueba con v2, v3,v4,v5,v6,v7... su fecha de fin sea anterior
+-- a la fecha de inicio del viaje v(i).
+-- v1 <> v2 evita duplicadas
+-- suponemos que los viajes estan ordenados, es decir, que v1 ocurre antes que v2
 
 -------------- End of invariants ------------------
 
