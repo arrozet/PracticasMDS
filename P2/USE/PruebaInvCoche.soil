@@ -13,5 +13,14 @@
 !new Coche('W11')
 
 !new Ciudad('Malaga')
+!Malaga.nombre := 'Malaga'
 
 !new Ciudad('Cordoba')
+!Cordoba.nombre := Cordoba
+
+!new Camino('MC')
+!MC.ciudadOrigen := Malaga
+!MC.ciudadFinal := Cordoba
+!MC.distancia := 170
+
+
