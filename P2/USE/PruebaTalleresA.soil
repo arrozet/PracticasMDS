@@ -28,9 +28,11 @@ reset
 !Malaga.nombre := 'Málaga'
 !Malaga.poblacion := 586384
 
--- Creación de Talleres     FALTA EL ATRIBUTO DE "TIEMPO DE GARANTIA"
+-- Creación de Talleres     
 !new TallerOficial('TallerOficialAlgeciras')
+!TallerOficialAlgeciras.tiempoGarantia := 4
 !new TallerOficial('TallerOficialMalaga')
+!TallerOficialMalaga.tiempoGarantia := 2
 
 !new TallerNoOficial('TallerNoOficialAlgeciras')
 !new TallerNoOficial('TallerNoOficialMalaga')
@@ -48,10 +50,17 @@ reset
 !Revision1.fechaInicio := 4
 !Revision1.fechaFin := 8 
 !Revision1.tipoRevision := TipoRevision.Reparacion
+
 !insert( TallerOficialAlgeciras, CocheDeDavid_307 ) into Revision
 !Revision2.fechaInicio := 4
-!Revision2.fechaFin := 8 
+!Revision2.fechaFin := 6
 !Revision2.tipoRevision := TipoRevision.Reparacion
+
+
+!insert( TallerOficialMalaga, CocheDeRuben_ECO_Dynamics ) into Revision
+!Revision2.fechaInicio := 7
+!Revision2.fechaFin := 8 
+!Revision2.tipoRevision := TipoRevision.Mantenimiento
 
     -- Ubicado
 !insert( CocheDeDavid_307, Algeciras ) into Ubicado
