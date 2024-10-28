@@ -30,7 +30,7 @@ class Coche < ActiveObject
     fechaMatriculacion : Integer
     kmRecorridos : Integer
     enGarantia : Boolean
-    necesitaMantenimiento : Boolean
+    necesitaMantenimiento : Boolean --derive : self.Clock.NOW - self.fechaMatriculacion >= 4 and self.Revision
     speed : Real init: 5
     position : Real init: 0
     isMoving : Boolean init: false
