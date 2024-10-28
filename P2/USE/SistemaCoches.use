@@ -1,6 +1,7 @@
 model sistemaCoches
 
- -- CLASES DEL MODELO 
+-------------- Enumerations ------------
+-------------- Classes ------------------ 
 
 enum TipoRevision { Mantenimiento, Reparacion }
 
@@ -101,7 +102,7 @@ end
 
 class TallerNoOficial < Taller
 end
-
+-------------- End of classes ------------------
 
 -------------- Relationships ------------------
 association EstOficial between
@@ -134,44 +135,61 @@ association ViajeCamino between
     Viaje [1]
 end
 
--- END OF THE Relationships ---------------------------------
--- INVARIANTES ----------------------------------------------
+-------------- End of relationships ------------------
+------------- Invariants -------------
 
 constraints
 
 context TallerNoOficial
--- Si está en un taller, el coche y el taller están en la misma ciudad
-inv CocheYCiudadMismaQueTalleNoOficial:
-    self.cocheArreglando->isEmpty() or
-        self.cocheArreglando->forAll(coche | coche.ciudad = self.ciudadNoOficial)
+    ---
+    -- [Texto que describe el invariante]
+    ---
+    -- Si está en un taller, el coche y el taller están en la misma ciudad
+    inv CocheYCiudadMismaQueTalleNoOficial:
+        self.cocheArreglando->isEmpty() or
+            self.cocheArreglando->forAll(coche | coche.ciudad = self.ciudadNoOficial)
 
 context TallerOficial
-inv CocheYCiudadMismaQueTalleOficial:
-    self.cocheArreglando->isEmpty() or
-        self.cocheArreglando->forAll(coche | coche.ciudad = self.ciudadOficial)
+    ---
+    -- [Texto que describe el invariante]
+    ---
+    inv CocheYCiudadMismaQueTalleOficial:
+        self.cocheArreglando->isEmpty() or
+            self.cocheArreglando->forAll(coche | coche.ciudad = self.ciudadOficial)
 
 --Todas las revisiones deben tener lugar después de que el coche se matriculase
 context Revision
-  inv revisionAfterRegistration:
-    self.vehiculo.fechaMatriculacion.toInteger() < self.fechaInicio
+    ---
+    -- [Texto que describe el invariante]
+    ---
+    inv revisionAfterRegistration:
+      self.vehiculo.fechaMatriculacion.toInteger() < self.fechaInicio
 
 
 
 --Si el coche está realizando actualmente algún viaje, dicho
 --viaje únicamente tendrá fecha de salida, pero no de llegada.
 context Viaje
-  inv viajeEnCurso:
-    self.coche.isMoving implies self.fechaLlegada.isUndefined()
+    ---
+    -- [Texto que describe el invariante]
+    ---
+    inv viajeEnCurso:
+      self.coche.isMoving implies self.fechaLlegada.isUndefined()
 
 
 --Un coche se encontrará en todo momento bien realizando un viaje determinado o bien en
 --una ciudad.
 context Coche
-  inv cocheEnViajeOCiudad:
-    (self.viaje.isDefined() implies self.ciudad.isUndefined()) and
-    (self.ciudad.isDefined() implies self.viaje.isUndefined())
+    ---
+    -- [Texto que describe el invariante]
+    ---
+    inv cocheEnViajeOCiudad:
+      (self.viaje.isDefined() implies self.ciudad.isUndefined()) and
+      (self.ciudad.isDefined() implies self.viaje.isUndefined())
 
 --Si el coche ha completado al menos un viaje y no se encuentra viajando, entonces debe
 --encontrarse en la ciudad a la que llegó en su último viaje.
 -- ESTA INVARIANTE ESTÁ CHUNGA, CREO QUE HAY QUE MEZCLAR CAMINO Y VIAJE EN UNO
+
+-------------- End of invariants ------------------
 
