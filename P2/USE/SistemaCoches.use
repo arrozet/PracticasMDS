@@ -128,7 +128,7 @@ end
 
 association Viajado between
     Coche [1]
-    Viaje [1]
+    Viaje [0..*]
 end
 
 association ViajeCamino between
@@ -140,9 +140,15 @@ end
 ------------- Invariants -------------
 
 constraints
+-- 1
+context Camino
+  inv distanciaCiudadMayorQueCinco:
+    self.distancia >= 5
 
-context TallerNoOficial
+
+
 -- 3
+context TallerNoOficial
     ---
     -- [Texto que describe el invariante]
     ---
@@ -187,8 +193,8 @@ context Coche
     -- [Texto que describe el invariante]
     ---
     inv cocheEnViajeOCiudad:
-      (self.viaje.isDefined() implies self.ciudad.isUndefined()) and
-      (self.ciudad.isDefined() implies self.viaje.isUndefined())
+      (self.viaje->notEmpty() implies self.ciudad.isUndefined()) and
+      (self.ciudad.isDefined() implies self.viaje->isEmpty())
 
 -- 10
 --Si el coche ha completado al menos un viaje y no se encuentra viajando, entonces debe
@@ -201,12 +207,11 @@ context Coche
 -- del siguiente. 
 context Coche
   inv viajesNoSeSolapan:
-  self.viaje.isDefined implies (self.viaje-> forAll(v1,v2 | v1 <> implies (
+  (self.viaje -> size() >= 2) implies (self.viaje-> forAll(v1,v2 | v1 <> v2 implies (
 	(v1.fechaLlegada <= v2.fechaSalida)
         	)
 	)
     )
-end
 -- Esto comprueba del listado de viajes, con cada viaje, si se cumplen los invariantes bien
 --de v1 comprueba con v2, v3,v4,v5,v6,v7... su fecha de fin sea anterior
 -- a la fecha de inicio del viaje v(i).
@@ -216,5 +221,6 @@ end
 
 -- 12 
 
+-- 14 ESTE NO ES UN INVARIANTE CREO
 -------------- End of invariants ------------------
 
