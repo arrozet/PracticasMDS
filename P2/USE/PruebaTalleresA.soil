@@ -1,23 +1,25 @@
 reset
 
--- Creación de Coches
+-- Creación de Coches   
 !new Coche( 'CocheDeJuanma_Passat' )
 !CocheDeJuanma_Passat.fechaMatriculacion := 0
 !CocheDeJuanma_Passat.kmRecorridos := 150000 
 !CocheDeJuanma_Passat.enGarantia := false
-!CocheDeJuanma_Passat.necesitaMantenimiento := true
+-- enGarantia es un derive
+-- necesitaMantenimiento es un derive
 
 !new Coche( 'CocheDeDavid_307' )
 !CocheDeDavid_307.fechaMatriculacion := 0
 !CocheDeDavid_307.kmRecorridos := 280000 -- Más kilometros que la madre del suito
 !CocheDeDavid_307.enGarantia := false
-!CocheDeDavid_307.necesitaMantenimiento := true
+-- enGarantia es un derive
+-- necesitaMantenimiento es un derive
 
 !new Coche( 'CocheDeRuben_ECO_Dynamics' )
-!CocheDeRuben_ECO_Dynamics.fechaMatriculacion := 5
+!CocheDeRuben_ECO_Dynamics.fechaMatriculacion := 78
 !CocheDeRuben_ECO_Dynamics.kmRecorridos := 129000 -- Más kilometros que la madre del suito
-!CocheDeRuben_ECO_Dynamics.enGarantia := true
-!CocheDeRuben_ECO_Dynamics.necesitaMantenimiento := false
+-- enGarantia es un derive
+-- necesitaMantenimiento es un derive
 
 -- Creación de Ciudades
 !new Ciudad('Algeciras')
@@ -30,9 +32,9 @@ reset
 
 -- Creación de Talleres     
 !new TallerOficial('TallerOficialAlgeciras')
-!TallerOficialAlgeciras.tiempoGarantia := 4
+!TallerOficialAlgeciras.tiempoGarantia := 7
 !new TallerOficial('TallerOficialMalaga')
-!TallerOficialMalaga.tiempoGarantia := 2
+!TallerOficialMalaga.tiempoGarantia := 5
 
 !new TallerNoOficial('TallerNoOficialAlgeciras')
 !new TallerNoOficial('TallerNoOficialMalaga')
@@ -47,21 +49,22 @@ reset
 
     -- Revisiones
 !insert( TallerOficialMalaga, CocheDeJuanma_Passat ) into Revision
-!Revision1.fechaInicio := 4
-!Revision1.fechaFin := 8 
+!Revision1.fechaInicio := 405
+!Revision1.fechaFin := 410
 !Revision1.tipoRevision := TipoRevision.Reparacion
 
 !insert( TallerOficialAlgeciras, CocheDeDavid_307 ) into Revision
-!Revision2.fechaInicio := 4
-!Revision2.fechaFin := 6
+!Revision2.fechaInicio := 406
+!Revision2.fechaFin := 409
 !Revision2.tipoRevision := TipoRevision.Reparacion
 
 
 !insert( TallerOficialMalaga, CocheDeRuben_ECO_Dynamics ) into Revision
-!Revision2.fechaInicio := 7
-!Revision2.fechaFin := 8 
-!Revision2.tipoRevision := TipoRevision.Mantenimiento
+!Revision3.fechaInicio := 490
+!Revision3.fechaFin := 494
+!Revision3.tipoRevision := TipoRevision.Mantenimiento
 
     -- Ubicado
 !insert( CocheDeDavid_307, Algeciras ) into Ubicado
 !insert( CocheDeJuanma_Passat, Malaga ) into Ubicado
+!insert( CocheDeRuben_ECO_Dynamics, Malaga ) into Ubicado
