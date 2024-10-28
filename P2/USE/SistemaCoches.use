@@ -1,9 +1,9 @@
 model sistemaCoches
 
 -------------- Enumerations ------------
+enum TipoRevision { Mantenimiento, Reparacion }
 -------------- Classes ------------------ 
 
-enum TipoRevision { Mantenimiento, Reparacion }
 
 class Clock 
   attributes
