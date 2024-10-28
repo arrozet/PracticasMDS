@@ -71,8 +71,8 @@ class Ciudad
 end
 
 associationclass Camino between    -- CiudadOrigen y CiudadFinal, creo que deberemos realizar 2 caminos por cada 2 ciudades
-    Ciudad [0..1] role ciudadOrigen -- Esto es para facilitar el modelador
-    Ciudad [0..*] role ciudadFinal
+    Ciudad [1] role ciudadOrigen -- Esto es para facilitar el modelador
+    Ciudad [1] role ciudadFinal
   attributes
     distancia : Integer
 end
@@ -133,7 +133,7 @@ end
 
 association ViajeCamino between
     Camino [1]
-    Viaje [1]
+    Viaje [0..*]
 end
 
 -------------- End of relationships ------------------
