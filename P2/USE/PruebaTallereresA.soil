@@ -1,0 +1,58 @@
+reset
+
+-- Creación de Coches
+!new Coche( 'CocheDeJuanma_Passat' )
+!CocheDeJuanma_Passat.fechaMatriculacion := 0
+!CocheDeJuanma_Passat.kmRecorridos := 150000 
+!CocheDeJuanma_Passat.enGarantia := false
+!CocheDeJuanma_Passat.necesitaMantenimiento := true
+
+!new Coche( 'CocheDeDavid_307' )
+!CocheDeDavid_307.fechaMatriculacion := 0
+!CocheDeDavid_307.kmRecorridos := 280000 -- Más kilometros que la madre del suito
+!CocheDeDavid_307.enGarantia := false
+!CocheDeDavid_307.necesitaMantenimiento := true
+
+!new Coche( 'CocheDeRuben_ECO_Dynamics' )
+!CocheDeRuben_ECO_Dynamics.fechaMatriculacion := 5
+!CocheDeRuben_ECO_Dynamics.kmRecorridos := 129000 -- Más kilometros que la madre del suito
+!CocheDeRuben_ECO_Dynamics.enGarantia := true
+!CocheDeRuben_ECO_Dynamics.necesitaMantenimiento := false
+
+-- Creación de Ciudades
+!new Ciudad('Algeciras')
+!Algeciras.nombre := 'Algeciras'
+!Algeciras.poblacion := 123639
+
+!new Ciudad('Malaga')
+!Malaga.nombre := 'Málaga'
+!Malaga.poblacion := 586384
+
+-- Creación de Talleres     FALTA EL ATRIBUTO DE "TIEMPO DE GARANTIA"
+!new TallerOficial('TallerOficialAlgeciras')
+!new TallerOficial('TallerOficialMalaga')
+
+!new TallerNoOficial('TallerNoOficialAlgeciras')
+!new TallerNoOficial('TallerNoOficialMalaga')
+
+-- Creación de Asociaciones
+    -- EstOficial
+!insert( TallerOficialAlgeciras, Algeciras ) into EstOficial
+!insert( TallerOficialMalaga, Malaga ) into EstOficial
+    -- EstaNoOficial
+!insert( TallerNoOficialAlgeciras, Algeciras ) into EstaNoOficial
+!insert( TallerNoOficialMalaga, Malaga ) into EstaNoOficial
+
+    -- Revisiones
+!insert( TallerOficialMalaga, CocheDeJuanma_Passat ) into Revision
+!Revision1.fechaInicio := 4
+!Revision1.fechaFin := 8 
+!Revision1.tipoRevision := TipoRevision.Reparacion
+!insert( TallerOficialAlgeciras, CocheDeDavid_307 ) into Revision
+!Revision2.fechaInicio := 4
+!Revision2.fechaFin := 8 
+!Revision2.tipoRevision := TipoRevision.Reparacion
+
+    -- Ubicado
+!insert( CocheDeDavid_307, Algeciras ) into Ubicado
+!insert( CocheDeJuanma_Passat, Malaga ) into Ubicado
