@@ -41,7 +41,8 @@ class Coche < ActiveObject
       end
       post IncreasSpeed: self.speed = self.speed@pre + 1
     startMoving()
-      begin 
+      begin
+        self.isMoving := true
       end 
       pre isNotMoving : not self.isMoving
       post Moving : self.isMoving
