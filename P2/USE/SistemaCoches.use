@@ -27,7 +27,7 @@ end
 
 class Coche < ActiveObject
   attributes
-    fechaMatriculacion : String
+    fechaMatriculacion : Integer
     kmRecorridos : Integer
     enGarantia : Boolean
     necesitaMantenimiento : Boolean
@@ -66,8 +66,8 @@ end
 
 class Ciudad
   attributes
-    Nombre : String
-    Poblacion : Integer
+    nombre : String
+    poblacion : Integer
 end
 
 associationclass Camino between    -- CiudadOrigen y CiudadFinal, creo que deberemos realizar 2 caminos por cada 2 ciudades
@@ -172,7 +172,7 @@ context Revision
     -- [Texto que describe el invariante]
     ---
     inv revisionAfterRegistration:
-      self.vehiculo.fechaMatriculacion.toInteger() < self.fechaInicio
+      self.vehiculo.fechaMatriculacion < self.fechaInicio
 
 
 -- 8
