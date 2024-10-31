@@ -104,14 +104,9 @@ end
 -------------- End of classes ------------------
 
 -------------- Relationships ------------------
-association EstOficial between
-    TallerOficial [0..1] role tallerOficial
-    Ciudad [1] role ciudadOficial
-end
-
-association EstaNoOficial between -- Como coño represento que es una composicion?
-    TallerNoOficial [0..*] role ciudadTallerNoOficial 
-    Ciudad [1] role ciudadNoOficial
+association UbicacionTaller between
+    Taller [0..*] role tallerCiudad
+    Ciudad [1] role ciudadtalleres
 end
 
 association Ubicado between
@@ -131,7 +126,7 @@ end
 
 association ViajeRecorrido between
     Recorrido [1] role recorridoViaje
-    Viaje [0..*] role viajeKm
+    Viaje [0..*] role ViajeKm
 end
 
 -------------- End of relationships ------------------
@@ -139,30 +134,21 @@ end
 
 constraints
 -- 1
-context Camino
+context Recorrido
   inv distanciaCiudadMayorQueCinco:
-    self.distancia >= 5
+    self.numKm >= 5
 
 
 
 -- 3
-context TallerNoOficial
+context Taller
     ---
     -- [Texto que describe el invariante]
     ---
     -- Si está en un taller, el coche y el taller están en la misma ciudad
     inv CocheYCiudadMismaQueTalleNoOficial:
         self.cocheArreglando->isEmpty() or
-            self.cocheArreglando->forAll(coche | coche.ciudad = self.ciudadNoOficial)
-
-context TallerOficial
-    ---
-    -- [Texto que describe el invariante]
-    ---
-    inv CocheYCiudadMismaQueTalleOficial:
-        self.cocheArreglando->isEmpty() or
-            self.cocheArreglando->forAll(coche | coche.ciudad = self.ciudadOficial)
-
+            self.cocheArreglando->forAll(coche | coche.ciudadCoche = self.ciudadtalleres)
 --  4
 --Todas las revisiones deben tener lugar después de que el coche se matriculase
 context Revision
@@ -181,18 +167,18 @@ context Viaje
     -- [Texto que describe el invariante]
     ---
     inv viajeEnCurso:
-      self.coche.isMoving implies self.fechaLlegada.isUndefined()
+      self.cocheViajes.isMoving implies self.fechaLlegada.isUndefined()
 
--- 9
+-- 9 ESTE ESTA MAL
 --Un coche se encontrará en todo momento bien realizando un viaje determinado o bien en
 --una ciudad.
-context Coche
+--context Coche
     ---
     -- [Texto que describe el invariante]
     ---
-    inv cocheEnViajeOCiudad:
-      (self.viaje->notEmpty() implies self.ciudad.isUndefined()) and
-      (self.ciudad.isDefined() implies self.viaje->isEmpty())
+--    inv cocheEnViajeOCiudad:
+--      (self.viaje->notEmpty() implies self.ciudadCoche.isUndefined()) and
+--      (self.ciudadCoche.isDefined() implies self.viaje->isEmpty())
 
 -- 10
 --Si el coche ha completado al menos un viaje y no se encuentra viajando, entonces debe
@@ -205,7 +191,7 @@ context Coche
 -- del siguiente. 
 context Coche
   inv viajesNoSeSolapan:
-  (self.viaje -> size() >= 2) implies (self.viaje-> forAll(v1,v2 | v1 <> v2 implies (
+  (self.viajesRealizadosCoche -> size() >= 2) implies (self.viajesRealizadosCoche-> forAll(v1,v2 | v1 <> v2 implies (
 	(v1.fechaLlegada <= v2.fechaSalida)
         	)
 	)
