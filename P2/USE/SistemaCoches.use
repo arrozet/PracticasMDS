@@ -29,7 +29,7 @@ class Coche < ActiveObject
   attributes
     fechaMatriculacion : Integer
     kmRecorridos : Integer
-    enGarantia : Boolean
+    enGarantia : Boolean --que alguien intente pegarse de hostias con este derive por favor, Eduardo gastó 1 hora aquí
     necesitaMantenimiento : Boolean derive : 
         (self.clock.NOW - self.fechaMatriculacion > 4 * 100) and 
         (self.revision->isEmpty() or 
