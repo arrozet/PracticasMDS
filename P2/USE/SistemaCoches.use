@@ -6,7 +6,7 @@ enum TipoRevision { Mantenimiento, Reparacion }
 
 -- ANOTACION PARA TODOS, SOLUCION A TODOS LOS PROBLEMAS: para saber si un coche esta de viaje o no, buscamos en el ulitmo viaje de la lista de viajes del coche, si fecha de llegada esta definido 
 -- EJEMPLO: context Coche
--- self.viajesRealizadosCoche->select(v | v.fechaLlegada.isDefined())->sortedBy(r | r.fechaLlegada)->last().fechaLlegada.isUndefined()
+-- self.viajesRealizadosCoche->sortedBy(r | r.fechaLlegada)->last().fechaLlegada.isUndefined()
 class Clock 
   attributes
     NOW : Integer init = 0 -- POSIX representation starting at 0
@@ -98,7 +98,8 @@ associationclass Revision between
     tipoRevision : TipoRevision
 end 
 
-
+-- "en cada ciudad habrá, a lo sumo, un taller oficial, pudiendo haber varios talleres no oficiales." 
+-- se comprobará mirando si el taller es oficial, que solo exista uno (código OCL)
 class Taller
 end 
 
@@ -156,51 +157,52 @@ context Taller
         self.cocheArreglando->isEmpty() or
             self.cocheArreglando->forAll(coche | coche.ciudadCoche = self.ciudadtalleres)
 --  4
---Todas las revisiones deben tener lugar después de que el coche se matriculase
+--
 context Revision
     ---
-    -- [Texto que describe el invariante]
+    -- Todas las revisiones deben tener lugar después de que el coche se matriculase
     ---
     inv revisionAfterRegistration:
       self.vehiculo.fechaMatriculacion < self.fechaInicio
 
 
 -- 8
---Si el coche está realizando actualmente algún viaje, dicho
---viaje únicamente tendrá fecha de salida, pero no de llegada.
 context Viaje
     ---
-    -- [Texto que describe el invariante]
+    -- Si el coche está realizando actualmente algún viaje, dicho
+    --viaje únicamente tendrá fecha de salida, pero no de llegada.
     ---
     inv viajeEnCurso:
       self.cocheViajes.isMoving implies self.fechaLlegada.isUndefined()
 
 -- 9 ESTE ESTA MAL
---Un coche se encontrará en todo momento bien realizando un viaje determinado o bien en
---una ciudad.
+
 context Coche
     ---
-    -- [Texto que describe el invariante]
+    --Un coche se encontrará en todo momento bien realizando un viaje determinado o bien en
+    --una ciudad.
     ---
     inv cocheEnViajeOCiudad: -- con el let hacemos que si hay un undefined, se coloque al final, el let por alguna razon, quita el color verde de los comentarios
-      let viajesConLlegadaDefinida = self.viajesRealizadosCoche->select(v | v.fechaLlegada.isDefined())->sortedBy(r | r.fechaLlegada) in 
+      let viajesConLlegadaDefinida = self.viajesRealizadosCoche->sortedBy(r | r.fechaLlegada) in 
         ((viajesConLlegadaDefinida->isEmpty() or viajesConLlegadaDefinida->last().fechaLlegada.isDefined()) implies self.ciudadCoche.isDefined()) and
-        ((viajesConLlegadaDefinida->isEmpty() or viajesConLlegadaDefinida->last().fechaLlegada.isUndefined()) implies self.ciudadCoche.isUndefined())
+        ((viajesConLlegadaDefinida->last().fechaLlegada.isUndefined()) implies self.ciudadCoche.isUndefined())
 
 -- 10
---Si el coche ha completado al menos un viaje y no se encuentra viajando, entonces debe
---encontrarse en la ciudad a la que llegó en su último viaje.
+    ---
+    --Si el coche ha completado al menos un viaje y no se encuentra viajando, entonces debe
+    --encontrarse en la ciudad a la que llegó en su último viaje.
+    ---
 
 context Coche
   inv cocheTerminaEnCiudad:
-    (not(self.viajesRealizadosCoche->isEmpty()) and self.viajesRealizadosCoche->select(v | v.fechaLlegada.isDefined())->sortedBy(r | r.fechaLlegada)->last().fechaLlegada.isDefined()) implies 
-    (self.ciudadCoche = self.viajesRealizadosCoche->select(v | v.fechaLlegada.isDefined())->sortedBy(r | r.fechaLlegada)->last().recorridoViaje.ciudadFinal) 
+    (not(self.viajesRealizadosCoche->isEmpty()) and self.viajesRealizadosCoche->sortedBy(r | r.fechaLlegada)->last().fechaLlegada.isDefined()) implies 
+    (self.ciudadCoche = self.viajesRealizadosCoche->sortedBy(r | r.fechaLlegada)->last().recorridoViaje.ciudadFinal) 
     
 
 -- 11
--- Dos viajes no pueden solaparse en el tiempo, es decir, un viaje debe ocurrir siempre 
--- después de otro, pudiendo la fecha de llegada de un viaje coincidir con la fecha de salida 
--- del siguiente. 
+    -- Dos viajes no pueden solaparse en el tiempo, es decir, un viaje debe ocurrir siempre 
+    -- después de otro, pudiendo la fecha de llegada de un viaje coincidir con la fecha de salida 
+    -- del siguiente. 
 context Coche
   inv viajesNoSeSolapan:
   (self.viajesRealizadosCoche -> size() >= 2) implies (self.viajesRealizadosCoche-> forAll(v1,v2 | v1 <> v2 implies (
@@ -218,13 +220,18 @@ context Coche
 -- 12 
 -- Las ciudades de origen y destino de los viajes deben ser coherentes. Es decir, si un coche 
 -- realiza un viaje desde la ciudad A hasta la ciudad B, el próximo viaje debe partir desde la ciudad B.
-context Coche
-  inv viajesNoSeSolapan:
-  (self.viajesRealizadosCoche -> size() >= 2) implies (self.viajesRealizadosCoche->select(v | v.fechaLlegada.isDefined())->sortedBy(r | r.fechaLlegada)-> forAll(v1,v2 | v1 <> v2 implies (
-	(v1.recorridoViaje.ciudadFinal <= v2.recorridoViaje.ciudadOrigen) -- esto esta terminado
-        	)
-	  )
-  )
+
+--NO SE COMO HACER PARA QUE ITERE DE UNO EN UNO, NO HAY UNA FUNCION INDEXOF Y SE LIA
+--context Coche
+--  inv viajesNoSeSolapan:
+--  (self.viajesRealizadosCoche -> size() >= 2) implies
+--    (self.viajesRealizadosCoche
+--     ->sortedBy(r | r.fechaLlegada)
+--      ->forAll(i | 
+--        i <> self.viajesRealizadosCoche->at(i+1) implies 
+--          (self.viajesRealizadosCoche->at(i).recorridoViaje.ciudadFinal = self.viajesRealizadosCoche->at(i+1).recorridoViaje.ciudadOrigen)
+--      )
+--   )
 
 -- 14 ESTE NO ES UN INVARIANTE CREO
 -------------- End of invariants ------------------
