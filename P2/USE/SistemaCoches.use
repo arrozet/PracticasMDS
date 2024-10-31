@@ -70,11 +70,11 @@ class Ciudad
     poblacion : Integer
 end
 
-associationclass Camino between    -- CiudadOrigen y CiudadFinal, creo que deberemos realizar 2 caminos por cada 2 ciudades
+associationclass Recorrido between    -- CiudadOrigen y CiudadFinal, creo que deberemos realizar 2 caminos por cada 2 ciudades
     Ciudad [1] role ciudadOrigen -- Esto es para facilitar el modelador
     Ciudad [1] role ciudadFinal
   attributes
-    distancia : Integer
+    numKm : Integer
 end
 
 class Viaje
@@ -101,8 +101,6 @@ class TallerOficial < Taller
     tiempoGarantia : Integer
 end
 
-class TallerNoOficial < Taller
-end
 -------------- End of classes ------------------
 
 -------------- Relationships ------------------
@@ -111,14 +109,14 @@ association EstOficial between
     Ciudad [1] role ciudadOficial
 end
 
-association EstaNoOficial between
-    TallerNoOficial [0..*] role ciudadTallerNoOficial
+association EstaNoOficial between -- Como coño represento que es una composicion?
+    TallerNoOficial [0..*] role ciudadTallerNoOficial 
     Ciudad [1] role ciudadNoOficial
 end
 
 association Ubicado between
-    Coche [0..*] role coche
-    Ciudad [0..1] role ciudad
+    Coche [0..*] role cocheEstacionado
+    Ciudad [0..1] role ciudadCoche
 end
 
 association Arreglando between
@@ -127,13 +125,13 @@ association Arreglando between
 end
 
 association Viajado between
-    Coche [1]
-    Viaje [0..*]
+    Coche [1] role cocheViajes
+    Viaje [0..*] role viajesRealizadosCoche
 end
 
-association ViajeCamino between
-    Camino [1]
-    Viaje [0..*]
+association ViajeRecorrido between
+    Recorrido [1] role recorridoViaje
+    Viaje [0..*] role viajeKm
 end
 
 -------------- End of relationships ------------------
