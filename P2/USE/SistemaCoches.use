@@ -30,7 +30,9 @@ class Coche < ActiveObject
     fechaMatriculacion : Integer
     kmRecorridos : Integer
     enGarantia : Boolean
-    necesitaMantenimiento : Boolean --derive : self.Clock.NOW - self.fechaMatriculacion >= 4 and self.Revision
+    necesitaMantenimiento : Boolean derive : 
+        (self.clock.NOW - self.fechaMatriculacion > 4 * 100) and 
+        (self.revision->isEmpty() or (self.clock.NOW - self.revision->sortedBy(r | r.fechaFin)->last().fechaFin >= 100))
     speed : Real init: 5
     position : Real init: 0
     isMoving : Boolean init: false
