@@ -4,7 +4,9 @@ model sistemaCoches
 enum TipoRevision { Mantenimiento, Reparacion }
 -------------- Classes ------------------ 
 
-
+-- ANOTACION PARA TODOS, SOLUCION A TODOS LOS PROBLEMAS: para saber si un coche esta de viaje o no, buscamos en el ulitmo viaje de la lista de viajes del coche, si fecha de llegada esta definido 
+-- EJEMPLO: context Coche
+-- self.viajesRealizadosCoche->(v | v.fechaLlegada.isDefined())->sortedBy(r | r.fechaLlegada)->last().fechaLlegada.isUndefined()
 class Clock 
   attributes
     NOW : Integer init = 0 -- POSIX representation starting at 0
@@ -98,7 +100,7 @@ end
 
 
 class Taller
-end -- chatgpt dice que se pone así una relación sin atirbutos
+end 
 
 class TallerOficial < Taller
   attributes
@@ -176,13 +178,14 @@ context Viaje
 -- 9 ESTE ESTA MAL
 --Un coche se encontrará en todo momento bien realizando un viaje determinado o bien en
 --una ciudad.
---context Coche
+context Coche
     ---
     -- [Texto que describe el invariante]
     ---
---    inv cocheEnViajeOCiudad:
---      (self.viaje->notEmpty() implies self.ciudadCoche.isUndefined()) and
---      (self.ciudadCoche.isDefined() implies self.viaje->isEmpty())
+    inv cocheEnViajeOCiudad: -- con el let hacemos que si hay un undefined, se coloque al final
+      let viajesConLlegadaDefinida = self.viajesRealizadosCoche->select(v | v.fechaLlegada.isDefined())->sortedBy(r | r.fechaLlegada) in 
+        (viajesConLlegadaDefinida->isEmpty() or viajesConLlegadaDefinida->last().fechaLlegada.isDefined() implies self.ciudadCoche.isUndefined()) and
+        (viajesConLlegadaDefinida->isEmpty() or viajesConLlegadaDefinida->last().fechaLlegada.isUndefined() implies self.ciudadCoche.isDefined())
 
 -- 10
 --Si el coche ha completado al menos un viaje y no se encuentra viajando, entonces debe
