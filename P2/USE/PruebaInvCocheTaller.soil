@@ -1,0 +1,15 @@
+!new Coche('Passat_2002')
+
+!new Ciudad('Malaga')
+!Malaga.nombre := 'Malaga'
+
+!new Ciudad('Cordoba')
+!Cordoba.nombre := 'Cordoba'
+
+!new Taller('Mequetrefe')
+
+!insert(Mequetrefe,Cordoba) into UbicacionTaller
+
+!insert(Passat_2002, Malaga) into Ubicado
+
+!insert(Passat_2002, Mequetrefe) into Arreglando

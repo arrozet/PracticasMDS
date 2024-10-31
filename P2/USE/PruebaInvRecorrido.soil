@@ -16,11 +16,14 @@
 !Malaga.nombre := 'Malaga'
 
 !new Ciudad('Cordoba')
-!Cordoba.nombre := Cordoba
+!Cordoba.nombre := 'Cordoba'
 
-!new Camino('MC')
-!MC.ciudadOrigen := Malaga
-!MC.ciudadFinal := Cordoba
-!MC.distancia := 170
+!new Ciudad('Barcelona')
+!Barcelona.nombre := 'Barcelona'
+
+!insert(Barcelona,Cordoba) into Recorrido
+!Recorrido1.numKm := 3
+
+
 
 
