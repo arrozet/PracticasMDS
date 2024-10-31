@@ -184,8 +184,8 @@ context Coche
     ---
     inv cocheEnViajeOCiudad: -- con el let hacemos que si hay un undefined, se coloque al final, el let por alguna razon, quita el color verde de los comentarios
       let viajesConLlegadaDefinida = self.viajesRealizadosCoche->select(v | v.fechaLlegada.isDefined())->sortedBy(r | r.fechaLlegada) in 
-        (viajesConLlegadaDefinida->isEmpty() or viajesConLlegadaDefinida->last().fechaLlegada.isDefined() implies self.ciudadCoche.isUndefined()) and
-        (viajesConLlegadaDefinida->isEmpty() or viajesConLlegadaDefinida->last().fechaLlegada.isUndefined() implies self.ciudadCoche.isDefined())
+        ((viajesConLlegadaDefinida->isEmpty() or viajesConLlegadaDefinida->last().fechaLlegada.isDefined()) implies self.ciudadCoche.isDefined()) and
+        ((viajesConLlegadaDefinida->isEmpty() or viajesConLlegadaDefinida->last().fechaLlegada.isUndefined()) implies self.ciudadCoche.isUndefined())
 
 -- 10
 --Si el coche ha completado al menos un viaje y no se encuentra viajando, entonces debe
@@ -206,8 +206,8 @@ context Coche
   (self.viajesRealizadosCoche -> size() >= 2) implies (self.viajesRealizadosCoche-> forAll(v1,v2 | v1 <> v2 implies (
 	(v1.fechaLlegada <= v2.fechaSalida)
         	)
-	)
-    )
+	  )
+  )
 -- Esto comprueba del listado de viajes, con cada viaje, si se cumplen los invariantes bien
 --de v1 comprueba con v2, v3,v4,v5,v6,v7... su fecha de fin sea anterior
 -- a la fecha de inicio del viaje v(i).
@@ -216,6 +216,15 @@ context Coche
 
 
 -- 12 
+-- Las ciudades de origen y destino de los viajes deben ser coherentes. Es decir, si un coche 
+-- realiza un viaje desde la ciudad A hasta la ciudad B, el próximo viaje debe partir desde la ciudad B.
+context Coche
+  inv viajesNoSeSolapan:
+  (self.viajesRealizadosCoche -> size() >= 2) implies (self.viajesRealizadosCoche->select(v | v.fechaLlegada.isDefined())->sortedBy(r | r.fechaLlegada)-> forAll(v1,v2 | v1 <> v2 implies (
+	(v1.recorridoViaje.ciudadFinal <= v2.recorridoViaje.ciudadOrigen) -- esto esta terminado
+        	)
+	  )
+  )
 
 -- 14 ESTE NO ES UN INVARIANTE CREO
 -------------- End of invariants ------------------
