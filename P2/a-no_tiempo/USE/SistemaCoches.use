@@ -174,8 +174,8 @@ context Coche
     ---
     inv CocheTerminaEnCiudad :
       self.viajeCoche->isEmpty() or   -- Tiene que dar correcto si ha completado 0 viajes
-      not self.viajeCoche->exists(v | v.fechaLlegada.isUndefined()) implies 
-      (self.ciudadCoche = self.viajeCoche->sortedBy(v | v.fechaLlegada)->last().recorridoViaje.ciudadFinal) 
+      not self.viajeCoche->exists(v | v.fechaLlegada.isUndefined()) implies -- si el coche no está en un viaje
+      (self.ciudadCoche = self.viajeCoche->sortedBy(v | v.fechaLlegada)->last().recorridoViaje.ciudadFinal) -- la ciudad en la que está ahora es la ciudad a la que ha llegado en el último viaje
 
       --(not(self.viajesRealizadosCoche->isEmpty()) and self.viajesRealizadosCoche->sortedBy(r | r.fechaLlegada)->last().fechaLlegada.isDefined()) implies 
       --(self.ciudadCoche = self.viajesRealizadosCoche->sortedBy(r | r.fechaLlegada)->last().recorridoViaje.ciudadFinal) 
@@ -186,12 +186,12 @@ context Coche
     -- del siguiente. 
     ---
     inv ViajesNoSeSolapan :
-      let viajesOrdenados : OrderedSet(Viaje) = self.viajeCoche->sortedBy(v | v.fechaSalida) in
-        (self.viajeCoche -> size() >= 2) implies 
-        (self.viajeCoche-> forAll(v1,v2 | viajesOrdenados->indexOf(v1) = viajesOrdenados->indexOf(v2) - 1 implies 
-                                                                        ((v1.fechaLlegada <= v2.fechaSalida))))
+      let viajesOrdenados : OrderedSet(Viaje) = self.viajeCoche->sortedBy(v | v.fechaSalida) in -- Saco los viajes ordenados
+        (self.viajeCoche -> size() >= 2) implies -- Si tengo más de 2
+        (self.viajeCoche-> forAll(v1,v2 | viajesOrdenados->indexOf(v1) = 
+                                  viajesOrdenados->indexOf(v2) - 1 implies ((v1.fechaLlegada <= v2.fechaSalida)))) -- basicamente, viaje[i].fechaLlegada < viaje[j].fechaSalida | i < j
     
-    -- Creo que esto está mal porque el forAll compara todos con todos, es decir, 
+    -- Creo que lo de abajo está mal porque el forAll compara todos con todos, es decir, 
     -- compararía el primer elemento con el segundo y el segundo con el primero. En ese caso, el implies no se cumpliría
 
     --(self.viajesRealizadosCoche -> size() >= 2) implies 
@@ -208,10 +208,10 @@ context Coche
     --- NO SE COMO HACER PARA QUE ITERE DE UNO EN UNO, NO HAY UNA FUNCION INDEXOF Y SE LIA
 
     inv CiudadesCoherentes : 
-      let viajesOrdenados : OrderedSet(Viaje) = self.viajeCoche->sortedBy(v | v.fechaSalida) in
-        (self.viajeCoche -> size() >= 2) implies 
-        (self.viajeCoche-> forAll(v1,v2 | viajesOrdenados->indexOf(v1) = viajesOrdenados->indexOf(v2) - 1 implies 
-                            (v1.recorridoViaje.ciudadFinal = v2.recorridoViaje.ciudadOrigen)))
+      let viajesOrdenados : OrderedSet(Viaje) = self.viajeCoche->sortedBy(v | v.fechaSalida) in -- Saco los viajes ordenados
+        (self.viajeCoche -> size() >= 2) implies -- Si tengo más de 2
+        (self.viajeCoche-> forAll(v1,v2 | viajesOrdenados->indexOf(v1) = 
+                                  viajesOrdenados->indexOf(v2) - 1 implies (v1.recorridoViaje.ciudadFinal = v2.recorridoViaje.ciudadOrigen))) -- si llegas a una ciudad, en el siguiente viaje partes desde ella
 
     -- inv ViajesNoSeSolapan:
     --  (self.viajeCoche -> size() >= 2) implies
