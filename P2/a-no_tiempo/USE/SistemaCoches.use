@@ -2,12 +2,14 @@ model sistemaCoches
 
 -------------- Enumerations ------------
 enum TipoRevision { reparacion, mantenimiento}
--------------- Classes ------------------ 
+-------------- End of enumerations ------------
 
+-------------- Classes ------------------ 
 -- ANOTACION PARA TODOS, SOLUCION A TODOS LOS PROBLEMAS: para saber si un coche esta de viaje o no, buscamos en el ulitmo viaje de 
 -- la lista de viajes del coche, si fecha de llegada esta definido 
 -- EJEMPLO: context Coche
 -- self.viajesRealizadosCoche->sortedBy(r | r.fechaLlegada)->last().fechaLlegada.isUndefined()
+
 class Clock 
   attributes
     NOW : Integer init = 0 -- POSIX representation starting at 0
@@ -31,8 +33,11 @@ end
 class Coche < ActiveObject
   attributes
     fechaMatriculacion : Integer
-    kmRecorridos : Integer
-    enGarantia : Boolean --que alguien intente pegarse de hostias con este derive por favor, Eduardo gastó 1 hora aquí
+    -- esto es derive (apartado 13)
+    kmRecorridos : Integer 
+    -- esto es derive (apartado 15)
+    enGarantia : Boolean 
+    -- esto es derive (apartado 16)
     necesitaMantenimiento : Boolean derive : 
         (self.clock.NOW - self.fechaMatriculacion > 4 * 100) and 
         (self.revision->isEmpty() or 
@@ -138,102 +143,112 @@ association ViajeRecorrido between
 end
 
 -------------- End of relationships ------------------
+
 ------------- Invariants -------------
 
 constraints
--- 1
+-------------------------
+-- El formato para las invariantes será el siguiente:
+-- context [CLASE]
+  --- [ANOTACIONES ADICIONALES]
+  -- [Número de apartado en enunciado]. [Frase explícita del enunciado]
+  --- [ANOTACIONES ADICIONALES]
+  --inv [nombre del invariante]
+    -- [declaración del invariante]
+
+-- Si tienes dudas, hay un ejemplo justo abajo
+-------------------------
+
 context Recorrido
-  inv distanciaCiudadMayorQueCinco:
+  ---
+  -- 1. Cada ciudad debe estar al menos a 5 kilómetros de distancia de otra. 
+  ---
+  inv distanciaEntreCiudadesAlMenosCinco:
     self.numKm >= 5
 
-
-
--- 3
 context Taller
     ---
-    -- [Texto que describe el invariante]
+    -- 7. Si un coche está siendo sometido a una revisión, entonces el coche debe encontrarse en 
+    -- la misma ciudad donde está el taller.
     ---
-    -- Si está en un taller, el coche y el taller están en la misma ciudad
     inv CocheYCiudadMismaQueTalleNoOficial:
         self.cocheArreglando->isEmpty() or
             self.cocheArreglando->forAll(coche | coche.ciudadCoche = self.ciudadtalleres)
---  4
---
+
 context Revision
     ---
-    -- Todas las revisiones deben tener lugar después de que el coche se matriculase
+    -- 4. Todas las revisiones deben tener lugar después de que el coche se matriculase
     ---
     inv revisionAfterRegistration:
       self.vehiculo.fechaMatriculacion < self.fechaInicio
 
-
--- 8
 context Viaje
     ---
-    -- Si el coche está realizando actualmente algún viaje, dicho
-    --viaje únicamente tendrá fecha de salida, pero no de llegada.
+    -- 8. Si el coche está realizando actualmente algún viaje, dicho
+    -- viaje únicamente tendrá fecha de salida, pero no de llegada.
     ---
     inv viajeEnCurso:
       self.cocheViajes.isMoving implies self.fechaLlegada.isUndefined()
 
--- 9 ESTE ESTA MAL
-
 context Coche
-    ---
-    --Un coche se encontrará en todo momento bien realizando un viaje determinado o bien en
-    --una ciudad.
+    --- ESTÁ MAL
+    -- 9. Un coche se encontrará en todo momento bien realizando un viaje determinado o bien en
+    -- una ciudad.
     ---
     inv cocheEnViajeOCiudad: -- con el let hacemos que si hay un undefined, se coloque al final, el let por alguna razon, quita el color verde de los comentarios
-      let viajesConLlegadaDefinida = self.viajesRealizadosCoche->sortedBy(r | r.fechaLlegada) in 
+      let viajesConLlegadaDefinida : OrderedSet(Viaje) = self.viajesRealizadosCoche->sortedBy(r | r.fechaLlegada) in 
         ((viajesConLlegadaDefinida->isEmpty() or viajesConLlegadaDefinida->last().fechaLlegada.isDefined()) implies self.ciudadCoche.isDefined()) and
         ((viajesConLlegadaDefinida->last().fechaLlegada.isUndefined()) implies self.ciudadCoche.isUndefined())
 
--- 10
     ---
-    --Si el coche ha completado al menos un viaje y no se encuentra viajando, entonces debe
-    --encontrarse en la ciudad a la que llegó en su último viaje.
+    -- 10. Si el coche ha completado al menos un viaje y no se encuentra viajando, entonces debe
+    -- encontrarse en la ciudad a la que llegó en su último viaje.
     ---
-
-context Coche
-  inv cocheTerminaEnCiudad:
-    (not(self.viajesRealizadosCoche->isEmpty()) and self.viajesRealizadosCoche->sortedBy(r | r.fechaLlegada)->last().fechaLlegada.isDefined()) implies 
-    (self.ciudadCoche = self.viajesRealizadosCoche->sortedBy(r | r.fechaLlegada)->last().recorridoViaje.ciudadFinal) 
+    inv cocheTerminaEnCiudad:
+      (not(self.viajesRealizadosCoche->isEmpty()) and self.viajesRealizadosCoche->sortedBy(r | r.fechaLlegada)->last().fechaLlegada.isDefined()) implies 
+      (self.ciudadCoche = self.viajesRealizadosCoche->sortedBy(r | r.fechaLlegada)->last().recorridoViaje.ciudadFinal) 
     
 
--- 11
-    -- Dos viajes no pueden solaparse en el tiempo, es decir, un viaje debe ocurrir siempre 
+    ---
+    -- 11. Dos viajes no pueden solaparse en el tiempo, es decir, un viaje debe ocurrir siempre 
     -- después de otro, pudiendo la fecha de llegada de un viaje coincidir con la fecha de salida 
     -- del siguiente. 
-context Coche
-  inv viajesNoSeSolapan:
-  (self.viajesRealizadosCoche -> size() >= 2) implies (self.viajesRealizadosCoche-> forAll(v1,v2 | v1 <> v2 implies (
-	(v1.fechaLlegada <= v2.fechaSalida)
-        	)
-	  )
-  )
--- Esto comprueba del listado de viajes, con cada viaje, si se cumplen los invariantes bien
---de v1 comprueba con v2, v3,v4,v5,v6,v7... su fecha de fin sea anterior
--- a la fecha de inicio del viaje v(i).
--- v1 <> v2 evita duplicadas
--- suponemos que los viajes estan ordenados, es decir, que v1 ocurre antes que v2
+    ---
+    inv viajesNoSeSolapan:
+      (self.viajesRealizadosCoche -> size() >= 2) implies 
+      (self.viajesRealizadosCoche-> forAll(v1,v2 | v1 <> v2 implies ((v1.fechaLlegada <= v2.fechaSalida))))
+    
+    -- Esto comprueba del listado de viajes, con cada viaje, si se cumplen los invariantes bien
+    -- de v1 comprueba con v2, v3,v4,v5,v6,v7... su fecha de fin sea anterior
+    -- a la fecha de inicio del viaje v(i).
+    -- v1 <> v2 evita duplicadas
+    -- suponemos que los viajes estan ordenados, es decir, que v1 ocurre antes que v2
 
+    ---
+    -- 12. Las ciudades de origen y destino de los viajes deben ser coherentes. Es decir, si un coche 
+    -- realiza un viaje desde la ciudad A hasta la ciudad B, el próximo viaje debe partir desde la ciudad B.
+    --- NO SE COMO HACER PARA QUE ITERE DE UNO EN UNO, NO HAY UNA FUNCION INDEXOF Y SE LIA
 
--- 12 
--- Las ciudades de origen y destino de los viajes deben ser coherentes. Es decir, si un coche 
--- realiza un viaje desde la ciudad A hasta la ciudad B, el próximo viaje debe partir desde la ciudad B.
+    --  inv viajesNoSeSolapan:
+    --  (self.viajesRealizadosCoche -> size() >= 2) implies
+    --    (self.viajesRealizadosCoche
+    --     ->sortedBy(r | r.fechaLlegada)
+    --      ->forAll(i | 
+    --        i <> self.viajesRealizadosCoche->at(i+1) implies 
+    --          (self.viajesRealizadosCoche->at(i).recorridoViaje.ciudadFinal = self.viajesRealizadosCoche->at(i+1).recorridoViaje.ciudadOrigen)
+    --      )
+    --   )
 
---NO SE COMO HACER PARA QUE ITERE DE UNO EN UNO, NO HAY UNA FUNCION INDEXOF Y SE LIA
---context Coche
---  inv viajesNoSeSolapan:
---  (self.viajesRealizadosCoche -> size() >= 2) implies
---    (self.viajesRealizadosCoche
---     ->sortedBy(r | r.fechaLlegada)
---      ->forAll(i | 
---        i <> self.viajesRealizadosCoche->at(i+1) implies 
---          (self.viajesRealizadosCoche->at(i).recorridoViaje.ciudadFinal = self.viajesRealizadosCoche->at(i+1).recorridoViaje.ciudadOrigen)
---      )
---   )
+    ---
+    -- 14. ESTO NO ES UN INVARIANTE, ES UNA ASUNCIÓN QUE SE HACE PARA FACILITAR EL MODELADO
+    ---
 
--- 14 ESTE NO ES UN INVARIANTE CREO
+    ---
+    -- 15. ESTO NO ES UN INVARIANTE, ES EL DERIVE DE enGarantia
+    ---
+
+    ---
+    -- 16. ESTO NO ES UN INVARIANTE, ES EL DERIVE DE necesitaMantenimiento
+    ---
 -------------- End of invariants ------------------
 
