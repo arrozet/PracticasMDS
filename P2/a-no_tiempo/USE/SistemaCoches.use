@@ -1,10 +1,11 @@
 model sistemaCoches
 
 -------------- Enumerations ------------
-enum TipoRevision { Mantenimiento, Reparacion }
+enum TipoRevision { reparacion, mantenimiento}
 -------------- Classes ------------------ 
 
--- ANOTACION PARA TODOS, SOLUCION A TODOS LOS PROBLEMAS: para saber si un coche esta de viaje o no, buscamos en el ulitmo viaje de la lista de viajes del coche, si fecha de llegada esta definido 
+-- ANOTACION PARA TODOS, SOLUCION A TODOS LOS PROBLEMAS: para saber si un coche esta de viaje o no, buscamos en el ulitmo viaje de 
+-- la lista de viajes del coche, si fecha de llegada esta definido 
 -- EJEMPLO: context Coche
 -- self.viajesRealizadosCoche->sortedBy(r | r.fechaLlegada)->last().fechaLlegada.isUndefined()
 class Clock 
@@ -35,7 +36,7 @@ class Coche < ActiveObject
     necesitaMantenimiento : Boolean derive : 
         (self.clock.NOW - self.fechaMatriculacion > 4 * 100) and 
         (self.revision->isEmpty() or 
-          (self.revision->select(r | r.tipoRevision = TipoRevision::Mantenimiento)
+          (self.revision->select(r | r.tipoRevision = TipoRevision::mantenimiento)
           ->sortedBy(r | r.fechaFin)->last().fechaFin >= self.clock.NOW - 100))
     speed : Real init: 5
     position : Real init: 0
