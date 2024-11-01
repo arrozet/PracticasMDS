@@ -8,72 +8,24 @@ enum TipoRevision { reparacion, mantenimiento}
 -- ANOTACION PARA TODOS, SOLUCION A TODOS LOS PROBLEMAS: para saber si un coche esta de viaje o no, buscamos en el ulitmo viaje de 
 -- la lista de viajes del coche, si fecha de llegada esta definido 
 -- EJEMPLO: context Coche
--- self.viajesRealizadosCoche->sortedBy(r | r.fechaLlegada)->last().fechaLlegada.isUndefined()
+-- self.viajeCoche->sortedBy(r | r.fechaLlegada)->last().fechaLlegada.isUndefined()
 
 class Clock 
   attributes
     NOW : Integer init = 0 -- POSIX representation starting at 0
-    resolution: Integer init = 1 
-  operations
-    tick() 
-
-    run (n:Integer)
+    --resolution: Integer init = 1 
 end
 
-abstract class ActiveObject -- real-time objects 
-  operations
-    tick()
-end
-
-association Time between 
-  Clock [1] role clock
-  ActiveObject [*] role ao ordered
-end
-
-class Coche < ActiveObject
+class Coche
   attributes
     fechaMatriculacion : Integer
-    -- esto es derive (apartado 13)
-    kmRecorridos : Integer 
+    -- esto es derive (apartado 13) - SE USA CLOCK
+    kmRecorridos : Integer derive : 
+      self.viajeCoche->select(v | v.fechaLlegada.isDefined())->collect(v | v.recorridoViaje.numKm)->sum()
     -- esto es derive (apartado 15)
     enGarantia : Boolean 
-    -- esto es derive (apartado 16)
-    necesitaMantenimiento : Boolean derive : 
-        (self.clock.NOW - self.fechaMatriculacion > 4 * 100) and 
-        (self.revision->isEmpty() or 
-          (self.revision->select(r | r.tipoRevision = TipoRevision::mantenimiento)
-          ->sortedBy(r | r.fechaFin)->last().fechaFin >= self.clock.NOW - 100))
-    speed : Real init: 5
-    position : Real init: 0
-    isMoving : Boolean init: false
-  operations
-    accelerate() 
-      begin 
-        self.speed := self.speed + 1
-      end
-      post IncreasSpeed: self.speed = self.speed@pre + 1
-    startMoving()
-      begin
-        self.isMoving := true
-      end 
-      pre isNotMoving : not self.isMoving
-      post Moving : self.isMoving
-    stopMoving()
-      begin
-        self.isMoving := false
-      end
-      pre isMoving : self.isMoving
-      post notMoving : not self.isMoving
-    tick()
-      begin 
-       if self.isMoving then
-        self.position := self.position + self.speed*self.clock.resolution
-      end;
-    end
-    post carMoved : self.isMoving@pre implies
-                    self.position = self.position@pre + self.speed*self.clock.resolution
-
-
+    -- esto es derive (apartado 16) - SE USA CLOCK
+    necesitaMantenimiento : Boolean
 end
 
 class Ciudad
@@ -82,9 +34,10 @@ class Ciudad
     poblacion : Integer
 end
 
+-- PREGUNTAR AL PROFESOR SOBRE EL COMENTARIO DE ABAJO
 associationclass Recorrido between    -- CiudadOrigen y CiudadFinal, creo que deberemos realizar 2 caminos por cada 2 ciudades
-    Ciudad [1] role ciudadOrigen -- Esto es para facilitar el modelador
-    Ciudad [1] role ciudadFinal
+    Ciudad [0..*] role ciudadOrigen -- Esto es para facilitar el modelador
+    Ciudad [0..*] role ciudadFinal
   attributes
     numKm : Integer
 end
@@ -95,17 +48,13 @@ class Viaje
     fechaLlegada : Integer
 end
 
-associationclass Revision between
-    Taller [0..*] role tallerCoche
-    Coche [0..*] role vehiculo
+class Revision
   attributes
     fechaInicio : Integer
     fechaFin : Integer
     tipoRevision : TipoRevision
 end 
 
--- "en cada ciudad habrá, a lo sumo, un taller oficial, pudiendo haber varios talleres no oficiales." 
--- se comprobará mirando si el taller es oficial, que solo exista uno (código OCL)
 class Taller
 end 
 
@@ -117,9 +66,9 @@ end
 -------------- End of classes ------------------
 
 -------------- Relationships ------------------
-association UbicacionTaller between
+composition UbicacionTaller between
+    Ciudad [1] role ciudadTaller
     Taller [0..*] role tallerCiudad
-    Ciudad [1] role ciudadtalleres
 end
 
 association Ubicado between
@@ -127,19 +76,24 @@ association Ubicado between
     Ciudad [0..1] role ciudadCoche
 end
 
-association Arreglando between
-    Coche [0..*] role cocheArreglando
-    Taller [0..*] role tallerReparando
+association Revisado between
+    Coche [1] role cocheRevision
+    Revision [0..*] role revisionCoche
+end
+
+association Realizada between
+    Taller [1] role tallerRevision
+    Revision [0..*] role revisionTaller
 end
 
 association Viajado between
-    Coche [1] role cocheViajes
-    Viaje [0..*] role viajesRealizadosCoche
+    Coche [1] role cocheViaje
+    Viaje [0..*] role viajeCoche
 end
 
 association ViajeRecorrido between
     Recorrido [1] role recorridoViaje
-    Viaje [0..*] role ViajeKm
+    Viaje [0..*] role viajeRecorrido
 end
 
 -------------- End of relationships ------------------
@@ -163,61 +117,85 @@ context Recorrido
   ---
   -- 1. Cada ciudad debe estar al menos a 5 kilómetros de distancia de otra. 
   ---
-  inv distanciaEntreCiudadesAlMenosCinco:
+  inv DistanciaEntreCiudadesAlMenosCinco :
     self.numKm >= 5
-
-context Taller
-    ---
-    -- 7. Si un coche está siendo sometido a una revisión, entonces el coche debe encontrarse en 
-    -- la misma ciudad donde está el taller.
-    ---
-    inv CocheYCiudadMismaQueTalleNoOficial:
-        self.cocheArreglando->isEmpty() or
-            self.cocheArreglando->forAll(coche | coche.ciudadCoche = self.ciudadtalleres)
 
 context Revision
     ---
     -- 4. Todas las revisiones deben tener lugar después de que el coche se matriculase
     ---
-    inv revisionAfterRegistration:
-      self.vehiculo.fechaMatriculacion < self.fechaInicio
+    inv RevisionDespuesDeMatriculacion :
+      self.cocheRevision.fechaMatriculacion < self.fechaInicio
+
+context Ciudad
+    ---
+    -- 6. En cada ciudad habrá, a lo sumo, un taller oficial, pudiendo 
+    -- haber varios talleres no oficiales. 
+    --- se comprobará mirando si el taller es oficial, que solo exista uno
+    inv UnSoloTallerOficial :
+      self.tallerCiudad->select(t | t.oclIsTypeOf(TallerOficial))->size() <= 1 
 
 context Viaje
     ---
     -- 8. Si el coche está realizando actualmente algún viaje, dicho
     -- viaje únicamente tendrá fecha de salida, pero no de llegada.
     ---
-    inv viajeEnCurso:
-      self.cocheViajes.isMoving implies self.fechaLlegada.isUndefined()
+    inv ViajeEnCurso :
+      self.cocheViaje.ciudadCoche.isUndefined() implies self.fechaLlegada.isUndefined()
 
 context Coche
-    --- ESTÁ MAL
+    ---
+    -- 7. Si un coche está siendo sometido a una revisión, entonces el coche debe encontrarse en 
+    -- la misma ciudad donde está el taller.
+    ---
+    inv CiudadCocheEnRevision_Igual_CiudadTaller :
+      self.revisionCoche->isEmpty() or  -- no tiene revisiones
+      self.revisionCoche->exists(r | r.fechaFin.isUndefined() implies self.ciudadCoche = r.tallerRevision.ciudadTaller) -- o si tiene, la revisión que está teniendo es en la misma ciudad
+      -- si el exists no encuentra nada, da correcto (según ChatGPT)
+    
+    --- 
     -- 9. Un coche se encontrará en todo momento bien realizando un viaje determinado o bien en
     -- una ciudad.
     ---
-    inv cocheEnViajeOCiudad: -- con el let hacemos que si hay un undefined, se coloque al final, el let por alguna razon, quita el color verde de los comentarios
-      let viajesConLlegadaDefinida : OrderedSet(Viaje) = self.viajesRealizadosCoche->sortedBy(r | r.fechaLlegada) in 
-        ((viajesConLlegadaDefinida->isEmpty() or viajesConLlegadaDefinida->last().fechaLlegada.isDefined()) implies self.ciudadCoche.isDefined()) and
-        ((viajesConLlegadaDefinida->last().fechaLlegada.isUndefined()) implies self.ciudadCoche.isUndefined())
+    inv CocheEnViajeOCiudad :
+      self.viajeCoche->isEmpty() implies self.ciudadCoche.isDefined() or  -- si nunca ha hecho un viaje, está en una ciudad
+      self.viajeCoche->exists(v | v.fechaLlegada.isUndefined() implies self.ciudadCoche.isUndefined()) or -- si está haciendo un viaje, no está en una ciudad
+      self.ciudadCoche.isDefined() implies not self.viajeCoche->exists(v | v.fechaLlegada.isUndefined()) -- si está en una ciudad, no está haciendo un viaje
+
+      -- ANOTACIÓN DE IMPLEMENTACIÓN PREVIA: ESTÁ MAL
+       -- con el let hacemos que si hay un undefined, se coloque al final
+      --let viajesConLlegadaDefinida : OrderedSet(Viaje) = self.viajeCoche->sortedBy(r | r.fechaLlegada) in 
+      --  ((viajesConLlegadaDefinida->isEmpty() or viajesConLlegadaDefinida->last().fechaLlegada.isDefined()) implies self.ciudadCoche.isDefined()) and
+      --  ((viajesConLlegadaDefinida->last().fechaLlegada.isUndefined()) implies self.ciudadCoche.isUndefined())
 
     ---
     -- 10. Si el coche ha completado al menos un viaje y no se encuentra viajando, entonces debe
     -- encontrarse en la ciudad a la que llegó en su último viaje.
     ---
-    inv cocheTerminaEnCiudad:
-      (not(self.viajesRealizadosCoche->isEmpty()) and self.viajesRealizadosCoche->sortedBy(r | r.fechaLlegada)->last().fechaLlegada.isDefined()) implies 
-      (self.ciudadCoche = self.viajesRealizadosCoche->sortedBy(r | r.fechaLlegada)->last().recorridoViaje.ciudadFinal) 
-    
+    inv CocheTerminaEnCiudad :
+      self.viajeCoche->isEmpty() or   -- Tiene que dar correcto si ha completado 0 viajes
+      not self.viajeCoche->exists(v | v.fechaLlegada.isUndefined()) implies 
+      (self.ciudadCoche = self.viajeCoche->sortedBy(v | v.fechaLlegada)->last().recorridoViaje.ciudadFinal) 
+
+      --(not(self.viajesRealizadosCoche->isEmpty()) and self.viajesRealizadosCoche->sortedBy(r | r.fechaLlegada)->last().fechaLlegada.isDefined()) implies 
+      --(self.ciudadCoche = self.viajesRealizadosCoche->sortedBy(r | r.fechaLlegada)->last().recorridoViaje.ciudadFinal) 
 
     ---
     -- 11. Dos viajes no pueden solaparse en el tiempo, es decir, un viaje debe ocurrir siempre 
     -- después de otro, pudiendo la fecha de llegada de un viaje coincidir con la fecha de salida 
     -- del siguiente. 
     ---
-    inv viajesNoSeSolapan:
-      (self.viajesRealizadosCoche -> size() >= 2) implies 
-      (self.viajesRealizadosCoche-> forAll(v1,v2 | v1 <> v2 implies ((v1.fechaLlegada <= v2.fechaSalida))))
+    inv ViajesNoSeSolapan :
+      let viajesOrdenados : OrderedSet(Viaje) = self.viajeCoche->sortedBy(v | v.fechaSalida) in
+        (self.viajeCoche -> size() >= 2) implies 
+        (self.viajeCoche-> forAll(v1,v2 | viajesOrdenados->indexOf(v1) = viajesOrdenados->indexOf(v2) - 1 implies 
+                                                                        ((v1.fechaLlegada <= v2.fechaSalida))))
     
+    -- Creo que esto está mal porque el forAll compara todos con todos, es decir, 
+    -- compararía el primer elemento con el segundo y el segundo con el primero. En ese caso, el implies no se cumpliría
+
+    --(self.viajesRealizadosCoche -> size() >= 2) implies 
+    --  (self.viajesRealizadosCoche-> forAll(v1,v2 | v1 <> v2 implies ((v1.fechaLlegada <= v2.fechaSalida))))
     -- Esto comprueba del listado de viajes, con cada viaje, si se cumplen los invariantes bien
     -- de v1 comprueba con v2, v3,v4,v5,v6,v7... su fecha de fin sea anterior
     -- a la fecha de inicio del viaje v(i).
@@ -229,13 +207,19 @@ context Coche
     -- realiza un viaje desde la ciudad A hasta la ciudad B, el próximo viaje debe partir desde la ciudad B.
     --- NO SE COMO HACER PARA QUE ITERE DE UNO EN UNO, NO HAY UNA FUNCION INDEXOF Y SE LIA
 
-    --  inv viajesNoSeSolapan:
-    --  (self.viajesRealizadosCoche -> size() >= 2) implies
-    --    (self.viajesRealizadosCoche
+    inv CiudadesCoherentes : 
+      let viajesOrdenados : OrderedSet(Viaje) = self.viajeCoche->sortedBy(v | v.fechaSalida) in
+        (self.viajeCoche -> size() >= 2) implies 
+        (self.viajeCoche-> forAll(v1,v2 | viajesOrdenados->indexOf(v1) = viajesOrdenados->indexOf(v2) - 1 implies 
+                            (v1.recorridoViaje.ciudadFinal = v2.recorridoViaje.ciudadOrigen)))
+
+    -- inv ViajesNoSeSolapan:
+    --  (self.viajeCoche -> size() >= 2) implies
+    --    (self.viajeCoche
     --     ->sortedBy(r | r.fechaLlegada)
     --      ->forAll(i | 
-    --        i <> self.viajesRealizadosCoche->at(i+1) implies 
-    --          (self.viajesRealizadosCoche->at(i).recorridoViaje.ciudadFinal = self.viajesRealizadosCoche->at(i+1).recorridoViaje.ciudadOrigen)
+    --        i <> self.viajeCoche->at(i+1) implies 
+    --          (self.viajeCoche->at(i).recorridoViaje.ciudadFinal = self.viajeCoche->at(i+1).recorridoViaje.ciudadOrigen)
     --      )
     --   )
 

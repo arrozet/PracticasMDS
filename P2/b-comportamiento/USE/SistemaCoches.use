@@ -1,0 +1,254 @@
+model sistemaCoches
+
+-------------- Enumerations ------------
+enum TipoRevision { reparacion, mantenimiento}
+-------------- End of enumerations ------------
+
+-------------- Classes ------------------ 
+-- ANOTACION PARA TODOS, SOLUCION A TODOS LOS PROBLEMAS: para saber si un coche esta de viaje o no, buscamos en el ulitmo viaje de 
+-- la lista de viajes del coche, si fecha de llegada esta definido 
+-- EJEMPLO: context Coche
+-- self.viajesRealizadosCoche->sortedBy(r | r.fechaLlegada)->last().fechaLlegada.isUndefined()
+
+class Clock 
+  attributes
+    NOW : Integer init = 0 -- POSIX representation starting at 0
+    resolution: Integer init = 1 
+  operations
+    tick() 
+
+    run (n:Integer)
+end
+
+abstract class ActiveObject -- real-time objects 
+  operations
+    tick()
+end
+
+association Time between 
+  Clock [1] role clock
+  ActiveObject [*] role ao ordered
+end
+
+class Coche < ActiveObject
+  attributes
+    fechaMatriculacion : Integer
+    -- esto es derive (apartado 13) SE USA CLOCK
+    kmRecorridos : Integer 
+    -- esto es derive (apartado 15)
+    enGarantia : Boolean 
+    -- esto es derive (apartado 16) SE USA CLOCK
+    necesitaMantenimiento : Boolean derive : 
+        (self.clock.NOW - self.fechaMatriculacion > 4 * 100) and 
+        (self.revision->isEmpty() or 
+          (self.revision->select(r | r.tipoRevision = TipoRevision::mantenimiento)
+          ->sortedBy(r | r.fechaFin)->last().fechaFin >= self.clock.NOW - 100))
+    speed : Real init: 5
+    position : Real init: 0
+    isMoving : Boolean init: false
+  operations
+    accelerate() 
+      begin 
+        self.speed := self.speed + 1
+      end
+      post IncreasSpeed: self.speed = self.speed@pre + 1
+    startMoving()
+      begin
+        self.isMoving := true
+      end 
+      pre isNotMoving : not self.isMoving
+      post Moving : self.isMoving
+    stopMoving()
+      begin
+        self.isMoving := false
+      end
+      pre isMoving : self.isMoving
+      post notMoving : not self.isMoving
+    tick()
+      begin 
+       if self.isMoving then
+        self.position := self.position + self.speed*self.clock.resolution
+      end;
+    end
+    post carMoved : self.isMoving@pre implies
+                    self.position = self.position@pre + self.speed*self.clock.resolution
+
+
+end
+
+class Ciudad
+  attributes
+    nombre : String
+    poblacion : Integer
+end
+
+associationclass Recorrido between    -- CiudadOrigen y CiudadFinal, creo que deberemos realizar 2 caminos por cada 2 ciudades
+    Ciudad [1] role ciudadOrigen -- Esto es para facilitar el modelador
+    Ciudad [1] role ciudadFinal
+  attributes
+    numKm : Integer
+end
+
+class Viaje
+  attributes
+    fechaSalida : Integer
+    fechaLlegada : Integer
+end
+
+associationclass Revision between
+    Taller [0..*] role tallerCoche
+    Coche [0..*] role vehiculo
+  attributes
+    fechaInicio : Integer
+    fechaFin : Integer
+    tipoRevision : TipoRevision
+end 
+
+-- "en cada ciudad habrá, a lo sumo, un taller oficial, pudiendo haber varios talleres no oficiales." 
+-- se comprobará mirando si el taller es oficial, que solo exista uno (código OCL)
+class Taller
+end 
+
+class TallerOficial < Taller
+  attributes
+    tiempoGarantia : Integer
+end
+
+-------------- End of classes ------------------
+
+-------------- Relationships ------------------
+association UbicacionTaller between
+    Taller [0..*] role tallerCiudad
+    Ciudad [1] role ciudadtalleres
+end
+
+association Ubicado between
+    Coche [0..*] role cocheEstacionado
+    Ciudad [0..1] role ciudadCoche
+end
+
+association Arreglando between
+    Coche [0..*] role cocheArreglando
+    Taller [0..*] role tallerReparando
+end
+
+association Viajado between
+    Coche [1] role cocheViajes
+    Viaje [0..*] role viajesRealizadosCoche
+end
+
+association ViajeRecorrido between
+    Recorrido [1] role recorridoViaje
+    Viaje [0..*] role ViajeKm
+end
+
+-------------- End of relationships ------------------
+
+------------- Invariants -------------
+
+constraints
+-------------------------
+-- El formato para las invariantes será el siguiente:
+-- context [CLASE]
+  --- [ANOTACIONES ADICIONALES]
+  -- [Número de apartado en enunciado]. [Frase explícita del enunciado]
+  --- [ANOTACIONES ADICIONALES]
+  --inv [nombre del invariante]
+    -- [declaración del invariante]
+
+-- Si tienes dudas, hay un ejemplo justo abajo
+-------------------------
+
+context Recorrido
+  ---
+  -- 1. Cada ciudad debe estar al menos a 5 kilómetros de distancia de otra. 
+  ---
+  inv distanciaEntreCiudadesAlMenosCinco:
+    self.numKm >= 5
+
+context Taller
+    ---
+    -- 7. Si un coche está siendo sometido a una revisión, entonces el coche debe encontrarse en 
+    -- la misma ciudad donde está el taller.
+    ---
+    inv CocheYCiudadMismaQueTalleNoOficial:
+        self.cocheArreglando->isEmpty() or
+            self.cocheArreglando->forAll(coche | coche.ciudadCoche = self.ciudadtalleres)
+
+context Revision
+    ---
+    -- 4. Todas las revisiones deben tener lugar después de que el coche se matriculase
+    ---
+    inv revisionAfterRegistration:
+      self.vehiculo.fechaMatriculacion < self.fechaInicio
+
+context Viaje
+    ---
+    -- 8. Si el coche está realizando actualmente algún viaje, dicho
+    -- viaje únicamente tendrá fecha de salida, pero no de llegada.
+    ---
+    inv viajeEnCurso:
+      self.cocheViajes.isMoving implies self.fechaLlegada.isUndefined()
+
+context Coche
+    --- ESTÁ MAL
+    -- 9. Un coche se encontrará en todo momento bien realizando un viaje determinado o bien en
+    -- una ciudad.
+    ---
+    inv cocheEnViajeOCiudad: -- con el let hacemos que si hay un undefined, se coloque al final, el let por alguna razon, quita el color verde de los comentarios
+      let viajesConLlegadaDefinida : OrderedSet(Viaje) = self.viajesRealizadosCoche->sortedBy(r | r.fechaLlegada) in 
+        ((viajesConLlegadaDefinida->isEmpty() or viajesConLlegadaDefinida->last().fechaLlegada.isDefined()) implies self.ciudadCoche.isDefined()) and
+        ((viajesConLlegadaDefinida->last().fechaLlegada.isUndefined()) implies self.ciudadCoche.isUndefined())
+
+    ---
+    -- 10. Si el coche ha completado al menos un viaje y no se encuentra viajando, entonces debe
+    -- encontrarse en la ciudad a la que llegó en su último viaje.
+    ---
+    inv cocheTerminaEnCiudad:
+      (not(self.viajesRealizadosCoche->isEmpty()) and self.viajesRealizadosCoche->sortedBy(r | r.fechaLlegada)->last().fechaLlegada.isDefined()) implies 
+      (self.ciudadCoche = self.viajesRealizadosCoche->sortedBy(r | r.fechaLlegada)->last().recorridoViaje.ciudadFinal) 
+    
+
+    ---
+    -- 11. Dos viajes no pueden solaparse en el tiempo, es decir, un viaje debe ocurrir siempre 
+    -- después de otro, pudiendo la fecha de llegada de un viaje coincidir con la fecha de salida 
+    -- del siguiente. 
+    ---
+    inv viajesNoSeSolapan:
+      (self.viajesRealizadosCoche -> size() >= 2) implies 
+      (self.viajesRealizadosCoche-> forAll(v1,v2 | v1 <> v2 implies ((v1.fechaLlegada <= v2.fechaSalida))))
+    
+    -- Esto comprueba del listado de viajes, con cada viaje, si se cumplen los invariantes bien
+    -- de v1 comprueba con v2, v3,v4,v5,v6,v7... su fecha de fin sea anterior
+    -- a la fecha de inicio del viaje v(i).
+    -- v1 <> v2 evita duplicadas
+    -- suponemos que los viajes estan ordenados, es decir, que v1 ocurre antes que v2
+
+    ---
+    -- 12. Las ciudades de origen y destino de los viajes deben ser coherentes. Es decir, si un coche 
+    -- realiza un viaje desde la ciudad A hasta la ciudad B, el próximo viaje debe partir desde la ciudad B.
+    --- NO SE COMO HACER PARA QUE ITERE DE UNO EN UNO, NO HAY UNA FUNCION INDEXOF Y SE LIA
+
+    --  inv viajesNoSeSolapan:
+    --  (self.viajesRealizadosCoche -> size() >= 2) implies
+    --    (self.viajesRealizadosCoche
+    --     ->sortedBy(r | r.fechaLlegada)
+    --      ->forAll(i | 
+    --        i <> self.viajesRealizadosCoche->at(i+1) implies 
+    --          (self.viajesRealizadosCoche->at(i).recorridoViaje.ciudadFinal = self.viajesRealizadosCoche->at(i+1).recorridoViaje.ciudadOrigen)
+    --      )
+    --   )
+
+    ---
+    -- 14. ESTO NO ES UN INVARIANTE, ES UNA ASUNCIÓN QUE SE HACE PARA FACILITAR EL MODELADO
+    ---
+
+    ---
+    -- 15. ESTO NO ES UN INVARIANTE, ES EL DERIVE DE enGarantia
+    ---
+
+    ---
+    -- 16. ESTO NO ES UN INVARIANTE, ES EL DERIVE DE necesitaMantenimiento
+    ---
+-------------- End of invariants ------------------
+

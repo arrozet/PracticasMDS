@@ -3,21 +3,21 @@ reset
 -- Creación de Coches   
 !new Coche( 'CocheDeJuanma_Passat' )
 !CocheDeJuanma_Passat.fechaMatriculacion := 0
-!CocheDeJuanma_Passat.kmRecorridos := 150000 
+--!CocheDeJuanma_Passat.kmRecorridos := 150000 
 !CocheDeJuanma_Passat.enGarantia := false
 -- enGarantia es un derive
 -- necesitaMantenimiento es un derive
 
 !new Coche( 'CocheDeDavid_307' )
 !CocheDeDavid_307.fechaMatriculacion := 0
-!CocheDeDavid_307.kmRecorridos := 280000 -- Más kilometros que la madre del suito
+--!CocheDeDavid_307.kmRecorridos := 280000 -- Más kilometros que la madre del suito
 !CocheDeDavid_307.enGarantia := false
 -- enGarantia es un derive
 -- necesitaMantenimiento es un derive
 
 !new Coche( 'CocheDeRuben_ECO_Dynamics' )
 !CocheDeRuben_ECO_Dynamics.fechaMatriculacion := 78
-!CocheDeRuben_ECO_Dynamics.kmRecorridos := 129000 -- Más kilometros que la madre del suito
+--!CocheDeRuben_ECO_Dynamics.kmRecorridos := 129000 -- Más kilometros que la madre del suito
 -- enGarantia es un derive
 -- necesitaMantenimiento es un derive
 

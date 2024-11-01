@@ -1,0 +1,31 @@
+reset
+---
+-- 1. Cada ciudad debe estar al menos a 5 kilómetros de distancia de otra. 
+---
+--!new Coche('McQueen')
+
+--!new COche('Passat_2002')
+
+--!new Coche('Multipla')
+
+--!new Coche('RB19')
+
+--!new Coche('AMR23')
+
+--!new Coche('W11')
+
+--!new Ciudad('Malaga')
+--!Malaga.nombre := 'Malaga'
+
+!new Ciudad('Cordoba')
+!Cordoba.nombre := 'Cordoba'
+
+!new Ciudad('Barcelona')
+!Barcelona.nombre := 'Barcelona'
+
+!insert(Barcelona,Cordoba) into Recorrido
+!Recorrido1.numKm := 3
+
+
+
+
