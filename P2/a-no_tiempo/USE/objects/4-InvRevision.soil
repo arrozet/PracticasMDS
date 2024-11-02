@@ -4,21 +4,35 @@
     --inv RevisionDespuesDeMatriculacion :
     --self.cocheRevision.fechaMatriculacion < self.fechaInicio
 
-!new Coche ( 'Audi_R8' )
-!Audi_R8.fechaMatriculacion := 24
 
+-- creamos el coche que se va a someter a la revision 
+-- con una fecha de matriculacion > fecha de Inicio
+!new Coche ( 'Audi_R8' )
+!Audi_R8.fechaMatriculacion := 55  
+-----------------------------------------------------------------
+-- PARA QUE DE 'OK' DESCOMENTAR EL DE ABAJO Y COMENTAR EL DE ARRIBA
+--!Audi_R8.fechaMatriculacion := 27 
+-----------------------------------------------------------------
+
+-- creamos un taller para asociarlo a la revision del coche
 !new Taller ( 'PacoRueda' )
 
+-- creamos la revision a la que se va a someter el coche
 !new Revision ( 'ITV_Guadalhorce' )
 !ITV_Guadalhorce.fechaInicio := 54
 !ITV_Guadalhorce.fechaFin := 56
 
-
+-- creamos la ciudad en la que está ubicada el taller
 !new Ciudad ( 'Malaga' )
 !Malaga.nombre := 'Malaga'
 !Malaga.poblacion := 24000
 
+-- relaciones
 !insert(Audi_R8,ITV_Guadalhorce) into Revisado
 !insert(PacoRueda,ITV_Guadalhorce) into Realizada
 !insert(Malaga, PacoRueda) into UbicacionTaller
+
+
+
+
 

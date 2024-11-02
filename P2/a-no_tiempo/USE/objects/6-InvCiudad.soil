@@ -4,19 +4,28 @@
     -- inv UnSoloTallerOficial :
     -- self.tallerCiudad->select(t | t.oclIsTypeOf(TallerOficial))->size() <= 1 
 
+-- creamos la ciudad donde van a estar ubicada los talleres
 !new Ciudad ( 'Malaga' )
 !Malaga.nombre := 'Malaga'
 !Malaga.poblacion := 24000
 
+-- creamos talleres noOficiales
 !new Taller ( 'Talleres_Pacheco' )
 !new Taller ( 'ElDominicanoRD' )
 
-!new TallerOficial ( 'Tesla' )
-!Tesla.tiempoGarantia := 74
+-- creamos talleres oficiales
+!new TallerOficial ( 'TallerTesla' )
+!TallerTesla.tiempoGarantia := 74
 
+!new TallerOficial ( 'TallerToyota' )
+!TallerToyota.tiempoGarantia := 74
+
+-- relaciones
 !insert (Malaga, Tesla) into UbicacionTaller
 !insert (Malaga, Talleres_Pacheco) into UbicacionTaller
 !insert (Malaga, ElDominicanoRD) into UbicacionTaller
 
-
+-- PARA QUE DE OK COMENTAR ESTA PARTE -------------   
+!insert (Malaga, TallerToyota) into UbicacionTaller
+---------------------------------------------------
 

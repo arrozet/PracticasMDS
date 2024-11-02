@@ -1,0 +1,35 @@
+    -- 8. Si el coche está realizando actualmente algún viaje, dicho
+    -- viaje únicamente tendrá fecha de salida, pero no de llegada.
+    
+    -- inv ViajeEnCurso :
+    -- self.cocheViaje.ciudadCoche.isUndefined() implies self.fechaLlegada.isUndefined()
+
+
+-- creamos las ciudades origen y destino
+!new Ciudad ( 'Malaga' )
+!Malaga.nombre := 'Malaga'
+!Malaga.poblacion := 24000
+
+!new Ciudad ( 'Cordoba' )
+!Malaga.nombre := 'Cordoba'
+!Malaga.poblacion := 42000
+
+-- creamos el recorrido entre las ciudades
+!insert (Malaga, Cordoba) into Recorrido
+!Recorrido1.numKm := 8
+
+-- a su vez creamos el coche con el que se va a hacer el recorrido
+!new Coche ( 'Audi_Q4_Sportback' )
+!Audi_Q4_Sportback.fechaMatriculacion := 24
+
+-- creamos el viaje
+!new Viaje ( 'TravelToFindAWife' )
+!TravelToFindAWife.fechaSalida := 45
+
+-- COMENTAR ESTA LINEA PARA QUE DE OK -- 
+!TravelToFindAWife.fechaLlegada := 48
+----------------------------------------
+
+-- relaciones
+!insert (Audi_Q4_Sportback, TravelToFindAWife) into Viajado
+!insert (Recorrido1, TravelToFindAWife) into ViajeRecorrido
