@@ -16,17 +16,27 @@ reset
 !new Viaje('route_66')
 !route_66.fechaSalida := 3
 
--- escenario 1: nunca ha hecho un viaje => está en una ciudad (TIENE QUE DEVOLVER 'OK')
+-- Recorrido
+!insert (los_angeles,chicago) into Recorrido
+!Recorrido1.numKm := 2000
+
+-- ViajeRecorrido
+!insert (Recorrido1,route_66) into ViajeRecorrido
+
+
+-- escenario 1: nunca ha hecho un viaje y está en una ciudad (TIENE QUE DEVOLVER 'OK')
 --!insert (mercedes_G63_Jorge,los_angeles) into Ubicado
 
--- escenario 2: (ESTÁ FALLANDO Y NO SE POR QUÉ) El coche está realizando un viaje (sin fecha de llegada, es decir, aún en curso) (TIENE QUE DEVOLVER 'OK')
---!insert (mercedes_G63_Jorge,route_66) into Viajado
+-- escenario 2: El coche está realizando un viaje (sin fecha de llegada, es decir, aún en curso) (TIENE QUE DEVOLVER 'OK')
+!insert (mercedes_G63_Jorge,route_66) into Viajado
 
 -- escenario 3: El coche completa el viaje y está en una ciudad de destino (TIENE QUE DEVOLVER 'OK')
+--!insert (mercedes_G63_Jorge,route_66) into Viajado
 --!route_66 .fechaLlegada := 10
 --!insert (mercedes_G63_Jorge,chicago) into Ubicado
 
--- escenario 4: VIOLAR EL INVARIANTE (NO FALLA, DEVUELVE 'OK' DEBERÍA SER 'FALSE')
-!route_66.fechaLlegada := Undefined 
+-- escenario 4: VIOLAR EL INVARIANTE
+--!insert (mercedes_G63_Jorge,route_66) into Viajado
+--!route_66.fechaLlegada := Undefined 
 -- Simula que el coche sigue en viaje
-!insert (mercedes_G63_Jorge, chicago) into Ubicado  -- Intenta ubicar el coche en una ciudad
+--!insert (mercedes_G63_Jorge, chicago) into Ubicado  -- Intenta ubicar el coche en una ciudad

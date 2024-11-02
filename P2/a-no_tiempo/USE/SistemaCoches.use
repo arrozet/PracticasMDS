@@ -158,9 +158,9 @@ context Coche
     -- una ciudad.
     ---
     inv CocheEnViajeOCiudad :
-      self.viajeCoche->isEmpty() implies self.ciudadCoche.isDefined() or  -- si nunca ha hecho un viaje, está en una ciudad
-      self.viajeCoche->exists(v | v.fechaLlegada.isUndefined() implies self.ciudadCoche.isUndefined()) or -- si está haciendo un viaje, no está en una ciudad
-      self.ciudadCoche.isDefined() implies not self.viajeCoche->exists(v | v.fechaLlegada.isUndefined()) -- si está en una ciudad, no está haciendo un viaje
+      (self.viajeCoche->isEmpty() and self.ciudadCoche.isDefined()) or  -- si nunca ha hecho un viaje, está en una ciudad
+      (self.viajeCoche->exists(v | v.fechaLlegada.isUndefined() and self.ciudadCoche.isUndefined())) or -- si está haciendo un viaje, no está en una ciudad
+      (self.ciudadCoche.isDefined() and not self.viajeCoche->exists(v | v.fechaLlegada.isUndefined())) -- si está en una ciudad, no está haciendo un viaje
 
       -- ANOTACIÓN DE IMPLEMENTACIÓN PREVIA: ESTÁ MAL
        -- con el let hacemos que si hay un undefined, se coloque al final
@@ -173,9 +173,9 @@ context Coche
     -- encontrarse en la ciudad a la que llegó en su último viaje.
     ---
     inv CocheTerminaEnCiudad :
-      self.viajeCoche->isEmpty() or   -- Tiene que dar correcto si ha completado 0 viajes
-      not self.viajeCoche->exists(v | v.fechaLlegada.isUndefined()) implies -- si el coche no está en un viaje
-      (self.ciudadCoche = self.viajeCoche->sortedBy(v | v.fechaLlegada)->last().recorridoViaje.ciudadFinal) -- la ciudad en la que está ahora es la ciudad a la que ha llegado en el último viaje
+      (self.viajeCoche->isEmpty()) or   -- Tiene que dar correcto si ha completado 0 viajes
+      (not self.viajeCoche->exists(v | v.fechaLlegada.isUndefined()) implies -- si el coche no está en un viaje
+      (self.ciudadCoche = self.viajeCoche->sortedBy(v | v.fechaLlegada)->last().recorridoViaje.ciudadFinal)) -- la ciudad en la que está ahora es la ciudad a la que ha llegado en el último viaje
 
       --(not(self.viajesRealizadosCoche->isEmpty()) and self.viajesRealizadosCoche->sortedBy(r | r.fechaLlegada)->last().fechaLlegada.isDefined()) implies 
       --(self.ciudadCoche = self.viajesRealizadosCoche->sortedBy(r | r.fechaLlegada)->last().recorridoViaje.ciudadFinal) 

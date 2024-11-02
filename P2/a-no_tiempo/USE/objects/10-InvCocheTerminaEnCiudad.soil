@@ -1,2 +1,40 @@
 reset
 
+-- Coche
+!new Coche('citroen_Ale')
+!citroen_Ale.fechaMatriculacion := 03
+
+-- Ciudades
+!new Ciudad('malaga')
+!malaga.nombre := 'Malaga'
+!malaga.poblacion := 500000
+
+!new Ciudad('chiclana')
+!chiclana.nombre := 'Chiclana'
+!chiclana.poblacion := 25
+
+!new Ciudad('sevilla')
+!sevilla.nombre := 'Sevilla'
+!sevilla.poblacion := 1000000
+
+-- Viaje
+!new Viaje('viaje1')
+!viaje1.fechaSalida := 1
+!viaje1.fechaLlegada := 2
+!insert (citroen_Ale, viaje1) into Viajado
+
+-- Recorrido
+!insert (malaga,chiclana) into Recorrido
+!Recorrido1.numKm := 300
+
+-- ViajeRecorrido
+!insert (Recorrido1, viaje1) into ViajeRecorrido
+
+-- Escenario 1: El coche no ha realizado ningún viaje (prueba inicial sin viajes, sin ciudad) 
+    --(comentar Viaje, Recorrido, ViajeRecorrido)
+
+-- Escenario 2: El coche ha completado un viaje y está estacionado en la ciudad de destino
+--!insert (citroen_Ale,chiclana) into Ubicado
+
+-- Escenario 3: Violación del Invariante (completa el viaje y no está en la ciudad destino)
+!insert (citroen_Ale,sevilla) into Ubicado
