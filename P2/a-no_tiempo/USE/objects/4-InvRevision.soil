@@ -1,0 +1,24 @@
+    ---
+    -- 4. Todas las revisiones deben tener lugar después de que el coche se matriculase
+    ---
+    --inv RevisionDespuesDeMatriculacion :
+    --self.cocheRevision.fechaMatriculacion < self.fechaInicio
+
+!new Coche ( 'Audi_R8' )
+!Audi_R8.fechaMatriculacion := 24
+
+!new Taller ( 'PacoRueda' )
+
+!new Revision ( 'ITV_Guadalhorce' )
+!ITV_Guadalhorce.fechaInicio := 54
+!ITV_Guadalhorce.fechaFin := 56
+
+
+!new Ciudad ( 'Malaga' )
+!Malaga.nombre := 'Malaga'
+!Malaga.poblacion := 24000
+
+!insert(Audi_R8,ITV_Guadalhorce) into Revisado
+!insert(PacoRueda,ITV_Guadalhorce) into Realizada
+!insert(Malaga, PacoRueda) into UbicacionTaller
+
