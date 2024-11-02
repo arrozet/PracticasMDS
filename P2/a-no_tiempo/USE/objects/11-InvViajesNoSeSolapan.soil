@@ -1,0 +1,54 @@
+reset
+
+-- Coche
+!new Coche('Porche_Artur')
+!Porche_Artur.fechaMatriculacion := 50
+
+-- Ciudades
+!new Ciudad('malaga')
+!malaga.nombre := 'Malaga'
+!malaga.poblacion := 450000
+
+!new Ciudad('granada')
+!granada.nombre := 'Granada'
+!granada.poblacion := 320000
+
+--Recorrido
+!insert(malaga,granada) into Recorrido
+!Recorrido1.numKm := 100
+
+!insert(granada,malaga) into Recorrido
+!Recorrido2.numKm := 100
+
+-- Viaje
+!new Viaje('viaje_1')
+!viaje_1.fechaSalida := 0
+!viaje_1.fechaLlegada := 2
+
+--Relaciones
+!insert (Porche_Artur,viaje_1) into Viajado
+!insert (Recorrido1,viaje_1) into ViajeRecorrido
+!insert (Porche_Artur,malaga) into Ubicado
+
+
+-- escenario 1: solo he hecho un viaje (TIENE QUE DEVOLVER 'OK')
+
+
+
+-- escenario 2: los viajes no se solapan (TIENE QUE DEVOLVER 'OK')
+--!new Viaje('viaje_2')
+--!viaje_2.fechaSalida := 2
+--!viaje_2.fechaLlegada := 5
+
+--!insert (Porche_Artur,viaje_2) into Viajado
+--!insert (Recorrido2,viaje_2) into ViajeRecorrido
+
+
+
+-- escenario 3: Se solapan los viajes (VIOLAR EL INVARIANTE)
+!new Viaje('viaje_2')
+!viaje_2.fechaSalida := 1
+!viaje_2.fechaLlegada := 5
+
+!insert (Porche_Artur,viaje_2) into Viajado
+!insert (Recorrido2,viaje_2) into ViajeRecorrido
