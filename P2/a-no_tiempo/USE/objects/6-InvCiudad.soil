@@ -1,0 +1,22 @@
+    -- 6. En cada ciudad habrá, a lo sumo, un taller oficial, pudiendo 
+    -- haber varios talleres no oficiales. 
+    -- se comprobará mirando si el taller es oficial, que solo exista uno
+    -- inv UnSoloTallerOficial :
+    -- self.tallerCiudad->select(t | t.oclIsTypeOf(TallerOficial))->size() <= 1 
+
+!new Ciudad ( 'Malaga' )
+!Malaga.nombre := 'Malaga'
+!Malaga.poblacion := 24000
+
+!new Taller ( 'Talleres_Pacheco' )
+!new Taller ( 'ElDominicanoRD' )
+
+!new TallerOficial ( 'Tesla' )
+!Tesla.tiempoGarantia := 74
+
+!insert (Malaga, Tesla) into UbicacionTaller
+!insert (Malaga, Talleres_Pacheco) into UbicacionTaller
+!insert (Malaga, ElDominicanoRD) into UbicacionTaller
+
+
+
