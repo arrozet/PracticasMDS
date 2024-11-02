@@ -34,7 +34,7 @@ reset
 !insert (ford_Ecosport_Jorge, reparacion_Manny_Manitas) into Revisado
 
 -- escenario 1: devuelve 'OK'
-!insert (ford_Ecosport_Jorge,malaga) into Ubicado -- ubicamos el coche en la ciudad donde se encuentra el taller
+--!insert (ford_Ecosport_Jorge,malaga) into Ubicado -- ubicamos el coche en la ciudad donde se encuentra el taller
     
 -- escenario 2: VIOLACIÓN DEL INVARIANTE
---!insert (ford_Ecosport_Jorge,marbella) into Ubicado -- ubicamos el coche en una ciudad distinta a la del taller
+!insert (ford_Ecosport_Jorge,marbella) into Ubicado -- ubicamos el coche en una ciudad distinta a la del taller
