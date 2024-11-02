@@ -1,0 +1,39 @@
+
+-- Coche
+!new Coche('ford_Ecosport_Jorge')
+!ford_Ecosport_Jorge.fechaMatriculacion := 19
+
+-- Revision
+!new Revision('reparacion_Manny_Manitas')
+!reparacion_Manny_Manitas.fechaInicio := 2
+!reparacion_Manny_Manitas.tipoRevision := TipoRevision::reparacion
+
+-- Talleres
+!new Taller('taller1')
+!new Taller('taller2')
+
+-- Ciudades
+!new Ciudad('malaga')
+!malaga.nombre := 'Malaga'
+!malaga.poblacion := 586.384
+
+!new Ciudad('marbella')
+!marbella.nombre := 'Marbella'
+!marbella.poblacion := 165.871
+
+-- Relaciones
+-- asociamos un taller en cada ciudad 
+!insert (malaga,taller1) into UbicacionTaller
+!insert (marbella,taller2) into UbicacionTaller
+
+    -- DESCOMENTA ESTA LÍNEA Y COMENTA LA SIGUIENTE PARA QUE EL CHECK DEVUELVA 'OK'
+--!insert (ford_Ecosport_Jorge,malaga) into Ubicado -- ubicamos el coche en la ciudad donde se encuentra el taller
+    
+    --LO QUE PRODUCE VIOLACIÓN DEL INVARIANTE:
+!insert (ford_Ecosport_Jorge,marbella) into Ubicado -- ubicamos el coche en una ciudad distinta a la del taller
+
+-- asociamos la revision a un taller
+!insert (taller1, reparacion_Manny_Manitas) into Realizada
+
+-- asociamos un coche a una revision
+!insert (ford_Ecosport_Jorge, reparacion_Manny_Manitas) into Revisado
