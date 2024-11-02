@@ -1,3 +1,4 @@
+reset
     -- 6. En cada ciudad habrá, a lo sumo, un taller oficial, pudiendo 
     -- haber varios talleres no oficiales. 
     -- se comprobará mirando si el taller es oficial, que solo exista uno

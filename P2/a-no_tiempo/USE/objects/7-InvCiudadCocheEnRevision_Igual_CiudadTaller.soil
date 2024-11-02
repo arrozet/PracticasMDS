@@ -1,3 +1,4 @@
+reset
 
 -- Coche
 !new Coche('ford_Ecosport_Jorge')

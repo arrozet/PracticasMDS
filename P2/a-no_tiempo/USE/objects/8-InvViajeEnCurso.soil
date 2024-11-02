@@ -1,3 +1,4 @@
+reset
     -- 8. Si el coche está realizando actualmente algún viaje, dicho
     -- viaje únicamente tendrá fecha de salida, pero no de llegada.
     
