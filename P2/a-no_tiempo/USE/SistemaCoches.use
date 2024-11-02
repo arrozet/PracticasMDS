@@ -159,7 +159,7 @@ context Coche
     ---
     inv CocheEnViajeOCiudad :
       (self.viajeCoche->isEmpty() and self.ciudadCoche.isDefined()) or  -- si nunca ha hecho un viaje, está en una ciudad
-      (self.viajeCoche->exists(v | v.fechaLlegada.isUndefined() and self.ciudadCoche.isUndefined())) or -- si está haciendo un viaje, no está en una ciudad
+      (self.viajeCoche->exists(v | v.fechaLlegada.isUndefined()) and self.ciudadCoche.isUndefined()) or -- si está haciendo un viaje, no está en una ciudad
       (self.ciudadCoche.isDefined() and not self.viajeCoche->exists(v | v.fechaLlegada.isUndefined())) -- si está en una ciudad, no está haciendo un viaje
 
       -- ANOTACIÓN DE IMPLEMENTACIÓN PREVIA: ESTÁ MAL
