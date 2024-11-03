@@ -37,7 +37,7 @@
 !new Revision('a_ver_el_caballito')
 !a_ver_el_caballito.fechaInicio:= 350
 !a_ver_el_caballito.fechaFin:= 370
-!a_ver_el_caballito.tipoRevision := mantenimiento
+!a_ver_el_caballito.tipoRevision := TipoRevision::mantenimiento 
 !insert(equinos,a_ver_el_caballito) into Realizada
 !insert(Caballo_de_Arthur_Morgan,a_ver_el_caballito) into Revisado
 !clock.run(120)

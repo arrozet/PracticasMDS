@@ -1,0 +1,46 @@
+-- Clock
+!new Clock('clock')
+
+-- Coche
+!new Coche('Pies_De_Frodo')
+!Pies_De_Frodo.fechaMatriculacion := 0
+
+-- Taller
+!new TallerOficial('cervezaHobbit')
+!cervezaHobbit.tiempoGarantia := 200
+
+-- Ciudades
+!new Ciudad('comarcaHobbit')
+!comarcaHobbit.nombre := 'Comarca Hobbit'
+!comarcaHobbit.poblacion := 50
+
+!new Ciudad('mordor')
+!mordor.nombre := 'Mordor'
+!mordor.poblacion := 300
+
+--Recorrido
+!insert(comarcaHobbit,mordor) into Recorrido
+!Recorrido1.numKm := 7
+
+!insert(mordor,comarcaHobbit) into Recorrido
+!Recorrido2.numKm := 7
+
+--Ubicado
+!insert (Pies_De_Frodo,mordor) into Ubicado
+!insert (mordor,cervezaHobbit) into UbicacionTaller
+
+--Tiempo
+!insert (clock,Pies_De_Frodo) into Time
+-- aqui debe ser false
+
+!clock.run(500)
+-- aqui true
+
+!new Revision('bebida')
+!bebida.fechaInicio:= 450
+!bebida.fechaFin:= 480
+!bebida.tipoRevision := TipoRevision::mantenimiento 
+!insert(cervezaHobbit,bebida) into Realizada
+!insert(Pies_De_Frodo,bebida) into Revisado
+
+-- y aqui false
