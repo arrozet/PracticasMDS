@@ -1,0 +1,73 @@
+reset
+
+    -- 12. Las ciudades de origen y destino de los viajes deben ser coherentes. Es decir, si un coche 
+    -- realiza un viaje desde la ciudad A hasta la ciudad B, el próximo viaje debe partir desde la ciudad B.
+
+-- Coche
+!new Coche('Audi_TheGrefg')
+!Audi_TheGrefg.fechaMatriculacion := 20
+
+-- Ciudades
+!new Ciudad('cainhurst')
+!cainhurst.nombre := 'Cainhurst'
+!cainhurst.poblacion := 2
+
+!new Ciudad('yharnam')
+!yharnam.nombre := 'Vieja Yharnam'
+!yharnam.poblacion := 3
+
+!new Ciudad('byrgenwerth')
+!cainhurst.nombre := 'Byrgenwerth'
+!cainhurst.poblacion := 4
+
+--Recorrido
+!insert(cainhurst,yharnam) into Recorrido
+!Recorrido1.numKm := 100
+
+!insert(yharnam,cainhurst) into Recorrido
+!Recorrido2.numKm := 100
+
+!insert(yharnam,byrgenwerth) into Recorrido
+!Recorrido3.numKm := 60
+
+!insert(byrgenwerth,yharnam) into Recorrido
+!Recorrido4.numKm := 60
+
+-- escenario 1: no se ha hecho ningun viaje y el coche está ubicado en una ciudad (TIENE QUE DEVOLVER 'OK')
+-- recorrido del coche: cainhurst
+!insert (Audi_TheGrefg,cainhurst) into Ubicado -- comentar esta linea para probar escenario 2
+
+-- escenario 2: hago un viaje (TIENE QUE DEVOLVER 'OK')
+-- recorrido del coche: cainhurst -> yharnam
+!new Viaje('viaje_1')
+!viaje_1.fechaSalida := 0
+!viaje_1.fechaLlegada := 2
+
+!insert (Audi_TheGrefg,viaje_1) into Viajado
+!insert (Recorrido1,viaje_1) into ViajeRecorrido
+!delete (Audi_TheGrefg,cainhurst) from Ubicado
+!insert (Audi_TheGrefg,yharnam) into Ubicado
+
+-- escenario 3: el viaje comienza desde la ciudad en la que se terminó el último viaje (TIENE QUE DEVOLVER 'OK')
+-- recorrido del coche: cainhurst -> yharnam -> byrgenwerth
+!new Viaje('viaje_2')
+!viaje_2.fechaSalida := 2
+!viaje_2.fechaLlegada := 5
+
+!insert (Audi_TheGrefg,viaje_2) into Viajado
+!insert (Recorrido3,viaje_2) into ViajeRecorrido
+!delete (Audi_TheGrefg,yharnam) from Ubicado
+!insert (Audi_TheGrefg,byrgenwerth) into Ubicado
+
+
+
+-- escenario 4: Añadimos un viaje desde una ciudad que no tiene sentido(VIOLAR EL INVARIANTE)
+-- recorrido del coche: cainhurst -> yharnam -> byrgenwerth -> (¿cainhurst->yharnam?)
+!new Viaje('viaje_3')
+!viaje_3.fechaSalida := 5
+!viaje_3.fechaLlegada := 7
+
+!insert (Audi_TheGrefg,viaje_3) into Viajado
+!insert (Recorrido1,viaje_3) into ViajeRecorrido
+!delete (Audi_TheGrefg,byrgenwerth) from Ubicado
+!insert (Audi_TheGrefg,yharnam) into Ubicado
