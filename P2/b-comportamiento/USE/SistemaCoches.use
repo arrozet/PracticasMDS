@@ -54,6 +54,10 @@ class Coche < ActiveObject
     fechaMatriculacion : Integer
 
     -- esto es derive (apartado 13)
+    ------------------------------
+    -- DUDA: debo ir sumando los kmAvanzados de los viajes, o solo sumar una vez he terminado de hacer el recorrido?
+    -- Ahora mismo está como lo segundo
+    ------------------------------
      kmRecorridos : Integer derive : 
       self.viajeCoche->select(v | v.fechaLlegada.isDefined())->collect(v | v.recorridoViaje.numKm)->sum()
 
