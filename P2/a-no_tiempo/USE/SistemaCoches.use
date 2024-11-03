@@ -19,7 +19,7 @@ end
 class Coche
   attributes
     fechaMatriculacion : Integer
-    -- esto es derive (apartado 13) - SE USA CLOCK
+    -- esto es derive (apartado 13)
     kmRecorridos : Integer derive : 
       self.viajeCoche->select(v | v.fechaLlegada.isDefined())->collect(v | v.recorridoViaje.numKm)->sum()
     -- esto es derive (apartado 15)
