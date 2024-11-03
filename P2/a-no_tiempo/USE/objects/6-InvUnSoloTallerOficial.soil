@@ -18,15 +18,34 @@ reset
 !new TallerOficial ( 'TallerTesla' )
 !TallerTesla.tiempoGarantia := 74
 
-!new TallerOficial ( 'TallerToyota' )
-!TallerToyota.tiempoGarantia := 74
+
 
 -- relaciones
-!insert (Malaga, Tesla) into UbicacionTaller
+!insert (Malaga, TallerTesla) into UbicacionTaller
 !insert (Malaga, Talleres_Pacheco) into UbicacionTaller
 !insert (Malaga, ElDominicanoRD) into UbicacionTaller
 
--- PARA QUE DE OK COMENTAR ESTA PARTE -------------   
+-- escenario 1: LA INVARIANTE DEVUELVE OK
+-- PARA QUE DE OK COMENTAR ESTA PARTE --------------- 
+!new TallerOficial ( 'TallerToyota' )
+!TallerToyota.tiempoGarantia := 87 
 !insert (Malaga, TallerToyota) into UbicacionTaller
----------------------------------------------------
+-----------------------------------------------------
+--escenario 2: CREAMOS UNA CIUDAD SIN TALLERES OFICIALES, DEBE OK
+-----------------------------------------------------------------
+--!new Ciudad('Granada')
+--!Granada.nombre := 'Granada'
+--!Granada.poblacion := 230000
 
+--!new Taller('tallerDistritoNorte')
+--!new Taller('taller_Sacromonte')
+
+--!insert (Granada, tallerDistritoNorte) into UbicacionTaller
+--!insert (Granada, taller_Sacromonte) into UbicacionTaller
+-----------------------------------------------------------------
+--escenario 3: CREAMOS UNA CIUDAD SIN TALLERES. DA OK
+------------------------------------------------------
+--!new Ciudad('Bilbao')
+--!Bilbao.nombre := 'Bilbao'
+--!Bilbao.poblacion := 345000
+------------------------------------------------------

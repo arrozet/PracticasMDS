@@ -7,30 +7,34 @@ reset
 
 
 -- creamos las ciudades origen y destino
-!new Ciudad ( 'Malaga' )
-!Malaga.nombre := 'Malaga'
-!Malaga.poblacion := 24000
+!new Ciudad('Madrid')
+!Madrid.nombre := 'Madrid'
+!Madrid.poblacion := 3200000
 
-!new Ciudad ( 'Cordoba' )
-!Malaga.nombre := 'Cordoba'
-!Malaga.poblacion := 42000
+!new Ciudad('Valencia')
+!Valencia.nombre := 'Valencia'
+!Valencia.poblacion := 800000
+
 
 -- creamos el recorrido entre las ciudades
-!insert (Malaga, Cordoba) into Recorrido
-!Recorrido1.numKm := 8
+!insert (Madrid, Valencia) into Recorrido
+!Recorrido1.numKm := 350
 
 -- a su vez creamos el coche con el que se va a hacer el recorrido
-!new Coche ( 'Audi_Q4_Sportback' )
-!Audi_Q4_Sportback.fechaMatriculacion := 24
+!new Coche('BMW_X5')
+!BMW_X5.fechaMatriculacion := 28
+
 
 -- creamos el viaje
-!new Viaje ( 'TravelToFindAWife' )
-!TravelToFindAWife.fechaSalida := 45
+!new Viaje('TravelToValencia')
+!TravelToValencia.fechaSalida := 50
 
--- COMENTAR ESTA LINEA PARA QUE DE OK -- 
-!TravelToFindAWife.fechaLlegada := 48
-----------------------------------------
-
+--COMENTAR PARA QUE DE OK
+-----------------------------------------
+--!TravelToValencia.fechaLlegada := 55
+-----------------------------------------
 -- relaciones
-!insert (Audi_Q4_Sportback, TravelToFindAWife) into Viajado
-!insert (Recorrido1, TravelToFindAWife) into ViajeRecorrido
+!insert (BMW_X5, TravelToValencia) into Viajado
+!insert (Recorrido1, TravelToValencia) into ViajeRecorrido
+
+

@@ -7,13 +7,9 @@ reset
 
 
 -- creamos el coche que se va a someter a la revision 
--- con una fecha de matriculacion > fecha de Inicio
+-- con una fecha de matriculacion > fecha de Inicio para que sea False
 !new Coche ( 'Audi_R8' )
 !Audi_R8.fechaMatriculacion := 55  
------------------------------------------------------------------
--- PARA QUE DE 'OK' DESCOMENTAR EL DE ABAJO Y COMENTAR EL DE ARRIBA
---!Audi_R8.fechaMatriculacion := 27 
------------------------------------------------------------------
 
 -- creamos un taller para asociarlo a la revision del coche
 !new Taller ( 'PacoRueda' )
@@ -32,8 +28,14 @@ reset
 !insert(Audi_R8,ITV_Guadalhorce) into Revisado
 !insert(PacoRueda,ITV_Guadalhorce) into Realizada
 !insert(Malaga, PacoRueda) into UbicacionTaller
+!insert(Audi_R8, Malaga) into Ubicado
 
 
-
-
-
+--escenario 1: PARA QUE DE 'OK' DESCOMENTAR EL DE ABAJO Y COMENTAR LINEA 12
+---------------------------------------------------------------------------
+--!Audi_R8.fechaMatriculacion := 27 
+---------------------------------------------------------------------------
+--escenario 2: PARA EL CASO QUE fechaMatriculacion = fechaInicio, DEBERIA DE DAR FALSE
+---------------------------------------------------------------------------------------
+--!Audi_R8.fechaMatriculacion := 54 
+---------------------------------------------------------------------------------------
