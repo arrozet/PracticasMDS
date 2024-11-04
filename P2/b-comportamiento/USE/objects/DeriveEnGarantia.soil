@@ -1,0 +1,47 @@
+-- Clock
+!new Clock('clock')
+
+-- Coche
+!new Coche('Caballo_de_Arthur_Morgan')
+!Caballo_de_Arthur_Morgan.fechaMatriculacion := 0
+
+-- Taller
+!new TallerOficial('equinos')
+!equinos.tiempoGarantia := 200
+
+-- Ciudades
+!new Ciudad('saint_denis')
+!saint_denis.nombre := 'Saint Denis'
+!saint_denis.poblacion := 10000
+
+!new Ciudad('valentine')
+!valentine.nombre := 'Valentine'
+!valentine.poblacion := 300
+
+--Recorrido
+!insert(saint_denis,valentine) into Recorrido
+!Recorrido1.numKm := 7
+
+!insert(valentine,saint_denis) into Recorrido
+!Recorrido2.numKm := 7
+
+--Ubicado
+!insert (Caballo_de_Arthur_Morgan,valentine) into Ubicado
+!insert (valentine,equinos) into UbicacionTaller
+
+--Tiempo
+!insert (clock,Caballo_de_Arthur_Morgan) into Time
+--  pasan 3,5 años
+!clock.run(350)
+
+!new Revision('a_ver_el_caballito')
+!a_ver_el_caballito.fechaInicio:= 350
+!a_ver_el_caballito.fechaFin:= 370
+!a_ver_el_caballito.tipoRevision := TipoRevision::mantenimiento 
+!insert(equinos,a_ver_el_caballito) into Realizada
+!insert(Caballo_de_Arthur_Morgan,a_ver_el_caballito) into Revisado
+!clock.run(120)
+-- por aquí debe estar en true todavia
+
+!clock.run(600)
+-- aquí debe dar false

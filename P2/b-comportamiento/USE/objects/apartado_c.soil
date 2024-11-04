@@ -3,6 +3,7 @@ reset
 -- Clock
 !new Clock('clock')
 
+
 -- Ciudades
 !new Ciudad('Malaga')
 !Malaga.nombre := 'Malaga'
@@ -27,6 +28,9 @@ reset
 !new Coche('Rimac_Nevera')
 !Rimac_Nevera.fechaMatriculacion := 0
 !Rimac_Nevera.velocidadAlDia := 27
+
+-- Necesario para que el coche se pueda comunicar con el clock
+!insert(clock, Rimac_Nevera) into Time
 
 -- El coche comienza en Málaga
 !insert(Rimac_Nevera, Malaga) into Ubicado
