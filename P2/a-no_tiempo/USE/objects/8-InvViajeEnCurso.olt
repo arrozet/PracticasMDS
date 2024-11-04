@@ -35,6 +35,14 @@
         </strategy>
         <hidden>false</hidden>
     </node>
+    <node id="reloj" sizeCalculated="true" type="Object">
+        <name>reloj</name>
+        <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyFixed">
+            <x>491.1801321956559</x>
+            <y>93.96295339914312</y>
+        </strategy>
+        <hidden>false</hidden>
+    </node>
     <node id="BMW_X5" sizeCalculated="true" type="Object">
         <name>BMW_X5</name>
         <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyFixed">
@@ -65,52 +73,6 @@
         <name>Viajado</name>
         <properties>
             <edgeproperty
-                id="[Viajado : (cocheViaje:BMW_X5, viajeCoche:TravelToValencia)]::source::rolename"
-                sizeCalculated="true" type="rolename" userDefined="true" visible="true">
-                <name>cocheViaje</name>
-                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
-                    <userOffsetX>0.0</userOffsetX>
-                    <userOffsetY>8.0</userOffsetY>
-                    <attached>[Viajado : (cocheViaje:BMW_X5, viajeCoche:TravelToValencia)]::WayPoint::0</attached>
-                    <offset_x>8</offset_x>
-                    <offset_y>8</offset_y>
-                    <placement>TOP</placement>
-                </strategy>
-                <hidden>false</hidden>
-            </edgeproperty>
-            <edgeproperty
-                id="[Viajado : (cocheViaje:BMW_X5, viajeCoche:TravelToValencia)]::source::multiplicity"
-                sizeCalculated="true" type="multiplicity"
-                userDefined="false" visible="true">
-                <name>1</name>
-                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
-                    <userOffsetX>0.0</userOffsetX>
-                    <userOffsetY>0.0</userOffsetY>
-                    <attached>[Viajado : (cocheViaje:BMW_X5, viajeCoche:TravelToValencia)]::WayPoint::0</attached>
-                    <offset_x>8</offset_x>
-                    <offset_y>8</offset_y>
-                    <placement>BOTTOM</placement>
-                </strategy>
-                <hidden>false</hidden>
-            </edgeproperty>
-            <edgeproperty
-                id="[Viajado : (cocheViaje:BMW_X5, viajeCoche:TravelToValencia)]::AssociationName"
-                sizeCalculated="true" type="associationName"
-                userDefined="false" visible="true">
-                <name>Viajado</name>
-                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyInBetween">
-                    <userOffsetX>0.0</userOffsetX>
-                    <userOffsetY>0.0</userOffsetY>
-                    <offsetX>0.0</offsetX>
-                    <offsetY>-10.0</offsetY>
-                    <related length="2">
-                        <related0>[Viajado : (cocheViaje:BMW_X5, viajeCoche:TravelToValencia)]::WayPoint::0</related0>
-                        <related1>[Viajado : (cocheViaje:BMW_X5, viajeCoche:TravelToValencia)]::WayPoint::1</related1>
-                    </related>
-                </strategy>
-                <hidden>false</hidden>
-            </edgeproperty>
-            <edgeproperty
                 id="[Viajado : (cocheViaje:BMW_X5, viajeCoche:TravelToValencia)]::target::rolename"
                 sizeCalculated="true" type="rolename" userDefined="true" visible="true">
                 <name>viajeCoche</name>
@@ -136,6 +98,52 @@
                     <offset_x>8</offset_x>
                     <offset_y>8</offset_y>
                     <placement>BOTTOM</placement>
+                </strategy>
+                <hidden>false</hidden>
+            </edgeproperty>
+            <edgeproperty
+                id="[Viajado : (cocheViaje:BMW_X5, viajeCoche:TravelToValencia)]::AssociationName"
+                sizeCalculated="true" type="associationName"
+                userDefined="false" visible="true">
+                <name>Viajado</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyInBetween">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                    <offsetX>0.0</offsetX>
+                    <offsetY>-10.0</offsetY>
+                    <related length="2">
+                        <related0>[Viajado : (cocheViaje:BMW_X5, viajeCoche:TravelToValencia)]::WayPoint::0</related0>
+                        <related1>[Viajado : (cocheViaje:BMW_X5, viajeCoche:TravelToValencia)]::WayPoint::1</related1>
+                    </related>
+                </strategy>
+                <hidden>false</hidden>
+            </edgeproperty>
+            <edgeproperty
+                id="[Viajado : (cocheViaje:BMW_X5, viajeCoche:TravelToValencia)]::source::multiplicity"
+                sizeCalculated="true" type="multiplicity"
+                userDefined="false" visible="true">
+                <name>1</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                    <attached>[Viajado : (cocheViaje:BMW_X5, viajeCoche:TravelToValencia)]::WayPoint::0</attached>
+                    <offset_x>8</offset_x>
+                    <offset_y>8</offset_y>
+                    <placement>BOTTOM</placement>
+                </strategy>
+                <hidden>false</hidden>
+            </edgeproperty>
+            <edgeproperty
+                id="[Viajado : (cocheViaje:BMW_X5, viajeCoche:TravelToValencia)]::source::rolename"
+                sizeCalculated="true" type="rolename" userDefined="true" visible="true">
+                <name>cocheViaje</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>8.0</userOffsetY>
+                    <attached>[Viajado : (cocheViaje:BMW_X5, viajeCoche:TravelToValencia)]::WayPoint::0</attached>
+                    <offset_x>8</offset_x>
+                    <offset_y>8</offset_y>
+                    <placement>TOP</placement>
                 </strategy>
                 <hidden>false</hidden>
             </edgeproperty>
@@ -177,6 +185,52 @@
         <name>ViajeRecorrido</name>
         <properties>
             <edgeproperty
+                id="[ViajeRecorrido : (recorridoViaje:Recorrido1 [Recorrido : (ciudadOrigen:Madrid, ciudadFinal:Valencia)], viajeRecorrido:TravelToValencia)]::target::multiplicity"
+                sizeCalculated="true" type="multiplicity"
+                userDefined="false" visible="true">
+                <name>*</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                    <attached>[ViajeRecorrido : (recorridoViaje:Recorrido1 [Recorrido : (ciudadOrigen:Madrid, ciudadFinal:Valencia)], viajeRecorrido:TravelToValencia)]::WayPoint::1</attached>
+                    <offset_x>8</offset_x>
+                    <offset_y>8</offset_y>
+                    <placement>BOTTOM</placement>
+                </strategy>
+                <hidden>false</hidden>
+            </edgeproperty>
+            <edgeproperty
+                id="[ViajeRecorrido : (recorridoViaje:Recorrido1 [Recorrido : (ciudadOrigen:Madrid, ciudadFinal:Valencia)], viajeRecorrido:TravelToValencia)]::target::rolename"
+                sizeCalculated="true" type="rolename" userDefined="true" visible="true">
+                <name>viajeRecorrido</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
+                    <userOffsetX>88.0</userOffsetX>
+                    <userOffsetY>-20.0</userOffsetY>
+                    <attached>[ViajeRecorrido : (recorridoViaje:Recorrido1 [Recorrido : (ciudadOrigen:Madrid, ciudadFinal:Valencia)], viajeRecorrido:TravelToValencia)]::WayPoint::1</attached>
+                    <offset_x>8</offset_x>
+                    <offset_y>8</offset_y>
+                    <placement>TOP</placement>
+                </strategy>
+                <hidden>false</hidden>
+            </edgeproperty>
+            <edgeproperty
+                id="[ViajeRecorrido : (recorridoViaje:Recorrido1 [Recorrido : (ciudadOrigen:Madrid, ciudadFinal:Valencia)], viajeRecorrido:TravelToValencia)]::AssociationName"
+                sizeCalculated="true" type="associationName"
+                userDefined="false" visible="true">
+                <name>ViajeRecorrido</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyInBetween">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                    <offsetX>0.0</offsetX>
+                    <offsetY>-10.0</offsetY>
+                    <related length="2">
+                        <related0>[ViajeRecorrido : (recorridoViaje:Recorrido1 [Recorrido : (ciudadOrigen:Madrid, ciudadFinal:Valencia)], viajeRecorrido:TravelToValencia)]::WayPoint::0</related0>
+                        <related1>[ViajeRecorrido : (recorridoViaje:Recorrido1 [Recorrido : (ciudadOrigen:Madrid, ciudadFinal:Valencia)], viajeRecorrido:TravelToValencia)]::WayPoint::1</related1>
+                    </related>
+                </strategy>
+                <hidden>false</hidden>
+            </edgeproperty>
+            <edgeproperty
                 id="[ViajeRecorrido : (recorridoViaje:Recorrido1 [Recorrido : (ciudadOrigen:Madrid, ciudadFinal:Valencia)], viajeRecorrido:TravelToValencia)]::source::rolename"
                 sizeCalculated="true" type="rolename" userDefined="true" visible="true">
                 <name>recorridoViaje</name>
@@ -199,52 +253,6 @@
                     <userOffsetX>0.0</userOffsetX>
                     <userOffsetY>0.0</userOffsetY>
                     <attached>[ViajeRecorrido : (recorridoViaje:Recorrido1 [Recorrido : (ciudadOrigen:Madrid, ciudadFinal:Valencia)], viajeRecorrido:TravelToValencia)]::WayPoint::0</attached>
-                    <offset_x>8</offset_x>
-                    <offset_y>8</offset_y>
-                    <placement>BOTTOM</placement>
-                </strategy>
-                <hidden>false</hidden>
-            </edgeproperty>
-            <edgeproperty
-                id="[ViajeRecorrido : (recorridoViaje:Recorrido1 [Recorrido : (ciudadOrigen:Madrid, ciudadFinal:Valencia)], viajeRecorrido:TravelToValencia)]::AssociationName"
-                sizeCalculated="true" type="associationName"
-                userDefined="false" visible="true">
-                <name>ViajeRecorrido</name>
-                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyInBetween">
-                    <userOffsetX>0.0</userOffsetX>
-                    <userOffsetY>0.0</userOffsetY>
-                    <offsetX>0.0</offsetX>
-                    <offsetY>-10.0</offsetY>
-                    <related length="2">
-                        <related0>[ViajeRecorrido : (recorridoViaje:Recorrido1 [Recorrido : (ciudadOrigen:Madrid, ciudadFinal:Valencia)], viajeRecorrido:TravelToValencia)]::WayPoint::0</related0>
-                        <related1>[ViajeRecorrido : (recorridoViaje:Recorrido1 [Recorrido : (ciudadOrigen:Madrid, ciudadFinal:Valencia)], viajeRecorrido:TravelToValencia)]::WayPoint::1</related1>
-                    </related>
-                </strategy>
-                <hidden>false</hidden>
-            </edgeproperty>
-            <edgeproperty
-                id="[ViajeRecorrido : (recorridoViaje:Recorrido1 [Recorrido : (ciudadOrigen:Madrid, ciudadFinal:Valencia)], viajeRecorrido:TravelToValencia)]::target::rolename"
-                sizeCalculated="true" type="rolename" userDefined="true" visible="true">
-                <name>viajeRecorrido</name>
-                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
-                    <userOffsetX>88.0</userOffsetX>
-                    <userOffsetY>-20.0</userOffsetY>
-                    <attached>[ViajeRecorrido : (recorridoViaje:Recorrido1 [Recorrido : (ciudadOrigen:Madrid, ciudadFinal:Valencia)], viajeRecorrido:TravelToValencia)]::WayPoint::1</attached>
-                    <offset_x>8</offset_x>
-                    <offset_y>8</offset_y>
-                    <placement>TOP</placement>
-                </strategy>
-                <hidden>false</hidden>
-            </edgeproperty>
-            <edgeproperty
-                id="[ViajeRecorrido : (recorridoViaje:Recorrido1 [Recorrido : (ciudadOrigen:Madrid, ciudadFinal:Valencia)], viajeRecorrido:TravelToValencia)]::target::multiplicity"
-                sizeCalculated="true" type="multiplicity"
-                userDefined="false" visible="true">
-                <name>*</name>
-                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
-                    <userOffsetX>0.0</userOffsetX>
-                    <userOffsetY>0.0</userOffsetY>
-                    <attached>[ViajeRecorrido : (recorridoViaje:Recorrido1 [Recorrido : (ciudadOrigen:Madrid, ciudadFinal:Valencia)], viajeRecorrido:TravelToValencia)]::WayPoint::1</attached>
                     <offset_x>8</offset_x>
                     <offset_y>8</offset_y>
                     <placement>BOTTOM</placement>
@@ -283,11 +291,172 @@
         <hidden>false</hidden>
         <linkValue>[ViajeRecorrido : (recorridoViaje:Recorrido1 [Recorrido : (ciudadOrigen:Madrid, ciudadFinal:Valencia)], viajeRecorrido:TravelToValencia)]</linkValue>
     </edge>
+    <edge type="BinaryEdge">
+        <source>reloj</source>
+        <target>BMW_X5</target>
+        <name>Time</name>
+        <properties>
+            <edgeproperty
+                id="[Time : (ao:BMW_X5, clock:reloj)]::target::rolename"
+                sizeCalculated="true" type="rolename"
+                userDefined="false" visible="true">
+                <name>ao {ordered}</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                    <attached>[Time : (ao:BMW_X5, clock:reloj)]::WayPoint::1</attached>
+                    <offset_x>8</offset_x>
+                    <offset_y>8</offset_y>
+                    <placement>TOP</placement>
+                </strategy>
+                <hidden>false</hidden>
+            </edgeproperty>
+            <edgeproperty
+                id="[Time : (ao:BMW_X5, clock:reloj)]::target::multiplicity"
+                sizeCalculated="true" type="multiplicity"
+                userDefined="false" visible="true">
+                <name>*</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                    <attached>[Time : (ao:BMW_X5, clock:reloj)]::WayPoint::1</attached>
+                    <offset_x>8</offset_x>
+                    <offset_y>8</offset_y>
+                    <placement>BOTTOM</placement>
+                </strategy>
+                <hidden>false</hidden>
+            </edgeproperty>
+            <edgeproperty
+                id="[Time : (ao:BMW_X5, clock:reloj)]::AssociationName"
+                sizeCalculated="true" type="associationName"
+                userDefined="false" visible="true">
+                <name>Time</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyInBetween">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                    <offsetX>0.0</offsetX>
+                    <offsetY>-10.0</offsetY>
+                    <related length="2">
+                        <related0>[Time : (ao:BMW_X5, clock:reloj)]::WayPoint::0</related0>
+                        <related1>[Time : (ao:BMW_X5, clock:reloj)]::WayPoint::1</related1>
+                    </related>
+                </strategy>
+                <hidden>false</hidden>
+            </edgeproperty>
+            <edgeproperty
+                id="[Time : (ao:BMW_X5, clock:reloj)]::source::multiplicity"
+                sizeCalculated="true" type="multiplicity"
+                userDefined="false" visible="true">
+                <name>1</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                    <attached>[Time : (ao:BMW_X5, clock:reloj)]::WayPoint::0</attached>
+                    <offset_x>8</offset_x>
+                    <offset_y>8</offset_y>
+                    <placement>BOTTOM</placement>
+                </strategy>
+                <hidden>false</hidden>
+            </edgeproperty>
+            <edgeproperty
+                id="[Time : (ao:BMW_X5, clock:reloj)]::source::rolename"
+                sizeCalculated="true" type="rolename"
+                userDefined="false" visible="true">
+                <name>clock</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                    <attached>[Time : (ao:BMW_X5, clock:reloj)]::WayPoint::0</attached>
+                    <offset_x>8</offset_x>
+                    <offset_y>8</offset_y>
+                    <placement>TOP</placement>
+                </strategy>
+                <hidden>false</hidden>
+            </edgeproperty>
+        </properties>
+        <waypoints>
+            <edgeproperty
+                id="[Time : (ao:BMW_X5, clock:reloj)]::WayPoint::0"
+                sizeCalculated="true" type="WayPoint"
+                userDefined="false" visible="true">
+                <name>0</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyAttachedIntersection">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                </strategy>
+                <id>0</id>
+                <specialid>1</specialid>
+                <hidden>false</hidden>
+            </edgeproperty>
+            <edgeproperty
+                id="[Time : (ao:BMW_X5, clock:reloj)]::WayPoint::1"
+                sizeCalculated="true" type="WayPoint"
+                userDefined="false" visible="true">
+                <name>1</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyAttachedIntersection">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                </strategy>
+                <id>1</id>
+                <specialid>2</specialid>
+                <hidden>false</hidden>
+            </edgeproperty>
+        </waypoints>
+        <hidden>false</hidden>
+        <linkValue>[Time : (ao:BMW_X5, clock:reloj)]</linkValue>
+    </edge>
     <edge type="NodeEdge">
         <source>Madrid</source>
         <target>Valencia</target>
         <name>Recorrido</name>
         <properties>
+            <edgeproperty
+                id="Recorrido1 [Recorrido : (ciudadOrigen:Madrid, ciudadFinal:Valencia)]::target::rolename"
+                sizeCalculated="true" type="rolename"
+                userDefined="false" visible="true">
+                <name>ciudadFinal</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                    <attached>Recorrido1 [Recorrido : (ciudadOrigen:Madrid, ciudadFinal:Valencia)]::WayPoint::1</attached>
+                    <offset_x>8</offset_x>
+                    <offset_y>8</offset_y>
+                    <placement>TOP</placement>
+                </strategy>
+                <hidden>false</hidden>
+            </edgeproperty>
+            <edgeproperty
+                id="Recorrido1 [Recorrido : (ciudadOrigen:Madrid, ciudadFinal:Valencia)]::target::multiplicity"
+                sizeCalculated="true" type="multiplicity"
+                userDefined="false" visible="true">
+                <name>*</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                    <attached>Recorrido1 [Recorrido : (ciudadOrigen:Madrid, ciudadFinal:Valencia)]::WayPoint::1</attached>
+                    <offset_x>8</offset_x>
+                    <offset_y>8</offset_y>
+                    <placement>BOTTOM</placement>
+                </strategy>
+                <hidden>false</hidden>
+            </edgeproperty>
+            <edgeproperty
+                id="Recorrido1 [Recorrido : (ciudadOrigen:Madrid, ciudadFinal:Valencia)]::AssociationName"
+                sizeCalculated="true" type="associationName"
+                userDefined="false" visible="true">
+                <name>Recorrido</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyInBetween">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                    <offsetX>0.0</offsetX>
+                    <offsetY>-10.0</offsetY>
+                    <related length="2">
+                        <related0>Recorrido1 [Recorrido : (ciudadOrigen:Madrid, ciudadFinal:Valencia)]::WayPoint::0</related0>
+                        <related1>Recorrido1 [Recorrido : (ciudadOrigen:Madrid, ciudadFinal:Valencia)]::WayPoint::1</related1>
+                    </related>
+                </strategy>
+                <hidden>false</hidden>
+            </edgeproperty>
             <edgeproperty
                 id="Recorrido1 [Recorrido : (ciudadOrigen:Madrid, ciudadFinal:Valencia)]::source::multiplicity"
                 sizeCalculated="true" type="multiplicity"
@@ -311,53 +480,6 @@
                     <userOffsetX>1.0</userOffsetX>
                     <userOffsetY>17.0</userOffsetY>
                     <attached>Recorrido1 [Recorrido : (ciudadOrigen:Madrid, ciudadFinal:Valencia)]::WayPoint::0</attached>
-                    <offset_x>8</offset_x>
-                    <offset_y>8</offset_y>
-                    <placement>TOP</placement>
-                </strategy>
-                <hidden>false</hidden>
-            </edgeproperty>
-            <edgeproperty
-                id="Recorrido1 [Recorrido : (ciudadOrigen:Madrid, ciudadFinal:Valencia)]::AssociationName"
-                sizeCalculated="true" type="associationName"
-                userDefined="false" visible="true">
-                <name>Recorrido</name>
-                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyInBetween">
-                    <userOffsetX>0.0</userOffsetX>
-                    <userOffsetY>0.0</userOffsetY>
-                    <offsetX>0.0</offsetX>
-                    <offsetY>-10.0</offsetY>
-                    <related length="2">
-                        <related0>Recorrido1 [Recorrido : (ciudadOrigen:Madrid, ciudadFinal:Valencia)]::WayPoint::0</related0>
-                        <related1>Recorrido1 [Recorrido : (ciudadOrigen:Madrid, ciudadFinal:Valencia)]::WayPoint::1</related1>
-                    </related>
-                </strategy>
-                <hidden>false</hidden>
-            </edgeproperty>
-            <edgeproperty
-                id="Recorrido1 [Recorrido : (ciudadOrigen:Madrid, ciudadFinal:Valencia)]::target::multiplicity"
-                sizeCalculated="true" type="multiplicity"
-                userDefined="false" visible="true">
-                <name>*</name>
-                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
-                    <userOffsetX>0.0</userOffsetX>
-                    <userOffsetY>0.0</userOffsetY>
-                    <attached>Recorrido1 [Recorrido : (ciudadOrigen:Madrid, ciudadFinal:Valencia)]::WayPoint::1</attached>
-                    <offset_x>8</offset_x>
-                    <offset_y>8</offset_y>
-                    <placement>BOTTOM</placement>
-                </strategy>
-                <hidden>false</hidden>
-            </edgeproperty>
-            <edgeproperty
-                id="Recorrido1 [Recorrido : (ciudadOrigen:Madrid, ciudadFinal:Valencia)]::target::rolename"
-                sizeCalculated="true" type="rolename"
-                userDefined="false" visible="true">
-                <name>ciudadFinal</name>
-                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
-                    <userOffsetX>0.0</userOffsetX>
-                    <userOffsetY>0.0</userOffsetY>
-                    <attached>Recorrido1 [Recorrido : (ciudadOrigen:Madrid, ciudadFinal:Valencia)]::WayPoint::1</attached>
                     <offset_x>8</offset_x>
                     <offset_y>8</offset_y>
                     <placement>TOP</placement>

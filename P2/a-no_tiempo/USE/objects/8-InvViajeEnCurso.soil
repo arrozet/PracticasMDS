@@ -28,6 +28,7 @@ reset
 -- creamos el viaje
 !new Viaje('TravelToValencia')
 !TravelToValencia.fechaSalida := 50
+!TravelToValencia.fechaLlegada := 90
 
 -- Creamos el reloj para cumplir las restricciones de multiplicidad
 !new Clock( 'reloj' )
