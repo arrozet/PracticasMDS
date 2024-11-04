@@ -1,0 +1,67 @@
+reset
+    -- 5. Como mucho, un coche se debe someter a una revisión, como máximo, en un momento dado. 
+    -- inv UnaRevisionALaVez :
+    --  self.revisionCoche->select(r | r.fechaFin.isUndefined())->size() <= 1
+
+
+-- Creamos el reloj para cumplir las restricciones de multiplicidad
+!new Clock( 'reloj' )
+
+--creamos un coche
+!new Coche ('Coche1')
+!Coche1.fechaMatriculacion := 2  
+
+-- creamos la ciudad donde van a estar ubicada los talleres
+!new Ciudad ( 'Malaga' )
+!Malaga.nombre := 'Malaga'
+!Malaga.poblacion := 24000
+
+-- creamos talleres noOficiales
+!new Taller ( 'Talleres_Pacheco' )
+!new Taller ( 'ElDominicanoRD' )
+
+
+-- relaciones
+!insert (Malaga, Talleres_Pacheco) into UbicacionTaller
+!insert (Malaga, ElDominicanoRD) into UbicacionTaller
+!insert (Coche1, Malaga) into Ubicado
+!insert(reloj,Coche1) into Time
+
+-----------------------------------------------------------------
+-- escenario 1: LA INVARIANTE DEVUELVE OK
+-- No hay revisiones en curso
+-----------------------------------------------------------------
+--!new Revision ('Revision_1')
+--!Revision_1.fechaInicio :=10
+--!Revision_1.fechaFin :=12
+
+--!insert(Coche1,Revision_1) into Revisado
+--!insert(Talleres_Pacheco, Revision_1) into Realizada
+
+-----------------------------------------------------------------
+-- escenario 2: LA INVARIANTE DEVUELVE OK
+-- Hay una revisión en curso
+-----------------------------------------------------------------
+--!new Revision ('Revision_1')
+--!Revision_1.fechaInicio :=10
+
+--!insert(Coche1,Revision_1) into Revisado
+--!insert(Talleres_Pacheco, Revision_1) into Realizada
+
+
+-----------------------------------------------------------------
+-- escenario 3: LA INVARIANTE FALLA
+-- Hay más de una revisión en curso
+-----------------------------------------------------------------
+!new Revision ('Revision_1')
+!Revision_1.fechaInicio :=10
+
+!new Revision ('Revision_2')
+!Revision_2.fechaInicio :=12
+
+!insert(Coche1,Revision_1) into Revisado
+!insert(Talleres_Pacheco, Revision_1) into Realizada
+
+!insert(Coche1,Revision_2) into Revisado
+!insert(ElDominicanoRD, Revision_2) into Realizada
+
