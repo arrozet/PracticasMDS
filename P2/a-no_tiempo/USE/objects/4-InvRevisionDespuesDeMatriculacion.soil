@@ -24,11 +24,16 @@ reset
 !Malaga.nombre := 'Malaga'
 !Malaga.poblacion := 24000
 
+-- Creamos el reloj para cumplir las restricciones de multiplicidad
+
+!new Clock( 'reloj' )
+
 -- relaciones
 !insert(Audi_R8,ITV_Guadalhorce) into Revisado
 !insert(PacoRueda,ITV_Guadalhorce) into Realizada
 !insert(Malaga, PacoRueda) into UbicacionTaller
 !insert(Audi_R8, Malaga) into Ubicado
+!insert(reloj,Audi_R8) into Time
 
 
 --escenario 1: PARA QUE DE 'OK' DESCOMENTAR EL DE ABAJO Y COMENTAR LINEA 12
