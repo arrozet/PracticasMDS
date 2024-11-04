@@ -1,25 +1,14 @@
 model sistemaCoches
 
-------------------------------
--- DUDA: no hay que hacer una maquina de estados? realmente, nada cambia de estado no? solo se crean viajes
-------------------------------
-
 -------------- Enumerations ------------
 enum TipoRevision { reparacion, mantenimiento}
 -------------- End of enumerations ------------
 
 -------------- Classes ------------------ 
--- ANOTACION PARA TODOS, SOLUCION A TODOS LOS PROBLEMAS: para saber si un coche esta de viaje o no, buscamos en el ulitmo viaje de 
--- la lista de viajes del coche, si fecha de llegada esta definido 
--- EJEMPLO: context Coche
--- self.viajesRealizadosCoche->sortedBy(r | r.fechaLlegada)->last().fechaLlegada.isUndefined()
 
 class Clock 
   attributes
     NOW : Integer init = 0 -- POSIX representation starting at 0
-    ------------------------------
-    -- DUDA: deben poder considerarse fragmentos de días, es decir, cambiar la resolución?
-    ------------------------------
     resolution: Integer init = 1 
   operations
     tick() 
@@ -29,7 +18,7 @@ class Clock
 
         -- Notifico a todos los AO que avancen un día
         for o in self.ao do 
-          o.tick()
+          o.action()
         end;
       end  
       post TimePasses: self.NOW = self.NOW@pre + self.resolution
@@ -46,7 +35,7 @@ end
 
 abstract class ActiveObject -- real-time objects 
   operations  -- para que Coche obligatoriamente implemente estas operaciones
-    tick() begin end
+    action() begin end
 end
 
 class Coche < ActiveObject
@@ -54,12 +43,8 @@ class Coche < ActiveObject
     fechaMatriculacion : Integer
 
     -- esto es derive (apartado 13)
-    ------------------------------
-    -- DUDA: debo ir sumando los kmAvanzados de los viajes, o solo sumar una vez he terminado de hacer el recorrido?
-    -- Ahora mismo está como lo segundo
-    ------------------------------
      kmRecorridos : Integer derive : 
-      self.viajeCoche->select(v | v.fechaLlegada.isDefined())->collect(v | v.recorridoViaje.numKm)->sum()
+      self.viajeCoche->collect(v | v.kmAvanzados)->sum()
 
     -- esto es derive (apartado 15) - SE USA CLOCK
     enGarantia : Boolean derive : 
@@ -78,9 +63,7 @@ class Coche < ActiveObject
 
     -- indica cuantos km avanza al dia en los viajes
     velocidadAlDia : Integer
-    ------------------------------
-    -- DUDA: debo considerar que la velocidad del coche cambia, o la velocidad del coche se instancia en el soil y ya?
-    ------------------------------
+   
   operations
     comenzarViaje(r : Recorrido)
       begin
@@ -121,10 +104,6 @@ class Coche < ActiveObject
 
           -- El coche se debe parar y crear la relación de Ubicado en la ciudad final
           insert(self, viajeActual.recorridoViaje.ciudadFinal) into Ubicado;
-          ------------------------------
-          -- DUDA: debo considerar que la velocidad del coche cambia, o la velocidad del coche se instancia en el soil y ya?
-          ------------------------------
-          --self.velocidadAlDia := 0;
         end;
           
       end
@@ -138,7 +117,7 @@ class Coche < ActiveObject
           (self.viajeCoche->exists(v | v.fechaLlegada.isDefined() and v.kmAvanzados = v.recorridoViaje.numKm and v.fechaLlegada = self.clock.NOW and 
           self.ciudadCoche = v.recorridoViaje.ciudadFinal))
 
-    tick()
+    action()
       begin
         -- Simplemente tengo que llamar a avanzar, para si el coche está en un viaje, que avance (si no lo está no hará nada ya que no se cumplirá la precond)
         if (self.viajeCoche -> exists(v | v.fechaLlegada.isUndefined())) then -- El coche está realizando un viaje
@@ -154,9 +133,7 @@ class Ciudad
     nombre : String
     poblacion : Integer
 end
-------------------------------
--- DUDA: PREGUNTAR AL PROFESOR SOBRE EL COMENTARIO DE ABAJO
-------------------------------
+
 associationclass Recorrido between    -- CiudadOrigen y CiudadFinal, creo que deberemos realizar 2 caminos por cada 2 ciudades
     Ciudad [0..*] role ciudadOrigen -- Esto es para facilitar el modelador
     Ciudad [0..*] role ciudadFinal
@@ -335,5 +312,18 @@ context Coche
     ---
     -- 16. ESTO NO ES UN INVARIANTE, ES EL DERIVE DE necesitaMantenimiento
     ---
+
+    ---
+    -- No puede haber más de dos viajes de un mismo coche con la fecha
+
+    -------------------------
+    -- INVARIANTES IMPLÍCITOS
+    -------------------------
+
+    context Clock
+      inv RelojEsUnico : 
+        Clock.allInstances()->size()=1
+
+      
 -------------- End of invariants ------------------
 
