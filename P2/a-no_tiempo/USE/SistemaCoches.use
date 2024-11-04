@@ -13,19 +13,34 @@ enum TipoRevision { reparacion, mantenimiento}
 class Clock 
   attributes
     NOW : Integer init = 0 -- POSIX representation starting at 0
-    --resolution: Integer init = 1 
+    resolution: Integer init = 1 
 end
 
-class Coche
+abstract class ActiveObject -- real-time objects 
+end
+
+class Coche < ActiveObject
   attributes
     fechaMatriculacion : Integer
     -- esto es derive (apartado 13)
     kmRecorridos : Integer derive : 
       self.viajeCoche->select(v | v.fechaLlegada.isDefined())->collect(v | v.recorridoViaje.numKm)->sum()
-    -- esto es derive (apartado 15)
-    enGarantia : Boolean 
+
+    -- esto es derive (apartado 15) - SE USA CLOCK
+    enGarantia : Boolean derive : 
+      ((self.clock.NOW - self.fechaMatriculacion) <= 4 * 100) or -- No han pasado más de 4 años desde la matriculacion
+      -- Hay una revision en un taller oficial y aun le queda garantia
+      self.revisionCoche->exists(r | r.tallerRevision.oclIsTypeOf(TallerOficial) and (self.clock.NOW - r.fechaFin <= r.tallerRevision.oclAsType(TallerOficial).tiempoGarantia))
+
     -- esto es derive (apartado 16) - SE USA CLOCK
-    necesitaMantenimiento : Boolean
+    necesitaMantenimiento : Boolean derive : 
+        -- Saco la fecha del último mantenimiento
+        let fechaUltimoMantenimiento : Integer = (self.revisionCoche->select(r | r.tipoRevision = TipoRevision::mantenimiento)->sortedBy(r | r.fechaFin)->last().fechaFin) in
+
+        ((self.clock.NOW - self.fechaMatriculacion) > 4 * 100) and -- Han pasado más de 4 años desde la matriculacion
+        ((self.revisionCoche->isEmpty()) or -- Si no tiene revisiones, le toca revisión
+          (self.clock.NOW - fechaUltimoMantenimiento >=  100)) -- Si las tiene, le toca si pasó 1 año desde la última de mantenimiento
+
 end
 
 class Ciudad
@@ -66,6 +81,11 @@ end
 -------------- End of classes ------------------
 
 -------------- Relationships ------------------
+association Time between 
+  Clock [1] role clock
+  ActiveObject [*] role ao ordered
+end
+
 composition UbicacionTaller between
     Ciudad [1] role ciudadTaller
     Taller [0..*] role tallerCiudad
@@ -162,12 +182,6 @@ context Coche
       (self.viajeCoche->exists(v | v.fechaLlegada.isUndefined()) and self.ciudadCoche.isUndefined()) or -- si está haciendo un viaje, no está en una ciudad
       (self.ciudadCoche.isDefined() and not self.viajeCoche->exists(v | v.fechaLlegada.isUndefined())) -- si está en una ciudad, no está haciendo un viaje
 
-      -- ANOTACIÓN DE IMPLEMENTACIÓN PREVIA: ESTÁ MAL
-       -- con el let hacemos que si hay un undefined, se coloque al final
-      --let viajesConLlegadaDefinida : OrderedSet(Viaje) = self.viajeCoche->sortedBy(r | r.fechaLlegada) in 
-      --  ((viajesConLlegadaDefinida->isEmpty() or viajesConLlegadaDefinida->last().fechaLlegada.isDefined()) implies self.ciudadCoche.isDefined()) and
-      --  ((viajesConLlegadaDefinida->last().fechaLlegada.isUndefined()) implies self.ciudadCoche.isUndefined())
-
     ---
     -- 10. Si el coche ha completado al menos un viaje y no se encuentra viajando, entonces debe
     -- encontrarse en la ciudad a la que llegó en su último viaje.
@@ -176,9 +190,6 @@ context Coche
       (self.viajeCoche->isEmpty()) or   -- Tiene que dar correcto si ha completado 0 viajes
       (not self.viajeCoche->exists(v | v.fechaLlegada.isUndefined()) implies -- si el coche no está en un viaje
       (self.ciudadCoche = self.viajeCoche->sortedBy(v | v.fechaLlegada)->last().recorridoViaje.ciudadFinal)) -- la ciudad en la que está ahora es la ciudad a la que ha llegado en el último viaje
-
-      --(not(self.viajesRealizadosCoche->isEmpty()) and self.viajesRealizadosCoche->sortedBy(r | r.fechaLlegada)->last().fechaLlegada.isDefined()) implies 
-      --(self.ciudadCoche = self.viajesRealizadosCoche->sortedBy(r | r.fechaLlegada)->last().recorridoViaje.ciudadFinal) 
 
     ---
     -- 11. Dos viajes no pueden solaparse en el tiempo, es decir, un viaje debe ocurrir siempre 
@@ -190,38 +201,17 @@ context Coche
         (self.viajeCoche -> size() >= 2) implies -- Si tengo más de 2
         (self.viajeCoche-> forAll(v1,v2 | viajesOrdenados->indexOf(v1) = 
                                   viajesOrdenados->indexOf(v2) - 1 implies ((v1.fechaLlegada <= v2.fechaSalida)))) -- basicamente, viaje[i].fechaLlegada < viaje[j].fechaSalida | i < j
-    
-    -- Creo que lo de abajo está mal porque el forAll compara todos con todos, es decir, 
-    -- compararía el primer elemento con el segundo y el segundo con el primero. En ese caso, el implies no se cumpliría
-
-    --(self.viajesRealizadosCoche -> size() >= 2) implies 
-    --  (self.viajesRealizadosCoche-> forAll(v1,v2 | v1 <> v2 implies ((v1.fechaLlegada <= v2.fechaSalida))))
-    -- Esto comprueba del listado de viajes, con cada viaje, si se cumplen los invariantes bien
-    -- de v1 comprueba con v2, v3,v4,v5,v6,v7... su fecha de fin sea anterior
-    -- a la fecha de inicio del viaje v(i).
-    -- v1 <> v2 evita duplicadas
-    -- suponemos que los viajes estan ordenados, es decir, que v1 ocurre antes que v2
 
     ---
     -- 12. Las ciudades de origen y destino de los viajes deben ser coherentes. Es decir, si un coche 
     -- realiza un viaje desde la ciudad A hasta la ciudad B, el próximo viaje debe partir desde la ciudad B.
-    --- NO SE COMO HACER PARA QUE ITERE DE UNO EN UNO, NO HAY UNA FUNCION INDEXOF Y SE LIA
+    --- 
 
     inv CiudadesCoherentes : 
       let viajesOrdenados : OrderedSet(Viaje) = self.viajeCoche->sortedBy(v | v.fechaSalida) in -- Saco los viajes ordenados
         (self.viajeCoche -> size() >= 2) implies -- Si tengo más de 2
         (self.viajeCoche-> forAll(v1,v2 | viajesOrdenados->indexOf(v1) = 
                                   viajesOrdenados->indexOf(v2) - 1 implies (v1.recorridoViaje.ciudadFinal = v2.recorridoViaje.ciudadOrigen))) -- si llegas a una ciudad, en el siguiente viaje partes desde ella
-
-    -- inv ViajesNoSeSolapan:
-    --  (self.viajeCoche -> size() >= 2) implies
-    --    (self.viajeCoche
-    --     ->sortedBy(r | r.fechaLlegada)
-    --      ->forAll(i | 
-    --        i <> self.viajeCoche->at(i+1) implies 
-    --          (self.viajeCoche->at(i).recorridoViaje.ciudadFinal = self.viajeCoche->at(i+1).recorridoViaje.ciudadOrigen)
-    --      )
-    --   )
 
     ---
     -- 14. ESTO NO ES UN INVARIANTE, ES UNA ASUNCIÓN QUE SE HACE PARA FACILITAR EL MODELADO
@@ -234,5 +224,18 @@ context Coche
     ---
     -- 16. ESTO NO ES UN INVARIANTE, ES EL DERIVE DE necesitaMantenimiento
     ---
+
+    ---
+    -- No puede haber más de dos viajes de un mismo coche con la fecha
+
+    -------------------------
+    -- INVARIANTES IMPLÍCITOS
+    -------------------------
+
+    context Clock
+      inv RelojEsUnico : 
+        Clock.allInstances()->size()=1
+
+      
 -------------- End of invariants ------------------
 
