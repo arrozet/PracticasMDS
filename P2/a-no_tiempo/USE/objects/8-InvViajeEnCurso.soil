@@ -29,11 +29,15 @@ reset
 !new Viaje('TravelToValencia')
 !TravelToValencia.fechaSalida := 50
 
+-- Creamos el reloj para cumplir las restricciones de multiplicidad
+!new Clock( 'reloj' )
+
 --COMENTAR PARA QUE DE OK
 -----------------------------------------
 --!TravelToValencia.fechaLlegada := 55
 -----------------------------------------
 -- relaciones
+!insert(reloj,BMW_X5) into Time
 !insert (BMW_X5, TravelToValencia) into Viajado
 !insert (Recorrido1, TravelToValencia) into ViajeRecorrido
 

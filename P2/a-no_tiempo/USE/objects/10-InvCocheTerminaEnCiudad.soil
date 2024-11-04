@@ -21,6 +21,12 @@ reset
 !new Viaje('viaje1')
 !viaje1.fechaSalida := 1
 !viaje1.fechaLlegada := 2
+
+-- Creamos el reloj para cumplir las restricciones de multiplicidad
+!new Clock( 'reloj' )
+
+!insert(reloj,citroen_Ale) into Time
+
 !insert (citroen_Ale, viaje1) into Viajado
 
 -- Recorrido

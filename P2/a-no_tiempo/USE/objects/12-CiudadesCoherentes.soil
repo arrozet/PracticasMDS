@@ -20,6 +20,10 @@ reset
 !cainhurst.nombre := 'Byrgenwerth'
 !cainhurst.poblacion := 4
 
+-- Creamos el reloj para cumplir las restricciones de multiplicidad
+!new Clock( 'reloj' )
+!insert (reloj, Audi_TheGrefg) into Time
+
 --Recorrido
 !insert(cainhurst,yharnam) into Recorrido
 !Recorrido1.numKm := 100

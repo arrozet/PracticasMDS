@@ -16,6 +16,11 @@ reset
 !new Viaje('route_66')
 !route_66.fechaSalida := 3
 
+-- Creamos el reloj para cumplir las restricciones de multiplicidad
+!new Clock( 'reloj' )
+
+!insert(reloj,mercedes_G63_Jorge) into Time
+
 -- Recorrido
 !insert (los_angeles,chicago) into Recorrido
 !Recorrido1.numKm := 2000

@@ -25,6 +25,10 @@ reset
 !viaje_1.fechaSalida := 0
 !viaje_1.fechaLlegada := 2
 
+-- Creamos el reloj para cumplir las restricciones de multiplicidad
+!new Clock( 'reloj' )
+!insert (reloj,Porche_Artur) into Time
+
 --Relaciones
 !insert (Porche_Artur,viaje_1) into Viajado
 !insert (Recorrido1,viaje_1) into ViajeRecorrido

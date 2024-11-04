@@ -4,7 +4,8 @@ reset
 !new Coche('Porsche_911_GT3_Paquete_Touring')
 !new Coche('Audi_RS3')
 
-
+-- Creamos el reloj para cumplir las restricciones de multiplicidad
+!new Clock( 'reloj' )
 -- Ciudades
 !new Ciudad('Malaga')
 !Malaga.nombre := 'Malaga'
@@ -34,7 +35,8 @@ reset
 !Viaje_Audi_1.fechaLlegada := 12
 !insert(Audi_RS3, Viaje_Audi_1) into Viajado
 
-
+!insert (reloj,Porsche_911_GT3_Paquete_Touring) into Time
+!insert (reloj, Audi_RS3) into Time
 
 -- Recorridos
 !insert(Malaga,Stalingrado) into Recorrido

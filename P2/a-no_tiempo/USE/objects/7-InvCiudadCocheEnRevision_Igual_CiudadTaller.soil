@@ -21,8 +21,12 @@ reset
 !new Ciudad('marbella')
 !marbella.nombre := 'Marbella'
 !marbella.poblacion := 165871
+-- Creamos el reloj para cumplir las restricciones de multiplicidad
+
+!new Clock( 'reloj' )
 
 -- Relaciones
+!insert(reloj,ford_Ecosport_Jorge) into Time
 -- asociamos un taller en cada ciudad 
 !insert (malaga,taller1) into UbicacionTaller
 !insert (marbella,taller2) into UbicacionTaller

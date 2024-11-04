@@ -9,6 +9,10 @@ reset
 
 !new Taller('Mequetrefe')
 
+-- Creamos el reloj para cumplir las restricciones de multiplicidad
+!new Clock( 'reloj' )
+!insert (reloj, Passat_2002) into Time
+
 !insert(Mequetrefe,Cordoba) into UbicacionTaller
 
 !insert(Passat_2002, Malaga) into Ubicado

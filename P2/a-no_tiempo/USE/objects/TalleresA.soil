@@ -39,6 +39,12 @@ reset
 !new TallerNoOficial('TallerNoOficialAlgeciras')
 !new TallerNoOficial('TallerNoOficialMalaga')
 
+-- Creamos el reloj para cumplir las restricciones de multiplicidad
+!new Clock( 'reloj' )
+!insert(reloj,CocheDeJuanma_Passat) into Time
+!insert(reloj,CocheDeDavid_307) into Time
+!insert(reloj,CocheDeRuben_ECO_Dynamics) into Time
+
 -- Creación de Asociaciones
     -- EstOficial
 !insert( TallerOficialAlgeciras, Algeciras ) into EstOficial
