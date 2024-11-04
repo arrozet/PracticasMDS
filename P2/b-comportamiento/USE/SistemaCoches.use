@@ -235,6 +235,14 @@ context Revision
     inv RevisionDespuesDeMatriculacion :
       self.cocheRevision.fechaMatriculacion < self.fechaInicio
 
+    ---
+    -- ?. La fecha de inicio de la revision es anterior a la fecha de finalizacion
+    ---
+
+    ---
+    -- 5. Como mucho, un coche se debe someter a una revisión, como máximo, en un momento dado. 
+    ---
+
 context Ciudad
     ---
     -- 6. En cada ciudad habrá, a lo sumo, un taller oficial, pudiendo 
@@ -250,6 +258,12 @@ context Viaje
     ---
     inv ViajeEnCurso :
       self.cocheViaje.ciudadCoche.isUndefined() implies self.fechaLlegada.isUndefined()
+
+    
+    ---
+    -- ?. Fecha de salida no es null
+    ---
+    
 
 context Coche
     ---
