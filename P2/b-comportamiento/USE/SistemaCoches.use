@@ -249,12 +249,10 @@ context Revision
   -- ?. Las fechas de una revisión deben ser válidas.
   -- Para ser válidas, la fecha de inicio de una revisión es anterior a la fecha de finalización y todas las fechas deben ser positivas
   -- Además, la fecha de inicio siempre debe estar definida
-  -- También deben ser posteriores a la fecha de matriculación del vehículo que realiza el viaje.
   ---
   inv FechasRevisionValidas : 
     self.fechaInicio.isDefined() and self.fechaInicio >= 0 and 
-    (self.fechaFin.isDefined() implies (self.fechaInicio <= self.fechaFin and self.fechaFin>=0)) and
-    self.cocheRevision.fechaMatriculacion <= self.fechaInicio
+    (self.fechaFin.isDefined() implies (self.fechaInicio <= self.fechaFin and self.fechaFin>=0))
 
 context Ciudad
   ---

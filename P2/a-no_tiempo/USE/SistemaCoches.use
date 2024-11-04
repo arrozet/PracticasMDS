@@ -165,8 +165,7 @@ context Revision
   ---
   inv FechasRevisionValidas : 
     self.fechaInicio.isDefined() and self.fechaInicio >= 0 and 
-    (self.fechaFin.isDefined() implies (self.fechaInicio <= self.fechaFin and self.fechaFin>=0)) and
-    self.cocheRevision.fechaMatriculacion <= self.fechaInicio
+    (self.fechaFin.isDefined() implies (self.fechaInicio <= self.fechaFin and self.fechaFin>=0))
 
 context Ciudad
   ---
@@ -264,5 +263,3 @@ context Coche
   -- 16. ESTO NO ES UN INVARIANTE, ES EL DERIVE DE necesitaMantenimiento
   ---
 -------------- End of invariants ------------------
--------------- End of invariants ------------------
-
