@@ -218,8 +218,18 @@ constraints
   --inv [nombre del invariante]
     -- [declaración del invariante]
 
+-- Los invariantes implícitos se indicarán en [Número de apartado en enunciado] con una ? 
 -- Si tienes dudas, hay un ejemplo justo abajo
 -------------------------
+
+
+context Clock
+  ---
+  -- ?. Debe haber, como mucho, un solo reloj en el sistema. 
+  ---
+  inv RelojEsUnico :     
+    Clock.allInstances()->size()=1
+
 
 context Recorrido
   ---
@@ -229,115 +239,117 @@ context Recorrido
     self.numKm >= 5
 
 context Revision
-    ---
-    -- 4. Todas las revisiones deben tener lugar después de que el coche se matriculase
-    ---
-    inv RevisionDespuesDeMatriculacion :
-      self.cocheRevision.fechaMatriculacion < self.fechaInicio
+  ---
+  -- 4. Todas las revisiones deben tener lugar después de que el coche se matriculase
+  ---
+  inv RevisionDespuesDeMatriculacion :
+    self.cocheRevision.fechaMatriculacion < self.fechaInicio
 
-    ---
-    -- ?. La fecha de inicio de la revision es anterior a la fecha de finalizacion
-    ---
-
-    ---
-    -- 5. Como mucho, un coche se debe someter a una revisión, como máximo, en un momento dado. 
-    ---
+  ---
+  -- ?. Las fechas de una revisión deben ser válidas.
+  -- Para ser válidas, la fecha de inicio de una revisión es anterior a la fecha de finalización y todas las fechas deben ser positivas
+  -- Además, la fecha de inicio siempre debe estar definida
+  -- También deben ser posteriores a la fecha de matriculación del vehículo que realiza el viaje.
+  ---
+  inv FechasRevisionValidas : 
+    self.fechaInicio.isDefined() and self.fechaInicio >= 0 and 
+    (self.fechaFin.isDefined() implies (self.fechaInicio <= self.fechaFin and self.fechaFin>=0)) and
+    self.cocheRevision.fechaMatriculacion <= self.fechaInicio
 
 context Ciudad
-    ---
-    -- 6. En cada ciudad habrá, a lo sumo, un taller oficial, pudiendo 
-    -- haber varios talleres no oficiales. 
-    --- se comprobará mirando si el taller es oficial, que solo exista uno
-    inv UnSoloTallerOficial :
-      self.tallerCiudad->select(t | t.oclIsTypeOf(TallerOficial))->size() <= 1 
+  ---
+  -- 6. En cada ciudad habrá, a lo sumo, un taller oficial, pudiendo 
+  -- haber varios talleres no oficiales. 
+  --- se comprobará mirando si el taller es oficial, que solo exista uno
+  inv UnSoloTallerOficial :
+    self.tallerCiudad->select(t | t.oclIsTypeOf(TallerOficial))->size() <= 1 
 
 context Viaje
-    ---
-    -- 8. Si el coche está realizando actualmente algún viaje, dicho
-    -- viaje únicamente tendrá fecha de salida, pero no de llegada.
-    ---
-    inv ViajeEnCurso :
-      self.cocheViaje.ciudadCoche.isUndefined() implies self.fechaLlegada.isUndefined()
+  ---
+  -- 8. Si el coche está realizando actualmente algún viaje, dicho
+  -- viaje únicamente tendrá fecha de salida, pero no de llegada.
+  ---
+  inv ViajeEnCurso :
+    self.cocheViaje.ciudadCoche.isUndefined() implies self.fechaLlegada.isUndefined()
 
-    
-    ---
-    -- ?. Fecha de salida no es null
-    ---
-    
+  ---
+  -- ?. Las fechas de un viaje deben ser válidas.
+  -- Para ser válidas, la fecha de salida de un viaje es anterior a la fecha de llegada y todas las fechas deben ser positivas.
+  -- Además, la fecha de salida siempre debe estar definida.
+  -- También deben ser posteriores a la fecha de matriculación del vehículo que realiza el viaje.
+  ---
+  inv FechasViajeValidas :
+    self.fechaSalida.isDefined() and self.fechaSalida >= 0 and 
+    (self.fechaLlegada.isDefined() implies (self.fechaSalida <= self.fechaLlegada and self.fechaLlegada >= 0)) and
+    self.cocheViaje.fechaMatriculacion <= self.fechaSalida
 
 context Coche
-    ---
-    -- 7. Si un coche está siendo sometido a una revisión, entonces el coche debe encontrarse en 
-    -- la misma ciudad donde está el taller.
-    ---
-    inv CiudadCocheEnRevision_Igual_CiudadTaller :
-      self.revisionCoche->isEmpty() or  -- no tiene revisiones
-      self.revisionCoche->exists(r | r.fechaFin.isUndefined() implies self.ciudadCoche = r.tallerRevision.ciudadTaller) -- o si tiene, la revisión que está teniendo es en la misma ciudad
-      -- si el exists no encuentra nada, da correcto (según ChatGPT)
-    
-    --- 
-    -- 9. Un coche se encontrará en todo momento bien realizando un viaje determinado o bien en
-    -- una ciudad.
-    ---
-    inv CocheEnViajeOCiudad :
-      (self.viajeCoche->isEmpty() and self.ciudadCoche.isDefined()) or  -- si nunca ha hecho un viaje, está en una ciudad
-      (self.viajeCoche->exists(v | v.fechaLlegada.isUndefined()) and self.ciudadCoche.isUndefined()) or -- si está haciendo un viaje, no está en una ciudad
-      (self.ciudadCoche.isDefined() and not self.viajeCoche->exists(v | v.fechaLlegada.isUndefined())) -- si está en una ciudad, no está haciendo un viaje
+  ---
+  -- ?. La fecha de matriculación debe ser válida, es decir, debe ser positiva.
+  ---
+  inv FechaMatriculacionValida :
+    self.fechaMatriculacion >= 0
 
-    ---
-    -- 10. Si el coche ha completado al menos un viaje y no se encuentra viajando, entonces debe
-    -- encontrarse en la ciudad a la que llegó en su último viaje.
-    ---
-    inv CocheTerminaEnCiudad :
-      (self.viajeCoche->isEmpty()) or   -- Tiene que dar correcto si ha completado 0 viajes
-      (not self.viajeCoche->exists(v | v.fechaLlegada.isUndefined()) implies -- si el coche no está en un viaje
-      (self.ciudadCoche = self.viajeCoche->sortedBy(v | v.fechaLlegada)->last().recorridoViaje.ciudadFinal)) -- la ciudad en la que está ahora es la ciudad a la que ha llegado en el último viaje
+  ---
+  -- 5. Como mucho, un coche se debe someter a una revisión, como máximo, en un momento dado. 
+  ---
+  inv UnaRevisionALaVez :
+    self.revisionCoche->select(r | r.fechaFin.isUndefined())->size() <= 1
 
-    ---
-    -- 11. Dos viajes no pueden solaparse en el tiempo, es decir, un viaje debe ocurrir siempre 
-    -- después de otro, pudiendo la fecha de llegada de un viaje coincidir con la fecha de salida 
-    -- del siguiente. 
-    ---
-    inv ViajesNoSeSolapan :
-      let viajesOrdenados : OrderedSet(Viaje) = self.viajeCoche->sortedBy(v | v.fechaSalida) in -- Saco los viajes ordenados
-        (self.viajeCoche -> size() >= 2) implies -- Si tengo más de 2
-        (self.viajeCoche-> forAll(v1,v2 | viajesOrdenados->indexOf(v1) = 
-                                  viajesOrdenados->indexOf(v2) - 1 implies ((v1.fechaLlegada <= v2.fechaSalida)))) -- basicamente, viaje[i].fechaLlegada < viaje[j].fechaSalida | i < j
+  ---
+  -- 7. Si un coche está siendo sometido a una revisión, entonces el coche debe encontrarse en 
+  -- la misma ciudad donde está el taller.
+  ---
+  inv CiudadCocheEnRevision_Igual_CiudadTaller :
+    self.revisionCoche->isEmpty() or  -- no tiene revisiones
+    self.revisionCoche->exists(r | r.fechaFin.isUndefined() implies self.ciudadCoche = r.tallerRevision.ciudadTaller) -- o si tiene, la revisión que está teniendo es en la misma ciudad
+    -- si el exists no encuentra nada, da correcto (según ChatGPT)
+  
+  --- 
+  -- 9. Un coche se encontrará en todo momento bien realizando un viaje determinado o bien en
+  -- una ciudad.
+  ---
+  inv CocheEnViajeOCiudad :
+    (self.viajeCoche->isEmpty() and self.ciudadCoche.isDefined()) or  -- si nunca ha hecho un viaje, está en una ciudad
+    (self.viajeCoche->exists(v | v.fechaLlegada.isUndefined()) and self.ciudadCoche.isUndefined()) or -- si está haciendo un viaje, no está en una ciudad
+    (self.ciudadCoche.isDefined() and not self.viajeCoche->exists(v | v.fechaLlegada.isUndefined())) -- si está en una ciudad, no está haciendo un viaje
 
-    ---
-    -- 12. Las ciudades de origen y destino de los viajes deben ser coherentes. Es decir, si un coche 
-    -- realiza un viaje desde la ciudad A hasta la ciudad B, el próximo viaje debe partir desde la ciudad B.
-    --- 
+  ---
+  -- 10. Si el coche ha completado al menos un viaje y no se encuentra viajando, entonces debe
+  -- encontrarse en la ciudad a la que llegó en su último viaje.
+  ---
+  inv CocheTerminaEnCiudad :
+    (self.viajeCoche->isEmpty()) or   -- Tiene que dar correcto si ha completado 0 viajes
+    (not self.viajeCoche->exists(v | v.fechaLlegada.isUndefined()) implies -- si el coche no está en un viaje
+    (self.ciudadCoche = self.viajeCoche->sortedBy(v | v.fechaLlegada)->last().recorridoViaje.ciudadFinal)) -- la ciudad en la que está ahora es la ciudad a la que ha llegado en el último viaje
 
-    inv CiudadesCoherentes : 
-      let viajesOrdenados : OrderedSet(Viaje) = self.viajeCoche->sortedBy(v | v.fechaSalida) in -- Saco los viajes ordenados
-        (self.viajeCoche -> size() >= 2) implies -- Si tengo más de 2
-        (self.viajeCoche-> forAll(v1,v2 | viajesOrdenados->indexOf(v1) = 
-                                  viajesOrdenados->indexOf(v2) - 1 implies (v1.recorridoViaje.ciudadFinal = v2.recorridoViaje.ciudadOrigen))) -- si llegas a una ciudad, en el siguiente viaje partes desde ella
-
-    ---
-    -- 14. ESTO NO ES UN INVARIANTE, ES UNA ASUNCIÓN QUE SE HACE PARA FACILITAR EL MODELADO
-    ---
-
-    ---
-    -- 15. ESTO NO ES UN INVARIANTE, ES EL DERIVE DE enGarantia
-    ---
-
-    ---
-    -- 16. ESTO NO ES UN INVARIANTE, ES EL DERIVE DE necesitaMantenimiento
-    ---
-
-    ---
-    -- No puede haber más de dos viajes de un mismo coche con la fecha
-
-    -------------------------
-    -- INVARIANTES IMPLÍCITOS
-    -------------------------
-
-    context Clock
-      inv RelojEsUnico : 
-        Clock.allInstances()->size()=1
-
-      
+  ---
+  -- 11. Dos viajes no pueden solaparse en el tiempo, es decir, un viaje debe ocurrir siempre 
+  -- después de otro, pudiendo la fecha de llegada de un viaje coincidir con la fecha de salida 
+  -- del siguiente. 
+  ---
+  inv ViajesNoSeSolapan :
+    let viajesOrdenados : OrderedSet(Viaje) = self.viajeCoche->sortedBy(v | v.fechaSalida) in -- Saco los viajes ordenados
+      (self.viajeCoche -> size() >= 2) implies -- Si tengo más de 2
+      (self.viajeCoche-> forAll(v1,v2 | viajesOrdenados->indexOf(v1) = 
+                                viajesOrdenados->indexOf(v2) - 1 implies ((v1.fechaLlegada <= v2.fechaSalida)))) -- basicamente, viaje[i].fechaLlegada < viaje[j].fechaSalida | i < j
+  ---
+  -- 12. Las ciudades de origen y destino de los viajes deben ser coherentes. Es decir, si un coche 
+  -- realiza un viaje desde la ciudad A hasta la ciudad B, el próximo viaje debe partir desde la ciudad B.
+  --- 
+  inv CiudadesCoherentes : 
+    let viajesOrdenados : OrderedSet(Viaje) = self.viajeCoche->sortedBy(v | v.fechaSalida) in -- Saco los viajes ordenados
+      (self.viajeCoche -> size() >= 2) implies -- Si tengo más de 2
+      (self.viajeCoche-> forAll(v1,v2 | viajesOrdenados->indexOf(v1) = 
+                                viajesOrdenados->indexOf(v2) - 1 implies (v1.recorridoViaje.ciudadFinal = v2.recorridoViaje.ciudadOrigen))) -- si llegas a una ciudad, en el siguiente viaje partes desde ella
+  ---
+  -- 14. ESTO NO ES UN INVARIANTE, ES UNA ASUNCIÓN QUE SE HACE PARA FACILITAR EL MODELADO
+  ---
+  ---
+  -- 15. ESTO NO ES UN INVARIANTE, ES EL DERIVE DE enGarantia
+  ---
+  ---
+  -- 16. ESTO NO ES UN INVARIANTE, ES EL DERIVE DE necesitaMantenimiento
+  ---
 -------------- End of invariants ------------------
 
