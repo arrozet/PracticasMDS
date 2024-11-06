@@ -1,0 +1,13 @@
+-- Continúa en Málaga hasta el día 5
+!clock.run(5)
+-- comienza un viaje haciendo el recorrido de Málaga a Sevilla
+!Rimac_Nevera.comenzarViaje(Recorrido1)
+-- Los días van pasando y el coche va avanzando hasta que llega a Sevilla.
+-- Necesitará 210/27 = 7.777 = 8 días
+!clock.run(8)
+-- El mismo día que llega a Sevilla, el coche comienza otro viaje haciendo el recorrido entre Sevilla y Granada.
+!Rimac_Nevera.comenzarViaje(Recorrido2)
+--  Los días van pasando y el coche continúa realizando el viaje. 
+-- Necesitará 250/27 = 9.25 = 10 días
+!clock.run(10)
+-- Una vez llega a Granada, la simulación termina.

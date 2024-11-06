@@ -1,0 +1,36 @@
+reset
+
+-- Clock
+!new Clock('clock')
+
+
+-- Ciudades
+!new Ciudad('Malaga')
+!Malaga.nombre := 'Malaga'
+!Malaga.poblacion := 2000
+
+!new Ciudad('Sevilla')
+!Sevilla.nombre := 'Sevilla'
+!Sevilla.poblacion := 777
+
+!new Ciudad('Granada')
+!Granada.nombre := 'Granada'
+!Granada.poblacion := 1
+
+-- Recorridos
+!insert(Malaga,Sevilla) into Recorrido
+!Recorrido1.numKm := 210
+
+!insert(Sevilla,Granada) into Recorrido
+!Recorrido2.numKm := 250
+
+-- Coche
+!new Coche('Rimac_Nevera')
+!Rimac_Nevera.fechaMatriculacion := 0
+!Rimac_Nevera.velocidadAlDia := 27
+
+-- Necesario para que el coche se pueda comunicar con el clock
+!insert(clock, Rimac_Nevera) into Time
+
+-- El coche comienza en Málaga
+!insert(Rimac_Nevera, Malaga) into Ubicado

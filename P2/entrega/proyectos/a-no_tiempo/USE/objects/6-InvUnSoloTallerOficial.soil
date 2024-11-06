@@ -1,0 +1,51 @@
+reset
+    -- 6. En cada ciudad habrá, a lo sumo, un taller oficial, pudiendo 
+    -- haber varios talleres no oficiales. 
+    -- se comprobará mirando si el taller es oficial, que solo exista uno
+    -- inv UnSoloTallerOficial :
+    -- self.tallerCiudad->select(t | t.oclIsTypeOf(TallerOficial))->size() <= 1 
+
+-- creamos la ciudad donde van a estar ubicada los talleres
+!new Ciudad ( 'Malaga' )
+!Malaga.nombre := 'Malaga'
+!Malaga.poblacion := 24000
+
+-- creamos talleres noOficiales
+!new Taller ( 'Talleres_Pacheco' )
+!new Taller ( 'ElDominicanoRD' )
+
+-- creamos talleres oficiales
+!new TallerOficial ( 'TallerTesla' )
+!TallerTesla.tiempoGarantia := 74
+
+
+
+-- relaciones
+!insert (Malaga, TallerTesla) into UbicacionTaller
+!insert (Malaga, Talleres_Pacheco) into UbicacionTaller
+!insert (Malaga, ElDominicanoRD) into UbicacionTaller
+
+-- escenario 1: LA INVARIANTE DEVUELVE OK
+-- PARA QUE DE OK COMENTAR ESTA PARTE --------------- 
+!new TallerOficial ( 'TallerToyota' )
+!TallerToyota.tiempoGarantia := 87 
+!insert (Malaga, TallerToyota) into UbicacionTaller
+-----------------------------------------------------
+--escenario 2: CREAMOS UNA CIUDAD SIN TALLERES OFICIALES, DEBE OK
+-----------------------------------------------------------------
+--!new Ciudad('Granada')
+--!Granada.nombre := 'Granada'
+--!Granada.poblacion := 230000
+
+--!new Taller('tallerDistritoNorte')
+--!new Taller('taller_Sacromonte')
+
+--!insert (Granada, tallerDistritoNorte) into UbicacionTaller
+--!insert (Granada, taller_Sacromonte) into UbicacionTaller
+-----------------------------------------------------------------
+--escenario 3: CREAMOS UNA CIUDAD SIN TALLERES. DA OK
+------------------------------------------------------
+--!new Ciudad('Bilbao')
+--!Bilbao.nombre := 'Bilbao'
+--!Bilbao.poblacion := 345000
+------------------------------------------------------

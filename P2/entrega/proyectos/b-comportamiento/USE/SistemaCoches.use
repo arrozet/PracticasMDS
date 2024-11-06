@@ -1,0 +1,353 @@
+model sistemaCoches
+
+-------------- Enumerations ------------
+enum TipoRevision { reparacion, mantenimiento}
+-------------- End of enumerations ------------
+
+-------------- Classes ------------------ 
+
+class Clock 
+  attributes
+    NOW : Integer init = 0 -- POSIX representation starting at 0
+    resolution: Integer init = 1 
+  operations
+    tick() 
+      begin 
+        -- Incremento el tiempo en dias
+        self.NOW := self.NOW + self.resolution;
+
+        -- Notifico a todos los AO que avancen un día
+        for o in self.ao do 
+          o.action()
+        end;
+      end  
+      post TimePasses: self.NOW = self.NOW@pre + self.resolution
+
+    run (n:Integer)
+      begin
+        -- Hago tick n veces
+        for i in Sequence{1..n} do
+          self.tick();
+        end;
+      end
+
+end
+
+abstract class ActiveObject -- real-time objects 
+  operations  -- para que Coche obligatoriamente implemente estas operaciones
+    action() begin end
+end
+
+class Coche < ActiveObject
+  attributes
+    fechaMatriculacion : Integer
+
+    -- esto es derive (apartado 13)
+     kmRecorridos : Integer derive : 
+      self.viajeCoche->collect(v | v.kmAvanzados)->sum()
+
+    -- esto es derive (apartado 15) - SE USA CLOCK
+    enGarantia : Boolean derive : 
+      ((self.clock.NOW - self.fechaMatriculacion) <= 4 * 100) or -- No han pasado más de 4 años desde la matriculacion
+      -- Hay una revision en un taller oficial y aun le queda garantia
+      self.revisionCoche->exists(r | r.tallerRevision.oclIsTypeOf(TallerOficial) and (self.clock.NOW - r.fechaFin <= r.tallerRevision.oclAsType(TallerOficial).tiempoGarantia))
+
+    -- esto es derive (apartado 16) - SE USA CLOCK
+    necesitaMantenimiento : Boolean derive : 
+        -- Saco la fecha del último mantenimiento
+        let fechaUltimoMantenimiento : Integer = (self.revisionCoche->select(r | r.tipoRevision = TipoRevision::mantenimiento)->sortedBy(r | r.fechaFin)->last().fechaFin) in
+
+        ((self.clock.NOW - self.fechaMatriculacion) > 4 * 100) and -- Han pasado más de 4 años desde la matriculacion
+        ((self.revisionCoche->isEmpty()) or -- Si no tiene revisiones, le toca revisión
+          (self.clock.NOW - fechaUltimoMantenimiento >=  100)) -- Si las tiene, le toca si pasó 1 año desde la última de mantenimiento
+
+    -- indica cuantos km avanza al dia en los viajes
+    velocidadAlDia : Integer
+   
+  operations
+    comenzarViaje(r : Recorrido)
+      begin
+        -- Crear un nuevo viaje con los valores iniciales
+        declare nuevoViaje : Viaje;
+        nuevoViaje := new Viaje;
+        nuevoViaje.fechaSalida := self.clock.NOW;
+        -- Asociar el nuevo viaje con el coche y el recorrido
+        insert(self, nuevoViaje) into Viajado;
+        insert(r, nuevoViaje) into ViajeRecorrido;
+
+        -- Al haberse comenzado un viaje, el coche ya no está en una ciudad, ¡está viajando!
+        delete(self, self.ciudadCoche) from Ubicado;
+      end
+
+      -- Un coche comienza un viaje desde la ciudad en la que se encuentra
+      pre DesdeCiudadDondeSeEncuentra : (self.ciudadCoche = r.ciudadOrigen) 
+
+      -- Ahora hay un viaje más, ese viaje tiene los atributos anteriormente instanciados, 
+      -- el coche ya no está ubicado en una ciudad y hay un viaje cuyo recorrido es el de esta operacion
+      post ViajeCreado : ((self.viajeCoche->size() = self.viajeCoche@pre->size() + 1) and 
+                          (self.viajeCoche -> exists(v | v.fechaLlegada.isUndefined() and v.fechaSalida = self.clock.NOW and v.kmAvanzados = 0))) and
+                          self.ciudadCoche.isUndefined() and 
+                          self.viajeCoche->exists(v | v.recorridoViaje = r)
+
+    avanzar()
+      begin
+        -- Selecciona el viaje actual
+        declare viajeActual : Viaje;
+        viajeActual := self.viajeCoche->any(v | v.fechaLlegada.isUndefined());
+
+        viajeActual.kmAvanzados := viajeActual.kmAvanzados + self.velocidadAlDia;
+          
+        -- Si el viaje se completa, establece la fecha de llegada
+        if viajeActual.kmAvanzados >= viajeActual.recorridoViaje.numKm then
+          viajeActual.kmAvanzados := viajeActual.recorridoViaje.numKm;
+          viajeActual.fechaLlegada := self.clock.NOW;
+
+          -- El coche se debe parar y crear la relación de Ubicado en la ciudad final
+          insert(self, viajeActual.recorridoViaje.ciudadFinal) into Ubicado;
+        end;
+          
+      end
+      post ViajeSigue_O_ViajeFinalizado :
+          -- Postcondición 1: Si el viaje sigue en curso, kmAvanzados ha aumentado sin finalizar el viaje
+          (self.viajeCoche->exists(v | v.fechaLlegada.isUndefined() and v.kmAvanzados = v.kmAvanzados@pre + self.velocidadAlDia) and 
+          self.ciudadCoche.isUndefined()) 
+
+          or
+          -- Postcondición 2: Si el viaje se completa, el coche ha llegado a la ciudad final y tiene fecha de llegada
+          (self.viajeCoche->exists(v | v.fechaLlegada.isDefined() and v.kmAvanzados = v.recorridoViaje.numKm and v.fechaLlegada = self.clock.NOW and 
+          self.ciudadCoche = v.recorridoViaje.ciudadFinal))
+
+    action()
+      begin
+        -- Simplemente tengo que llamar a avanzar, para si el coche está en un viaje, que avance (si no lo está no hará nada ya que no se cumplirá la precond)
+        if (self.viajeCoche -> exists(v | v.fechaLlegada.isUndefined())) then -- El coche está realizando un viaje
+          self.avanzar()
+        end;
+      end
+    
+
+end
+
+class Ciudad
+  attributes
+    nombre : String
+    poblacion : Integer
+end
+
+associationclass Recorrido between    -- CiudadOrigen y CiudadFinal, creo que deberemos realizar 2 caminos por cada 2 ciudades
+    Ciudad [0..*] role ciudadOrigen -- Esto es para facilitar el modelador
+    Ciudad [0..*] role ciudadFinal
+  attributes
+    numKm : Integer
+end
+
+class Viaje 
+  attributes
+    fechaSalida : Integer
+    fechaLlegada : Integer
+
+    -- El sistema también va a almacenar los kilómetros de los viajes. 
+    -- Cuando un viaje está en curso, este atributo indica los kilómetros que lleva realizado. 
+    kmAvanzados : Integer init : 0
+end
+
+class Revision
+  attributes
+    fechaInicio : Integer
+    fechaFin : Integer
+    tipoRevision : TipoRevision
+end 
+
+class Taller
+end 
+
+class TallerOficial < Taller
+  attributes
+    tiempoGarantia : Integer
+end
+
+-------------- End of classes ------------------
+
+-------------- Relationships ------------------
+association Time between 
+  Clock [1] role clock
+  ActiveObject [*] role ao ordered
+end
+
+composition UbicacionTaller between
+    Ciudad [1] role ciudadTaller
+    Taller [0..*] role tallerCiudad
+end
+
+association Ubicado between
+    Coche [0..*] role cocheEstacionado
+    Ciudad [0..1] role ciudadCoche
+end
+
+association Revisado between
+    Coche [1] role cocheRevision
+    Revision [0..*] role revisionCoche
+end
+
+association Realizada between
+    Taller [1] role tallerRevision
+    Revision [0..*] role revisionTaller
+end
+
+association Viajado between
+    Coche [1] role cocheViaje
+    Viaje [0..*] role viajeCoche
+end
+
+association ViajeRecorrido between
+    Recorrido [1] role recorridoViaje
+    Viaje [0..*] role viajeRecorrido
+end
+
+-------------- End of relationships ------------------
+
+------------- Invariants -------------
+
+constraints
+-------------------------
+-- El formato para las invariantes será el siguiente:
+-- context [CLASE]
+  --- [ANOTACIONES ADICIONALES]
+  -- [Número de apartado en enunciado]. [Frase explícita del enunciado]
+  --- [ANOTACIONES ADICIONALES]
+  --inv [nombre del invariante]
+    -- [declaración del invariante]
+
+-- Los invariantes implícitos se indicarán en [Número de apartado en enunciado] con una ? 
+-- Si tienes dudas, hay un ejemplo justo abajo
+-------------------------
+
+
+context Clock
+  ---
+  -- ?. Debe haber, como mucho, un solo reloj en el sistema. 
+  ---
+  inv RelojEsUnico :     
+    Clock.allInstances()->size()=1
+
+
+context Recorrido
+  ---
+  -- 1. Cada ciudad debe estar al menos a 5 kilómetros de distancia de otra. 
+  ---
+  inv DistanciaEntreCiudadesAlMenosCinco :
+    self.numKm >= 5
+
+context Revision
+  ---
+  -- 4. Todas las revisiones deben tener lugar después de que el coche se matriculase
+  ---
+  inv RevisionDespuesDeMatriculacion :
+    self.cocheRevision.fechaMatriculacion < self.fechaInicio
+
+  ---
+  -- ?. Las fechas de una revisión deben ser válidas.
+  -- Para ser válidas, la fecha de inicio de una revisión es anterior a la fecha de finalización y todas las fechas deben ser positivas
+  -- Además, la fecha de inicio siempre debe estar definida
+  ---
+  inv FechasRevisionValidas : 
+    self.fechaInicio.isDefined() and self.fechaInicio >= 0 and 
+    (self.fechaFin.isDefined() implies (self.fechaInicio <= self.fechaFin and self.fechaFin>=0))
+
+context Ciudad
+  ---
+  -- 6. En cada ciudad habrá, a lo sumo, un taller oficial, pudiendo 
+  -- haber varios talleres no oficiales. 
+  --- se comprobará mirando si el taller es oficial, que solo exista uno
+  inv UnSoloTallerOficial :
+    self.tallerCiudad->select(t | t.oclIsTypeOf(TallerOficial))->size() <= 1 
+
+context Viaje
+  ---
+  -- 8. Si el coche está realizando actualmente algún viaje, dicho
+  -- viaje únicamente tendrá fecha de salida, pero no de llegada.
+  ---
+  inv ViajeEnCurso :
+    self.cocheViaje.ciudadCoche.isUndefined() implies self.fechaLlegada.isUndefined()
+
+  ---
+  -- ?. Las fechas de un viaje deben ser válidas.
+  -- Para ser válidas, la fecha de salida de un viaje es anterior a la fecha de llegada y todas las fechas deben ser positivas.
+  -- Además, la fecha de salida siempre debe estar definida.
+  -- También deben ser posteriores a la fecha de matriculación del vehículo que realiza el viaje.
+  ---
+  inv FechasViajeValidas :
+    self.fechaSalida.isDefined() and self.fechaSalida >= 0 and 
+    (self.fechaLlegada.isDefined() implies (self.fechaSalida <= self.fechaLlegada and self.fechaLlegada >= 0)) and
+    self.cocheViaje.fechaMatriculacion <= self.fechaSalida
+
+context Coche
+  ---
+  -- ?. La fecha de matriculación debe ser válida, es decir, debe ser positiva.
+  ---
+  inv FechaMatriculacionValida :
+    self.fechaMatriculacion >= 0
+
+  ---
+  -- 5. Como mucho, un coche se debe someter a una revisión, como máximo, en un momento dado. 
+  ---
+  inv UnaRevisionALaVez :
+    self.revisionCoche->select(r | r.fechaFin.isUndefined())->size() <= 1
+
+  ---
+  -- 7. Si un coche está siendo sometido a una revisión, entonces el coche debe encontrarse en 
+  -- la misma ciudad donde está el taller.
+  ---
+  inv CiudadCocheEnRevision_Igual_CiudadTaller :
+    self.revisionCoche->isEmpty() or  -- no tiene revisiones
+    self.revisionCoche->exists(r | r.fechaFin.isUndefined() implies self.ciudadCoche = r.tallerRevision.ciudadTaller) -- o si tiene, la revisión que está teniendo es en la misma ciudad
+    -- si el exists no encuentra nada, da correcto (según ChatGPT)
+  
+  --- 
+  -- 9. Un coche se encontrará en todo momento bien realizando un viaje determinado o bien en
+  -- una ciudad.
+  ---
+  inv CocheEnViajeOCiudad :
+    (self.viajeCoche->isEmpty() and self.ciudadCoche.isDefined()) or  -- si nunca ha hecho un viaje, está en una ciudad
+    (self.viajeCoche->exists(v | v.fechaLlegada.isUndefined()) and self.ciudadCoche.isUndefined()) or -- si está haciendo un viaje, no está en una ciudad
+    (self.ciudadCoche.isDefined() and not self.viajeCoche->exists(v | v.fechaLlegada.isUndefined())) -- si está en una ciudad, no está haciendo un viaje
+
+  ---
+  -- 10. Si el coche ha completado al menos un viaje y no se encuentra viajando, entonces debe
+  -- encontrarse en la ciudad a la que llegó en su último viaje.
+  ---
+  inv CocheTerminaEnCiudad :
+    (self.viajeCoche->isEmpty()) or   -- Tiene que dar correcto si ha completado 0 viajes
+    (not self.viajeCoche->exists(v | v.fechaLlegada.isUndefined()) implies -- si el coche no está en un viaje
+    (self.ciudadCoche = self.viajeCoche->sortedBy(v | v.fechaLlegada)->last().recorridoViaje.ciudadFinal)) -- la ciudad en la que está ahora es la ciudad a la que ha llegado en el último viaje
+
+  ---
+  -- 11. Dos viajes no pueden solaparse en el tiempo, es decir, un viaje debe ocurrir siempre 
+  -- después de otro, pudiendo la fecha de llegada de un viaje coincidir con la fecha de salida 
+  -- del siguiente. 
+  ---
+  inv ViajesNoSeSolapan :
+    let viajesOrdenados : OrderedSet(Viaje) = self.viajeCoche->sortedBy(v | v.fechaSalida) in -- Saco los viajes ordenados
+      (self.viajeCoche -> size() >= 2) implies -- Si tengo más de 2
+      (self.viajeCoche-> forAll(v1,v2 | viajesOrdenados->indexOf(v1) = 
+                                viajesOrdenados->indexOf(v2) - 1 implies ((v1.fechaLlegada <= v2.fechaSalida)))) -- basicamente, viaje[i].fechaLlegada < viaje[j].fechaSalida | i < j
+  ---
+  -- 12. Las ciudades de origen y destino de los viajes deben ser coherentes. Es decir, si un coche 
+  -- realiza un viaje desde la ciudad A hasta la ciudad B, el próximo viaje debe partir desde la ciudad B.
+  --- 
+  inv CiudadesCoherentes : 
+    let viajesOrdenados : OrderedSet(Viaje) = self.viajeCoche->sortedBy(v | v.fechaSalida) in -- Saco los viajes ordenados
+      (self.viajeCoche -> size() >= 2) implies -- Si tengo más de 2
+      (self.viajeCoche-> forAll(v1,v2 | viajesOrdenados->indexOf(v1) = 
+                                viajesOrdenados->indexOf(v2) - 1 implies (v1.recorridoViaje.ciudadFinal = v2.recorridoViaje.ciudadOrigen))) -- si llegas a una ciudad, en el siguiente viaje partes desde ella
+  ---
+  -- 14. ESTO NO ES UN INVARIANTE, ES UNA ASUNCIÓN QUE SE HACE PARA FACILITAR EL MODELADO
+  ---
+  ---
+  -- 15. ESTO NO ES UN INVARIANTE, ES EL DERIVE DE enGarantia
+  ---
+  ---
+  -- 16. ESTO NO ES UN INVARIANTE, ES EL DERIVE DE necesitaMantenimiento
+  ---
+-------------- End of invariants ------------------
+

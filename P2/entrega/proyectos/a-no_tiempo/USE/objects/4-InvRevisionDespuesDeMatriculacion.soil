@@ -1,0 +1,46 @@
+reset 
+    ---
+    -- 4. Todas las revisiones deben tener lugar después de que el coche se matriculase
+    ---
+    --inv RevisionDespuesDeMatriculacion :
+    --self.cocheRevision.fechaMatriculacion < self.fechaInicio
+
+
+-- creamos el coche que se va a someter a la revision 
+-- con una fecha de matriculacion > fecha de Inicio para que sea False
+!new Coche ( 'Audi_R8' )
+!Audi_R8.fechaMatriculacion := 55  
+
+-- creamos un taller para asociarlo a la revision del coche
+!new Taller ( 'PacoRueda' )
+
+-- creamos la revision a la que se va a someter el coche
+!new Revision ( 'ITV_Guadalhorce' )
+!ITV_Guadalhorce.fechaInicio := 54
+!ITV_Guadalhorce.fechaFin := 56
+
+-- creamos la ciudad en la que está ubicada el taller
+!new Ciudad ( 'Malaga' )
+!Malaga.nombre := 'Malaga'
+!Malaga.poblacion := 24000
+
+-- Creamos el reloj para cumplir las restricciones de multiplicidad
+
+!new Clock( 'reloj' )
+
+-- relaciones
+!insert(Audi_R8,ITV_Guadalhorce) into Revisado
+!insert(PacoRueda,ITV_Guadalhorce) into Realizada
+!insert(Malaga, PacoRueda) into UbicacionTaller
+!insert(Audi_R8, Malaga) into Ubicado
+!insert(reloj,Audi_R8) into Time
+
+
+--escenario 1: PARA QUE DE 'OK' DESCOMENTAR EL DE ABAJO Y COMENTAR LINEA 12
+---------------------------------------------------------------------------
+--!Audi_R8.fechaMatriculacion := 27 
+---------------------------------------------------------------------------
+--escenario 2: PARA EL CASO QUE fechaMatriculacion = fechaInicio, DEBERIA DE DAR FALSE
+---------------------------------------------------------------------------------------
+--!Audi_R8.fechaMatriculacion := 54 
+---------------------------------------------------------------------------------------

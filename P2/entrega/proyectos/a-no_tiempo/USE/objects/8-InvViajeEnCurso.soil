@@ -1,0 +1,45 @@
+reset
+    -- 8. Si el coche está realizando actualmente algún viaje, dicho
+    -- viaje únicamente tendrá fecha de salida, pero no de llegada.
+    
+    -- inv ViajeEnCurso :
+    -- self.cocheViaje.ciudadCoche.isUndefined() implies self.fechaLlegada.isUndefined()
+
+
+-- creamos las ciudades origen y destino
+!new Ciudad('Madrid')
+!Madrid.nombre := 'Madrid'
+!Madrid.poblacion := 3200000
+
+!new Ciudad('Valencia')
+!Valencia.nombre := 'Valencia'
+!Valencia.poblacion := 800000
+
+
+-- creamos el recorrido entre las ciudades
+!insert (Madrid, Valencia) into Recorrido
+!Recorrido1.numKm := 350
+
+-- a su vez creamos el coche con el que se va a hacer el recorrido
+!new Coche('BMW_X5')
+!BMW_X5.fechaMatriculacion := 28
+
+
+-- creamos el viaje
+!new Viaje('TravelToValencia')
+!TravelToValencia.fechaSalida := 50
+!TravelToValencia.fechaLlegada := 90
+
+-- Creamos el reloj para cumplir las restricciones de multiplicidad
+!new Clock( 'reloj' )
+
+--COMENTAR PARA QUE DE OK
+-----------------------------------------
+--!TravelToValencia.fechaLlegada := 55
+-----------------------------------------
+-- relaciones
+!insert(reloj,BMW_X5) into Time
+!insert (BMW_X5, TravelToValencia) into Viajado
+!insert (Recorrido1, TravelToValencia) into ViajeRecorrido
+
+

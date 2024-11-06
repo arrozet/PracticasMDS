@@ -1,0 +1,58 @@
+reset
+
+-- Coches
+!new Coche('Porsche_911_GT3_Paquete_Touring')
+!new Coche('Audi_RS3')
+
+-- Creamos el reloj para cumplir las restricciones de multiplicidad
+!new Clock( 'reloj' )
+-- Ciudades
+!new Ciudad('Malaga')
+!Malaga.nombre := 'Malaga'
+!Malaga.poblacion := 10000000
+
+!new Ciudad('Stalingrado')
+!Stalingrado.nombre := 'Stalingrado'
+!Stalingrado.poblacion := 777
+
+!new Ciudad('Washington_DC')
+!Washington_DC.nombre := 'Washington DC'
+!Washington_DC.poblacion := 1
+
+-- Crear Viajes y asociarlos a los coches
+!new Viaje('Viaje_Porsche_1')
+!Viaje_Porsche_1.fechaSalida := 1
+!Viaje_Porsche_1.fechaLlegada := 22
+!insert(Porsche_911_GT3_Paquete_Touring, Viaje_Porsche_1) into Viajado
+
+!new Viaje('Viaje_Porsche_2')
+!Viaje_Porsche_2.fechaSalida := 22
+!Viaje_Porsche_2.fechaLlegada := 25
+!insert(Porsche_911_GT3_Paquete_Touring, Viaje_Porsche_2) into Viajado
+
+!new Viaje('Viaje_Audi_1')
+!Viaje_Audi_1.fechaSalida := 2
+!Viaje_Audi_1.fechaLlegada := 12
+!insert(Audi_RS3, Viaje_Audi_1) into Viajado
+
+!insert (reloj,Porsche_911_GT3_Paquete_Touring) into Time
+!insert (reloj, Audi_RS3) into Time
+
+-- Recorridos
+!insert(Malaga,Stalingrado) into Recorrido
+!Recorrido1.numKm := 5000
+
+!insert(Stalingrado,Washington_DC) into Recorrido
+!Recorrido2.numKm := 10000
+
+!insert(Malaga,Washington_DC) into Recorrido
+!Recorrido3.numKm := 5
+
+-- Asociar recorridos con viajes
+!insert(Recorrido1, Viaje_Porsche_1) into ViajeRecorrido
+!insert(Recorrido2, Viaje_Porsche_2) into ViajeRecorrido
+!insert(Recorrido3, Viaje_Audi_1) into ViajeRecorrido
+
+-- Los invariantes CocheTerminaEnCiudad y ViajeEnCurso dan false porque para que den True
+-- hace falta implementar operaciones que modifiquen las relaciones (relación de Ubicado, por ejemplo)
+

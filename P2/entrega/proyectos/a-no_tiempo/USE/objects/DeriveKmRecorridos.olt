@@ -1,0 +1,1254 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<diagram_Layout version="13">
+    <diagramOptions>
+        <autolayout>false</autolayout>
+        <antialiasing>false</antialiasing>
+        <showassocnames>false</showassocnames>
+        <showattributes>true</showattributes>
+        <showmultiplicities>false</showmultiplicities>
+        <showoperations>false</showoperations>
+        <showrolenames>true</showrolenames>
+        <showgrid>false</showgrid>
+        <ShowStates>false</ShowStates>
+    </diagramOptions>
+    <node id="Recorrido3" sizeCalculated="true" type="Object">
+        <name>Recorrido3</name>
+        <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToCorner">
+            <userOffsetX>66.0</userOffsetX>
+            <userOffsetY>-3.0</userOffsetY>
+            <basisDeltaX>ABSOLUTE</basisDeltaX>
+            <deltaX>0.0</deltaX>
+            <maxDeltaX>1.7976931348623157E308</maxDeltaX>
+            <basisDeltaY>ABSOLUTE</basisDeltaY>
+            <deltaY>-54.0</deltaY>
+            <maxDeltaY>1.7976931348623157E308</maxDeltaY>
+            <corner>NORTH</corner>
+            <relativeNodeId>Recorrido3 [Recorrido : (ciudadOrigen:Malaga, ciudadFinal:Washington_DC)]::WayPoint::-1</relativeNodeId>
+        </strategy>
+        <hidden>false</hidden>
+    </node>
+    <node id="Washington_DC" sizeCalculated="true" type="Object">
+        <name>Washington_DC</name>
+        <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyFixed">
+            <x>223.56530498739323</x>
+            <y>208.73617435868317</y>
+        </strategy>
+        <hidden>false</hidden>
+    </node>
+    <node id="Audi_RS3" sizeCalculated="true" type="Object">
+        <name>Audi_RS3</name>
+        <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyFixed">
+            <x>772.1735436191805</x>
+            <y>238.80538710998496</y>
+        </strategy>
+        <hidden>false</hidden>
+    </node>
+    <node id="Recorrido1" sizeCalculated="true" type="Object">
+        <name>Recorrido1</name>
+        <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToCorner">
+            <userOffsetX>-3.0</userOffsetX>
+            <userOffsetY>-7.0</userOffsetY>
+            <basisDeltaX>ABSOLUTE</basisDeltaX>
+            <deltaX>0.0</deltaX>
+            <maxDeltaX>1.7976931348623157E308</maxDeltaX>
+            <basisDeltaY>ABSOLUTE</basisDeltaY>
+            <deltaY>-54.0</deltaY>
+            <maxDeltaY>1.7976931348623157E308</maxDeltaY>
+            <corner>NORTH</corner>
+            <relativeNodeId>Recorrido1 [Recorrido : (ciudadOrigen:Malaga, ciudadFinal:Stalingrado)]::WayPoint::-1</relativeNodeId>
+        </strategy>
+        <hidden>false</hidden>
+    </node>
+    <node id="Recorrido2" sizeCalculated="true" type="Object">
+        <name>Recorrido2</name>
+        <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToCorner">
+            <userOffsetX>-109.0</userOffsetX>
+            <userOffsetY>-32.0</userOffsetY>
+            <basisDeltaX>ABSOLUTE</basisDeltaX>
+            <deltaX>0.0</deltaX>
+            <maxDeltaX>1.7976931348623157E308</maxDeltaX>
+            <basisDeltaY>ABSOLUTE</basisDeltaY>
+            <deltaY>-54.0</deltaY>
+            <maxDeltaY>1.7976931348623157E308</maxDeltaY>
+            <corner>NORTH</corner>
+            <relativeNodeId>Recorrido2 [Recorrido : (ciudadFinal:Washington_DC, ciudadOrigen:Stalingrado)]::WayPoint::-1</relativeNodeId>
+        </strategy>
+        <hidden>false</hidden>
+    </node>
+    <node id="Viaje_Porsche_2" sizeCalculated="true" type="Object">
+        <name>Viaje_Porsche_2</name>
+        <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyFixed">
+            <x>121.83129435892465</x>
+            <y>319.77358151219084</y>
+        </strategy>
+        <hidden>false</hidden>
+    </node>
+    <node id="Porsche_911_GT3_Paquete_Touring" sizeCalculated="true" type="Object">
+        <name>Porsche_911_GT3_Paquete_Touring</name>
+        <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyFixed">
+            <x>444.7618018205179</x>
+            <y>302.94307964048204</y>
+        </strategy>
+        <hidden>false</hidden>
+    </node>
+    <node id="Viaje_Porsche_1" sizeCalculated="true" type="Object">
+        <name>Viaje_Porsche_1</name>
+        <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyFixed">
+            <x>499.6072856865618</x>
+            <y>215.86224157879622</y>
+        </strategy>
+        <hidden>false</hidden>
+    </node>
+    <node id="Viaje_Audi_1" sizeCalculated="true" type="Object">
+        <name>Viaje_Audi_1</name>
+        <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyFixed">
+            <x>796.6915120378077</x>
+            <y>139.76192001607433</y>
+        </strategy>
+        <hidden>false</hidden>
+    </node>
+    <node id="Malaga" sizeCalculated="true" type="Object">
+        <name>Malaga</name>
+        <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyFixed">
+            <x>775.250529301376</x>
+            <y>17.863689105370668</y>
+        </strategy>
+        <hidden>false</hidden>
+    </node>
+    <node id="Stalingrado" sizeCalculated="true" type="Object">
+        <name>Stalingrado</name>
+        <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyFixed">
+            <x>234.49576339271994</x>
+            <y>17.525516967060923</y>
+        </strategy>
+        <hidden>false</hidden>
+    </node>
+    <edge type="BinaryEdge">
+        <source>Recorrido1</source>
+        <target>Viaje_Porsche_1</target>
+        <name>ViajeRecorrido</name>
+        <properties>
+            <edgeproperty
+                id="[ViajeRecorrido : (recorridoViaje:Recorrido1 [Recorrido : (ciudadOrigen:Malaga, ciudadFinal:Stalingrado)], viajeRecorrido:Viaje_Porsche_1)]::source::multiplicity"
+                sizeCalculated="true" type="multiplicity"
+                userDefined="false" visible="true">
+                <name>1</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                    <attached>[ViajeRecorrido : (recorridoViaje:Recorrido1 [Recorrido : (ciudadOrigen:Malaga, ciudadFinal:Stalingrado)], viajeRecorrido:Viaje_Porsche_1)]::WayPoint::0</attached>
+                    <offset_x>8</offset_x>
+                    <offset_y>8</offset_y>
+                    <placement>BOTTOM</placement>
+                </strategy>
+                <hidden>false</hidden>
+            </edgeproperty>
+            <edgeproperty
+                id="[ViajeRecorrido : (recorridoViaje:Recorrido1 [Recorrido : (ciudadOrigen:Malaga, ciudadFinal:Stalingrado)], viajeRecorrido:Viaje_Porsche_1)]::source::rolename"
+                sizeCalculated="true" type="rolename" userDefined="true" visible="true">
+                <name>recorridoViaje</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
+                    <userOffsetX>7.0</userOffsetX>
+                    <userOffsetY>3.0</userOffsetY>
+                    <attached>[ViajeRecorrido : (recorridoViaje:Recorrido1 [Recorrido : (ciudadOrigen:Malaga, ciudadFinal:Stalingrado)], viajeRecorrido:Viaje_Porsche_1)]::WayPoint::0</attached>
+                    <offset_x>8</offset_x>
+                    <offset_y>8</offset_y>
+                    <placement>TOP</placement>
+                </strategy>
+                <hidden>false</hidden>
+            </edgeproperty>
+            <edgeproperty
+                id="[ViajeRecorrido : (recorridoViaje:Recorrido1 [Recorrido : (ciudadOrigen:Malaga, ciudadFinal:Stalingrado)], viajeRecorrido:Viaje_Porsche_1)]::AssociationName"
+                sizeCalculated="true" type="associationName"
+                userDefined="false" visible="true">
+                <name>ViajeRecorrido</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyInBetween">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                    <offsetX>0.0</offsetX>
+                    <offsetY>-10.0</offsetY>
+                    <related length="2">
+                        <related0>[ViajeRecorrido : (recorridoViaje:Recorrido1 [Recorrido : (ciudadOrigen:Malaga, ciudadFinal:Stalingrado)], viajeRecorrido:Viaje_Porsche_1)]::WayPoint::0</related0>
+                        <related1>[ViajeRecorrido : (recorridoViaje:Recorrido1 [Recorrido : (ciudadOrigen:Malaga, ciudadFinal:Stalingrado)], viajeRecorrido:Viaje_Porsche_1)]::WayPoint::1</related1>
+                    </related>
+                </strategy>
+                <hidden>false</hidden>
+            </edgeproperty>
+            <edgeproperty
+                id="[ViajeRecorrido : (recorridoViaje:Recorrido1 [Recorrido : (ciudadOrigen:Malaga, ciudadFinal:Stalingrado)], viajeRecorrido:Viaje_Porsche_1)]::target::rolename"
+                sizeCalculated="true" type="rolename" userDefined="true" visible="true">
+                <name>viajeRecorrido</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
+                    <userOffsetX>8.0</userOffsetX>
+                    <userOffsetY>4.0</userOffsetY>
+                    <attached>[ViajeRecorrido : (recorridoViaje:Recorrido1 [Recorrido : (ciudadOrigen:Malaga, ciudadFinal:Stalingrado)], viajeRecorrido:Viaje_Porsche_1)]::WayPoint::1</attached>
+                    <offset_x>8</offset_x>
+                    <offset_y>8</offset_y>
+                    <placement>TOP</placement>
+                </strategy>
+                <hidden>false</hidden>
+            </edgeproperty>
+            <edgeproperty
+                id="[ViajeRecorrido : (recorridoViaje:Recorrido1 [Recorrido : (ciudadOrigen:Malaga, ciudadFinal:Stalingrado)], viajeRecorrido:Viaje_Porsche_1)]::target::multiplicity"
+                sizeCalculated="true" type="multiplicity"
+                userDefined="false" visible="true">
+                <name>*</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                    <attached>[ViajeRecorrido : (recorridoViaje:Recorrido1 [Recorrido : (ciudadOrigen:Malaga, ciudadFinal:Stalingrado)], viajeRecorrido:Viaje_Porsche_1)]::WayPoint::1</attached>
+                    <offset_x>8</offset_x>
+                    <offset_y>8</offset_y>
+                    <placement>BOTTOM</placement>
+                </strategy>
+                <hidden>false</hidden>
+            </edgeproperty>
+        </properties>
+        <waypoints>
+            <edgeproperty
+                id="[ViajeRecorrido : (recorridoViaje:Recorrido1 [Recorrido : (ciudadOrigen:Malaga, ciudadFinal:Stalingrado)], viajeRecorrido:Viaje_Porsche_1)]::WayPoint::0"
+                sizeCalculated="true" type="WayPoint"
+                userDefined="false" visible="true">
+                <name>0</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyAttachedIntersection">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                </strategy>
+                <id>0</id>
+                <specialid>1</specialid>
+                <hidden>false</hidden>
+            </edgeproperty>
+            <edgeproperty
+                id="[ViajeRecorrido : (recorridoViaje:Recorrido1 [Recorrido : (ciudadOrigen:Malaga, ciudadFinal:Stalingrado)], viajeRecorrido:Viaje_Porsche_1)]::WayPoint::1"
+                sizeCalculated="true" type="WayPoint"
+                userDefined="false" visible="true">
+                <name>1</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyAttachedIntersection">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                </strategy>
+                <id>1</id>
+                <specialid>2</specialid>
+                <hidden>false</hidden>
+            </edgeproperty>
+        </waypoints>
+        <hidden>false</hidden>
+        <linkValue>[ViajeRecorrido : (recorridoViaje:Recorrido1 [Recorrido : (ciudadOrigen:Malaga, ciudadFinal:Stalingrado)], viajeRecorrido:Viaje_Porsche_1)]</linkValue>
+    </edge>
+    <edge type="BinaryEdge">
+        <source>Audi_RS3</source>
+        <target>Viaje_Audi_1</target>
+        <name>Viajado</name>
+        <properties>
+            <edgeproperty
+                id="[Viajado : (cocheViaje:Audi_RS3, viajeCoche:Viaje_Audi_1)]::source::rolename"
+                sizeCalculated="true" type="rolename" userDefined="true" visible="true">
+                <name>cocheViaje</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
+                    <userOffsetX>66.0</userOffsetX>
+                    <userOffsetY>6.0</userOffsetY>
+                    <attached>[Viajado : (cocheViaje:Audi_RS3, viajeCoche:Viaje_Audi_1)]::WayPoint::0</attached>
+                    <offset_x>8</offset_x>
+                    <offset_y>8</offset_y>
+                    <placement>TOP</placement>
+                </strategy>
+                <hidden>false</hidden>
+            </edgeproperty>
+            <edgeproperty
+                id="[Viajado : (cocheViaje:Audi_RS3, viajeCoche:Viaje_Audi_1)]::source::multiplicity"
+                sizeCalculated="true" type="multiplicity"
+                userDefined="false" visible="true">
+                <name>1</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                    <attached>[Viajado : (cocheViaje:Audi_RS3, viajeCoche:Viaje_Audi_1)]::WayPoint::0</attached>
+                    <offset_x>8</offset_x>
+                    <offset_y>8</offset_y>
+                    <placement>BOTTOM</placement>
+                </strategy>
+                <hidden>false</hidden>
+            </edgeproperty>
+            <edgeproperty
+                id="[Viajado : (cocheViaje:Audi_RS3, viajeCoche:Viaje_Audi_1)]::AssociationName"
+                sizeCalculated="true" type="associationName"
+                userDefined="false" visible="true">
+                <name>Viajado</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyInBetween">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                    <offsetX>0.0</offsetX>
+                    <offsetY>-10.0</offsetY>
+                    <related length="2">
+                        <related0>[Viajado : (cocheViaje:Audi_RS3, viajeCoche:Viaje_Audi_1)]::WayPoint::0</related0>
+                        <related1>[Viajado : (cocheViaje:Audi_RS3, viajeCoche:Viaje_Audi_1)]::WayPoint::1</related1>
+                    </related>
+                </strategy>
+                <hidden>false</hidden>
+            </edgeproperty>
+            <edgeproperty
+                id="[Viajado : (cocheViaje:Audi_RS3, viajeCoche:Viaje_Audi_1)]::target::rolename"
+                sizeCalculated="true" type="rolename" userDefined="true" visible="true">
+                <name>viajeCoche</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
+                    <userOffsetX>7.0</userOffsetX>
+                    <userOffsetY>2.0</userOffsetY>
+                    <attached>[Viajado : (cocheViaje:Audi_RS3, viajeCoche:Viaje_Audi_1)]::WayPoint::1</attached>
+                    <offset_x>8</offset_x>
+                    <offset_y>8</offset_y>
+                    <placement>TOP</placement>
+                </strategy>
+                <hidden>false</hidden>
+            </edgeproperty>
+            <edgeproperty
+                id="[Viajado : (cocheViaje:Audi_RS3, viajeCoche:Viaje_Audi_1)]::target::multiplicity"
+                sizeCalculated="true" type="multiplicity"
+                userDefined="false" visible="true">
+                <name>*</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                    <attached>[Viajado : (cocheViaje:Audi_RS3, viajeCoche:Viaje_Audi_1)]::WayPoint::1</attached>
+                    <offset_x>8</offset_x>
+                    <offset_y>8</offset_y>
+                    <placement>BOTTOM</placement>
+                </strategy>
+                <hidden>false</hidden>
+            </edgeproperty>
+        </properties>
+        <waypoints>
+            <edgeproperty
+                id="[Viajado : (cocheViaje:Audi_RS3, viajeCoche:Viaje_Audi_1)]::WayPoint::0"
+                sizeCalculated="true" type="WayPoint"
+                userDefined="false" visible="true">
+                <name>0</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyAttachedIntersection">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                </strategy>
+                <id>0</id>
+                <specialid>1</specialid>
+                <hidden>false</hidden>
+            </edgeproperty>
+            <edgeproperty
+                id="[Viajado : (cocheViaje:Audi_RS3, viajeCoche:Viaje_Audi_1)]::WayPoint::1"
+                sizeCalculated="true" type="WayPoint"
+                userDefined="false" visible="true">
+                <name>1</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyAttachedIntersection">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                </strategy>
+                <id>1</id>
+                <specialid>2</specialid>
+                <hidden>false</hidden>
+            </edgeproperty>
+        </waypoints>
+        <hidden>false</hidden>
+        <linkValue>[Viajado : (cocheViaje:Audi_RS3, viajeCoche:Viaje_Audi_1)]</linkValue>
+    </edge>
+    <edge type="BinaryEdge">
+        <source>Recorrido2</source>
+        <target>Viaje_Porsche_2</target>
+        <name>ViajeRecorrido</name>
+        <properties>
+            <edgeproperty
+                id="[ViajeRecorrido : (recorridoViaje:Recorrido2 [Recorrido : (ciudadFinal:Washington_DC, ciudadOrigen:Stalingrado)], viajeRecorrido:Viaje_Porsche_2)]::source::rolename"
+                sizeCalculated="true" type="rolename" userDefined="true" visible="true">
+                <name>recorridoViaje</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
+                    <userOffsetX>2.0</userOffsetX>
+                    <userOffsetY>10.0</userOffsetY>
+                    <attached>[ViajeRecorrido : (recorridoViaje:Recorrido2 [Recorrido : (ciudadFinal:Washington_DC, ciudadOrigen:Stalingrado)], viajeRecorrido:Viaje_Porsche_2)]::WayPoint::0</attached>
+                    <offset_x>8</offset_x>
+                    <offset_y>8</offset_y>
+                    <placement>TOP</placement>
+                </strategy>
+                <hidden>false</hidden>
+            </edgeproperty>
+            <edgeproperty
+                id="[ViajeRecorrido : (recorridoViaje:Recorrido2 [Recorrido : (ciudadFinal:Washington_DC, ciudadOrigen:Stalingrado)], viajeRecorrido:Viaje_Porsche_2)]::source::multiplicity"
+                sizeCalculated="true" type="multiplicity"
+                userDefined="false" visible="true">
+                <name>1</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                    <attached>[ViajeRecorrido : (recorridoViaje:Recorrido2 [Recorrido : (ciudadFinal:Washington_DC, ciudadOrigen:Stalingrado)], viajeRecorrido:Viaje_Porsche_2)]::WayPoint::0</attached>
+                    <offset_x>8</offset_x>
+                    <offset_y>8</offset_y>
+                    <placement>BOTTOM</placement>
+                </strategy>
+                <hidden>false</hidden>
+            </edgeproperty>
+            <edgeproperty
+                id="[ViajeRecorrido : (recorridoViaje:Recorrido2 [Recorrido : (ciudadFinal:Washington_DC, ciudadOrigen:Stalingrado)], viajeRecorrido:Viaje_Porsche_2)]::AssociationName"
+                sizeCalculated="true" type="associationName"
+                userDefined="false" visible="true">
+                <name>ViajeRecorrido</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyInBetween">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                    <offsetX>0.0</offsetX>
+                    <offsetY>-10.0</offsetY>
+                    <related length="2">
+                        <related0>[ViajeRecorrido : (recorridoViaje:Recorrido2 [Recorrido : (ciudadFinal:Washington_DC, ciudadOrigen:Stalingrado)], viajeRecorrido:Viaje_Porsche_2)]::WayPoint::0</related0>
+                        <related1>[ViajeRecorrido : (recorridoViaje:Recorrido2 [Recorrido : (ciudadFinal:Washington_DC, ciudadOrigen:Stalingrado)], viajeRecorrido:Viaje_Porsche_2)]::WayPoint::1</related1>
+                    </related>
+                </strategy>
+                <hidden>false</hidden>
+            </edgeproperty>
+            <edgeproperty
+                id="[ViajeRecorrido : (recorridoViaje:Recorrido2 [Recorrido : (ciudadFinal:Washington_DC, ciudadOrigen:Stalingrado)], viajeRecorrido:Viaje_Porsche_2)]::target::rolename"
+                sizeCalculated="true" type="rolename"
+                userDefined="false" visible="true">
+                <name>viajeRecorrido</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                    <attached>[ViajeRecorrido : (recorridoViaje:Recorrido2 [Recorrido : (ciudadFinal:Washington_DC, ciudadOrigen:Stalingrado)], viajeRecorrido:Viaje_Porsche_2)]::WayPoint::1</attached>
+                    <offset_x>8</offset_x>
+                    <offset_y>8</offset_y>
+                    <placement>TOP</placement>
+                </strategy>
+                <hidden>false</hidden>
+            </edgeproperty>
+            <edgeproperty
+                id="[ViajeRecorrido : (recorridoViaje:Recorrido2 [Recorrido : (ciudadFinal:Washington_DC, ciudadOrigen:Stalingrado)], viajeRecorrido:Viaje_Porsche_2)]::target::multiplicity"
+                sizeCalculated="true" type="multiplicity"
+                userDefined="false" visible="true">
+                <name>*</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                    <attached>[ViajeRecorrido : (recorridoViaje:Recorrido2 [Recorrido : (ciudadFinal:Washington_DC, ciudadOrigen:Stalingrado)], viajeRecorrido:Viaje_Porsche_2)]::WayPoint::1</attached>
+                    <offset_x>8</offset_x>
+                    <offset_y>8</offset_y>
+                    <placement>BOTTOM</placement>
+                </strategy>
+                <hidden>false</hidden>
+            </edgeproperty>
+        </properties>
+        <waypoints>
+            <edgeproperty
+                id="[ViajeRecorrido : (recorridoViaje:Recorrido2 [Recorrido : (ciudadFinal:Washington_DC, ciudadOrigen:Stalingrado)], viajeRecorrido:Viaje_Porsche_2)]::WayPoint::0"
+                sizeCalculated="true" type="WayPoint"
+                userDefined="false" visible="true">
+                <name>0</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyAttachedIntersection">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                </strategy>
+                <id>0</id>
+                <specialid>1</specialid>
+                <hidden>false</hidden>
+            </edgeproperty>
+            <edgeproperty
+                id="[ViajeRecorrido : (recorridoViaje:Recorrido2 [Recorrido : (ciudadFinal:Washington_DC, ciudadOrigen:Stalingrado)], viajeRecorrido:Viaje_Porsche_2)]::WayPoint::1"
+                sizeCalculated="true" type="WayPoint"
+                userDefined="false" visible="true">
+                <name>1</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyAttachedIntersection">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                </strategy>
+                <id>1</id>
+                <specialid>2</specialid>
+                <hidden>false</hidden>
+            </edgeproperty>
+        </waypoints>
+        <hidden>false</hidden>
+        <linkValue>[ViajeRecorrido : (recorridoViaje:Recorrido2 [Recorrido : (ciudadFinal:Washington_DC, ciudadOrigen:Stalingrado)], viajeRecorrido:Viaje_Porsche_2)]</linkValue>
+    </edge>
+    <edge type="BinaryEdge">
+        <source>Recorrido3</source>
+        <target>Viaje_Audi_1</target>
+        <name>ViajeRecorrido</name>
+        <properties>
+            <edgeproperty
+                id="[ViajeRecorrido : (recorridoViaje:Recorrido3 [Recorrido : (ciudadOrigen:Malaga, ciudadFinal:Washington_DC)], viajeRecorrido:Viaje_Audi_1)]::source::multiplicity"
+                sizeCalculated="true" type="multiplicity"
+                userDefined="false" visible="true">
+                <name>1</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                    <attached>[ViajeRecorrido : (recorridoViaje:Recorrido3 [Recorrido : (ciudadOrigen:Malaga, ciudadFinal:Washington_DC)], viajeRecorrido:Viaje_Audi_1)]::WayPoint::0</attached>
+                    <offset_x>8</offset_x>
+                    <offset_y>8</offset_y>
+                    <placement>BOTTOM</placement>
+                </strategy>
+                <hidden>false</hidden>
+            </edgeproperty>
+            <edgeproperty
+                id="[ViajeRecorrido : (recorridoViaje:Recorrido3 [Recorrido : (ciudadOrigen:Malaga, ciudadFinal:Washington_DC)], viajeRecorrido:Viaje_Audi_1)]::source::rolename"
+                sizeCalculated="true" type="rolename" userDefined="true" visible="true">
+                <name>recorridoViaje</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>10.0</userOffsetY>
+                    <attached>[ViajeRecorrido : (recorridoViaje:Recorrido3 [Recorrido : (ciudadOrigen:Malaga, ciudadFinal:Washington_DC)], viajeRecorrido:Viaje_Audi_1)]::WayPoint::0</attached>
+                    <offset_x>8</offset_x>
+                    <offset_y>8</offset_y>
+                    <placement>TOP</placement>
+                </strategy>
+                <hidden>false</hidden>
+            </edgeproperty>
+            <edgeproperty
+                id="[ViajeRecorrido : (recorridoViaje:Recorrido3 [Recorrido : (ciudadOrigen:Malaga, ciudadFinal:Washington_DC)], viajeRecorrido:Viaje_Audi_1)]::AssociationName"
+                sizeCalculated="true" type="associationName"
+                userDefined="false" visible="true">
+                <name>ViajeRecorrido</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyInBetween">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                    <offsetX>0.0</offsetX>
+                    <offsetY>-10.0</offsetY>
+                    <related length="2">
+                        <related0>[ViajeRecorrido : (recorridoViaje:Recorrido3 [Recorrido : (ciudadOrigen:Malaga, ciudadFinal:Washington_DC)], viajeRecorrido:Viaje_Audi_1)]::WayPoint::0</related0>
+                        <related1>[ViajeRecorrido : (recorridoViaje:Recorrido3 [Recorrido : (ciudadOrigen:Malaga, ciudadFinal:Washington_DC)], viajeRecorrido:Viaje_Audi_1)]::WayPoint::1</related1>
+                    </related>
+                </strategy>
+                <hidden>false</hidden>
+            </edgeproperty>
+            <edgeproperty
+                id="[ViajeRecorrido : (recorridoViaje:Recorrido3 [Recorrido : (ciudadOrigen:Malaga, ciudadFinal:Washington_DC)], viajeRecorrido:Viaje_Audi_1)]::target::multiplicity"
+                sizeCalculated="true" type="multiplicity"
+                userDefined="false" visible="true">
+                <name>*</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                    <attached>[ViajeRecorrido : (recorridoViaje:Recorrido3 [Recorrido : (ciudadOrigen:Malaga, ciudadFinal:Washington_DC)], viajeRecorrido:Viaje_Audi_1)]::WayPoint::1</attached>
+                    <offset_x>8</offset_x>
+                    <offset_y>8</offset_y>
+                    <placement>BOTTOM</placement>
+                </strategy>
+                <hidden>false</hidden>
+            </edgeproperty>
+            <edgeproperty
+                id="[ViajeRecorrido : (recorridoViaje:Recorrido3 [Recorrido : (ciudadOrigen:Malaga, ciudadFinal:Washington_DC)], viajeRecorrido:Viaje_Audi_1)]::target::rolename"
+                sizeCalculated="true" type="rolename" userDefined="true" visible="true">
+                <name>viajeRecorrido</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
+                    <userOffsetX>9.0</userOffsetX>
+                    <userOffsetY>-9.0</userOffsetY>
+                    <attached>[ViajeRecorrido : (recorridoViaje:Recorrido3 [Recorrido : (ciudadOrigen:Malaga, ciudadFinal:Washington_DC)], viajeRecorrido:Viaje_Audi_1)]::WayPoint::1</attached>
+                    <offset_x>8</offset_x>
+                    <offset_y>8</offset_y>
+                    <placement>TOP</placement>
+                </strategy>
+                <hidden>false</hidden>
+            </edgeproperty>
+        </properties>
+        <waypoints>
+            <edgeproperty
+                id="[ViajeRecorrido : (recorridoViaje:Recorrido3 [Recorrido : (ciudadOrigen:Malaga, ciudadFinal:Washington_DC)], viajeRecorrido:Viaje_Audi_1)]::WayPoint::0"
+                sizeCalculated="true" type="WayPoint"
+                userDefined="false" visible="true">
+                <name>0</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyAttachedIntersection">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                </strategy>
+                <id>0</id>
+                <specialid>1</specialid>
+                <hidden>false</hidden>
+            </edgeproperty>
+            <edgeproperty
+                id="[ViajeRecorrido : (recorridoViaje:Recorrido3 [Recorrido : (ciudadOrigen:Malaga, ciudadFinal:Washington_DC)], viajeRecorrido:Viaje_Audi_1)]::WayPoint::1"
+                sizeCalculated="true" type="WayPoint"
+                userDefined="false" visible="true">
+                <name>1</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyAttachedIntersection">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                </strategy>
+                <id>1</id>
+                <specialid>2</specialid>
+                <hidden>false</hidden>
+            </edgeproperty>
+        </waypoints>
+        <hidden>false</hidden>
+        <linkValue>[ViajeRecorrido : (recorridoViaje:Recorrido3 [Recorrido : (ciudadOrigen:Malaga, ciudadFinal:Washington_DC)], viajeRecorrido:Viaje_Audi_1)]</linkValue>
+    </edge>
+    <edge type="BinaryEdge">
+        <source>Porsche_911_GT3_Paquete_Touring</source>
+        <target>Viaje_Porsche_2</target>
+        <name>Viajado</name>
+        <properties>
+            <edgeproperty
+                id="[Viajado : (cocheViaje:Porsche_911_GT3_Paquete_Touring, viajeCoche:Viaje_Porsche_2)]::source::rolename"
+                sizeCalculated="true" type="rolename" userDefined="true" visible="true">
+                <name>cocheViaje</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
+                    <userOffsetX>2.0</userOffsetX>
+                    <userOffsetY>10.0</userOffsetY>
+                    <attached>[Viajado : (cocheViaje:Porsche_911_GT3_Paquete_Touring, viajeCoche:Viaje_Porsche_2)]::WayPoint::0</attached>
+                    <offset_x>8</offset_x>
+                    <offset_y>8</offset_y>
+                    <placement>TOP</placement>
+                </strategy>
+                <hidden>false</hidden>
+            </edgeproperty>
+            <edgeproperty
+                id="[Viajado : (cocheViaje:Porsche_911_GT3_Paquete_Touring, viajeCoche:Viaje_Porsche_2)]::source::multiplicity"
+                sizeCalculated="true" type="multiplicity"
+                userDefined="false" visible="true">
+                <name>1</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                    <attached>[Viajado : (cocheViaje:Porsche_911_GT3_Paquete_Touring, viajeCoche:Viaje_Porsche_2)]::WayPoint::0</attached>
+                    <offset_x>8</offset_x>
+                    <offset_y>8</offset_y>
+                    <placement>BOTTOM</placement>
+                </strategy>
+                <hidden>false</hidden>
+            </edgeproperty>
+            <edgeproperty
+                id="[Viajado : (cocheViaje:Porsche_911_GT3_Paquete_Touring, viajeCoche:Viaje_Porsche_2)]::AssociationName"
+                sizeCalculated="true" type="associationName"
+                userDefined="false" visible="true">
+                <name>Viajado</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyInBetween">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                    <offsetX>0.0</offsetX>
+                    <offsetY>-10.0</offsetY>
+                    <related length="2">
+                        <related0>[Viajado : (cocheViaje:Porsche_911_GT3_Paquete_Touring, viajeCoche:Viaje_Porsche_2)]::WayPoint::0</related0>
+                        <related1>[Viajado : (cocheViaje:Porsche_911_GT3_Paquete_Touring, viajeCoche:Viaje_Porsche_2)]::WayPoint::1</related1>
+                    </related>
+                </strategy>
+                <hidden>false</hidden>
+            </edgeproperty>
+            <edgeproperty
+                id="[Viajado : (cocheViaje:Porsche_911_GT3_Paquete_Touring, viajeCoche:Viaje_Porsche_2)]::target::multiplicity"
+                sizeCalculated="true" type="multiplicity"
+                userDefined="false" visible="true">
+                <name>*</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                    <attached>[Viajado : (cocheViaje:Porsche_911_GT3_Paquete_Touring, viajeCoche:Viaje_Porsche_2)]::WayPoint::1</attached>
+                    <offset_x>8</offset_x>
+                    <offset_y>8</offset_y>
+                    <placement>BOTTOM</placement>
+                </strategy>
+                <hidden>false</hidden>
+            </edgeproperty>
+            <edgeproperty
+                id="[Viajado : (cocheViaje:Porsche_911_GT3_Paquete_Touring, viajeCoche:Viaje_Porsche_2)]::target::rolename"
+                sizeCalculated="true" type="rolename" userDefined="true" visible="true">
+                <name>viajeCoche</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
+                    <userOffsetX>9.0</userOffsetX>
+                    <userOffsetY>-10.0</userOffsetY>
+                    <attached>[Viajado : (cocheViaje:Porsche_911_GT3_Paquete_Touring, viajeCoche:Viaje_Porsche_2)]::WayPoint::1</attached>
+                    <offset_x>8</offset_x>
+                    <offset_y>8</offset_y>
+                    <placement>TOP</placement>
+                </strategy>
+                <hidden>false</hidden>
+            </edgeproperty>
+        </properties>
+        <waypoints>
+            <edgeproperty
+                id="[Viajado : (cocheViaje:Porsche_911_GT3_Paquete_Touring, viajeCoche:Viaje_Porsche_2)]::WayPoint::0"
+                sizeCalculated="true" type="WayPoint"
+                userDefined="false" visible="true">
+                <name>0</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyAttachedIntersection">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                </strategy>
+                <id>0</id>
+                <specialid>1</specialid>
+                <hidden>false</hidden>
+            </edgeproperty>
+            <edgeproperty
+                id="[Viajado : (cocheViaje:Porsche_911_GT3_Paquete_Touring, viajeCoche:Viaje_Porsche_2)]::WayPoint::1"
+                sizeCalculated="true" type="WayPoint"
+                userDefined="false" visible="true">
+                <name>1</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyAttachedIntersection">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                </strategy>
+                <id>1</id>
+                <specialid>2</specialid>
+                <hidden>false</hidden>
+            </edgeproperty>
+        </waypoints>
+        <hidden>false</hidden>
+        <linkValue>[Viajado : (cocheViaje:Porsche_911_GT3_Paquete_Touring, viajeCoche:Viaje_Porsche_2)]</linkValue>
+    </edge>
+    <edge type="BinaryEdge">
+        <source>Porsche_911_GT3_Paquete_Touring</source>
+        <target>Viaje_Porsche_1</target>
+        <name>Viajado</name>
+        <properties>
+            <edgeproperty
+                id="[Viajado : (cocheViaje:Porsche_911_GT3_Paquete_Touring, viajeCoche:Viaje_Porsche_1)]::source::multiplicity"
+                sizeCalculated="true" type="multiplicity"
+                userDefined="false" visible="true">
+                <name>1</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                    <attached>[Viajado : (cocheViaje:Porsche_911_GT3_Paquete_Touring, viajeCoche:Viaje_Porsche_1)]::WayPoint::0</attached>
+                    <offset_x>8</offset_x>
+                    <offset_y>8</offset_y>
+                    <placement>BOTTOM</placement>
+                </strategy>
+                <hidden>false</hidden>
+            </edgeproperty>
+            <edgeproperty
+                id="[Viajado : (cocheViaje:Porsche_911_GT3_Paquete_Touring, viajeCoche:Viaje_Porsche_1)]::source::rolename"
+                sizeCalculated="true" type="rolename" userDefined="true" visible="true">
+                <name>cocheViaje</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
+                    <userOffsetX>69.0</userOffsetX>
+                    <userOffsetY>7.0</userOffsetY>
+                    <attached>[Viajado : (cocheViaje:Porsche_911_GT3_Paquete_Touring, viajeCoche:Viaje_Porsche_1)]::WayPoint::0</attached>
+                    <offset_x>8</offset_x>
+                    <offset_y>8</offset_y>
+                    <placement>TOP</placement>
+                </strategy>
+                <hidden>false</hidden>
+            </edgeproperty>
+            <edgeproperty
+                id="[Viajado : (cocheViaje:Porsche_911_GT3_Paquete_Touring, viajeCoche:Viaje_Porsche_1)]::AssociationName"
+                sizeCalculated="true" type="associationName"
+                userDefined="false" visible="true">
+                <name>Viajado</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyInBetween">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                    <offsetX>0.0</offsetX>
+                    <offsetY>-10.0</offsetY>
+                    <related length="2">
+                        <related0>[Viajado : (cocheViaje:Porsche_911_GT3_Paquete_Touring, viajeCoche:Viaje_Porsche_1)]::WayPoint::0</related0>
+                        <related1>[Viajado : (cocheViaje:Porsche_911_GT3_Paquete_Touring, viajeCoche:Viaje_Porsche_1)]::WayPoint::1</related1>
+                    </related>
+                </strategy>
+                <hidden>false</hidden>
+            </edgeproperty>
+            <edgeproperty
+                id="[Viajado : (cocheViaje:Porsche_911_GT3_Paquete_Touring, viajeCoche:Viaje_Porsche_1)]::target::rolename"
+                sizeCalculated="true" type="rolename" userDefined="true" visible="true">
+                <name>viajeCoche</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
+                    <userOffsetX>8.0</userOffsetX>
+                    <userOffsetY>2.0</userOffsetY>
+                    <attached>[Viajado : (cocheViaje:Porsche_911_GT3_Paquete_Touring, viajeCoche:Viaje_Porsche_1)]::WayPoint::1</attached>
+                    <offset_x>8</offset_x>
+                    <offset_y>8</offset_y>
+                    <placement>TOP</placement>
+                </strategy>
+                <hidden>false</hidden>
+            </edgeproperty>
+            <edgeproperty
+                id="[Viajado : (cocheViaje:Porsche_911_GT3_Paquete_Touring, viajeCoche:Viaje_Porsche_1)]::target::multiplicity"
+                sizeCalculated="true" type="multiplicity"
+                userDefined="false" visible="true">
+                <name>*</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                    <attached>[Viajado : (cocheViaje:Porsche_911_GT3_Paquete_Touring, viajeCoche:Viaje_Porsche_1)]::WayPoint::1</attached>
+                    <offset_x>8</offset_x>
+                    <offset_y>8</offset_y>
+                    <placement>BOTTOM</placement>
+                </strategy>
+                <hidden>false</hidden>
+            </edgeproperty>
+        </properties>
+        <waypoints>
+            <edgeproperty
+                id="[Viajado : (cocheViaje:Porsche_911_GT3_Paquete_Touring, viajeCoche:Viaje_Porsche_1)]::WayPoint::0"
+                sizeCalculated="true" type="WayPoint"
+                userDefined="false" visible="true">
+                <name>0</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyAttachedIntersection">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                </strategy>
+                <id>0</id>
+                <specialid>1</specialid>
+                <hidden>false</hidden>
+            </edgeproperty>
+            <edgeproperty
+                id="[Viajado : (cocheViaje:Porsche_911_GT3_Paquete_Touring, viajeCoche:Viaje_Porsche_1)]::WayPoint::1"
+                sizeCalculated="true" type="WayPoint"
+                userDefined="false" visible="true">
+                <name>1</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyAttachedIntersection">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                </strategy>
+                <id>1</id>
+                <specialid>2</specialid>
+                <hidden>false</hidden>
+            </edgeproperty>
+        </waypoints>
+        <hidden>false</hidden>
+        <linkValue>[Viajado : (cocheViaje:Porsche_911_GT3_Paquete_Touring, viajeCoche:Viaje_Porsche_1)]</linkValue>
+    </edge>
+    <edge type="NodeEdge">
+        <source>Malaga</source>
+        <target>Washington_DC</target>
+        <name>Recorrido</name>
+        <properties>
+            <edgeproperty
+                id="Recorrido3 [Recorrido : (ciudadOrigen:Malaga, ciudadFinal:Washington_DC)]::source::rolename"
+                sizeCalculated="true" type="rolename" userDefined="true" visible="true">
+                <name>ciudadOrigen</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
+                    <userOffsetX>80.0</userOffsetX>
+                    <userOffsetY>14.0</userOffsetY>
+                    <attached>Recorrido3 [Recorrido : (ciudadOrigen:Malaga, ciudadFinal:Washington_DC)]::WayPoint::0</attached>
+                    <offset_x>8</offset_x>
+                    <offset_y>8</offset_y>
+                    <placement>TOP</placement>
+                </strategy>
+                <hidden>false</hidden>
+            </edgeproperty>
+            <edgeproperty
+                id="Recorrido3 [Recorrido : (ciudadOrigen:Malaga, ciudadFinal:Washington_DC)]::source::multiplicity"
+                sizeCalculated="true" type="multiplicity"
+                userDefined="false" visible="true">
+                <name>*</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                    <attached>Recorrido3 [Recorrido : (ciudadOrigen:Malaga, ciudadFinal:Washington_DC)]::WayPoint::0</attached>
+                    <offset_x>8</offset_x>
+                    <offset_y>8</offset_y>
+                    <placement>BOTTOM</placement>
+                </strategy>
+                <hidden>false</hidden>
+            </edgeproperty>
+            <edgeproperty
+                id="Recorrido3 [Recorrido : (ciudadOrigen:Malaga, ciudadFinal:Washington_DC)]::AssociationName"
+                sizeCalculated="true" type="associationName"
+                userDefined="false" visible="true">
+                <name>Recorrido</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyInBetween">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                    <offsetX>0.0</offsetX>
+                    <offsetY>-10.0</offsetY>
+                    <related length="2">
+                        <related0>Recorrido3 [Recorrido : (ciudadOrigen:Malaga, ciudadFinal:Washington_DC)]::WayPoint::0</related0>
+                        <related1>Recorrido3 [Recorrido : (ciudadOrigen:Malaga, ciudadFinal:Washington_DC)]::WayPoint::1</related1>
+                    </related>
+                </strategy>
+                <hidden>false</hidden>
+            </edgeproperty>
+            <edgeproperty
+                id="Recorrido3 [Recorrido : (ciudadOrigen:Malaga, ciudadFinal:Washington_DC)]::target::rolename"
+                sizeCalculated="true" type="rolename" userDefined="true" visible="true">
+                <name>ciudadFinal</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
+                    <userOffsetX>18.0</userOffsetX>
+                    <userOffsetY>-13.0</userOffsetY>
+                    <attached>Recorrido3 [Recorrido : (ciudadOrigen:Malaga, ciudadFinal:Washington_DC)]::WayPoint::1</attached>
+                    <offset_x>8</offset_x>
+                    <offset_y>8</offset_y>
+                    <placement>TOP</placement>
+                </strategy>
+                <hidden>false</hidden>
+            </edgeproperty>
+            <edgeproperty
+                id="Recorrido3 [Recorrido : (ciudadOrigen:Malaga, ciudadFinal:Washington_DC)]::target::multiplicity"
+                sizeCalculated="true" type="multiplicity"
+                userDefined="false" visible="true">
+                <name>*</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                    <attached>Recorrido3 [Recorrido : (ciudadOrigen:Malaga, ciudadFinal:Washington_DC)]::WayPoint::1</attached>
+                    <offset_x>8</offset_x>
+                    <offset_y>8</offset_y>
+                    <placement>BOTTOM</placement>
+                </strategy>
+                <hidden>false</hidden>
+            </edgeproperty>
+        </properties>
+        <waypoints>
+            <edgeproperty
+                id="Recorrido3 [Recorrido : (ciudadOrigen:Malaga, ciudadFinal:Washington_DC)]::WayPoint::0"
+                sizeCalculated="true" type="WayPoint"
+                userDefined="false" visible="true">
+                <name>0</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyAttachedIntersection">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                </strategy>
+                <id>0</id>
+                <specialid>1</specialid>
+                <hidden>false</hidden>
+            </edgeproperty>
+            <edgeproperty
+                id="Recorrido3 [Recorrido : (ciudadOrigen:Malaga, ciudadFinal:Washington_DC)]::WayPoint::1"
+                sizeCalculated="true" type="WayPoint"
+                userDefined="false" visible="true">
+                <name>1</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyAttachedIntersection">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                </strategy>
+                <id>1</id>
+                <specialid>2</specialid>
+                <hidden>false</hidden>
+            </edgeproperty>
+        </waypoints>
+        <hidden>false</hidden>
+        <connectionNode>
+            <edgeproperty
+                id="Recorrido3 [Recorrido : (ciudadOrigen:Malaga, ciudadFinal:Washington_DC)]::WayPoint::-1"
+                sizeCalculated="true" type="WayPoint"
+                userDefined="false" visible="false">
+                <name>-1</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyInBetween">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                    <offsetX>0.0</offsetX>
+                    <offsetY>0.0</offsetY>
+                    <related length="2">
+                        <related0>Recorrido3 [Recorrido : (ciudadOrigen:Malaga, ciudadFinal:Washington_DC)]::WayPoint::0</related0>
+                        <related1>Recorrido3 [Recorrido : (ciudadOrigen:Malaga, ciudadFinal:Washington_DC)]::WayPoint::1</related1>
+                    </related>
+                </strategy>
+                <id>-1</id>
+                <specialid>7</specialid>
+                <hidden>true</hidden>
+            </edgeproperty>
+        </connectionNode>
+        <associationClass>
+            <node id="Recorrido3" sizeCalculated="true" type="Object">
+                <name>Recorrido3</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToCorner">
+                    <userOffsetX>66.0</userOffsetX>
+                    <userOffsetY>-3.0</userOffsetY>
+                    <basisDeltaX>ABSOLUTE</basisDeltaX>
+                    <deltaX>0.0</deltaX>
+                    <maxDeltaX>1.7976931348623157E308</maxDeltaX>
+                    <basisDeltaY>ABSOLUTE</basisDeltaY>
+                    <deltaY>-54.0</deltaY>
+                    <maxDeltaY>1.7976931348623157E308</maxDeltaY>
+                    <corner>NORTH</corner>
+                    <relativeNodeId>Recorrido3 [Recorrido : (ciudadOrigen:Malaga, ciudadFinal:Washington_DC)]::WayPoint::-1</relativeNodeId>
+                </strategy>
+                <hidden>false</hidden>
+            </node>
+        </associationClass>
+        <linkValue>Recorrido3 [Recorrido : (ciudadOrigen:Malaga, ciudadFinal:Washington_DC)]</linkValue>
+    </edge>
+    <edge type="NodeEdge">
+        <source>Malaga</source>
+        <target>Stalingrado</target>
+        <name>Recorrido</name>
+        <properties>
+            <edgeproperty
+                id="Recorrido1 [Recorrido : (ciudadOrigen:Malaga, ciudadFinal:Stalingrado)]::source::rolename"
+                sizeCalculated="true" type="rolename" userDefined="true" visible="true">
+                <name>ciudadOrigen</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
+                    <userOffsetX>1.0</userOffsetX>
+                    <userOffsetY>-8.0</userOffsetY>
+                    <attached>Recorrido1 [Recorrido : (ciudadOrigen:Malaga, ciudadFinal:Stalingrado)]::WayPoint::0</attached>
+                    <offset_x>8</offset_x>
+                    <offset_y>8</offset_y>
+                    <placement>TOP</placement>
+                </strategy>
+                <hidden>false</hidden>
+            </edgeproperty>
+            <edgeproperty
+                id="Recorrido1 [Recorrido : (ciudadOrigen:Malaga, ciudadFinal:Stalingrado)]::source::multiplicity"
+                sizeCalculated="true" type="multiplicity"
+                userDefined="false" visible="true">
+                <name>*</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                    <attached>Recorrido1 [Recorrido : (ciudadOrigen:Malaga, ciudadFinal:Stalingrado)]::WayPoint::0</attached>
+                    <offset_x>8</offset_x>
+                    <offset_y>8</offset_y>
+                    <placement>BOTTOM</placement>
+                </strategy>
+                <hidden>false</hidden>
+            </edgeproperty>
+            <edgeproperty
+                id="Recorrido1 [Recorrido : (ciudadOrigen:Malaga, ciudadFinal:Stalingrado)]::AssociationName"
+                sizeCalculated="true" type="associationName"
+                userDefined="false" visible="true">
+                <name>Recorrido</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyInBetween">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                    <offsetX>0.0</offsetX>
+                    <offsetY>-10.0</offsetY>
+                    <related length="2">
+                        <related0>Recorrido1 [Recorrido : (ciudadOrigen:Malaga, ciudadFinal:Stalingrado)]::WayPoint::0</related0>
+                        <related1>Recorrido1 [Recorrido : (ciudadOrigen:Malaga, ciudadFinal:Stalingrado)]::WayPoint::1</related1>
+                    </related>
+                </strategy>
+                <hidden>false</hidden>
+            </edgeproperty>
+            <edgeproperty
+                id="Recorrido1 [Recorrido : (ciudadOrigen:Malaga, ciudadFinal:Stalingrado)]::target::rolename"
+                sizeCalculated="true" type="rolename" userDefined="true" visible="true">
+                <name>ciudadFinal</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
+                    <userOffsetX>4.0</userOffsetX>
+                    <userOffsetY>-10.0</userOffsetY>
+                    <attached>Recorrido1 [Recorrido : (ciudadOrigen:Malaga, ciudadFinal:Stalingrado)]::WayPoint::1</attached>
+                    <offset_x>8</offset_x>
+                    <offset_y>8</offset_y>
+                    <placement>TOP</placement>
+                </strategy>
+                <hidden>false</hidden>
+            </edgeproperty>
+            <edgeproperty
+                id="Recorrido1 [Recorrido : (ciudadOrigen:Malaga, ciudadFinal:Stalingrado)]::target::multiplicity"
+                sizeCalculated="true" type="multiplicity"
+                userDefined="false" visible="true">
+                <name>*</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                    <attached>Recorrido1 [Recorrido : (ciudadOrigen:Malaga, ciudadFinal:Stalingrado)]::WayPoint::1</attached>
+                    <offset_x>8</offset_x>
+                    <offset_y>8</offset_y>
+                    <placement>BOTTOM</placement>
+                </strategy>
+                <hidden>false</hidden>
+            </edgeproperty>
+        </properties>
+        <waypoints>
+            <edgeproperty
+                id="Recorrido1 [Recorrido : (ciudadOrigen:Malaga, ciudadFinal:Stalingrado)]::WayPoint::0"
+                sizeCalculated="true" type="WayPoint"
+                userDefined="false" visible="true">
+                <name>0</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyAttachedIntersection">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                </strategy>
+                <id>0</id>
+                <specialid>1</specialid>
+                <hidden>false</hidden>
+            </edgeproperty>
+            <edgeproperty
+                id="Recorrido1 [Recorrido : (ciudadOrigen:Malaga, ciudadFinal:Stalingrado)]::WayPoint::1"
+                sizeCalculated="true" type="WayPoint"
+                userDefined="false" visible="true">
+                <name>1</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyAttachedIntersection">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                </strategy>
+                <id>1</id>
+                <specialid>2</specialid>
+                <hidden>false</hidden>
+            </edgeproperty>
+        </waypoints>
+        <hidden>false</hidden>
+        <connectionNode>
+            <edgeproperty
+                id="Recorrido1 [Recorrido : (ciudadOrigen:Malaga, ciudadFinal:Stalingrado)]::WayPoint::-1"
+                sizeCalculated="true" type="WayPoint"
+                userDefined="false" visible="false">
+                <name>-1</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyInBetween">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                    <offsetX>0.0</offsetX>
+                    <offsetY>0.0</offsetY>
+                    <related length="2">
+                        <related0>Recorrido1 [Recorrido : (ciudadOrigen:Malaga, ciudadFinal:Stalingrado)]::WayPoint::0</related0>
+                        <related1>Recorrido1 [Recorrido : (ciudadOrigen:Malaga, ciudadFinal:Stalingrado)]::WayPoint::1</related1>
+                    </related>
+                </strategy>
+                <id>-1</id>
+                <specialid>7</specialid>
+                <hidden>true</hidden>
+            </edgeproperty>
+        </connectionNode>
+        <associationClass>
+            <node id="Recorrido1" sizeCalculated="true" type="Object">
+                <name>Recorrido1</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToCorner">
+                    <userOffsetX>-3.0</userOffsetX>
+                    <userOffsetY>-7.0</userOffsetY>
+                    <basisDeltaX>ABSOLUTE</basisDeltaX>
+                    <deltaX>0.0</deltaX>
+                    <maxDeltaX>1.7976931348623157E308</maxDeltaX>
+                    <basisDeltaY>ABSOLUTE</basisDeltaY>
+                    <deltaY>-54.0</deltaY>
+                    <maxDeltaY>1.7976931348623157E308</maxDeltaY>
+                    <corner>NORTH</corner>
+                    <relativeNodeId>Recorrido1 [Recorrido : (ciudadOrigen:Malaga, ciudadFinal:Stalingrado)]::WayPoint::-1</relativeNodeId>
+                </strategy>
+                <hidden>false</hidden>
+            </node>
+        </associationClass>
+        <linkValue>Recorrido1 [Recorrido : (ciudadOrigen:Malaga, ciudadFinal:Stalingrado)]</linkValue>
+    </edge>
+    <edge type="NodeEdge">
+        <source>Stalingrado</source>
+        <target>Washington_DC</target>
+        <name>Recorrido</name>
+        <properties>
+            <edgeproperty
+                id="Recorrido2 [Recorrido : (ciudadFinal:Washington_DC, ciudadOrigen:Stalingrado)]::source::rolename"
+                sizeCalculated="true" type="rolename"
+                userDefined="false" visible="true">
+                <name>ciudadOrigen</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                    <attached>Recorrido2 [Recorrido : (ciudadFinal:Washington_DC, ciudadOrigen:Stalingrado)]::WayPoint::0</attached>
+                    <offset_x>8</offset_x>
+                    <offset_y>8</offset_y>
+                    <placement>TOP</placement>
+                </strategy>
+                <hidden>false</hidden>
+            </edgeproperty>
+            <edgeproperty
+                id="Recorrido2 [Recorrido : (ciudadFinal:Washington_DC, ciudadOrigen:Stalingrado)]::source::multiplicity"
+                sizeCalculated="true" type="multiplicity"
+                userDefined="false" visible="true">
+                <name>*</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                    <attached>Recorrido2 [Recorrido : (ciudadFinal:Washington_DC, ciudadOrigen:Stalingrado)]::WayPoint::0</attached>
+                    <offset_x>8</offset_x>
+                    <offset_y>8</offset_y>
+                    <placement>BOTTOM</placement>
+                </strategy>
+                <hidden>false</hidden>
+            </edgeproperty>
+            <edgeproperty
+                id="Recorrido2 [Recorrido : (ciudadFinal:Washington_DC, ciudadOrigen:Stalingrado)]::AssociationName"
+                sizeCalculated="true" type="associationName"
+                userDefined="false" visible="true">
+                <name>Recorrido</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyInBetween">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                    <offsetX>0.0</offsetX>
+                    <offsetY>-10.0</offsetY>
+                    <related length="2">
+                        <related0>Recorrido2 [Recorrido : (ciudadFinal:Washington_DC, ciudadOrigen:Stalingrado)]::WayPoint::0</related0>
+                        <related1>Recorrido2 [Recorrido : (ciudadFinal:Washington_DC, ciudadOrigen:Stalingrado)]::WayPoint::1</related1>
+                    </related>
+                </strategy>
+                <hidden>false</hidden>
+            </edgeproperty>
+            <edgeproperty
+                id="Recorrido2 [Recorrido : (ciudadFinal:Washington_DC, ciudadOrigen:Stalingrado)]::target::rolename"
+                sizeCalculated="true" type="rolename"
+                userDefined="false" visible="true">
+                <name>ciudadFinal</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                    <attached>Recorrido2 [Recorrido : (ciudadFinal:Washington_DC, ciudadOrigen:Stalingrado)]::WayPoint::1</attached>
+                    <offset_x>8</offset_x>
+                    <offset_y>8</offset_y>
+                    <placement>TOP</placement>
+                </strategy>
+                <hidden>false</hidden>
+            </edgeproperty>
+            <edgeproperty
+                id="Recorrido2 [Recorrido : (ciudadFinal:Washington_DC, ciudadOrigen:Stalingrado)]::target::multiplicity"
+                sizeCalculated="true" type="multiplicity"
+                userDefined="false" visible="true">
+                <name>*</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToAttached">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                    <attached>Recorrido2 [Recorrido : (ciudadFinal:Washington_DC, ciudadOrigen:Stalingrado)]::WayPoint::1</attached>
+                    <offset_x>8</offset_x>
+                    <offset_y>8</offset_y>
+                    <placement>BOTTOM</placement>
+                </strategy>
+                <hidden>false</hidden>
+            </edgeproperty>
+        </properties>
+        <waypoints>
+            <edgeproperty
+                id="Recorrido2 [Recorrido : (ciudadFinal:Washington_DC, ciudadOrigen:Stalingrado)]::WayPoint::0"
+                sizeCalculated="true" type="WayPoint"
+                userDefined="false" visible="true">
+                <name>0</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyAttachedIntersection">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                </strategy>
+                <id>0</id>
+                <specialid>1</specialid>
+                <hidden>false</hidden>
+            </edgeproperty>
+            <edgeproperty
+                id="Recorrido2 [Recorrido : (ciudadFinal:Washington_DC, ciudadOrigen:Stalingrado)]::WayPoint::1"
+                sizeCalculated="true" type="WayPoint"
+                userDefined="false" visible="true">
+                <name>1</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyAttachedIntersection">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                </strategy>
+                <id>1</id>
+                <specialid>2</specialid>
+                <hidden>false</hidden>
+            </edgeproperty>
+        </waypoints>
+        <hidden>false</hidden>
+        <connectionNode>
+            <edgeproperty
+                id="Recorrido2 [Recorrido : (ciudadFinal:Washington_DC, ciudadOrigen:Stalingrado)]::WayPoint::-1"
+                sizeCalculated="true" type="WayPoint"
+                userDefined="false" visible="false">
+                <name>-1</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyInBetween">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                    <offsetX>0.0</offsetX>
+                    <offsetY>0.0</offsetY>
+                    <related length="2">
+                        <related0>Recorrido2 [Recorrido : (ciudadFinal:Washington_DC, ciudadOrigen:Stalingrado)]::WayPoint::0</related0>
+                        <related1>Recorrido2 [Recorrido : (ciudadFinal:Washington_DC, ciudadOrigen:Stalingrado)]::WayPoint::1</related1>
+                    </related>
+                </strategy>
+                <id>-1</id>
+                <specialid>7</specialid>
+                <hidden>true</hidden>
+            </edgeproperty>
+        </connectionNode>
+        <associationClass>
+            <node id="Recorrido2" sizeCalculated="true" type="Object">
+                <name>Recorrido2</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyRelativeToCorner">
+                    <userOffsetX>-109.0</userOffsetX>
+                    <userOffsetY>-32.0</userOffsetY>
+                    <basisDeltaX>ABSOLUTE</basisDeltaX>
+                    <deltaX>0.0</deltaX>
+                    <maxDeltaX>1.7976931348623157E308</maxDeltaX>
+                    <basisDeltaY>ABSOLUTE</basisDeltaY>
+                    <deltaY>-54.0</deltaY>
+                    <maxDeltaY>1.7976931348623157E308</maxDeltaY>
+                    <corner>NORTH</corner>
+                    <relativeNodeId>Recorrido2 [Recorrido : (ciudadFinal:Washington_DC, ciudadOrigen:Stalingrado)]::WayPoint::-1</relativeNodeId>
+                </strategy>
+                <hidden>false</hidden>
+            </node>
+        </associationClass>
+        <linkValue>Recorrido2 [Recorrido : (ciudadFinal:Washington_DC, ciudadOrigen:Stalingrado)]</linkValue>
+    </edge>
+</diagram_Layout>
