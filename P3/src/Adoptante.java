@@ -2,13 +2,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class Adoptante implements IAdoptante,Rol {
-    
+public class Adoptante extends Socio implements IAdoptante {
+
 	private List<Animal> animalesAdoptados;
 	
-	public Adoptante() {
+	public Adoptante(Date fechaInscripcion, Refugio refugio) {
+		super(fechaInscripcion, refugio);
 		animalesAdoptados = new ArrayList<>();
-	}	
+	}
 	
     public void adoptaAnimal(Animal animal) throws RefugioAnimalesException {
         
@@ -30,7 +31,11 @@ public class Adoptante implements IAdoptante,Rol {
     }
 
 	@Override
-	public void adoptar(Animal animal) {
-		animalesAdoptados.add( animal );
+	public void adoptar(Animal animal, Voluntario voluntario) {
+		try {
+			voluntario.tramitarAdopcion(animal, this);
+		} catch (RefugioAnimalesException e) {
+			System.err.print(e.getMessage());
+		}
 	}
 }

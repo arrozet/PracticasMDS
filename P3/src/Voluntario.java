@@ -1,21 +1,22 @@
 import java.util.Date;
 
-public class Voluntario implements IVoluntario,Rol{
+public class Voluntario extends Socio implements IVoluntario{
 	
-	private Refugio refugio;
 	
-	public Voluntario( Refugio refugio ) {
-		this.refugio = refugio;
+	
+	public Voluntario(Date fechaInscripcion, Refugio refugio) {
+		super(fechaInscripcion, refugio);
 	}
-	
+
 	@Override
 	public void tramitarAdopcion( Animal animal, Adoptante adoptante ) throws RefugioAnimalesException {
 		adoptante.adoptaAnimal(animal);
+		getRefugio().animalAdoptado(animal);
 	}
 
 	@Override
 	public void registrar(Animal animal) {
-		refugio.registrarAnimal(animal);
+		super.getRefugio().registrarAnimal(animal);
 	}
 	
 }

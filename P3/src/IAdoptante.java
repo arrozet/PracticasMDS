@@ -1,6 +1,6 @@
 
 public interface IAdoptante {
 	
-	void adoptar(Animal a);
+	void adoptar(Animal animal, Voluntario voluntario);
 	
 }

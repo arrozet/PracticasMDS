@@ -5,8 +5,7 @@ public class Animal {
 	private EstadoAnimal estadoAnimal;	// Lo de los enumerados no se como va ¿Se crea una clase?
 	private Date nacimiento; 
 	
-	public Animal( EstadoAnimal estadoAnimal, Date nacimiento ) {
-		this.setEstadoAnimal(estadoAnimal);
+	public Animal( Date nacimiento ) {
 		this.setNacimiento(nacimiento);
 		this.estadoAnimal = EstadoAnimal.disponible;
 	}
@@ -35,5 +34,8 @@ public class Animal {
 		estadoAnimal = EstadoAnimal.adoptado;
 	}
 	
+	public void setEnTratamiento() {
+		estadoAnimal = EstadoAnimal.enTratamiento;
+	}
 	
 }

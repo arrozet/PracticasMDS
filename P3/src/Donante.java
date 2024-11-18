@@ -1,20 +1,16 @@
 import java.util.Date;
 
-public class Donante implements IDonante,Rol{
+public class Donante  extends Socio implements IDonante{
+		
 	
-	private Refugio refugio;
-	
-	public Donante( Refugio refugio) {
-		this.refugio = refugio;
+	public Donante(Date fechaInscripcion, Refugio refugio) {
+		super(fechaInscripcion, refugio);
 	}
-	
+
 	@Override
 	public void donar(double donacion, Date fechaDonacion) {
-		getRefugio().recibeDonacion( new Donacion(donacion,fechaDonacion ) );
+		super.getRefugio().recibeDonacion( new Donacion(donacion,fechaDonacion ) );
 	}
-	
-	private Refugio getRefugio() {
-		return refugio;
-	}
+
 
 }
