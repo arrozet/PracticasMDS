@@ -15,7 +15,7 @@ class Socio {
      * 
      * Para solucionarlo usamos "roles", una lista de clases
      */
-    private List<Socio> roles;
+    private List<Rol> roles;
 
     public Socio(Date fechaInscripcion, Refugio refugio ) {
         this.roles = new ArrayList<>();
@@ -35,17 +35,17 @@ class Socio {
 		this.fechaInscripcion = fechaInscripcion;
 	}
 
-    public List<Socio> getRoles() {
+    public List<Rol> getRoles() {
         return roles;
     }
 
-    public void addRol( Socio rol ) {
+    public void addRol( Rol rol ) {
         if (!roles.contains(rol)) {
             roles.add(rol);
         }
     }
 
-    public boolean hasRole( Socio rol) {
+    public boolean hasRole( Rol rol) {
         return roles.contains(rol);
     }
 

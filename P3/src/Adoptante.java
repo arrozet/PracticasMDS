@@ -2,13 +2,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class Adoptante extends Socio implements IAdoptante {
+public class Adoptante implements IAdoptante,Rol {
     
 	private List<Animal> animalesAdoptados;
 	
-	public Adoptante(Date fechaInscripcion, Refugio refugio) {
-		super(fechaInscripcion, refugio);
-		super.addRol(this);
+	public Adoptante() {
 		animalesAdoptados = new ArrayList<>();
 	}	
 	
