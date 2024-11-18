@@ -1,11 +1,29 @@
+import java.util.Date;
 
 public class Animal {
 	
-	private string estadoAnimal;	// Lo de los enumerados no se como va ¿Se crea una clase?
-	private date nacimiento; 
+	private String estadoAnimal;	// Lo de los enumerados no se como va ¿Se crea una clase?
+	private Date nacimiento; 
 	
-	public Animal( string estadoAnimal, date nacimiento ) {
-		this.estadoAnimal = estadoAnimal;
+	public Animal( String estadoAnimal, Date nacimiento ) {
+		this.setEstadoAnimal(estadoAnimal);
+		this.setNacimiento(nacimiento);
+	}
+
+	public Date getNacimiento() {
+		return nacimiento;
+	}
+
+	public void setNacimiento(Date nacimiento) {
 		this.nacimiento = nacimiento;
 	}
+
+	public String getEstadoAnimal() {
+		return estadoAnimal;
+	}
+
+	public void setEstadoAnimal(String estadoAnimal) {
+		this.estadoAnimal = estadoAnimal;
+	}
+	
 }
