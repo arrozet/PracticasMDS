@@ -1,6 +1,6 @@
 
 public interface IVoluntario {
 	
-	void tramitarAdopcion();
-	void registrar();
+	void tramitarAdopcion(Animal animal, Adoptante adoptante) throws RefugioAnimalesException;
+	void registrar(Animal animal, Refugio refugio);
 }
