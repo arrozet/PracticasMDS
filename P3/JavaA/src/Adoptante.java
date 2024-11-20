@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class Adoptante extends Socio implements IAdoptante {
+public class Adoptante extends Socio  {
 
 	private List<Animal> animalesAdoptados;
 	
@@ -20,7 +20,7 @@ public class Adoptante extends Socio implements IAdoptante {
         return super.toString() + ", Animales Adoptados: " + animalesAdoptados;
     }
 
-	@Override
+
 	public void adoptar(Animal animal, Voluntario voluntario) {
     	assert( !animal.estaAdoptado() );
         animalesAdoptados.add(animal);

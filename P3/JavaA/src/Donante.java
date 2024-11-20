@@ -1,6 +1,6 @@
 import java.util.Date;
 
-public class Donante  extends Socio implements IDonante{
+public class Donante  extends Socio {
 		
 	
 	public Donante(Date fechaInscripcion, Refugio refugio) {
