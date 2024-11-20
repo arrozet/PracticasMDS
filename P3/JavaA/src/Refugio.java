@@ -28,7 +28,7 @@ public class Refugio{
 		this.liquidez = liquidez;
 	}
 	
-	public void registrarAnimal( Animal animal ) {	// Quizás debería mostrar excepción
+	public void registrar( Animal animal ) {	// Quizás debería mostrar excepción
 		animalesRegistrados.add(animal);
 	}
 	
