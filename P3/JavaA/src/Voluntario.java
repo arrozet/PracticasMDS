@@ -1,7 +1,7 @@
 import java.util.Date;
 import java.util.List;
 
-public class Voluntario extends Socio implements IVoluntario{
+public class Voluntario extends Socio {
 	
 	private List<Adopcion> tramites;
 	
@@ -9,13 +9,12 @@ public class Voluntario extends Socio implements IVoluntario{
 		super(fechaInscripcion, refugio);
 	}
 
-	@Override
 	public void tramitarAdopcion( Animal animal, Adoptante adoptante ) throws RefugioAnimalesException {
 		adoptante.adoptaAnimal(animal);
 		getRefugio().animalAdoptado(animal);
 	}
 
-	@Override
+
 	public void registrar(Animal animal) {
 		tramiteAdopcion();
 		super.getRefugio().registrar(animal);
