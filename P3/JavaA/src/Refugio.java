@@ -27,11 +27,7 @@ public class Refugio{
 	public void setLiquidez(double liquidez) {
 		this.liquidez = liquidez;
 	}
-	
-	public void registrarAnimal( Animal animal ) {	// Quizás debería mostrar excepción
-		animalesRegistrados.add(animal);
-	}
-	
+
 	public void recibeDonacion( Donacion donacion ) {
 		liquidez += donacion.getCantidadDonada();
 		donaciones.add(donacion);
