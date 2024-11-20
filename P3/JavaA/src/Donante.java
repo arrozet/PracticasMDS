@@ -7,8 +7,12 @@ public class Donante  extends Socio implements IDonante{
 		super(fechaInscripcion, refugio);
 	}
 
+	/*
+	 * Debemos comprobar que la donación sea mayor que 0
+	 */
 	@Override
 	public void donar(double donacion, Date fechaDonacion) {
+		assert( donacion > 0 );
 		super.getRefugio().recibeDonacion( new Donacion(donacion,fechaDonacion ) );
 	}
 

@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -7,21 +8,26 @@ public class Voluntario extends Socio implements IVoluntario{
 	
 	public Voluntario(Date fechaInscripcion, Refugio refugio) {
 		super(fechaInscripcion, refugio);
+		tramites = new ArrayList<>();
 	}
 
 	@Override
 	public void tramitarAdopcion( Animal animal, Adoptante adoptante ) throws RefugioAnimalesException {
-		adoptante.adoptaAnimal(animal);
+		registrar(animal);
 		getRefugio().animalAdoptado(animal);
 	}
 
 	@Override
 	public void registrar(Animal animal) {
-		tramiteAdopcion();
 		super.getRefugio().registrar(animal);
+		tramiteAdopcion();
 	}
 	
 	private void tramiteAdopcion() {
 		tramites.add(new Adopcion( getFechaInscripcion()) );
+	}
+	
+	public List<Adopcion> getTramites(){
+		return tramites;
 	}
 }

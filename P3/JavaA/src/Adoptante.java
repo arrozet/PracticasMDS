@@ -10,16 +10,6 @@ public class Adoptante extends Socio implements IAdoptante {
 		super(fechaInscripcion, refugio);
 		animalesAdoptados = new ArrayList<>();
 	}
-	
-    public void adoptaAnimal(Animal animal) throws RefugioAnimalesException {
-        
-    	if (!animal.estaAdoptado()) {
-            animal.setAdoptado();
-            animalesAdoptados.add(animal);
-        }else {
-        	throw new RefugioAnimalesException("El animal ya se encontraba adoptado");
-        }
-    }
     
     public List<Animal> getAnimalesAdoptados() {
         return animalesAdoptados;
@@ -32,10 +22,13 @@ public class Adoptante extends Socio implements IAdoptante {
 
 	@Override
 	public void adoptar(Animal animal, Voluntario voluntario) {
+    	assert( !animal.estaAdoptado() );
+        animalesAdoptados.add(animal);
 		try {
 			voluntario.tramitarAdopcion(animal, this);
 		} catch (RefugioAnimalesException e) {
-			System.err.print(e.getMessage());
+			e.printStackTrace();
 		}
+    	animal.setAdoptado();
 	}
 }

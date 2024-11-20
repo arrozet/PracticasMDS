@@ -28,10 +28,10 @@ public class Refugio{
 		this.liquidez = liquidez;
 	}
 	
-	public void registrar( Animal animal ) {	// Quizás debería mostrar excepción
-		animalesRegistrados.add(animal);
-	}
-	
+	/*
+	 * Función que llama la clase Donante
+	 *  Esta incrementa la liquidez, del refugio  
+	 */
 	public void recibeDonacion( Donacion donacion ) {
 		liquidez += donacion.getCantidadDonada();
 		donaciones.add(donacion);
