@@ -9,7 +9,8 @@ public class Animal {
 		this.setNacimiento(nacimiento);
 		this.estadoAnimal = EstadoAnimal.disponible;
 	}
-
+	
+	/* Funciones sobre nacimiento */
 	public Date getNacimiento() {
 		return nacimiento;
 	}
@@ -18,6 +19,7 @@ public class Animal {
 		this.nacimiento = nacimiento;
 	}
 
+	/* Funciones sobre el estado del animal */
 	public String getEstadoAnimal() {
 		return estadoAnimal.name();
 	}
@@ -37,5 +39,4 @@ public class Animal {
 	public void setEnTratamiento() {
 		estadoAnimal = EstadoAnimal.enTratamiento;
 	}
-	
 }

@@ -5,21 +5,16 @@ public class Refugio{
 	
 	private double liquidez;
 	
-	private List<Animal> animalesRegistrados;
-	private List<Animal> animalesRefugiados;
-	private List<Donacion> donaciones;
+	private List<Animal> animalesRegistrados;	/* Animales que han sido alguna vez parte del refugio */
+	private List<Animal> animalesRefugiados;	/* Animales que actualmente permanecen en  el refugio */
 	
-	public Refugio( double liquidez ) {
-		this.setLiquidez(liquidez);
+	public Refugio() {
+		this.setLiquidez( 0.0 );	/* Inicializamos el refugio con 0 liquidez */
 		animalesRegistrados = new ArrayList<>();
 		animalesRefugiados = new ArrayList<>();
 	}
 	
-	public void registrar( Animal a) {
-		animalesRegistrados.add(a);
-		animalesRefugiados.add(a);
-	}
-
+	/* Funciones sobre liquidez */
 	public double getLiquidez() {
 		return liquidez;
 	}
@@ -28,13 +23,18 @@ public class Refugio{
 		this.liquidez = liquidez;
 	}
 	
+	/* Funciones sobre los animales */
+	public void registrar( Animal a) {
+		animalesRegistrados.add(a);
+		animalesRefugiados.add(a);
+	}
+	
 	/*
 	 * Función que llama la clase Donante
 	 *  Esta incrementa la liquidez, del refugio  
 	 */
 	public void recibeDonacion( Donacion donacion ) {
 		liquidez += donacion.getCantidadDonada();
-		donaciones.add(donacion);
 	}
 	
 	/* 
@@ -42,6 +42,5 @@ public class Refugio{
 	 */
 	public void animalAdoptado( Animal a) {
 		animalesRefugiados.remove(a);
-		a.setAdoptado();
 	}
 }

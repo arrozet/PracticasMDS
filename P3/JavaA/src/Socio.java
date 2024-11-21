@@ -9,21 +9,26 @@ class Socio {
         this.setFechaInscripcion(fechaInscripcion);
     }
     
+    /* Funcioens sobre la fecha de inscripción */
 	public Date getFechaInscripcion() {
 		return fechaInscripcion;
 	}
 	
-	public Refugio getRefugio() {
-		return refugioInscrito;
-	}
-
 	public void setFechaInscripcion(Date fechaInscripcion) {
 		this.fechaInscripcion = fechaInscripcion;
 	}
+	
+	/* Funciones sobre el refugio */
+	public Refugio getRefugio() {
+		return refugioInscrito;
+	}
+	
+	public void setRefugio( Refugio newRefugio ) {
+		this.refugioInscrito = newRefugio;
+	}
 
-    //MAL: FALTA POR IMPLEMENTAR
     @Override	
     public String toString() {
-        return "";
+        return this.getClass().getName() + " Inscrito: " + getFechaInscripcion().toString() + "; En el refugio: " + getRefugio().toString();
     }
 }

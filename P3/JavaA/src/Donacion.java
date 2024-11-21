@@ -14,11 +14,17 @@ public class Donacion{
 		return fechaDonacion;
 	}
 
+	public void setFechaDonacion( Date newFecha) {
+		this.fechaDonacion = newFecha;
+	}
 
 	public double getCantidadDonada() {
 		return cantidadDonada;
 	}
 
+	public void setCantidadDonada( double newCantidadDonada) {
+		this.cantidadDonada = newCantidadDonada;
+	}
 	
 	
 }

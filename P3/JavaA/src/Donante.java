@@ -1,19 +1,25 @@
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
-public class Donante  extends Socio {
+public class Donante extends Socio {
 		
+	private List<Donacion> donaciones;
 	
 	public Donante(Date fechaInscripcion, Refugio refugio) {
 		super(fechaInscripcion, refugio);
+		donaciones = new ArrayList<>();
 	}
-
-	/*
-	 * Debemos comprobar que la donación sea mayor que 0
-	 */
-	@Override
-	public void donar(double donacion, Date fechaDonacion) {
-		assert( donacion > 0 );
-		super.getRefugio().recibeDonacion( new Donacion(donacion,fechaDonacion ) );
+	
+	public void donar(double cantidad) {
+		assert( cantidad > 0 );
+		Donacion donacion = new Donacion(cantidad,null);	/* ESTA MAL NO SE QUE PONER DE FECHA */
+		donaciones.add( donacion );
+		super.getRefugio().recibeDonacion( donacion );
+	}
+	
+	public List<Donacion> getDonaciones(){
+		return donaciones;
 	}
 
 

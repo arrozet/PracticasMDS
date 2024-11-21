@@ -12,18 +12,12 @@ public class Voluntario extends Socio {
 	}
 
 	public void tramitarAdopcion( Animal animal, Adoptante adoptante ) throws RefugioAnimalesException {
-		registrar(animal);
 		getRefugio().animalAdoptado(animal);
+		tramites.add( new Adopcion(null, animal, adoptante) );
 	}
-
 
 	public void registrar(Animal animal) {
 		super.getRefugio().registrar(animal);
-		tramiteAdopcion();
-	}
-	
-	private void tramiteAdopcion() {
-		tramites.add(new Adopcion( getFechaInscripcion()) );
 	}
 	
 	public List<Adopcion> getTramites(){
