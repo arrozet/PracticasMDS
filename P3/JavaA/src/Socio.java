@@ -1,24 +1,24 @@
 import java.util.Date;
 
 class Socio {
-    private Date fechaInscripcion;
+    private Date registro;
     private Refugio refugioInscrito;
 
     public Socio(Date fechaInscripcion, Refugio refugio ) {
         this.refugioInscrito = refugio;
-        this.setFechaInscripcion(fechaInscripcion);
+        this.setRegistro(registro);
     }
     
-    /* Funcioens sobre la fecha de inscripción */
-	public Date getFechaInscripcion() {
-		return fechaInscripcion;
+    // MÉTODOS PARA EL REGISTRO
+	public Date getRegistro() {
+		return registro;
 	}
 	
-	public void setFechaInscripcion(Date fechaInscripcion) {
-		this.fechaInscripcion = fechaInscripcion;
+	public void setRegistro(Date fechaInscripcion) {
+		this.registro = fechaInscripcion;
 	}
 	
-	/* Funciones sobre el refugio */
+	// MÉTODOS PARA EL REFUGIO
 	public Refugio getRefugio() {
 		return refugioInscrito;
 	}
@@ -29,6 +29,6 @@ class Socio {
 
     @Override	
     public String toString() {
-        return this.getClass().getName() + " Inscrito: " + getFechaInscripcion().toString() + "; En el refugio: " + getRefugio().toString();
+        return this.getClass().getName() + " Inscrito: " + getRegistro().toString() + "; En el refugio: " + getRefugio().toString();
     }
 }

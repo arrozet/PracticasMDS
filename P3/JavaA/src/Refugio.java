@@ -7,11 +7,12 @@ public class Refugio{
 	
 	private List<Animal> animalesRegistrados;	/* Animales que han sido alguna vez parte del refugio */
 	private List<Animal> animalesRefugiados;	/* Animales que actualmente permanecen en  el refugio */
-	
+	private List<Socio> asociacion; /* Socios que pertenecen al refugio */
 	public Refugio() {
 		this.setLiquidez( 0.0 );	/* Inicializamos el refugio con 0 liquidez */
 		animalesRegistrados = new ArrayList<>();
 		animalesRefugiados = new ArrayList<>();
+		asociacion = new ArrayList<>();
 	}
 	
 	/* Funciones sobre liquidez */
