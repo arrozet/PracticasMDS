@@ -2,28 +2,32 @@ import java.util.Date;
 
 public class Donacion{
 	
-	private double cantidadDonada;
-	private Date fechaDonacion;
+	private double cantidad;
+	private Date fecha;
 	
-	public Donacion( double cantidad, Date fechaDonacion ) {
-		this.cantidadDonada = cantidad;
-		this.fechaDonacion = fechaDonacion;
+	public Donacion( double cantidad, Date fecha ) {
+		assert(cantidad > 0):"La cantidad a donar debe ser positiva";
+		assert(fecha != null):"La fecha debe ser distinta de null";
+		this.cantidad = cantidad;
+		this.fecha = fecha;
 	}
 
 	public Date getFechaDonacion() {
-		return fechaDonacion;
+		return fecha;
 	}
 
-	public void setFechaDonacion( Date newFecha) {
-		this.fechaDonacion = newFecha;
+	public void setFechaDonacion( Date fecha) {
+		assert(fecha != null):"La fecha debe ser distinta de null";
+		this.fecha = fecha;
 	}
 
 	public double getCantidadDonada() {
-		return cantidadDonada;
+		return cantidad;
 	}
 
 	public void setCantidadDonada( double newCantidadDonada) {
-		this.cantidadDonada = newCantidadDonada;
+		assert(cantidad > 0):"La cantidad a donar debe ser positiva";
+		this.cantidad = newCantidadDonada;
 	}
 	
 	

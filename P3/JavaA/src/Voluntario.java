@@ -10,15 +10,22 @@ public class Voluntario extends Socio {
 		super(registro, refugio);
 		tramites = new ArrayList<>();
 	}
-	
 
-	public void tramitarAdopcion( Animal animal, Adoptante adoptante ) throws RefugioAnimalesException {
-		getRefugio().animalAdoptado(animal);
-		tramites.add( new Adopcion(adoptante, animal,super.getRegistro()) );// creo que hay q crear una clase fechapor eso esta dando fallos
-		// el Date es de SQL noenq porqu me recomienda que lo caste con java.SQL.Date o algo ansin
+	public void tramitarAdopcion( Animal animal, Adoptante adoptante ) {
+		assert(animal != null) : "El animal es null";
+
+		getRefugio().eliminarAnimalRefugiado(animal);	// El animal ya no está refugiado, ya que ha sido adoptado
+
+		Adopcion nuevaAdopcion = new Adopcion(super.getRegistro(), animal, adoptante);
+		tramites.add(nuevaAdopcion);	// Se registra la nueva adopción
 	}
 
 	public void registrar(Animal animal) {
+		assert(animal != null): "El animal es null";
+
+		assert(super.getRefugio().getAnimalesRegistrados().contains(animal)) : "El animal ya está registrado.";
+
+		animal.setEstadoAnimal(EstadoAnimal.disponible); // Puede que fuese adoptado y lo mandasen de vuelta al refugio
 		super.getRefugio().registrar(animal);
 	}
 	

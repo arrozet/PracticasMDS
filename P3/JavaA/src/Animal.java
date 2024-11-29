@@ -1,42 +1,50 @@
+import java.time.Instant;
 import java.util.Date;
 
 public class Animal {
 	
-	private EstadoAnimal estadoAnimal;	// Lo de los enumerados no se como va ¿Se crea una clase?
-	private Date nacimiento; 
+	private EstadoAnimal estado;
+	private Date nacimiento;
+	private String nombre;
 	
-	public Animal( Date nacimiento ) {
+	public Animal( String nombre, Date nacimiento ) {
 		this.setNacimiento(nacimiento);
-		this.estadoAnimal = EstadoAnimal.disponible;
+		this.estado = EstadoAnimal.disponible;
+		this.nombre = nombre;	// Se ha decidido darle nombre para que se pueda identificar fácilmente
 	}
-	
-	/* Funciones sobre nacimiento */
+
 	public Date getNacimiento() {
 		return nacimiento;
 	}
 
 	public void setNacimiento(Date nacimiento) {
+		assert(nacimiento.before(Date.from(Instant.now())));
+
 		this.nacimiento = nacimiento;
 	}
 
-	/* Funciones sobre el estado del animal */
-	public String getEstadoAnimal() {
-		return estadoAnimal.name();
+	public EstadoAnimal getEstadoAnimal() {
+		return estado;
 	}
 
-	public void setEstadoAnimal(EstadoAnimal estadoAnimal) {
-		this.estadoAnimal = estadoAnimal;
+	public void setEstadoAnimal(EstadoAnimal estado) {
+		this.estado = estado;
 	}
 	
 	public boolean estaAdoptado() {
-		return estadoAnimal == EstadoAnimal.adoptado;
-	}
-
-	public void setAdoptado() {
-		estadoAnimal = EstadoAnimal.adoptado;
+		return estado == EstadoAnimal.adoptado;
 	}
 	
 	public void setEnTratamiento() {
-		estadoAnimal = EstadoAnimal.enTratamiento;
+		estado = EstadoAnimal.enTratamiento;
+	}
+
+	@Override
+	public String toString() {
+		return "Animal{" +
+				"nombre=" + nombre +
+				", estado=" + estado +
+				", nacimiento=" + nacimiento +
+				'}';
 	}
 }

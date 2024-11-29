@@ -6,12 +6,15 @@ public class Adopcion {
     private Adoptante adoptante;
 
     public Adopcion(Date fecha, Animal animal, Adoptante adoptante) {
+        assert(fecha != null) : "La fecha no puede ser null";
+        assert(animal != null) : "El animal no puede ser null";
+        assert(adoptante != null) : "El adoptante no puede ser null";
+
         this.fecha = fecha;
         this.animal = animal;
         this.adoptante = adoptante;
     }
 
-    /* Funciones sobre la fecha de la adopcion */
     public Date getFecha() {
         return fecha;
     }
@@ -20,7 +23,6 @@ public class Adopcion {
         this.fecha = fecha;
     }
 
-    /* Funciones sobre el animal */
     public Animal getAnimal() {
         return animal;
     }
@@ -29,7 +31,6 @@ public class Adopcion {
         this.animal = animal;
     }
 
-    /* Funciones sobre el adoptante */
     public Adoptante getAdoptante() {
         return adoptante;
     }

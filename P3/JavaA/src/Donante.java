@@ -1,3 +1,4 @@
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -11,9 +12,10 @@ public class Donante extends Socio {
 		donaciones = new ArrayList<>();
 	}
 	
-	public void donar(double cantidad) {
-		assert( cantidad > 0 );
-		Donacion donacion = new Donacion(cantidad,null);	/* ESTA MAL NO SE QUE PONER DE FECHA */
+	public void donar(double c) {
+		assert( c > 0 ) : "La cantidad a donar debe ser positiva";
+
+		Donacion donacion = new Donacion(c,Date.from(Instant.now())); // La donación se registra ahora mismo
 		donaciones.add( donacion );
 		super.getRefugio().recibeDonacion( donacion );
 	}

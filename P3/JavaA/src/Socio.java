@@ -1,15 +1,19 @@
 import java.util.Date;
 
-class Socio {
+// Debe ser una clase abstracta. No se puede instanciar un socio, sino solo adoptante, voluntario o donante
+public abstract class Socio {
     private Date registro;
+
+	// Para modelar la asociación con Refugio
     private Refugio refugioInscrito;
 
-    public Socio(Date fechaInscripcion, Refugio refugio ) {
-        this.refugioInscrito = refugio;
-        this.setRegistro(registro);
+    public Socio(Date fechaInscripcion, Refugio refugio) {
+		this.registro = fechaInscripcion;
+		this.refugioInscrito = refugio;
+
+		refugio.agregarSocio(this);
     }
-    
-    // MÉTODOS PARA EL REGISTRO
+
 	public Date getRegistro() {
 		return registro;
 	}
@@ -17,8 +21,7 @@ class Socio {
 	public void setRegistro(Date fechaInscripcion) {
 		this.registro = fechaInscripcion;
 	}
-	
-	// MÉTODOS PARA EL REFUGIO
+
 	public Refugio getRefugio() {
 		return refugioInscrito;
 	}
@@ -29,6 +32,6 @@ class Socio {
 
     @Override	
     public String toString() {
-        return this.getClass().getName() + " Inscrito: " + getRegistro().toString() + "; En el refugio: " + getRefugio().toString();
+        return this.getClass().getName() + " Fecha de inscripción: " + getRegistro().toString() + ";Refugio: " + getRefugio().toString();
     }
 }
