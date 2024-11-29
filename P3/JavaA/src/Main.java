@@ -3,11 +3,18 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class Main {
+    private static void imprimirRefugio(Refugio r){
+        String separador = "----------------------------------";
+
+        System.out.println();
+        System.out.println(separador);
+        System.out.println(r);
+        System.out.println(separador);
+        System.out.println();
+    }
+
     public static void main(String[] args) {
         try {
-            // Formateador para imprimir fechas
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-
             // Crear un refugio
             Refugio refugio = new Refugio();
 
@@ -18,6 +25,8 @@ public class Main {
             Adoptante adoptante2 = new Adoptante(new Date(), refugio);
             Donante donante1 = new Donante(new Date(), refugio);
             Donante donante2 = new Donante(new Date(), refugio);
+
+            imprimirRefugio(refugio);
 
             // Registrar múltiples animales
             Animal perro = new Animal("Coco", new Date(120, Calendar.JANUARY, 1)); // Fecha: 1 enero 2020
@@ -30,7 +39,9 @@ public class Main {
             voluntario1.registrar(gato);
             voluntario2.registrar(conejo);
             voluntario2.registrar(loro);
-            System.out.println("Animales registrados con éxito.\n");
+            System.out.println("Animales registrados con éxito.");
+
+            imprimirRefugio(refugio);
 
             // Mostrar animales registrados en el refugio
             System.out.println("Animales registrados en el refugio:");
@@ -40,10 +51,12 @@ public class Main {
             System.out.println();
 
             // Adoptar varios animales
-            System.out.println("Adoptando animales...");
+            System.out.println("Adoptando a Coco y a Michimini...");
             adoptante1.adoptar(perro, voluntario1);
             adoptante2.adoptar(gato, voluntario1);
-            System.out.println("Adopciones tramitadas con éxito.\n");
+            System.out.println("Adopciones tramitadas con éxito.");
+
+            imprimirRefugio(refugio);
 
             // Mostrar animales refugiados tras las adopciones
             System.out.println("Animales refugiados después de las adopciones:");
@@ -56,10 +69,9 @@ public class Main {
             System.out.println("Realizando donaciones...");
             donante1.donar(100.0);
             donante2.donar(200.0);
-            System.out.println("Donaciones realizadas con éxito.\n");
+            System.out.println("Donaciones realizadas con éxito.");
 
-            // Mostrar liquidez del refugio tras las donaciones
-            System.out.println("Liquidez del refugio: " + refugio.getLiquidez() + " euros.\n");
+            imprimirRefugio(refugio);
 
             // Mostrar trámites realizados por los voluntarios
             System.out.println("Trámites realizados por los voluntarios:");
@@ -78,24 +90,24 @@ public class Main {
             conejo.ponerEnTratamiento();
             System.out.println("Estado actual de Traviesito: " + conejo.getEstadoAnimal());
 
+            /*
             System.out.println("\nVolvemos a registrar al conejo...");
             voluntario2.registrar(conejo);
             System.out.println("Animales registrados después de volver a registrar Traviesito:");
             for (Animal animal : refugio.getAnimalesRegistrados()) {
                 System.out.println(animal);
             }
+            */
+
             System.out.println();
+
 
             // Agregar más socios al refugio y mostrar el total
-            System.out.println("Añadiendo nuevos socios...");
+            System.out.println("Añadiendo 2 nuevos socios...");
             refugio.agregarSocio(new Voluntario(new Date(), refugio));
             refugio.agregarSocio(new Adoptante(new Date(), refugio));
-            System.out.println("Número total de socios en el refugio: " + refugio.getSocios().size());
-            System.out.println();
 
-            // Mostrar estado general del refugio
-            System.out.println("Estado general del refugio:");
-            System.out.println(refugio);
+            imprimirRefugio(refugio);
 
         } catch (Exception e) {
             System.err.println("Error: " + e.getMessage());
