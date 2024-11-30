@@ -17,9 +17,10 @@ public class Donante extends Socio {
 	 * @param fechaInscripcion Fecha en la que el donante se inscribe en el refugio. No puede ser null.
 	 * @param refugio Refugio al que pertenece el donante. No puede ser null.
 	 */
-	public Donante(Date fechaInscripcion, Refugio refugio) {
+	public Donante(Date fechaInscripcion, Refugio refugio, double cantidad) {
 		super(fechaInscripcion, refugio);
 		donaciones = new ArrayList<>();
+		this.donar(cantidad);
 	}
 
 	/**
@@ -40,7 +41,10 @@ public class Donante extends Socio {
 		donaciones.add(donacion);
 
 		// Actualizar la liquidez del refugio
+		double liquidezAnterior = super.getRefugio().getLiquidez();	// Para el assert
 		super.getRefugio().recibeDonacion(donacion);
+		assert((super.getRefugio().getLiquidez() - liquidezAnterior) == donacion.getCantidadDonada())
+				: "La donación no se ha completado con éxito";
 	}
 
 	/**

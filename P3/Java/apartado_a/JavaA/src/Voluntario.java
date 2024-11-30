@@ -39,6 +39,7 @@ public class Voluntario extends Socio {
 		if (animal == null) {
 			throw new RefugioAnimalesException("El animal no puede ser null.");
 		}
+		assert(animal.getRefugio().equals(adoptante.getRefugio())) : "El animal y el adoptante no están en el mismo refugio";
 
 		// Cambiar el estado del animal a 'adoptado'
 		animal.adoptar();

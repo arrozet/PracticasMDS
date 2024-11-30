@@ -11,6 +11,7 @@ public class Animal {
 	private EstadoAnimal estado; // Estado actual del animal (disponible, adoptado, en tratamiento)
 	private Date nacimiento; // Fecha de nacimiento del animal
 	private String nombre; // Nombre del animal para su identificación
+	private Refugio refugio;
 
 	/**
 	 * Constructor de la clase Animal.
@@ -20,7 +21,7 @@ public class Animal {
 	 * @param nacimiento Fecha de nacimiento del animal. No puede ser null ni en el futuro.
 	 * @throws IllegalArgumentException Si el nombre es null o vacío, o si la fecha es inválida.
 	 */
-	public Animal(String nombre, Date nacimiento) {
+	public Animal(String nombre, Date nacimiento, Refugio refugio) {
 		if (nombre == null || nombre.trim().isEmpty()) {
 			throw new IllegalArgumentException("El nombre no puede ser null o vacío.");
 		}
@@ -34,6 +35,7 @@ public class Animal {
 		this.nacimiento = nacimiento;
 		this.estado = EstadoAnimal.disponible; // Por defecto, el animal está disponible
 		this.nombre = nombre;
+		this.refugio = refugio;
 	}
 
 	/**
@@ -78,6 +80,24 @@ public class Animal {
 	 */
 	public void setEstadoAnimal(EstadoAnimal estado) {
 		this.estado = estado;
+	}
+
+	/**
+	 * Obtiene el refugio al que está asociado el animal.
+	 *
+	 * @return El refugio donde el animal está registrado.
+	 */
+	public Refugio getRefugio() {
+		return refugio;
+	}
+
+	/**
+	 * Establece el refugio al que está asociado el animal.
+	 *
+	 * @param refugio El refugio donde se desea registrar al animal.
+	 */
+	public void setRefugio(Refugio refugio) {
+		this.refugio = refugio;
 	}
 
 	/**

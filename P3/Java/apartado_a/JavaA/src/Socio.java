@@ -89,8 +89,8 @@ public abstract class Socio {
 	@Override
 	public String toString() {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-		return this.getClass().getSimpleName() +
-				" Fecha de inscripción: " + dateFormat.format(registro) +
+		return this.getClass().getSimpleName().toUpperCase() +
+				" | Fecha de inscripción: " + dateFormat.format(registro) +
 				"; Refugio: " + refugioInscrito;
 	}
 }

@@ -3,14 +3,20 @@ import java.util.Date;
 import java.util.Enumeration;
 
 public class Main {
-    private static void imprimirRefugio(Refugio r){
+    private static void imprimirRefugio(Refugio r) {
         String separador = "----------------------------------";
-
         System.out.println();
         System.out.println(separador);
         System.out.println(r);
         System.out.println(separador);
         System.out.println();
+    }
+
+    private static <T> void imprimirEnumeration(Enumeration<T> enumeracion) {
+        while (enumeracion.hasMoreElements()) {
+            T elemento = enumeracion.nextElement();
+            System.out.println(elemento);
+        }
     }
 
     public static void main(String[] args) {
@@ -23,16 +29,16 @@ public class Main {
             Voluntario voluntario2 = new Voluntario(new Date(), refugio);
             Adoptante adoptante1 = new Adoptante(new Date(), refugio);
             Adoptante adoptante2 = new Adoptante(new Date(), refugio);
-            Donante donante1 = new Donante(new Date(), refugio);
-            Donante donante2 = new Donante(new Date(), refugio);
+            Donante donante1 = new Donante(new Date(), refugio, 5);
+            Donante donante2 = new Donante(new Date(), refugio, 5000);
 
             imprimirRefugio(refugio);
 
             // Registrar múltiples animales
-            Animal perro = new Animal("Coco", new Date(120, Calendar.JANUARY, 1)); // Fecha: 1 enero 2020
-            Animal gato = new Animal("Michimini", new Date(121, Calendar.JUNE, 10)); // Fecha: 10 junio 2021
-            Animal conejo = new Animal("Traviesito", new Date(119, Calendar.MARCH, 15)); // Fecha: 15 marzo 2019
-            Animal loro = new Animal("Gor je", new Date(122, Calendar.AUGUST, 5)); // Fecha: 5 agosto 2022
+            Animal perro = new Animal("Coco", new Date(120, Calendar.JANUARY, 1), refugio); // Fecha: 1 enero 2020
+            Animal gato = new Animal("Michimini", new Date(121, Calendar.JUNE, 10), refugio); // Fecha: 10 junio 2021
+            Animal conejo = new Animal("Traviesito", new Date(119, Calendar.MARCH, 15), refugio); // Fecha: 15 marzo 2019
+            Animal loro = new Animal("Gor je", new Date(122, Calendar.AUGUST, 5), refugio); // Fecha: 5 agosto 2022
 
             System.out.println("Registrando animales...");
             voluntario1.registrar(perro);
@@ -45,12 +51,7 @@ public class Main {
 
             // Mostrar animales registrados en el refugio
             System.out.println("Animales registrados en el refugio:");
-            Enumeration<Animal> animales = refugio.getAnimalesRegistrados();
-
-            while (animales.hasMoreElements()) {
-                Animal animal = animales.nextElement();
-                System.out.println(animal);
-            }
+            imprimirEnumeration(refugio.getAnimalesRegistrados());
             System.out.println();
 
             // Adoptar varios animales
@@ -63,13 +64,7 @@ public class Main {
 
             // Mostrar animales refugiados tras las adopciones
             System.out.println("Animales refugiados después de las adopciones:");
-            Enumeration<Animal> animalesRefugiadosTrasAdopciones = refugio.getAnimalesRefugiados();
-
-            System.out.println("Adopciones tramitadas por el voluntario:");
-            while (animalesRefugiadosTrasAdopciones.hasMoreElements()) {
-                Animal animal = animalesRefugiadosTrasAdopciones.nextElement();
-                System.out.println(animal);
-            }
+            imprimirEnumeration(refugio.getAnimalesRefugiados());
             System.out.println();
 
             // Realizar donaciones al refugio
@@ -83,21 +78,9 @@ public class Main {
             // Mostrar trámites realizados por los voluntarios
             System.out.println("Trámites realizados por los voluntarios:");
             System.out.println("Voluntario 1:");
-            Enumeration<Adopcion> tramites1 = voluntario1.getTramites();
-
-            System.out.println("Adopciones tramitadas por el voluntario:");
-            while (tramites1.hasMoreElements()) {
-                Adopcion adopcion = tramites1.nextElement();
-                System.out.println(adopcion);
-            }
+            imprimirEnumeration(voluntario1.getTramites());
             System.out.println("\nVoluntario 2:");
-            Enumeration<Adopcion> tramites2 = voluntario2.getTramites();
-
-            System.out.println("Adopciones tramitadas por el voluntario:");
-            while (tramites2.hasMoreElements()) {
-                Adopcion adopcion = tramites2.nextElement();
-                System.out.println(adopcion);
-            }
+            imprimirEnumeration(voluntario2.getTramites());
             System.out.println();
 
             // Volver a poner un animal en tratamiento y registrar de nuevo
@@ -105,22 +88,12 @@ public class Main {
             conejo.ponerEnTratamiento();
             System.out.println("Estado actual de Traviesito: " + conejo.getEstadoAnimal());
 
-            /*
-            System.out.println("\nVolvemos a registrar al conejo...");
-            voluntario2.registrar(conejo);
-            System.out.println("Animales registrados después de volver a registrar Traviesito:");
-            for (Animal animal : refugio.getAnimalesRegistrados()) {
-                System.out.println(animal);
-            }
-            */
-
-            System.out.println();
-
-
             // Agregar más socios al refugio y mostrar el total
             System.out.println("Añadiendo 2 nuevos socios...");
-            refugio.agregarSocio(new Voluntario(new Date(), refugio));
-            refugio.agregarSocio(new Adoptante(new Date(), refugio));
+            Voluntario v2 = new Voluntario(new Date(), refugio);
+            Adoptante a2 = new Adoptante(new Date(), refugio);
+
+            imprimirEnumeration(refugio.getSocios());
 
             imprimirRefugio(refugio);
 

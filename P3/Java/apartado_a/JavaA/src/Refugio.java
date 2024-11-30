@@ -112,11 +112,19 @@ public class Refugio {
 	 * @throws IllegalArgumentException Si el animal es null.
 	 */
 	public void registrar(Animal a) {
+		// Asegurarse de que las listas estén inicializadas
+		assert animalesRegistrados != null : "La lista de animales registrados no está inicializada.";
+		assert animalesRefugiados != null : "La lista de animales refugiados no está inicializada.";
+
 		if (a == null) {
 			throw new IllegalArgumentException("El animal no puede ser null.");
 		}
 		animalesRegistrados.add(a);
 		animalesRefugiados.add(a);
+
+		// Verificar que el animal fue efectivamente añadido
+		assert animalesRegistrados.contains(a) : "El animal no fue añadido a la lista de animales registrados.";
+		assert animalesRefugiados.contains(a) : "El animal no fue añadido a la lista de animales refugiados.";
 	}
 
 	/**
@@ -163,10 +171,12 @@ public class Refugio {
 		if (socio == null) {
 			throw new IllegalArgumentException("El socio no puede ser null.");
 		}
-		if (!socios.contains(socio)) {
-			socios.add(socio);
-			socio.setRefugio(this);
+		if (socios.contains(socio)){
+			throw new IllegalArgumentException("El socio ya estaba asociado a este refugio.");
 		}
+
+		socios.add(socio);
+		socio.setRefugio(this);
 	}
 
 	/**
