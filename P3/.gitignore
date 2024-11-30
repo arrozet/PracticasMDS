@@ -170,3 +170,29 @@ fabric.properties
 
 # Android studio 3.1+ serialized cache file
 .idea/caches/build_file_checksums.ser
+
+
+#---------------------------------------------------------------------
+#Visual Paradigm
+#---------------------------------------------------------------------
+*.iml
+.idea/
+target
+.classpath
+.settings
+.project
+.factorypath
+*.log
+.vscode/
+# macOS
+.DS_Store
+
+#Visual Paradigm backup files
+
+*.vpp.vbak
+*.vpp.bak*
+*.vpp.lck
+
+# Runtime generated files
+
+/journalkeeper
