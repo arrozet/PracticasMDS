@@ -16,18 +16,18 @@ public class Adoptante implements Rol {
 	 * a través del voluntario.
 	 *
 	 * @param animal El animal a adoptar. No puede ser null.
-	 * @param socio El voluntario que tramita la adopción. No puede ser null.
+	 * @param adoptante El voluntario que tramita la adopción. No puede ser null.
 	 * @throws IllegalArgumentException Si el animal o el voluntario son null, o si el animal ya ha sido adoptado.
 	 */
-	public void adoptar(Animal animal,Voluntario voluntario, Socio socio) throws RefugioAnimalesException {
-		if(!socio.getRoles().stream().anyMatch(r -> r instanceof Voluntario)){ // si no es voluntario
-			throw new IllegalArgumentException("Este socio no es un voluntario");
+	public void adoptar(Animal animal,Voluntario voluntario, Socio adoptante) throws RefugioAnimalesException {
+		if(!adoptante.getRoles().stream().anyMatch(r -> r instanceof Adoptante)){ // si no es voluntario
+			throw new IllegalArgumentException("Este socio no es un adoptante");
 		} else {
 			// Validaciones de entrada
 			if (animal == null) {
 				throw new IllegalArgumentException("El animal no puede ser null.");
 			}
-			if (socio == null) {
+			if (adoptante == null) {
 				throw new IllegalArgumentException("El socio no puede ser null.");
 			}
 			if (animal.estaAdoptado()) {
@@ -41,7 +41,7 @@ public class Adoptante implements Rol {
 			animal.adoptar();
 
 			// Registrar la adopción a través del voluntario
-			voluntario.tramitarAdopcion(animal, socio);
+			voluntario.tramitarAdopcion(animal, adoptante);
 
 			assert (animal.estaAdoptado()) : "El animal no está adoptado tras tramitar la adopción";
 		}
