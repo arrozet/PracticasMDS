@@ -1,5 +1,6 @@
 import java.text.SimpleDateFormat;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -42,6 +43,9 @@ public class Socio implements IVoluntario, IDonante, IAdoptante{
 		this.esVoluntario = esVoluntario;
 		this.esDonante = esDonante;
 		this.esAdoptante = esAdoptante;
+		this.donaciones = new ArrayList<>();
+		this.tramites = new ArrayList<>();
+		this.adopciones = new ArrayList<>();
 
 		// Agregar este socio al refugio
 		refugio.agregarSocio(this);
