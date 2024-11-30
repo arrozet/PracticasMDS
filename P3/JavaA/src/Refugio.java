@@ -1,7 +1,5 @@
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * Clase que representa un Refugio de animales.
@@ -55,8 +53,18 @@ public class Refugio {
 	 *
 	 * @return Lista de animales registrados.
 	 */
-	public List<Animal> getAnimalesRegistrados() {
-		return animalesRegistrados;
+	public Enumeration<Animal> getAnimalesRegistrados() {
+		return Collections.enumeration(animalesRegistrados);
+	}
+
+	/**
+	 * Verifica si un animal está en la lista de animales registrados.
+	 *
+	 * @param a El animal a buscar en la lista de animales registrados.
+	 * @return {@code true} si el animal está registrado, {@code false} en caso contrario.
+	 */
+	public boolean containsAnimalesRegistrados(Animal a){
+		return animalesRegistrados.contains(a);
 	}
 
 	/**
@@ -73,8 +81,18 @@ public class Refugio {
 	 *
 	 * @return Lista de animales refugiados.
 	 */
-	public List<Animal> getAnimalesRefugiados() {
-		return animalesRefugiados;
+	public Enumeration<Animal> getAnimalesRefugiados() {
+		return Collections.enumeration(animalesRefugiados);
+	}
+
+	/**
+	 * Verifica si un animal está en la lista de animales refugiados (no adoptados).
+	 *
+	 * @param a El animal a buscar en la lista de animales refugiados.
+	 * @return {@code true} si el animal está en la lista de animales refugiados, {@code false} en caso contrario.
+	 */
+	public boolean containsAnimalesRefugiados(Animal a){
+		return animalesRefugiados.contains(a);
 	}
 
 	/**
@@ -152,12 +170,12 @@ public class Refugio {
 	}
 
 	/**
-	 * Obtiene la lista de socios asociados al refugio.
+	 * Devuelve un Enumeration que permite iterar sobre los socios asociados al refugio.
 	 *
-	 * @return Lista de socios registrados en el refugio.
+	 * @return Un Enumeration de los socios registrados en el refugio.
 	 */
-	public List<Socio> getSocios() {
-		return socios;
+	public Enumeration<Socio> getSocios() {
+		return Collections.enumeration(socios);
 	}
 
 	/**

@@ -1,6 +1,4 @@
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * Clase que representa a un Voluntario en el refugio.
@@ -42,6 +40,9 @@ public class Voluntario extends Socio {
 			throw new RefugioAnimalesException("El animal no puede ser null.");
 		}
 
+		// Cambiar el estado del animal a 'adoptado'
+		animal.adoptar();
+
 		// Eliminar el animal de la lista de refugiados, ya que ha sido adoptado
 		getRefugio().eliminarAnimalRefugiado(animal);
 
@@ -66,7 +67,7 @@ public class Voluntario extends Socio {
 		}
 
 		// Verificar si el animal ya está registrado en el refugio
-		if (super.getRefugio().getAnimalesRegistrados().contains(animal)) {
+		if (super.getRefugio().containsAnimalesRegistrados(animal)) {
 			throw new RefugioAnimalesException("El animal ya está registrado en el refugio.");
 		}
 
@@ -76,11 +77,11 @@ public class Voluntario extends Socio {
 	}
 
 	/**
-	 * Obtiene la lista de adopciones tramitadas por el voluntario.
+	 * Devuelve un Enumeration que permite iterar sobre las adopciones tramitadas por el voluntario.
 	 *
-	 * @return Lista de adopciones tramitadas.
+	 * @return Un Enumeration de las adopciones tramitadas.
 	 */
-	public List<Adopcion> getTramites() {
-		return tramites;
+	public Enumeration<Adopcion> getTramites() {
+		return Collections.enumeration(tramites);
 	}
 }

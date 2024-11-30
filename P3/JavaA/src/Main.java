@@ -1,6 +1,6 @@
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Enumeration;
 
 public class Main {
     private static void imprimirRefugio(Refugio r){
@@ -45,7 +45,10 @@ public class Main {
 
             // Mostrar animales registrados en el refugio
             System.out.println("Animales registrados en el refugio:");
-            for (Animal animal : refugio.getAnimalesRegistrados()) {
+            Enumeration<Animal> animales = refugio.getAnimalesRegistrados();
+
+            while (animales.hasMoreElements()) {
+                Animal animal = animales.nextElement();
                 System.out.println(animal);
             }
             System.out.println();
@@ -60,7 +63,11 @@ public class Main {
 
             // Mostrar animales refugiados tras las adopciones
             System.out.println("Animales refugiados después de las adopciones:");
-            for (Animal animal : refugio.getAnimalesRefugiados()) {
+            Enumeration<Animal> animalesRefugiadosTrasAdopciones = refugio.getAnimalesRefugiados();
+
+            System.out.println("Adopciones tramitadas por el voluntario:");
+            while (animalesRefugiadosTrasAdopciones.hasMoreElements()) {
+                Animal animal = animalesRefugiadosTrasAdopciones.nextElement();
                 System.out.println(animal);
             }
             System.out.println();
@@ -76,11 +83,19 @@ public class Main {
             // Mostrar trámites realizados por los voluntarios
             System.out.println("Trámites realizados por los voluntarios:");
             System.out.println("Voluntario 1:");
-            for (Adopcion adopcion : voluntario1.getTramites()) {
+            Enumeration<Adopcion> tramites1 = voluntario1.getTramites();
+
+            System.out.println("Adopciones tramitadas por el voluntario:");
+            while (tramites1.hasMoreElements()) {
+                Adopcion adopcion = tramites1.nextElement();
                 System.out.println(adopcion);
             }
             System.out.println("\nVoluntario 2:");
-            for (Adopcion adopcion : voluntario2.getTramites()) {
+            Enumeration<Adopcion> tramites2 = voluntario2.getTramites();
+
+            System.out.println("Adopciones tramitadas por el voluntario:");
+            while (tramites2.hasMoreElements()) {
+                Adopcion adopcion = tramites2.nextElement();
                 System.out.println(adopcion);
             }
             System.out.println();

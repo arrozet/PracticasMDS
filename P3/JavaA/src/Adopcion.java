@@ -11,8 +11,8 @@ public class Adopcion {
     private Adoptante adoptante; // Adoptante que realizó la adopción
 
     /**
-     * Constructor de la clase Adopcion.
-     * Valida que la fecha, el animal y el adoptante no sean null antes de crear la instancia.
+     * Constructor de la clase Adopcion.alida que la fecha, el animal y el adoptante no sean null antes de crear la instancia.
+     * V
      *
      * @param fecha Fecha de la adopción. No puede ser null.
      * @param animal Animal que ha sido adoptado. No puede ser null.

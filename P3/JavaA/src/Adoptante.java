@@ -39,9 +39,6 @@ public class Adoptante extends Socio {
 			throw new IllegalArgumentException("El animal ya ha sido adoptado.");
 		}
 
-		// Cambiar el estado del animal a 'adoptado'
-		animal.adoptar();
-
 		// Registrar la adopción a través del voluntario
 		voluntario.tramitarAdopcion(animal, this);
 

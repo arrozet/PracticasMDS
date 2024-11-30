@@ -1,7 +1,5 @@
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * Clase que representa un Donante en el refugio.
@@ -46,11 +44,11 @@ public class Donante extends Socio {
 	}
 
 	/**
-	 * Obtiene la lista de donaciones realizadas por el donante.
+	 * Devuelve un Enumeration que permite iterar sobre las donaciones realizadas.
 	 *
-	 * @return Lista de donaciones realizadas por este donante.
+	 * @return Un Enumeration de las donaciones registradas.
 	 */
-	public List<Donacion> getDonaciones() {
-		return donaciones;
+	public Enumeration<Donacion> getDonaciones() {
+		return Collections.enumeration(donaciones);
 	}
 }
