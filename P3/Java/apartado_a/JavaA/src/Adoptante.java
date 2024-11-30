@@ -39,6 +39,9 @@ public class Adoptante extends Socio {
 			throw new IllegalArgumentException("El animal ya ha sido adoptado.");
 		}
 
+		// Todas las personas involucradas deben estar en el mismo refugio
+		assert(this.getRefugio().equals(voluntario.getRefugio())) : "Voluntario y adoptante deben estar en el mismo refugio";
+
 		// Registrar la adopción a través del voluntario
 		voluntario.tramitarAdopcion(animal, this);
 
