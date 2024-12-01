@@ -1,7 +1,5 @@
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * Clase abstracta que representa un socio en el refugio.
@@ -22,30 +20,34 @@ public class Socio {
 	 * Valida que la fecha de inscripción y el refugio no sean null.
 	 *
 	 * @param fechaInscripcion Fecha en la que el socio se inscribe en el refugio. No puede ser null.
-	 * @param refugio Refugio al que el socio se asocia. No puede ser null.
 	 * @throws IllegalArgumentException Si la fecha o el refugio son null.
 	 */
-	public Socio(Date fechaInscripcion, Refugio refugio, Rol rol) {
+	public Socio(Date fechaInscripcion, Rol rol) {
 		if (fechaInscripcion == null) {
 			throw new IllegalArgumentException("La fecha de inscripción no puede ser null.");
 		}
-		if (refugio == null) {
-			throw new IllegalArgumentException("El refugio no puede ser null.");
-		}
+
 
 		this.registro = fechaInscripcion;
-		this.refugioInscrito = refugio;
+		this.refugioInscrito = rol.getRefugio();
 		this.roles = new ArrayList<>();
 		this.roles.add(rol);
 
 		// Agregar este socio al refugio
-		refugio.agregarSocio(this);
+		rol.getRefugio().agregarSocio(this);
 	}
 	// Añadir un rol al socio
 	public void agregarRol(Rol rol) {
-		if (!roles.contains(rol)) {
+		if(refugioInscrito!=rol.getRefugio()){
+			throw new IllegalArgumentException("Todos los roles tienen que estar en el mismo refugio");
+		}
+		if (roles.toString().contains(rol.toString())) {
+			System.err.println("El rol introducido ya estaba asignado a socio. No se ha introducido el rol de nuevo");
+		}
+		if (!roles.toString().contains(rol.toString())) {
 			roles.add(rol);
 		}
+
 	}
 
 	// Métodos proxy para delegar la llamada a los roles específicos
@@ -97,6 +99,15 @@ public class Socio {
 			}
 		}
 		throw new IllegalStateException("Este socio no tiene el rol de Donante.");
+	}
+
+	public Enumeration<Adopcion> getTramites() {
+		for (Rol rol : roles) {
+			if (rol instanceof Voluntario) {
+				return ((Voluntario) rol).getTramites();
+			}
+		}
+		throw new IllegalStateException("Este socio no tiene el rol de Voluntario.");
 	}
 
 
