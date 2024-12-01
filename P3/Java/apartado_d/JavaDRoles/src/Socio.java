@@ -1,6 +1,9 @@
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.List;
+import java.util.Vector;
 
 /**
  * Clase abstracta que representa un socio en el refugio.
@@ -34,7 +37,9 @@ public class Socio {
 		}
 		this.registro = fechaInscripcion;
 		this.refugioInscrito = refugio;
-		this.roles = roles;
+		this.roles = new ArrayList<>();
+		this.roles.add(rol);
+		
 		// Agregar este socio al refugio
 		refugio.agregarSocio(this);
 	}
