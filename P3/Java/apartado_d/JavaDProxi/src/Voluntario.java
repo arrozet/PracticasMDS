@@ -58,5 +58,8 @@ public class Voluntario implements Rol {
 		return Collections.enumeration(tramites);
 	}
 
-
+	@Override
+	public String toString() {
+		return this.getClass().getSimpleName();
+	}
 }

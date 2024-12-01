@@ -50,4 +50,9 @@ public class Adoptante implements Rol {
 
 		assert (animal.estaAdoptado()) : "El animal no está adoptado tras tramitar la adopción";
 	}
+
+	@Override
+	public String toString() {
+		return this.getClass().getSimpleName();
+	}
 }

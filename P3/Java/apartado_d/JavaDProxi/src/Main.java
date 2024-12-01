@@ -83,19 +83,15 @@ public class Main {
         try {
             // Crear un refugio
             Refugio refugio = new Refugio();
+            Refugio refugio2 = new Refugio();
 
             // Crear socios: varios voluntarios, adoptantes y donantes
-            Voluntario voluntario1 = new Voluntario(refugio);
-            Voluntario voluntario2 = new Voluntario(refugio);
-            Adoptante adoptante1 = new Adoptante(refugio);
-            Donante donante1 = new Donante(5, refugio);
 
-            Socio voluntarioDonante = new Socio(new Date(),refugio,voluntario1);
-            Socio voluntarioAdoptante = new Socio(new Date(),refugio,voluntario2);
+            Socio voluntarioDonante = new Socio(new Date(),new Voluntario(refugio));
+            Socio voluntarioAdoptante = new Socio(new Date(),new Voluntario(refugio));
 
-
-            voluntarioDonante.agregarRol(donante1);
-            voluntarioAdoptante.agregarRol(adoptante1);
+            voluntarioDonante.agregarRol(new Donante(5, refugio));
+            voluntarioAdoptante.agregarRol(new Adoptante(refugio));
 
             imprimirRefugio(refugio);
 
@@ -143,9 +139,9 @@ public class Main {
             // Mostrar trámites realizados por los voluntarios
             System.out.println("Trámites realizados por los voluntarios:");
             System.out.println("Voluntario 1:");
-            imprimirEnumeration(voluntario1.getTramites());
+            imprimirEnumeration(voluntarioDonante.getTramites());
             System.out.println("\nVoluntario 2:");
-            imprimirEnumeration(voluntario2.getTramites());
+            imprimirEnumeration(voluntarioDonante.getTramites());
             System.out.println();
 
             // Volver a poner un animal en tratamiento y registrar de nuevo
@@ -155,11 +151,10 @@ public class Main {
 
             // Agregar más socios al refugio y mostrar el total
             System.out.println("Añadiendo 2 nuevos socios...");
-            Voluntario v2 = new Voluntario(refugio);
-            Adoptante a2 = new Adoptante(refugio);
 
-            Socio v2s = new Socio(new Date(), refugio, v2);
-            Socio a2s = new Socio(new Date(), refugio, a2);
+
+            Socio v2s = new Socio(new Date(), new Voluntario(refugio));
+            Socio a2s = new Socio(new Date(), new Adoptante(refugio));
 
 
             imprimirEnumeration(refugio.getSocios());
