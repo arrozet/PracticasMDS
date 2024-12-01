@@ -60,11 +60,11 @@ public class Refugio {
 	/**
 	 * Verifica si un animal está en la lista de animales registrados.
 	 *
-	 * @param a El animal a buscar en la lista de animales registrados.
+	 * @param animal El animal a buscar en la lista de animales registrados.
 	 * @return {@code true} si el animal está registrado, {@code false} en caso contrario.
 	 */
-	public boolean containsAnimalesRegistrados(Animal a){
-		return animalesRegistrados.contains(a);
+	public boolean containsAnimalesRegistrados(Animal animal){
+		return animalesRegistrados.contains(animal);
 	}
 
 	/**
