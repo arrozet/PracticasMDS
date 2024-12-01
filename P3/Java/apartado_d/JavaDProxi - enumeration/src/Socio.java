@@ -75,7 +75,7 @@ public class Socio {
 	 */
 	public void tramitarAdopcion(Animal animal, Socio adoptante) throws RefugioAnimalesException {
 		if ( !adoptante.isAdoptante()) {
-			throw new IllegalArgumentException("El socio adoptante no tiene el rol de Adoptante: " + adoptante.getRoles().toString());
+			throw new IllegalArgumentException("El socio adoptante no tiene el rol de Adoptante: " + mostrarRoles(adoptante));
 		}
 		if ( !isVoluntario() ) {
 			throw new IllegalArgumentException("El socio voluntario no tiene el rol de Voluntario: " + this.getRoles().toString());
@@ -153,14 +153,7 @@ public class Socio {
 			throw new IllegalArgumentException("Este socio no tiene el rol de Adoptante: " + roles.toString());
 		}
 		if ( !voluntario.isVoluntario() ) {
-			
-			StringJoiner sj = new StringJoiner(";");
-			Enumeration<Rol> roles = voluntario.getRoles();
-			while( roles.hasMoreElements() ) {
-				sj.add( roles.nextElement().toString() );
-			}
-			
-			throw new IllegalArgumentException("Este socio no tiene el rol de Voluntario: " + sj.toString() );
+			throw new IllegalArgumentException("Este socio no tiene el rol de Voluntario: " + mostrarRoles(voluntario) );
 		}
 
 		/* Después de haber asegurado que son los roles buscados, buscamos la referencia del rol necesitado*/
@@ -257,6 +250,16 @@ public class Socio {
 		}
 		this.refugioInscrito = newRefugio;
 	}
+	
+	private String mostrarRoles(Socio socio) {
+		StringJoiner sj = new StringJoiner(";");
+		Enumeration<Rol> roles = socio.getRoles();
+		while( roles.hasMoreElements() ) {
+			sj.add( roles.nextElement().toString() );
+		}
+		return sj.toString();
+	}
+	
 
 	/**
 	 * Devuelve una representación textual del socio.
