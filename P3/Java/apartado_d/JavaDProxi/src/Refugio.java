@@ -3,7 +3,6 @@ import java.util.*;
 
 /**
  * Clase que representa un Refugio de animales.
- *
  * El refugio gestiona los animales registrados (tanto adoptados como no adoptados),
  * los animales refugiados (no adoptados) y los socios que interactúan con el refugio.
  * Además, controla las donaciones y la liquidez del refugio.

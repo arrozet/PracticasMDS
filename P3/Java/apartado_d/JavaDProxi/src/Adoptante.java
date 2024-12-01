@@ -1,5 +1,3 @@
-import java.util.Date;
-
 /**
  * Clase que representa un Adoptante en el refugio.
  * Un adoptante es un socio que adopta al menos un animal.
@@ -22,7 +20,6 @@ public class Adoptante implements Rol {
 
 	/**
 	 * Adopta un animal a través de un voluntario.
-	 *
 	 * Este método valida que el animal y el voluntario no sean null y que el animal no haya sido adoptado previamente.
 	 * Si todas las condiciones son válidas, se cambia el estado del animal a 'adoptado' y se registra la adopción
 	 * a través del voluntario.

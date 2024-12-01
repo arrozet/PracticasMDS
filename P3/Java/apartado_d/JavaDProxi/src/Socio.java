@@ -3,7 +3,6 @@ import java.util.*;
 
 /**
  * Clase que representa un socio en el refugio.
- *
  * Un socio es una persona asociada al refugio y puede desempeñar uno o más roles
  * como adoptante, voluntario o donante. Los roles se gestionan dinámicamente
  * mediante una lista. Además, el socio está asociado a un único refugio.

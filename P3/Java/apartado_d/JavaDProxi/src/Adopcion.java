@@ -29,7 +29,7 @@ public class Adopcion {
         if (adoptante == null) {
             throw new IllegalArgumentException("El adoptante no puede ser null.");
         }
-        if(!adoptante.getRoles().stream().anyMatch(rol -> rol instanceof Adoptante)){
+        if(adoptante.getRoles().stream().noneMatch(rol -> rol instanceof Adoptante)){
             throw new IllegalArgumentException("No es un adoptante");
         }
 
