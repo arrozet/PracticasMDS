@@ -58,4 +58,9 @@ public class Donante implements Rol {
 	public Enumeration<Donacion> getDonaciones() {
 		return Collections.enumeration(donaciones);
 	}
+
+	@Override
+	public String toString() {
+		return this.getClass().getSimpleName();
+	}
 }
