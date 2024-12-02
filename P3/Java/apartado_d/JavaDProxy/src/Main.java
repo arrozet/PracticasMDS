@@ -1,3 +1,10 @@
+import GestionAdopciones.Adoptante;
+import RecepcionDonaciones.Donante;
+import todos.Animal;
+import todos.Refugio;
+import todos.Socio;
+import todos.Voluntario;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Enumeration;
@@ -23,7 +30,7 @@ public class Main {
         try {
             // Crear un refugio
             Refugio refugio = new Refugio();
-            Refugio refugio2 = new Refugio();
+            //Refugio refugio2 = new Refugio();
 
             // Crear socios: varios voluntarios, adoptantes y donantes
 
@@ -78,21 +85,21 @@ public class Main {
 
             // Mostrar trámites realizados por los voluntarios
             System.out.println("Trámites realizados por los voluntarios:");
-            System.out.println("Voluntario 1:");
+            System.out.println("todos.Voluntario 1:");
             imprimirEnumeration(voluntarioDonante.getTramites());
-            System.out.println("\nVoluntario 2:");
+            System.out.println("\ntodos.Voluntario 2:");
             imprimirEnumeration(voluntarioDonante.getTramites());
             System.out.println();
 
             // Volver a poner un animal en tratamiento y registrar de nuevo
             System.out.println("Ponemos al conejo en tratamiento...");
-            conejo.ponerEnTratamiento();
+            voluntarioAdoptante.ponerEnTratamiento(conejo);
             System.out.println("Estado actual de Traviesito: " + conejo.getEstadoAnimal());
 
             // Agregar más socios al refugio y mostrar el total
             System.out.println("Añadiendo 2 nuevos socios...");
 
-
+            // Se crean para comprobar que se añaden al refugio
             Socio v2s = new Socio(new Date(), new Voluntario(refugio));
             Socio a2s = new Socio(new Date(), new Adoptante(refugio));
 
