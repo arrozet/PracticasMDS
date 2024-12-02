@@ -55,7 +55,7 @@ public class Animal {
 	 * @param nacimiento Nueva fecha de nacimiento.
 	 * @throws IllegalArgumentException Si la fecha es en el futuro.
 	 */
-	public void setNacimiento(Date nacimiento) {
+	private void setNacimiento(Date nacimiento) {
 		if (nacimiento == null) {
 			throw new IllegalArgumentException("La fecha de nacimiento no puede ser null.");
 		}
@@ -80,7 +80,7 @@ public class Animal {
 	 *
 	 * @param estado Nuevo estado del animal.
 	 */
-	public void setEstadoAnimal(EstadoAnimal estado) {
+	protected void setEstadoAnimal(EstadoAnimal estado) {
 		this.estado = estado;
 	}
 
@@ -98,7 +98,7 @@ public class Animal {
 	 *
 	 * @param refugio El refugio donde se desea registrar al animal.
 	 */
-	public void setRefugio(Refugio refugio) {
+	private void setRefugio(Refugio refugio) {
 		this.refugio = refugio;
 	}
 
@@ -116,7 +116,7 @@ public class Animal {
 	 *
 	 * @throws IllegalStateException Si el animal no está disponible para adopción.
 	 */
-	public void adoptar() {
+	protected void adoptar() {
 		if (estado != EstadoAnimal.disponible) {
 			throw new IllegalStateException("Solo se pueden adoptar animales disponibles.");
 		}
@@ -128,7 +128,7 @@ public class Animal {
 	 *
 	 * @throws IllegalStateException Si el animal ya ha sido adoptado.
 	 */
-	public void ponerEnTratamiento() {
+	protected void ponerEnTratamiento() {
 		if (estado == EstadoAnimal.adoptado) {
 			throw new IllegalStateException("No se puede poner en tratamiento un animal adoptado.");
 		}

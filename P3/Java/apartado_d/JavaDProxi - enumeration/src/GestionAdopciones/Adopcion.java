@@ -58,7 +58,7 @@ public class Adopcion {
      * @param fecha Nueva fecha de la adopción. No puede ser null.
      * @throws IllegalArgumentException Si la fecha es null.
      */
-    public void setFecha(Date fecha) {
+    private void setFecha(Date fecha) {
         if (fecha == null) {
             throw new IllegalArgumentException("La fecha no puede ser null.");
         }
@@ -80,7 +80,7 @@ public class Adopcion {
      * @param animal Nuevo animal adoptado. No puede ser null.
      * @throws IllegalArgumentException Si el animal es null.
      */
-    public void setAnimal(Animal animal) {
+    private void setAnimal(Animal animal) {
         if (animal == null) {
             throw new IllegalArgumentException("El animal no puede ser null.");
         }
@@ -102,7 +102,7 @@ public class Adopcion {
      * @param adoptante Nuevo adoptante. No puede ser null.
      * @throws IllegalArgumentException Si el adoptante es null.
      */
-    public void setAdoptante(Socio adoptante) {
+    private void setAdoptante(Socio adoptante) {
         if (adoptante == null) {
             throw new IllegalArgumentException("El adoptante no puede ser null.");
         }

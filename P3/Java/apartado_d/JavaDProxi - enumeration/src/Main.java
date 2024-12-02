@@ -93,7 +93,7 @@ public class Main {
 
             // Volver a poner un animal en tratamiento y registrar de nuevo
             System.out.println("Ponemos al conejo en tratamiento...");
-            conejo.ponerEnTratamiento();
+            voluntarioAdoptante.ponerEnTratamiento(conejo);
             System.out.println("Estado actual de Traviesito: " + conejo.getEstadoAnimal());
 
             // Agregar más socios al refugio y mostrar el total
