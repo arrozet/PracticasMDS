@@ -31,7 +31,7 @@ public class Adoptante extends Socio {
 	 * @param voluntario El voluntario que tramita la adopción. No puede ser null.
 	 * @throws IllegalArgumentException Si el animal o el voluntario son null, o si el animal ya ha sido adoptado.
 	 */
-	public void adoptar(Animal animal, Voluntario voluntario) throws RefugioAnimalesException {
+	public void adoptar(Animal animal, Voluntario voluntario) {
 		// Validaciones de entrada
 		if (animal == null) {
 			throw new IllegalArgumentException("El animal no puede ser null.");
