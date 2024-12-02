@@ -96,6 +96,8 @@ public class Main {
 
             // Agregar más socios al refugio y mostrar el total
             System.out.println("Añadiendo 2 nuevos socios...");
+
+            // Para comprobar que se meten al refugio correctamente
             Voluntario v2 = new Voluntario(new Date(), refugio);
             Adoptante a2 = new Adoptante(new Date(), refugio);
 
