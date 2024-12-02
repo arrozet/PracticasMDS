@@ -1,3 +1,7 @@
+package GestionAdopciones;
+
+import todos.Animal;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -7,16 +11,16 @@ import java.util.Date;
  */
 public class Adopcion {
     private Date fecha; // Fecha en la que se realizó la adopción
-    private Animal animal; // Animal adoptado
-    private Adoptante adoptante; // Adoptante que realizó la adopción
+    private Animal animal; // todos.Animal adoptado
+    private Adoptante adoptante; // GestionAdopciones.Adoptante que realizó la adopción
 
     /**
-     * Constructor de la clase Adopcion.alida que la fecha, el animal y el adoptante no sean null antes de crear la instancia.
+     * Constructor de la clase GestionAdopciones.Adopcion.alida que la fecha, el animal y el adoptante no sean null antes de crear la instancia.
      * V
      *
      * @param fecha Fecha de la adopción. No puede ser null.
-     * @param animal Animal que ha sido adoptado. No puede ser null.
-     * @param adoptante Adoptante que adopta el animal. No puede ser null.
+     * @param animal todos.Animal que ha sido adoptado. No puede ser null.
+     * @param adoptante GestionAdopciones.Adoptante que adopta el animal. No puede ser null.
      * @throws IllegalArgumentException Si alguno de los parámetros es null.
      */
     public Adopcion(Date fecha, Animal animal, Adoptante adoptante) {
@@ -50,7 +54,7 @@ public class Adopcion {
      * @param fecha Nueva fecha de la adopción. No puede ser null.
      * @throws IllegalArgumentException Si la fecha es null.
      */
-    public void setFecha(Date fecha) {
+    private void setFecha(Date fecha) {
         if (fecha == null) {
             throw new IllegalArgumentException("La fecha no puede ser null.");
         }
@@ -60,7 +64,7 @@ public class Adopcion {
     /**
      * Obtiene el animal asociado a la adopción.
      *
-     * @return Animal adoptado.
+     * @return todos.Animal adoptado.
      */
     public Animal getAnimal() {
         return animal;
@@ -72,7 +76,7 @@ public class Adopcion {
      * @param animal Nuevo animal adoptado. No puede ser null.
      * @throws IllegalArgumentException Si el animal es null.
      */
-    public void setAnimal(Animal animal) {
+    private void setAnimal(Animal animal) {
         if (animal == null) {
             throw new IllegalArgumentException("El animal no puede ser null.");
         }
@@ -82,7 +86,7 @@ public class Adopcion {
     /**
      * Obtiene el adoptante asociado a la adopción.
      *
-     * @return Adoptante que realizó la adopción.
+     * @return GestionAdopciones.Adoptante que realizó la adopción.
      */
     public Adoptante getAdoptante() {
         return adoptante;
@@ -94,7 +98,7 @@ public class Adopcion {
      * @param adoptante Nuevo adoptante. No puede ser null.
      * @throws IllegalArgumentException Si el adoptante es null.
      */
-    public void setAdoptante(Adoptante adoptante) {
+    private void setAdoptante(Adoptante adoptante) {
         if (adoptante == null) {
             throw new IllegalArgumentException("El adoptante no puede ser null.");
         }
@@ -110,9 +114,9 @@ public class Adopcion {
     @Override
     public String toString() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        return "Adopcion{" +
+        return "GestionAdopciones.Adopcion{" +
                 "fecha=" + dateFormat.format(fecha) +
-                ", animal=" + animal + // Suponiendo que Animal tiene un método getNombre
+                ", animal=" + animal + // Suponiendo que todos.Animal tiene un método getNombre
                 ", adoptante=" + adoptante +
                 '}';
     }

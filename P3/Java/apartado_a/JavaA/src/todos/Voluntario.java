@@ -1,7 +1,12 @@
+package todos;
+
+import GestionAdopciones.Adopcion;
+import GestionAdopciones.Adoptante;
+
 import java.util.*;
 
 /**
- * Clase que representa a un Voluntario en el refugio.
+ * Clase que representa a un todos.Voluntario en el refugio.
  *
  * Un voluntario es un socio que puede registrar animales en el refugio y tramitar adopciones.
  * Los voluntarios gestionan la relación entre los adoptantes y los animales en el refugio.
@@ -11,12 +16,12 @@ public class Voluntario extends Socio {
 	private List<Adopcion> tramites; // Lista de adopciones tramitadas por el voluntario
 
 	/**
-	 * Constructor de la clase Voluntario.
+	 * Constructor de la clase todos.Voluntario.
 	 * Inicializa al voluntario con la fecha de registro y el refugio al que pertenece.
 	 * También inicializa la lista de trámites como vacía.
 	 *
 	 * @param registro Fecha de inscripción del voluntario en el refugio. No puede ser null.
-	 * @param refugio Refugio al que pertenece el voluntario. No puede ser null.
+	 * @param refugio todos.Refugio al que pertenece el voluntario. No puede ser null.
 	 * @throws IllegalArgumentException Si la fecha o el refugio son null.
 	 */
 	public Voluntario(Date registro, Refugio refugio) {
@@ -73,8 +78,12 @@ public class Voluntario extends Socio {
 		}
 
 		// Establecer el estado del animal como disponible y registrarlo en el refugio
-		animal.setEstadoAnimal(EstadoAnimal.disponible);
 		super.getRefugio().registrar(animal);
+		assert(animal.getEstadoAnimal().equals(EstadoAnimal.disponible)) : "El estado del animal no es disponible tras registrarlo";
+	}
+
+	public void ponerEnTratamiento(Animal animal){
+		animal.ponerEnTratamiento();
 	}
 
 	/**

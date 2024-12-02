@@ -1,3 +1,4 @@
+package todos;
 
 public class RefugioAnimalesException extends Exception{
 	

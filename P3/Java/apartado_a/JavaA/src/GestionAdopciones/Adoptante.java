@@ -1,16 +1,20 @@
+package GestionAdopciones;
+
+import todos.*;
+
 import java.util.Date;
 
 /**
- * Clase que representa un Adoptante en el refugio.
+ * Clase que representa un GestionAdopciones.Adoptante en el refugio.
  * Un adoptante es un socio que adopta al menos un animal.
  */
 public class Adoptante extends Socio {
 
 	/**
-	 * Constructor de la clase Adoptante.
+	 * Constructor de la clase GestionAdopciones.Adoptante.
 	 *
 	 * @param registro Fecha en la que el adoptante se inscribe en el refugio. No puede ser null.
-	 * @param refugio Refugio al que pertenece el adoptante. No puede ser null.
+	 * @param refugio todos.Refugio al que pertenece el adoptante. No puede ser null.
 	 */
 	public Adoptante(Date registro, Refugio refugio) {
 		super(registro, refugio);
@@ -40,7 +44,7 @@ public class Adoptante extends Socio {
 		}
 
 		// Todas las personas involucradas deben estar en el mismo refugio
-		assert(this.getRefugio().equals(voluntario.getRefugio())) : "Voluntario y adoptante deben estar en el mismo refugio";
+		assert(this.getRefugio().equals(voluntario.getRefugio())) : "todos.Voluntario y adoptante deben estar en el mismo refugio";
 
 		// Registrar la adopción a través del voluntario
 		voluntario.tramitarAdopcion(animal, this);

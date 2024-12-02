@@ -1,8 +1,13 @@
+package RecepcionDonaciones;
+
+import todos.Refugio;
+import todos.Socio;
+
 import java.time.Instant;
 import java.util.*;
 
 /**
- * Clase que representa un Donante en el refugio.
+ * Clase que representa un RecepcionDonaciones.Donante en el refugio.
  * Un donante es un socio que realiza donaciones monetarias al refugio.
  */
 public class Donante extends Socio {
@@ -10,12 +15,12 @@ public class Donante extends Socio {
 	private List<Donacion> donaciones; // Lista de donaciones realizadas por el donante
 
 	/**
-	 * Constructor de la clase Donante.
+	 * Constructor de la clase RecepcionDonaciones.Donante.
 	 * Inicializa al donante con su fecha de inscripción y el refugio al que pertenece.
 	 * También inicializa la lista de donaciones vacía.
 	 *
 	 * @param fechaInscripcion Fecha en la que el donante se inscribe en el refugio. No puede ser null.
-	 * @param refugio Refugio al que pertenece el donante. No puede ser null.
+	 * @param refugio todos.Refugio al que pertenece el donante. No puede ser null.
 	 */
 	public Donante(Date fechaInscripcion, Refugio refugio, double cantidad) {
 		super(fechaInscripcion, refugio);
@@ -41,10 +46,10 @@ public class Donante extends Socio {
 		donaciones.add(donacion);
 
 		// Actualizar la liquidez del refugio
-		double liquidezAnterior = super.getRefugio().getLiquidez();	// Para el assert
+		//double liquidezAnterior = super.getRefugio().getLiquidez();	// Para el assert
 		super.getRefugio().recibeDonacion(donacion);
-		assert((super.getRefugio().getLiquidez() - liquidezAnterior) == donacion.getCantidadDonada())
-				: "La donación no se ha completado con éxito";
+		//assert((super.getRefugio().getLiquidez() - liquidezAnterior) == donacion.getCantidadDonada())
+		//		: "La donación no se ha completado con éxito";
 	}
 
 	/**

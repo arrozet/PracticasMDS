@@ -1,3 +1,5 @@
+package todos;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -11,14 +13,14 @@ import java.util.Date;
 public abstract class Socio {
 
 	private Date registro; // Fecha de inscripción del socio en el refugio
-	private Refugio refugioInscrito; // Refugio al que el socio está asociado
+	private Refugio refugioInscrito; // todos.Refugio al que el socio está asociado
 
 	/**
-	 * Constructor de la clase Socio.
+	 * Constructor de la clase todos.Socio.
 	 * Valida que la fecha de inscripción y el refugio no sean null.
 	 *
 	 * @param fechaInscripcion Fecha en la que el socio se inscribe en el refugio. No puede ser null.
-	 * @param refugio Refugio al que el socio se asocia. No puede ser null.
+	 * @param refugio todos.Refugio al que el socio se asocia. No puede ser null.
 	 * @throws IllegalArgumentException Si la fecha o el refugio son null.
 	 */
 	public Socio(Date fechaInscripcion, Refugio refugio) {
@@ -51,7 +53,7 @@ public abstract class Socio {
 	 * @param fechaInscripcion Nueva fecha de inscripción. No puede ser null.
 	 * @throws IllegalArgumentException Si la fecha es null.
 	 */
-	public void setRegistro(Date fechaInscripcion) {
+	private void setRegistro(Date fechaInscripcion) {
 		if (fechaInscripcion == null) {
 			throw new IllegalArgumentException("La fecha de inscripción no puede ser null.");
 		}
@@ -61,7 +63,7 @@ public abstract class Socio {
 	/**
 	 * Obtiene el refugio al que el socio está asociado.
 	 *
-	 * @return Refugio asociado al socio.
+	 * @return todos.Refugio asociado al socio.
 	 */
 	public Refugio getRefugio() {
 		return refugioInscrito;
@@ -73,7 +75,7 @@ public abstract class Socio {
 	 * @param newRefugio Nuevo refugio al que el socio estará asociado. No puede ser null.
 	 * @throws IllegalArgumentException Si el refugio es null.
 	 */
-	public void setRefugio(Refugio newRefugio) {
+	protected void setRefugio(Refugio newRefugio) {
 		if (newRefugio == null) {
 			throw new IllegalArgumentException("El nuevo refugio no puede ser null.");
 		}
@@ -91,6 +93,6 @@ public abstract class Socio {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 		return this.getClass().getSimpleName().toUpperCase() +
 				" | Fecha de inscripción: " + dateFormat.format(registro) +
-				"; Refugio: " + refugioInscrito;
+				"; todos.Refugio: " + refugioInscrito;
 	}
 }

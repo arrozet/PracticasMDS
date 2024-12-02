@@ -1,8 +1,12 @@
+package todos;
+
+import RecepcionDonaciones.Donacion;
+
 import java.time.Instant;
 import java.util.*;
 
 /**
- * Clase que representa un Refugio de animales.
+ * Clase que representa un todos.Refugio de animales.
  *
  * El refugio gestiona los animales registrados (tanto adoptados como no adoptados),
  * los animales refugiados (no adoptados) y los socios que interactúan con el refugio.
@@ -16,7 +20,7 @@ public class Refugio {
 	private List<Animal> animalesRegistrados; // Todos los animales registrados en el refugio
 	private List<Animal> animalesRefugiados;  // Solo los animales NO adoptados
 
-	// Lista para modelar la asociación con Socio
+	// Lista para modelar la asociación con todos.Socio
 	private List<Socio> socios;
 
 	/**
@@ -35,7 +39,7 @@ public class Refugio {
 	 *
 	 * @return Liquidez del refugio.
 	 */
-	public double getLiquidez() {
+	protected double getLiquidez() {
 		return liquidez;
 	}
 
@@ -44,7 +48,7 @@ public class Refugio {
 	 *
 	 * @param liquidez Nueva liquidez del refugio.
 	 */
-	public void setLiquidez(double liquidez) {
+	private void setLiquidez(double liquidez) {
 		this.liquidez = liquidez;
 	}
 
@@ -72,7 +76,7 @@ public class Refugio {
 	 *
 	 * @param animalesRegistrados Lista de animales registrados.
 	 */
-	public void setAnimalesRegistrados(List<Animal> animalesRegistrados) {
+	private void setAnimalesRegistrados(List<Animal> animalesRegistrados) {
 		this.animalesRegistrados = animalesRegistrados;
 	}
 
@@ -100,7 +104,7 @@ public class Refugio {
 	 *
 	 * @param animalesRefugiados Lista de animales refugiados.
 	 */
-	public void setAnimalesRefugiados(List<Animal> animalesRefugiados) {
+	private void setAnimalesRefugiados(List<Animal> animalesRefugiados) {
 		this.animalesRefugiados = animalesRefugiados;
 	}
 
@@ -108,10 +112,10 @@ public class Refugio {
 	 * Registra un animal en el refugio.
 	 * El animal se añade a las listas de animales registrados y refugiados.
 	 *
-	 * @param a Animal a registrar.
+	 * @param a todos.Animal a registrar.
 	 * @throws IllegalArgumentException Si el animal es null.
 	 */
-	public void registrar(Animal a) {
+	protected void registrar(Animal a) {
 		// Asegurarse de que las listas estén inicializadas
 		assert animalesRegistrados != null : "La lista de animales registrados no está inicializada.";
 		assert animalesRefugiados != null : "La lista de animales refugiados no está inicializada.";
@@ -119,6 +123,8 @@ public class Refugio {
 		if (a == null) {
 			throw new IllegalArgumentException("El animal no puede ser null.");
 		}
+
+		a.setEstadoAnimal(EstadoAnimal.disponible);
 		animalesRegistrados.add(a);
 		animalesRefugiados.add(a);
 
@@ -147,10 +153,10 @@ public class Refugio {
 	/**
 	 * Elimina un animal de la lista de animales refugiados si ha sido adoptado.
 	 *
-	 * @param animal Animal que ha sido adoptado.
+	 * @param animal todos.Animal que ha sido adoptado.
 	 * @throws IllegalArgumentException Si el animal es null o no está adoptado.
 	 */
-	public void eliminarAnimalRefugiado(Animal animal) {
+	protected void eliminarAnimalRefugiado(Animal animal) {
 		if (animal == null) {
 			throw new IllegalArgumentException("El animal no puede ser null.");
 		}
@@ -164,10 +170,10 @@ public class Refugio {
 	 * Agrega un socio al refugio y establece la relación bidireccional entre
 	 * el socio y el refugio.
 	 *
-	 * @param socio Socio a agregar.
+	 * @param socio todos.Socio a agregar.
 	 * @throws IllegalArgumentException Si el socio es null.
 	 */
-	public void agregarSocio(Socio socio) {
+	protected void agregarSocio(Socio socio) {
 		if (socio == null) {
 			throw new IllegalArgumentException("El socio no puede ser null.");
 		}
@@ -197,7 +203,7 @@ public class Refugio {
 	 */
 	@Override
 	public String toString() {
-		return "Refugio{" +
+		return "todos.Refugio{" +
 				"liquidez=" + liquidez + " euros" +
 				", animalesRegistrados=" + animalesRegistrados.size() +
 				", animalesRefugiados=" + animalesRefugiados.size() +
