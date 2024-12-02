@@ -29,7 +29,7 @@ public class Adopcion {
         if (adoptante == null) {
             throw new IllegalArgumentException("El adoptante no puede ser null.");
         }
-        if( !adoptante.isAdoptante()){
+        if( !adoptante.hasRole(Adoptante.class)){
             throw new IllegalArgumentException("No es un adoptante");
         }
 
@@ -101,7 +101,7 @@ public class Adopcion {
         if (adoptante == null) {
             throw new IllegalArgumentException("El adoptante no puede ser null.");
         }
-        if( !adoptante.isAdoptante() ){
+        if( !adoptante.hasRole(Adoptante.class) ){
             throw new IllegalArgumentException("No es un adoptante");
         }
         this.adoptante = adoptante;

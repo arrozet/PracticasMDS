@@ -74,10 +74,10 @@ public class Socio {
 	 * @throws IllegalArgumentException Si el adoptante o el voluntario no tienen los roles requeridos.
 	 */
 	public void tramitarAdopcion(Animal animal, Socio adoptante) throws RefugioAnimalesException {
-		if ( !adoptante.isAdoptante()) {
+		if ( !adoptante.hasRole(Adoptante.class)) {
 			throw new IllegalArgumentException("El socio adoptante no tiene el rol de Adoptante: " + mostrarRoles(adoptante));
 		}
-		if ( !isVoluntario() ) {
+		if ( !hasRole(Voluntario.class) ) {
 			throw new IllegalArgumentException("El socio voluntario no tiene el rol de Voluntario: " + this.getRoles().toString());
 		}
 		for (Rol rol : roles) {
@@ -87,31 +87,16 @@ public class Socio {
 			}
 		}
 	}
-	
-	public boolean isAdoptante() {
-		
-		for( Rol rol : roles ) {
-			if( rol instanceof Adoptante ) {
-				return true;
-			}
-		}
-		return false;
-	}
-	
-	public boolean isVoluntario() {
-		
-		for( Rol rol : roles ) {
-			if( rol instanceof Voluntario ) {
-				return true;
-			}
-		}
-		return false;
-	}
-	
-	public boolean isDonante( Socio socio ) {
-		
-		for( Rol rol : roles ) {
-			if( rol instanceof Donante ) {
+
+	/**
+	 * Comprueba si este socio tiene un rol específico.
+	 *
+	 * @param rolClass La clase del rol a comprobar (por ejemplo, Adoptante.class).
+	 * @return {@code true} si el socio tiene el rol especificado, {@code false} en caso contrario.
+	 */
+	public boolean hasRole(Class<? extends Rol> rolClass) {
+		for (Rol rol : roles) {
+			if (rolClass.isInstance(rol)) {
 				return true;
 			}
 		}
@@ -127,7 +112,7 @@ public class Socio {
 	 * @throws IllegalStateException    Si el socio no tiene el rol de Voluntario.
 	 */
 	public void registrar(Animal animal) throws RefugioAnimalesException {
-		if ( !isVoluntario() ) {
+		if ( !hasRole(Voluntario.class) ) {
 			throw new IllegalArgumentException("Este socio no tiene el rol de Voluntario: " + roles.toString());
 		}
 		for (Rol rol : roles) {
@@ -149,10 +134,10 @@ public class Socio {
 	 * @throws IllegalArgumentException Si los roles requeridos no están asignados.
 	 */
 	public void adoptar(Animal animal, Socio voluntario) throws RefugioAnimalesException {
-		if ( !isAdoptante() ) {
+		if ( !hasRole(Adoptante.class) ) {
 			throw new IllegalArgumentException("Este socio no tiene el rol de Adoptante: " + roles.toString());
 		}
-		if ( !voluntario.isVoluntario() ) {
+		if ( !voluntario.hasRole(Voluntario.class) ) {
 			throw new IllegalArgumentException("Este socio no tiene el rol de Voluntario: " + mostrarRoles(voluntario) );
 		}
 
@@ -178,7 +163,7 @@ public class Socio {
 	 * @throws IllegalStateException Si el socio no tiene el rol de Donante.
 	 */
 	public void donar(double cantidad) {
-		if ( !isDonante(this) ) {
+		if ( !hasRole(Donante.class) ) {
 			throw new IllegalArgumentException("Este socio no tiene el rol de Donante: " + roles.toString());
 		}
 		for (Rol rol : roles) {
@@ -196,7 +181,7 @@ public class Socio {
 	 * @throws IllegalStateException Si el socio no tiene el rol de Voluntario.
 	 */
 	public Enumeration<Adopcion> getTramites() {
-		if (!isVoluntario()) {
+		if (!hasRole(Voluntario.class)) {
 			throw new IllegalArgumentException("Este socio no tiene el rol de Voluntario: " + roles.toString());
 		}
 		for (Rol rol : roles) {
