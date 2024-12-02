@@ -46,10 +46,7 @@ public class Donante extends Socio {
 		donaciones.add(donacion);
 
 		// Actualizar la liquidez del refugio
-		//double liquidezAnterior = super.getRefugio().getLiquidez();	// Para el assert
 		super.getRefugio().recibeDonacion(donacion);
-		//assert((super.getRefugio().getLiquidez() - liquidezAnterior) == donacion.getCantidadDonada())
-		//		: "La donación no se ha completado con éxito";
 	}
 
 	/**

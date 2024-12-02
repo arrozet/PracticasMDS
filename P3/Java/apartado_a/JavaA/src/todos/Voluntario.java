@@ -38,11 +38,10 @@ public class Voluntario extends Socio {
 	 *
 	 * @param animal El animal a adoptar. No puede ser null.
 	 * @param adoptante El adoptante que adopta el animal. No puede ser null.
-	 * @throws RefugioAnimalesException Si el animal es null o no está en el refugio.
 	 */
-	public void tramitarAdopcion(Animal animal, Adoptante adoptante) throws RefugioAnimalesException {
+	public void tramitarAdopcion(Animal animal, Adoptante adoptante) {
 		if (animal == null) {
-			throw new RefugioAnimalesException("El animal no puede ser null.");
+			throw new IllegalArgumentException("El animal no puede ser null.");
 		}
 		assert(animal.getRefugio().equals(adoptante.getRefugio())) : "El animal y el adoptante no están en el mismo refugio";
 
@@ -53,7 +52,7 @@ public class Voluntario extends Socio {
 		getRefugio().eliminarAnimalRefugiado(animal);
 
 		// Registrar la adopción y añadirla a los trámites del voluntario
-		Adopcion nuevaAdopcion = new Adopcion(super.getRegistro(), animal, adoptante);
+		Adopcion nuevaAdopcion = new Adopcion(new Date(), animal, adoptante);
 		tramites.add(nuevaAdopcion);
 	}
 
@@ -65,16 +64,15 @@ public class Voluntario extends Socio {
 	 * y refugiados del refugio.
 	 *
 	 * @param animal El animal a registrar. No puede ser null.
-	 * @throws RefugioAnimalesException Si el animal ya está registrado en el refugio o es null.
 	 */
-	public void registrar(Animal animal) throws RefugioAnimalesException {
+	public void registrar(Animal animal) {
 		if (animal == null) {
-			throw new RefugioAnimalesException("El animal no puede ser null.");
+			throw new IllegalArgumentException("El animal no puede ser null.");
 		}
 
 		// Verificar si el animal ya está registrado en el refugio
 		if (super.getRefugio().containsAnimalesRegistrados(animal)) {
-			throw new RefugioAnimalesException("El animal ya está registrado en el refugio.");
+			throw new IllegalArgumentException("El animal ya está registrado en el refugio.");
 		}
 
 		// Establecer el estado del animal como disponible y registrarlo en el refugio
