@@ -153,10 +153,9 @@ public class Socio {
 	 * Requiere que el socio tenga el rol de voluntario.
 	 *
 	 * @param animal todos.Animal a registrar.
-	 * @throws RefugioAnimalesException Si ocurre un error durante el registro.
 	 * @throws IllegalStateException    Si el socio no tiene el rol de todos.Voluntario.
 	 */
-	public void registrar(Animal animal) throws RefugioAnimalesException {
+	public void registrar(Animal animal) {
 		Rol voluntario = searchRole(Voluntario.class);
 		if (voluntario == null) {
 			throw new IllegalArgumentException("Este socio no tiene el rol de todos.Voluntario: " + roles.toString());
