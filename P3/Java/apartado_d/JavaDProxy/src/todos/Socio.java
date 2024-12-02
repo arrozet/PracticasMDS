@@ -32,6 +32,9 @@ public class Socio {
 		if (fechaInscripcion == null) {
 			throw new IllegalArgumentException("La fecha de inscripción no puede ser null.");
 		}
+		if(rol==null){
+			throw new IllegalArgumentException("Un socio debe cumplir al menos un rol, por lo que rol no puede ser null.");
+		}
 
 		this.registro = fechaInscripcion;
 		this.refugioInscrito = rol.getRefugio();
