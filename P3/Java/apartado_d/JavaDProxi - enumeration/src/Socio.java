@@ -56,71 +56,46 @@ public class Socio {
 	}
 
 	/**
+	 * Busca y devuelve el primer rol del tipo especificado.
+	 *
+	 * @param rolClass La clase del rol a buscar (por ejemplo, Voluntario.class).
+	 * @return El rol encontrado del tipo especificado, o {@code null} si no existe.
+	 */
+	public Rol searchRole(Class<? extends Rol> rolClass) {
+		for (Rol rol : roles) {
+			if (rolClass.isInstance(rol)) {
+				return rol;
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Devuelve una representación en forma de cadena de todos los roles asociados a un socio.
+	 *
+	 * Este método recorre los roles del socio y los concatena en una única cadena,
+	 * separándolos por punto y coma (;).
+	 *
+	 * @param socio El socio cuyos roles se desean mostrar.
+	 * @return Una cadena que contiene la representación textual de todos los roles del socio,
+	 *         separados por punto y coma (;). Si no tiene roles, se devuelve una cadena vacía.
+	 */
+	private String mostrarRoles(Socio socio) {
+		StringJoiner sj = new StringJoiner(";");
+		Enumeration<Rol> roles = socio.getRoles();
+		while( roles.hasMoreElements() ) {
+			sj.add( roles.nextElement().toString() );
+		}
+		return sj.toString();
+	}
+
+	/**
 	 * Devuelve la lista de roles asociados al socio.
 	 *
 	 * @return Lista de roles dinámicos asociados al socio.
 	 */
 	public Enumeration<Rol> getRoles() {
 		return Collections.enumeration(roles);
-	}
-
-	/**
-	 * Tramita la adopción de un animal a través de este socio.
-	 * Requiere que el socio tenga el rol de voluntario y que el adoptante tenga el rol de Adoptante.
-	 *
-	 * @param animal     Animal que será adoptado.
-	 * @param adoptante  Socio adoptante que adopta el animal.
-	 * @throws RefugioAnimalesException Si ocurre un error durante la adopción.
-	 * @throws IllegalArgumentException Si el adoptante o el voluntario no tienen los roles requeridos.
-	 */
-	public void tramitarAdopcion(Animal animal, Socio adoptante) throws RefugioAnimalesException {
-		if ( !adoptante.hasRole(Adoptante.class)) {
-			throw new IllegalArgumentException("El socio adoptante no tiene el rol de Adoptante: " + mostrarRoles(adoptante));
-		}
-		if ( !hasRole(Voluntario.class) ) {
-			throw new IllegalArgumentException("El socio voluntario no tiene el rol de Voluntario: " + this.getRoles().toString());
-		}
-		for (Rol rol : roles) {
-			if (rol instanceof Voluntario) {
-				((Voluntario) rol).tramitarAdopcion(animal, adoptante);
-				return;
-			}
-		}
-	}
-
-	/**
-	 * Comprueba si este socio tiene un rol específico.
-	 *
-	 * @param rolClass La clase del rol a comprobar (por ejemplo, Adoptante.class).
-	 * @return {@code true} si el socio tiene el rol especificado, {@code false} en caso contrario.
-	 */
-	public boolean hasRole(Class<? extends Rol> rolClass) {
-		for (Rol rol : roles) {
-			if (rolClass.isInstance(rol)) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	/**
-	 * Registra un animal en el refugio a través de este socio.
-	 * Requiere que el socio tenga el rol de voluntario.
-	 *
-	 * @param animal Animal a registrar.
-	 * @throws RefugioAnimalesException Si ocurre un error durante el registro.
-	 * @throws IllegalStateException    Si el socio no tiene el rol de Voluntario.
-	 */
-	public void registrar(Animal animal) throws RefugioAnimalesException {
-		if ( !hasRole(Voluntario.class) ) {
-			throw new IllegalArgumentException("Este socio no tiene el rol de Voluntario: " + roles.toString());
-		}
-		for (Rol rol : roles) {
-			if (rol instanceof Voluntario) {
-				((Voluntario) rol).registrar(animal);
-				return;
-			}
-		}
 	}
 
 	/**
@@ -134,25 +109,56 @@ public class Socio {
 	 * @throws IllegalArgumentException Si los roles requeridos no están asignados.
 	 */
 	public void adoptar(Animal animal, Socio voluntario) throws RefugioAnimalesException {
-		if ( !hasRole(Adoptante.class) ) {
+		Rol rolAdoptante = searchRole(Adoptante.class);
+		if (rolAdoptante == null) {
 			throw new IllegalArgumentException("Este socio no tiene el rol de Adoptante: " + roles.toString());
 		}
-		if ( !voluntario.hasRole(Voluntario.class) ) {
+		Rol rolVoluntario = voluntario.searchRole(Voluntario.class);
+		if (rolVoluntario == null) {
 			throw new IllegalArgumentException("Este socio no tiene el rol de Voluntario: " + mostrarRoles(voluntario) );
 		}
+		((Adoptante) rolAdoptante).adoptar(animal, voluntario, this);
 
-		/* Después de haber asegurado que son los roles buscados, buscamos la referencia del rol necesitado*/
-		/* Buscamos el rol de adoptante */
-		Rol rolAdoptante = null;
-		Enumeration<Rol> roles = this.getRoles();
-		while( roles.hasMoreElements() ) {
-			rolAdoptante = roles.nextElement();
-			if( rolAdoptante instanceof Adoptante ) {
-				((Adoptante) rolAdoptante).adoptar(animal, voluntario, this);
-				return;
-			}
+	}
+
+	/**
+	 * Tramita la adopción de un animal a través de este socio.
+	 * Requiere que el socio tenga el rol de voluntario y que el adoptante tenga el rol de Adoptante.
+	 *
+	 * @param animal     Animal que será adoptado.
+	 * @param adoptante  Socio adoptante que adopta el animal.
+	 * @throws RefugioAnimalesException Si ocurre un error durante la adopción.
+	 * @throws IllegalArgumentException Si el adoptante o el voluntario no tienen los roles requeridos.
+	 */
+	public void tramitarAdopcion(Animal animal, Socio adoptante) throws RefugioAnimalesException {
+		// Validar que el socio adoptante tiene el rol de Adoptante
+		Rol rolAdoptante = adoptante.searchRole(Adoptante.class);
+		if (rolAdoptante == null) {
+			throw new IllegalArgumentException("El socio adoptante no tiene el rol de Adoptante: " + mostrarRoles(adoptante));
 		}
 
+		// Validar que este socio tiene el rol de Voluntario
+		Rol rolVoluntario = searchRole(Voluntario.class);
+		if (rolVoluntario == null) {
+			throw new IllegalArgumentException("El socio voluntario no tiene el rol de Voluntario: " + this.getRoles().toString());
+		}
+		((Voluntario) rolVoluntario).tramitarAdopcion(animal,adoptante);
+	}
+
+	/**
+	 * Registra un animal en el refugio a través de este socio.
+	 * Requiere que el socio tenga el rol de voluntario.
+	 *
+	 * @param animal Animal a registrar.
+	 * @throws RefugioAnimalesException Si ocurre un error durante el registro.
+	 * @throws IllegalStateException    Si el socio no tiene el rol de Voluntario.
+	 */
+	public void registrar(Animal animal) throws RefugioAnimalesException {
+		Rol voluntario = searchRole(Voluntario.class);
+		if (voluntario == null) {
+			throw new IllegalArgumentException("Este socio no tiene el rol de Voluntario: " + roles.toString());
+		}
+		((Voluntario) voluntario).registrar(animal);
 	}
 
 	/**
@@ -163,15 +169,11 @@ public class Socio {
 	 * @throws IllegalStateException Si el socio no tiene el rol de Donante.
 	 */
 	public void donar(double cantidad) {
-		if ( !hasRole(Donante.class) ) {
+		Rol donante = searchRole(Donante.class);
+		if ( donante==null ) {
 			throw new IllegalArgumentException("Este socio no tiene el rol de Donante: " + roles.toString());
 		}
-		for (Rol rol : roles) {
-			if (rol instanceof Donante) {
-				((Donante) rol).donar(cantidad);
-				return;
-			}
-		}
+		((Donante) donante).donar(cantidad);
 	}
 
 	/**
@@ -181,15 +183,11 @@ public class Socio {
 	 * @throws IllegalStateException Si el socio no tiene el rol de Voluntario.
 	 */
 	public Enumeration<Adopcion> getTramites() {
-		if (!hasRole(Voluntario.class)) {
+		Rol voluntario = searchRole(Voluntario.class);
+		if (voluntario == null) {
 			throw new IllegalArgumentException("Este socio no tiene el rol de Voluntario: " + roles.toString());
 		}
-		for (Rol rol : roles) {
-			if (rol instanceof Voluntario) {
-				return ((Voluntario) rol).getTramites();
-			}
-		}
-		return null; // Aquí no va a llegar nunca, pero Java necesita que ponga un return para que compile
+		return ((Voluntario) voluntario).getTramites();
 	}
 
 	/**
@@ -234,15 +232,6 @@ public class Socio {
 			throw new IllegalArgumentException("El nuevo refugio no puede ser null.");
 		}
 		this.refugioInscrito = newRefugio;
-	}
-	
-	private String mostrarRoles(Socio socio) {
-		StringJoiner sj = new StringJoiner(";");
-		Enumeration<Rol> roles = socio.getRoles();
-		while( roles.hasMoreElements() ) {
-			sj.add( roles.nextElement().toString() );
-		}
-		return sj.toString();
 	}
 	
 

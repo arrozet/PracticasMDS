@@ -23,7 +23,7 @@ public class Voluntario implements Rol {
 		if (animal == null) {
 			throw new RefugioAnimalesException("El animal no puede ser null.");
 		}
-		if( !adoptante.hasRole(Adoptante.class) ){
+		if( adoptante.searchRole(Adoptante.class) == null ){
 			throw new IllegalArgumentException("No es un adoptante");
 		}
 		assert(animal.getRefugio().equals(adoptante.getRefugio())) : "El animal y el adoptante no están en el mismo refugio";
