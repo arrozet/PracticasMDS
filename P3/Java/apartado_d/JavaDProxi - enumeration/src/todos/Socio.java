@@ -1,3 +1,9 @@
+package todos;
+
+import GestionAdopciones.Adopcion;
+import GestionAdopciones.Adoptante;
+import RecepcionDonaciones.Donante;
+
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -10,16 +16,16 @@ import java.util.*;
 public class Socio {
 
 	private Date registro; // Fecha de inscripción del socio en el refugio
-	private Refugio refugioInscrito; // Refugio al que el socio está asociado
+	private Refugio refugioInscrito; // todos.Refugio al que el socio está asociado
 	private List<Rol> roles; // Lista dinámica de roles asociados al socio
 
 	/**
-	 * Constructor de la clase Socio.
+	 * Constructor de la clase todos.Socio.
 	 * Inicializa un socio con una fecha de inscripción y su primer rol.
 	 * Valida que la fecha de inscripción y el refugio del rol no sean null.
 	 *
 	 * @param fechaInscripcion Fecha en la que el socio se inscribe en el refugio. No puede ser null.
-	 * @param rol Rol inicial del socio. No puede ser null.
+	 * @param rol todos.Rol inicial del socio. No puede ser null.
 	 * @throws IllegalArgumentException Si la fecha o el rol son null.
 	 */
 	public Socio(Date fechaInscripcion, Rol rol) {
@@ -40,7 +46,7 @@ public class Socio {
 	 * Agrega un rol al socio.
 	 * Valida que el rol pertenezca al mismo refugio y que no esté ya asignado.
 	 *
-	 * @param rol Rol a agregar. No puede ser null.
+	 * @param rol todos.Rol a agregar. No puede ser null.
 	 * @throws IllegalArgumentException Si el rol pertenece a un refugio diferente
 	 *                                  o si el rol ya está asignado al socio.
 	 */
@@ -58,7 +64,7 @@ public class Socio {
 	/**
 	 * Busca y devuelve el primer rol del tipo especificado.
 	 *
-	 * @param rolClass La clase del rol a buscar (por ejemplo, Voluntario.class).
+	 * @param rolClass La clase del rol a buscar (por ejemplo, todos.Voluntario.class).
 	 * @return El rol encontrado del tipo especificado, o {@code null} si no existe.
 	 */
 	public Rol searchRole(Class<? extends Rol> rolClass) {
@@ -100,22 +106,22 @@ public class Socio {
 
 	/**
 	 * Permite a este socio adoptar un animal.
-	 * Requiere que este socio tenga el rol de Adoptante y que el voluntario
-	 * encargado de la adopción tenga el rol de Voluntario.
+	 * Requiere que este socio tenga el rol de GestionAdopciones.Adoptante y que el voluntario
+	 * encargado de la adopción tenga el rol de todos.Voluntario.
 	 *
-	 * @param animal    Animal a adoptar.
-	 * @param voluntario Socio voluntario encargado de la adopción.
+	 * @param animal    todos.Animal a adoptar.
+	 * @param voluntario todos.Socio voluntario encargado de la adopción.
 	 * @throws RefugioAnimalesException Si ocurre un error durante la adopción.
 	 * @throws IllegalArgumentException Si los roles requeridos no están asignados.
 	 */
 	public void adoptar(Animal animal, Socio voluntario) throws RefugioAnimalesException {
 		Rol rolAdoptante = searchRole(Adoptante.class);
 		if (rolAdoptante == null) {
-			throw new IllegalArgumentException("Este socio no tiene el rol de Adoptante: " + roles.toString());
+			throw new IllegalArgumentException("Este socio no tiene el rol de GestionAdopciones.Adoptante: " + roles.toString());
 		}
 		Rol rolVoluntario = voluntario.searchRole(Voluntario.class);
 		if (rolVoluntario == null) {
-			throw new IllegalArgumentException("Este socio no tiene el rol de Voluntario: " + mostrarRoles(voluntario) );
+			throw new IllegalArgumentException("Este socio no tiene el rol de todos.Voluntario: " + mostrarRoles(voluntario) );
 		}
 		((Adoptante) rolAdoptante).adoptar(animal, voluntario, this);
 
@@ -123,24 +129,24 @@ public class Socio {
 
 	/**
 	 * Tramita la adopción de un animal a través de este socio.
-	 * Requiere que el socio tenga el rol de voluntario y que el adoptante tenga el rol de Adoptante.
+	 * Requiere que el socio tenga el rol de voluntario y que el adoptante tenga el rol de GestionAdopciones.Adoptante.
 	 *
-	 * @param animal     Animal que será adoptado.
-	 * @param adoptante  Socio adoptante que adopta el animal.
+	 * @param animal     todos.Animal que será adoptado.
+	 * @param adoptante  todos.Socio adoptante que adopta el animal.
 	 * @throws RefugioAnimalesException Si ocurre un error durante la adopción.
 	 * @throws IllegalArgumentException Si el adoptante o el voluntario no tienen los roles requeridos.
 	 */
 	public void tramitarAdopcion(Animal animal, Socio adoptante) throws RefugioAnimalesException {
-		// Validar que el socio adoptante tiene el rol de Adoptante
+		// Validar que el socio adoptante tiene el rol de GestionAdopciones.Adoptante
 		Rol rolAdoptante = adoptante.searchRole(Adoptante.class);
 		if (rolAdoptante == null) {
-			throw new IllegalArgumentException("El socio adoptante no tiene el rol de Adoptante: " + mostrarRoles(adoptante));
+			throw new IllegalArgumentException("El socio adoptante no tiene el rol de GestionAdopciones.Adoptante: " + mostrarRoles(adoptante));
 		}
 
-		// Validar que este socio tiene el rol de Voluntario
+		// Validar que este socio tiene el rol de todos.Voluntario
 		Rol rolVoluntario = searchRole(Voluntario.class);
 		if (rolVoluntario == null) {
-			throw new IllegalArgumentException("El socio voluntario no tiene el rol de Voluntario: " + this.getRoles().toString());
+			throw new IllegalArgumentException("El socio voluntario no tiene el rol de todos.Voluntario: " + this.getRoles().toString());
 		}
 		((Voluntario) rolVoluntario).tramitarAdopcion(animal,adoptante);
 	}
@@ -149,29 +155,29 @@ public class Socio {
 	 * Registra un animal en el refugio a través de este socio.
 	 * Requiere que el socio tenga el rol de voluntario.
 	 *
-	 * @param animal Animal a registrar.
+	 * @param animal todos.Animal a registrar.
 	 * @throws RefugioAnimalesException Si ocurre un error durante el registro.
-	 * @throws IllegalStateException    Si el socio no tiene el rol de Voluntario.
+	 * @throws IllegalStateException    Si el socio no tiene el rol de todos.Voluntario.
 	 */
 	public void registrar(Animal animal) throws RefugioAnimalesException {
 		Rol voluntario = searchRole(Voluntario.class);
 		if (voluntario == null) {
-			throw new IllegalArgumentException("Este socio no tiene el rol de Voluntario: " + roles.toString());
+			throw new IllegalArgumentException("Este socio no tiene el rol de todos.Voluntario: " + roles.toString());
 		}
 		((Voluntario) voluntario).registrar(animal);
 	}
 
 	/**
 	 * Permite a este socio realizar una donación al refugio.
-	 * Requiere que el socio tenga el rol de Donante.
+	 * Requiere que el socio tenga el rol de RecepcionDonaciones.Donante.
 	 *
 	 * @param cantidad Cantidad de la donación.
-	 * @throws IllegalStateException Si el socio no tiene el rol de Donante.
+	 * @throws IllegalStateException Si el socio no tiene el rol de RecepcionDonaciones.Donante.
 	 */
 	public void donar(double cantidad) {
 		Rol donante = searchRole(Donante.class);
 		if ( donante==null ) {
-			throw new IllegalArgumentException("Este socio no tiene el rol de Donante: " + roles.toString());
+			throw new IllegalArgumentException("Este socio no tiene el rol de RecepcionDonaciones.Donante: " + roles.toString());
 		}
 		((Donante) donante).donar(cantidad);
 	}
@@ -180,12 +186,12 @@ public class Socio {
 	 * Obtiene los trámites realizados por el voluntario asociado.
 	 *
 	 * @return Enumeración de adopciones tramitadas.
-	 * @throws IllegalStateException Si el socio no tiene el rol de Voluntario.
+	 * @throws IllegalStateException Si el socio no tiene el rol de todos.Voluntario.
 	 */
 	public Enumeration<Adopcion> getTramites() {
 		Rol voluntario = searchRole(Voluntario.class);
 		if (voluntario == null) {
-			throw new IllegalArgumentException("Este socio no tiene el rol de Voluntario: " + roles.toString());
+			throw new IllegalArgumentException("Este socio no tiene el rol de todos.Voluntario: " + roles.toString());
 		}
 		return ((Voluntario) voluntario).getTramites();
 	}
@@ -215,7 +221,7 @@ public class Socio {
 	/**
 	 * Obtiene el refugio al que el socio está asociado.
 	 *
-	 * @return Refugio asociado al socio.
+	 * @return todos.Refugio asociado al socio.
 	 */
 	public Refugio getRefugio() {
 		return refugioInscrito;
@@ -245,6 +251,6 @@ public class Socio {
 	public String toString() {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 		return this.getClass().getSimpleName() + " | Fecha de inscripción: " + dateFormat.format(registro) +
-				"; Refugio: " + refugioInscrito + "; Roles: " + roles.toString();
+				"; todos.Refugio: " + refugioInscrito + "; Roles: " + roles.toString();
 	}
 }

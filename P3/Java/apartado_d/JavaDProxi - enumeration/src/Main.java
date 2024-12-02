@@ -1,3 +1,10 @@
+import GestionAdopciones.Adoptante;
+import RecepcionDonaciones.Donante;
+import todos.Animal;
+import todos.Refugio;
+import todos.Socio;
+import todos.Voluntario;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Enumeration;
@@ -78,9 +85,9 @@ public class Main {
 
             // Mostrar trámites realizados por los voluntarios
             System.out.println("Trámites realizados por los voluntarios:");
-            System.out.println("Voluntario 1:");
+            System.out.println("todos.Voluntario 1:");
             imprimirEnumeration(voluntarioDonante.getTramites());
-            System.out.println("\nVoluntario 2:");
+            System.out.println("\ntodos.Voluntario 2:");
             imprimirEnumeration(voluntarioDonante.getTramites());
             System.out.println();
 

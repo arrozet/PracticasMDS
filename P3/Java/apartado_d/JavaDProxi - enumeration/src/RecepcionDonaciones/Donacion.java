@@ -1,3 +1,5 @@
+package RecepcionDonaciones;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -11,7 +13,7 @@ public class Donacion {
 	private Date fecha;      // Fecha en la que se realizó la donación
 
 	/**
-	 * Constructor de la clase Donacion.
+	 * Constructor de la clase RecepcionDonaciones.Donacion.
 	 * Valida que la cantidad sea positiva y que la fecha no sea null.
 	 *
 	 * @param cantidad Cantidad de dinero donada. Debe ser mayor que 0.
@@ -82,7 +84,7 @@ public class Donacion {
 	@Override
 	public String toString() {
 		SimpleDateFormat dateTimeFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-		return "Donacion{" +
+		return "RecepcionDonaciones.Donacion{" +
 				"cantidad=" + cantidad +
 				", fecha=" + dateTimeFormat.format(fecha) +
 				'}';

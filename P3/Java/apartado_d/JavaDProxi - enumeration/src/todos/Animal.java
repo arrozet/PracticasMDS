@@ -1,9 +1,11 @@
+package todos;
+
 import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.Date;
 
 /**
- * Clase que representa un Animal en el refugio.
+ * Clase que representa un todos.Animal en el refugio.
  * Incluye información sobre su nombre, fecha de nacimiento y estado.
  */
 public class Animal {
@@ -14,7 +16,7 @@ public class Animal {
 	private Refugio refugio;
 
 	/**
-	 * Constructor de la clase Animal.
+	 * Constructor de la clase todos.Animal.
 	 * Valida que el nombre y la fecha de nacimiento sean válidos.
 	 *
 	 * @param nombre Nombre del animal. No puede ser null ni vacío.
@@ -141,7 +143,7 @@ public class Animal {
 	@Override
 	public String toString() {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-		return "Animal{" +
+		return "todos.Animal{" +
 				"nombre='" + nombre + '\'' +
 				", estado=" + estado +
 				", nacimiento=" + dateFormat.format(nacimiento) +

@@ -1,3 +1,8 @@
+package todos;
+
+import GestionAdopciones.Adopcion;
+import GestionAdopciones.Adoptante;
+
 import java.util.*;
 
 public class Voluntario implements Rol {
@@ -50,8 +55,8 @@ public class Voluntario implements Rol {
 		}
 
 		// Establecer el estado del animal como disponible y registrarlo en el refugio
-		animal.setEstadoAnimal(EstadoAnimal.disponible);
 		refugio.registrar(animal);
+		assert(animal.getEstadoAnimal().equals(EstadoAnimal.disponible)) : "El estado del animal no es disponible tras registrarlo";
 	}
 
 	public Enumeration<Adopcion> getTramites() {

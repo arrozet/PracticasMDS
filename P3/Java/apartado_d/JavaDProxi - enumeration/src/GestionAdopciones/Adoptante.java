@@ -1,12 +1,16 @@
+package GestionAdopciones;
+
+import todos.*;
+
 /**
- * Clase que representa un Adoptante en el refugio.
+ * Clase que representa un GestionAdopciones.Adoptante en el refugio.
  * Un adoptante es un socio que adopta al menos un animal.
  */
 public class Adoptante implements Rol {
 
 	private Refugio refugio;
 	/**
-	 * Constructor de la clase Adoptante.
+	 * Constructor de la clase GestionAdopciones.Adoptante.
 	 *
 
 	 */
@@ -41,7 +45,7 @@ public class Adoptante implements Rol {
 		}
 
 		// Todas las personas involucradas deben estar en el mismo refugio
-		assert(adoptante.getRefugio().equals(voluntario.getRefugio())) : "Voluntario y adoptante deben estar en el mismo refugio";
+		assert(adoptante.getRefugio().equals(voluntario.getRefugio())) : "todos.Voluntario y adoptante deben estar en el mismo refugio";
 		// Registrar la adopción a través del voluntario
 		voluntario.tramitarAdopcion(animal, adoptante);
 

@@ -1,3 +1,8 @@
+package GestionAdopciones;
+
+import todos.Animal;
+import todos.Socio;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -7,16 +12,16 @@ import java.util.Date;
  */
 public class Adopcion {
     private Date fecha; // Fecha en la que se realizó la adopción
-    private Animal animal; // Animal adoptado
-    private Socio adoptante; // Adoptante que realizó la adopción
+    private Animal animal; // todos.Animal adoptado
+    private Socio adoptante; // GestionAdopciones.Adoptante que realizó la adopción
 
     /**
-     * Constructor de la clase Adopcion.alida que la fecha, el animal y el adoptante no sean null antes de crear la instancia.
+     * Constructor de la clase GestionAdopciones.Adopcion.alida que la fecha, el animal y el adoptante no sean null antes de crear la instancia.
      * V
      *
      * @param fecha Fecha de la adopción. No puede ser null.
-     * @param animal Animal que ha sido adoptado. No puede ser null.
-     * @param adoptante Adoptante que adopta el animal. No puede ser null.
+     * @param animal todos.Animal que ha sido adoptado. No puede ser null.
+     * @param adoptante GestionAdopciones.Adoptante que adopta el animal. No puede ser null.
      * @throws IllegalArgumentException Si alguno de los parámetros es null.
      */
     public Adopcion(Date fecha, Animal animal, Socio adoptante) {
@@ -63,7 +68,7 @@ public class Adopcion {
     /**
      * Obtiene el animal asociado a la adopción.
      *
-     * @return Animal adoptado.
+     * @return todos.Animal adoptado.
      */
     public Animal getAnimal() {
         return animal;
@@ -85,7 +90,7 @@ public class Adopcion {
     /**
      * Obtiene el adoptante asociado a la adopción.
      *
-     * @return Adoptante que realizó la adopción.
+     * @return GestionAdopciones.Adoptante que realizó la adopción.
      */
     public Socio getAdoptante() {
         return adoptante;
@@ -116,9 +121,9 @@ public class Adopcion {
     @Override
     public String toString() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        return "Adopcion{" +
+        return "GestionAdopciones.Adopcion{" +
                 "fecha=" + dateFormat.format(fecha) +
-                ", animal=" + animal + // Suponiendo que Animal tiene un método getNombre
+                ", animal=" + animal + // Suponiendo que todos.Animal tiene un método getNombre
                 ", adoptante=" + adoptante +
                 '}';
     }

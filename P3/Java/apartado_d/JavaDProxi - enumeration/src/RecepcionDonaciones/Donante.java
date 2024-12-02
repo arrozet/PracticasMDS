@@ -1,8 +1,13 @@
+package RecepcionDonaciones;
+
+import todos.Refugio;
+import todos.Rol;
+
 import java.time.Instant;
 import java.util.*;
 
 /**
- * Clase que representa un Donante en el refugio.
+ * Clase que representa un RecepcionDonaciones.Donante en el refugio.
  * Un donante es un socio que realiza donaciones monetarias al refugio.
  */
 public class Donante implements Rol {
@@ -11,7 +16,7 @@ public class Donante implements Rol {
 	private Refugio refugio;
 
 	/**
-	 * Constructor de la clase Donante.
+	 * Constructor de la clase RecepcionDonaciones.Donante.
 	 * Inicializa al donante con su fecha de inscripción y el refugio al que pertenece.
 	 * También inicializa la lista de donaciones vacía.
 	 *

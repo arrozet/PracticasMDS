@@ -1,3 +1,5 @@
+package todos;
+
 /**
  * Enumeración que representa los posibles estados de un animal en el refugio.
  */
