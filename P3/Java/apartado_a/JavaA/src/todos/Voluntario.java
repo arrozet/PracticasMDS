@@ -52,7 +52,7 @@ public class Voluntario extends Socio {
 		getRefugio().eliminarAnimalRefugiado(animal);
 
 		// Registrar la adopción y añadirla a los trámites del voluntario
-		Adopcion nuevaAdopcion = new Adopcion(super.getRegistro(), animal, adoptante);
+		Adopcion nuevaAdopcion = new Adopcion(new Date(), animal, adoptante);
 		tramites.add(nuevaAdopcion);
 	}
 
