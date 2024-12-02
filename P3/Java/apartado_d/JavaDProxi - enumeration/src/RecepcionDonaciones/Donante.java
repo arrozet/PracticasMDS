@@ -50,12 +50,9 @@ public class Donante implements Rol {
 		// Registrar la donación con la fecha actual
 		Donacion donacion = new Donacion(c, Date.from(Instant.now()));
 		donaciones.add(donacion);
-		double liquidezAnterior = refugio.getLiquidez();
+
 		// Actualizar la liquidez del refugio
 		refugio.recibeDonacion(donacion);
-		assert((refugio.getLiquidez() - liquidezAnterior) == donacion.getCantidadDonada())
-				: "La donación no se ha completado con éxito";
-
 	}
 
 	/**

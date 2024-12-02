@@ -24,9 +24,9 @@ public class Voluntario implements Rol {
 	}
 
 	// Los métodos de adopción y registro permanecen iguales, pero ahora usan getRefugio() y getRegistro()
-	public void tramitarAdopcion(Animal animal, Socio adoptante) throws RefugioAnimalesException {
+	public void tramitarAdopcion(Animal animal, Socio adoptante){
 		if (animal == null) {
-			throw new RefugioAnimalesException("El animal no puede ser null.");
+			throw new IllegalArgumentException("El animal no puede ser null.");
 		}
 		if( adoptante.searchRole(Adoptante.class) == null ){
 			throw new IllegalArgumentException("No es un adoptante");
@@ -44,19 +44,23 @@ public class Voluntario implements Rol {
 		tramites.add(nuevaAdopcion);
 	}
 
-	public void registrar(Animal animal) throws RefugioAnimalesException {
+	public void registrar(Animal animal) {
 		if (animal == null) {
-			throw new RefugioAnimalesException("El animal no puede ser null.");
+			throw new IllegalArgumentException("El animal no puede ser null.");
 		}
 
 		// Verificar si el animal ya está registrado en el refugio
 		if (refugio.containsAnimalesRegistrados(animal)) {
-			throw new RefugioAnimalesException("El animal ya está registrado en el refugio.");
+			throw new IllegalArgumentException("El animal ya está registrado en el refugio.");
 		}
 
 		// Establecer el estado del animal como disponible y registrarlo en el refugio
 		refugio.registrar(animal);
 		assert(animal.getEstadoAnimal().equals(EstadoAnimal.disponible)) : "El estado del animal no es disponible tras registrarlo";
+	}
+
+	public void ponerEnTratamiento(Animal animal){
+		animal.ponerEnTratamiento();
 	}
 
 	public Enumeration<Adopcion> getTramites() {

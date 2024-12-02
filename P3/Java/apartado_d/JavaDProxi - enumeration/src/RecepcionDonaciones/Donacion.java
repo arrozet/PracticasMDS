@@ -46,7 +46,7 @@ public class Donacion {
 	 * @param fecha Nueva fecha de la donación. No puede ser null.
 	 * @throws IllegalArgumentException Si la fecha es null.
 	 */
-	public void setFechaDonacion(Date fecha) {
+	private void setFechaDonacion(Date fecha) {
 		if (fecha == null) {
 			throw new IllegalArgumentException("La fecha de la donación no puede ser null.");
 		}
@@ -68,7 +68,7 @@ public class Donacion {
 	 * @param newCantidadDonada Nueva cantidad de dinero donada. Debe ser mayor que 0.
 	 * @throws IllegalArgumentException Si la cantidad es menor o igual a 0.
 	 */
-	public void setCantidadDonada(double newCantidadDonada) {
+	private void setCantidadDonada(double newCantidadDonada) {
 		if (newCantidadDonada <= 0) {
 			throw new IllegalArgumentException("La cantidad a donar debe ser positiva.");
 		}

@@ -111,10 +111,9 @@ public class Socio {
 	 *
 	 * @param animal    todos.Animal a adoptar.
 	 * @param voluntario todos.Socio voluntario encargado de la adopción.
-	 * @throws RefugioAnimalesException Si ocurre un error durante la adopción.
 	 * @throws IllegalArgumentException Si los roles requeridos no están asignados.
 	 */
-	public void adoptar(Animal animal, Socio voluntario) throws RefugioAnimalesException {
+	public void adoptar(Animal animal, Socio voluntario){
 		Rol rolAdoptante = searchRole(Adoptante.class);
 		if (rolAdoptante == null) {
 			throw new IllegalArgumentException("Este socio no tiene el rol de GestionAdopciones.Adoptante: " + roles.toString());
@@ -124,7 +123,6 @@ public class Socio {
 			throw new IllegalArgumentException("Este socio no tiene el rol de todos.Voluntario: " + mostrarRoles(voluntario) );
 		}
 		((Adoptante) rolAdoptante).adoptar(animal, voluntario, this);
-
 	}
 
 	/**
@@ -133,10 +131,9 @@ public class Socio {
 	 *
 	 * @param animal     todos.Animal que será adoptado.
 	 * @param adoptante  todos.Socio adoptante que adopta el animal.
-	 * @throws RefugioAnimalesException Si ocurre un error durante la adopción.
 	 * @throws IllegalArgumentException Si el adoptante o el voluntario no tienen los roles requeridos.
 	 */
-	public void tramitarAdopcion(Animal animal, Socio adoptante) throws RefugioAnimalesException {
+	public void tramitarAdopcion(Animal animal, Socio adoptante) {
 		// Validar que el socio adoptante tiene el rol de GestionAdopciones.Adoptante
 		Rol rolAdoptante = adoptante.searchRole(Adoptante.class);
 		if (rolAdoptante == null) {
@@ -182,6 +179,14 @@ public class Socio {
 		((Donante) donante).donar(cantidad);
 	}
 
+	public void ponerEnTratamiento(Animal animal){
+		Rol voluntario = searchRole(Voluntario.class);
+		if (voluntario == null) {
+			throw new IllegalArgumentException("Este socio no tiene el rol de todos.Voluntario: " + roles.toString());
+		}
+		((Voluntario) voluntario).ponerEnTratamiento(animal);
+	}
+
 	/**
 	 * Obtiene los trámites realizados por el voluntario asociado.
 	 *
@@ -211,7 +216,7 @@ public class Socio {
 	 * @param fechaInscripcion Nueva fecha de inscripción. No puede ser null.
 	 * @throws IllegalArgumentException Si la fecha es null.
 	 */
-	public void setRegistro(Date fechaInscripcion) {
+	private void setRegistro(Date fechaInscripcion) {
 		if (fechaInscripcion == null) {
 			throw new IllegalArgumentException("La fecha de inscripción no puede ser null.");
 		}
@@ -233,7 +238,7 @@ public class Socio {
 	 * @param newRefugio Nuevo refugio al que el socio estará asociado. No puede ser null.
 	 * @throws IllegalArgumentException Si el refugio es null.
 	 */
-	public void setRefugio(Refugio newRefugio) {
+	protected void setRefugio(Refugio newRefugio) {
 		if (newRefugio == null) {
 			throw new IllegalArgumentException("El nuevo refugio no puede ser null.");
 		}

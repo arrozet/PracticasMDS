@@ -32,7 +32,7 @@ public class Adoptante implements Rol {
 	 * @param voluntario El voluntario que tramita la adopción. No puede ser null.
 	 * @throws IllegalArgumentException Si el animal o el voluntario son null, o si el animal ya ha sido adoptado.
 	 */
-	public void adoptar(Animal animal, Socio voluntario, Socio adoptante) throws RefugioAnimalesException {
+	public void adoptar(Animal animal, Socio voluntario, Socio adoptante) {
 		// Validaciones de entrada
 		if (animal == null) {
 			throw new IllegalArgumentException("El animal no puede ser null.");
@@ -46,6 +46,7 @@ public class Adoptante implements Rol {
 
 		// Todas las personas involucradas deben estar en el mismo refugio
 		assert(adoptante.getRefugio().equals(voluntario.getRefugio())) : "todos.Voluntario y adoptante deben estar en el mismo refugio";
+
 		// Registrar la adopción a través del voluntario
 		voluntario.tramitarAdopcion(animal, adoptante);
 
