@@ -20,6 +20,19 @@ class WebRental extends Rental {
     public WebRental(Date startDate, Date endDate, Car car, Customer customer, Date deliveryTime,
                      RentalOffice deliveryOffice) {
         super(startDate, endDate, car, customer);
+
+        // Restricción de integridad 4
+        if (!car.getAssignedOffice().equals(deliveryOffice)) {
+            throw new IllegalArgumentException("La oficina de recogida debe ser la misma que la oficina asignada al coche.");
+        }
+
+        if (deliveryOffice != null && deliveryTime != null) {
+            Date limit = new Date(deliveryTime.getYear(), deliveryTime.getMonth(), deliveryTime.getDate(), 13, 0);
+            if (deliveryTime.after(limit)) {
+                throw new IllegalArgumentException("La hora de entrega debe ser anterior a las 13:00.");
+            }
+        }
+
         this.deliveryTime = deliveryTime;
         this.deliveryOffice = deliveryOffice;
     }

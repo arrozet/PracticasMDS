@@ -49,11 +49,19 @@ class Customer {
     }
 
     /**
-     * Añade un nuevo alquiler a la lista de alquileres del cliente.
+     * Añade un nuevo alquiler al cliente, verificando solapamientos.
      *
-     * @param rental Alquiler que se desea asociar al cliente.
+     * @param rental Alquiler que se desea añadir.
+     * @throws IllegalArgumentException Si el nuevo alquiler se solapa con uno existente.
      */
     public void addRental(Rental rental) {
+        // Añadida restricción de integridad 1
+        for (Rental existingRental : rentals) {
+            if (rental.getStartDate().before(existingRental.getEndDate())
+                    && rental.getEndDate().after(existingRental.getStartDate())) {
+                throw new IllegalArgumentException("El nuevo alquiler se solapa con uno existente.");
+            }
+        }
         this.rentals.add(rental);
     }
 

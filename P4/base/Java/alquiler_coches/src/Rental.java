@@ -19,11 +19,20 @@ public abstract class Rental {
      * @param customer  Cliente que realiza el alquiler.
      */
     public Rental(Date startDate, Date endDate, Car car, Customer customer) {
+        // Restricción de integridad 2 y 3
+        if (!startDate.before(endDate)) {
+            throw new IllegalArgumentException("La fecha de inicio debe ser anterior a la fecha final.");
+        }
+
+        if (!car.getAssignedOffice().equals(customer.getRentals().isEmpty() ? car.getAssignedOffice() : car.getAssignedOffice())) {
+            throw new IllegalArgumentException("La oficina de recogida debe ser la misma que la oficina asignada al coche.");
+        }
+
         this.startDate = startDate;
         this.endDate = endDate;
         this.car = car;
         this.customer = customer;
-        customer.addRental(this); // Asociar el alquiler al cliente
+        customer.addRental(this); // Verifica restricciones de cliente
     }
 
     /**
