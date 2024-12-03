@@ -1,3 +1,4 @@
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -96,4 +97,16 @@ public abstract class Rental {
     public void setCustomer(Customer customer) {
         this.customer = customer;
     }
+
+    @Override
+    public String toString() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        return "Rental{" +
+                "startDate=" + dateFormat.format(startDate) +
+                ", endDate=" + dateFormat.format(endDate) +
+                ", car=" + car.getLicensePlate() +
+                ", customer=" + customer.getDni() +
+                '}';
+    }
+
 }

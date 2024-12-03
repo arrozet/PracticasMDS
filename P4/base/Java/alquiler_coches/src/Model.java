@@ -83,4 +83,14 @@ class Model {
     public void removeCar(Car car) {
         this.cars.remove(car);
     }
+
+    @Override
+    public String toString() {
+        return "Model{" +
+                "name='" + name + '\'' +
+                ", pricePerDay=" + pricePerDay +
+                ", cars=" + cars +
+                '}';
+    }
+
 }

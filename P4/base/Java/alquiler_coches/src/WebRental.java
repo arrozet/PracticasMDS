@@ -59,4 +59,14 @@ class WebRental extends Rental {
     public void setDeliveryOffice(RentalOffice deliveryOffice) {
         this.deliveryOffice = deliveryOffice;
     }
+
+    @Override
+    public String toString() {
+        return "WebRental{" +
+                super.toString() +
+                ", deliveryTime=" + deliveryTime +
+                ", deliveryOffice=" + deliveryOffice +
+                '}';
+    }
+
 }

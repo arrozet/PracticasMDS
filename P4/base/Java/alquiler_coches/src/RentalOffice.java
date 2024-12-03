@@ -51,4 +51,13 @@ class RentalOffice {
     public void setFeeForDelivery(int feeForDelivery) {
         this.feeForDelivery = feeForDelivery;
     }
+
+    @Override
+    public String toString() {
+        return "RentalOffice{" +
+                "address='" + address + '\'' +
+                ", feeForDelivery=" + feeForDelivery +
+                '}';
+    }
+
 }

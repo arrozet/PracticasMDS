@@ -56,4 +56,14 @@ class Customer {
     public void addRental(Rental rental) {
         this.rentals.add(rental);
     }
+
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "dni='" + dni + '\'' +
+                ", name='" + name + '\'' +
+                ", rentals=" + rentals +
+                '}';
+    }
+
 }
