@@ -37,6 +37,7 @@ class Customer {
     public String getName() {
         return name;
     }
+
     /**
      * Obtiene un Enumeration de los alquileres realizados por el cliente.
      *
@@ -53,8 +54,15 @@ class Customer {
      * @throws IllegalArgumentException Si el nuevo alquiler se solapa con uno existente.
      */
     public void addRental(Rental rental) {
-        // Añadida restricción de integridad 1
+        if (rentals.contains(rental)) {
+            throw new IllegalArgumentException("El alquiler ya está asociado al cliente.");
+        }
+
+        // Restricción de integridad 1: un cliente no puede tener alquileres solapados.
         for (Rental existingRental : rentals) {
+            // Realmente con la primera condición bastaría, porque asumimos que el nuevo alquiler nunca es anterior
+            // a los ya existentes, pero así se fuerza hasta que si esto pudiese ocurrir,
+            // el solapamiento se detectase
             if (rental.getStartDate().before(existingRental.getEndDate())
                     && rental.getEndDate().after(existingRental.getStartDate())) {
                 throw new IllegalArgumentException("El nuevo alquiler se solapa con uno existente.");

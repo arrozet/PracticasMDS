@@ -34,6 +34,8 @@ class WebRental extends Rental {
 
         this.deliveryTime = deliveryTime;
         this.deliveryOffice = deliveryOffice;
+
+        deliveryOffice.addWebRental(this);
     }
 
     /**

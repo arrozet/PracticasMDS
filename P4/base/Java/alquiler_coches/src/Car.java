@@ -21,6 +21,9 @@ class Car {
         this.assignedOffice = assignedOffice;
         this.model = model;
         this.rentals = new ArrayList<>();
+
+        model.addCar(this);
+        assignedOffice.addCar(this);
     }
 
     /**
@@ -111,15 +114,6 @@ class Car {
             throw new IllegalArgumentException("El alquiler no está asociado a este coche.");
         }
         rentals.remove(rental);
-    }
-
-    /**
-     * Obtiene el número total de alquileres asociados al coche.
-     *
-     * @return Número de alquileres.
-     */
-    public int getNumberOfRentals() {
-        return rentals.size();
     }
 
     @Override

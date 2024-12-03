@@ -37,6 +37,7 @@ public abstract class Rental {
         this.customer = customer;
         this.pickUpOffice = pickUpOffice;
         customer.addRental(this); // Verifica restricciones relacionadas con el cliente
+        car.addRental(this);
     }
 
     /**

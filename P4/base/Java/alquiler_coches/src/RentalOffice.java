@@ -103,6 +103,24 @@ class RentalOffice {
     }
 
     /**
+     * Añade un web rental a la lista de web rentals asignados a la oficina.
+     *
+     * @param wr Coche que se desea añadir.
+     */
+    public void addWebRental(WebRental wr) {
+        this.webRentals.add(wr);
+    }
+
+    /**
+     * Elimina un web rental de la lista de web rentals asignados a la oficina.
+     *
+     * @param wr WebRental que se desea eliminar.
+     */
+    public void removeWebRental(WebRental wr) {
+        this.webRentals.remove(wr);
+    }
+
+    /**
      * Obtiene un Enumeration de los coches asignados a la oficina.
      *
      * @return Un Enumeration que permite iterar sobre los coches asignados a la oficina.

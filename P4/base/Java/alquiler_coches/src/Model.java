@@ -70,6 +70,9 @@ class Model {
      * @param car Objeto Car que se desea asociar.
      */
     public void addCar(Car car) {
+        if (cars.contains(car)) {
+            throw new IllegalArgumentException("El coche ya está asociado a este modelo.");
+        }
         this.cars.add(car);
     }
 
@@ -79,6 +82,9 @@ class Model {
      * @param car Objeto Car que se desea eliminar.
      */
     public void removeCar(Car car) {
+        if (!cars.contains(car)) {
+            throw new IllegalArgumentException("El coche no está asociado a este modelo.");
+        }
         this.cars.remove(car);
     }
 
