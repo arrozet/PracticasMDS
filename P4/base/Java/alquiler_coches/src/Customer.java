@@ -1,3 +1,4 @@
+import java.time.Instant;
 import java.util.*;
 
 /**
@@ -70,6 +71,44 @@ class Customer {
         }
         this.rentals.add(rental);
     }
+
+    /**
+     * Crea un alquiler web para el cliente.
+     *
+     * @param fechaInicial Fecha de inicio del alquiler.
+     * @param fechaFinal   Fecha de fin del alquiler.
+     * @param matricula    Matrícula del coche que se desea alquilar.
+     * @param devolucion   Oficina de devolución del coche.
+     * @return Un objeto de tipo {@code WebRental} que representa el alquiler creado.
+     * @throws IllegalArgumentException Si el coche con la matrícula especificada no existe o no cumple las restricciones del alquiler.
+     */
+    public WebRental alquilarDesdeWeb(Date fechaInicial, Date fechaFinal, String matricula, RentalOffice devolucion) {
+        // Buscar el coche por matrícula
+        Car coche = Car.findCarByLicensePlate(matricula);
+
+        // Crear el alquiler web con las restricciones del sistema
+        WebRental alquiler = new WebRental(fechaInicial, fechaFinal, coche, this,
+                coche.getAssignedOffice(), null, devolucion);
+
+        return alquiler;
+    }
+
+    /**
+     * Registra la devolución de un coche alquilado en la web.
+     *
+     * @param wr El objeto {@code WebRental} correspondiente al alquiler que se desea finalizar.
+     * @return La fecha de fin del alquiler registrada.
+     */
+    public Date devolverCocheAlquiladoEnWeb(WebRental wr) {
+        // Registrar la hora de finalización del alquiler
+        wr.setEndDate(Date.from(Instant.now()));
+
+        // Actualizar la oficina asignada del coche al devolverlo
+        wr.getCar().setAssignedOffice(wr.getDeliveryOffice());
+
+        return wr.getEndDate();
+    }
+
 
     @Override
     public String toString() {

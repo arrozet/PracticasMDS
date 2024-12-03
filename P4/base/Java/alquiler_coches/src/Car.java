@@ -8,6 +8,7 @@ class Car {
     private RentalOffice assignedOffice; // Oficina a la que está asignado el coche
     private Model model; // Modelo al que pertenece el coche
     private List<Rental> rentals; // Lista de alquileres asociados al coche
+    public static List<Car> allTheCars = new ArrayList<>();
 
     /**
      * Constructor de la clase Car.
@@ -23,8 +24,25 @@ class Car {
         this.rentals = new ArrayList<>();
 
         model.addCar(this);
+        allTheCars.add(this);
         assignedOffice.addCar(this);
     }
+
+    /**
+     * Encuentra un coche por su matrícula.
+     *
+     * @param licensePlate Matrícula del coche a buscar.
+     * @return El coche con la matrícula especificada.
+     * @throws IllegalArgumentException Si no se encuentra un coche con la matrícula proporcionada.
+     */
+    public static Car findCarByLicensePlate(String licensePlate) {
+        System.out.println(allTheCars.toString());
+        return allTheCars.stream()
+                .filter(car -> licensePlate.compareTo(car.getLicensePlate())==0)
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Coche no encontrado con la matrícula especificada: " + licensePlate));
+    }
+
 
     /**
      * Obtiene la matrícula del coche.

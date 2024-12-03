@@ -40,8 +40,8 @@ public class Main {
             Car car1 = new Car("1234ABC", office1, model1);
             Car car2 = new Car("5678DEF", office2, model2);
 
-            office1.addCar(car1);
-            office2.addCar(car2);
+            //office1.addCar(car1);
+            //office2.addCar(car2);
 
             System.out.println("\nCoches creados y asignados a oficinas:");
             System.out.println(car1);
@@ -66,7 +66,7 @@ public class Main {
             );
 
             office1.addRental(rental1);
-            car1.addRental(rental1);
+            //car1.addRental(rental1); // Esto se hace dentro del constructor, por eso da fallo
 
             // Crear alquileres web
             WebRental rental2 = new WebRental(
@@ -79,8 +79,8 @@ public class Main {
                     office1
             );
 
-            office2.addRental(rental2);
-            car2.addRental(rental2);
+            //office2.addRental(rental2);
+            //car2.addRental(rental2);
 
             System.out.println("\nAlquileres creados:");
             System.out.println(rental1);
@@ -109,6 +109,26 @@ public class Main {
 
             rental2.setDeliveryTime(dateFormat.parse("2024-12-15 11:45"));
             System.out.println("Nueva hora de entrega del alquiler 2: " + rental2.getDeliveryTime());
+
+            // === Nuevas funcionalidades ===
+
+            // Probar alquilarDesdeWeb
+            System.out.println("\nCliente 1 alquila un coche desde la web:");
+            WebRental nuevoAlquiler = customer1.alquilarDesdeWeb(
+                    dateFormat.parse("2024-12-20"),
+                    dateFormat.parse("2024-12-25"),
+                    "1234ABC",
+                    office2
+            );
+            System.out.println("Alquiler web creado: " + nuevoAlquiler);
+
+            // Probar devolverCocheAlquiladoEnWeb
+            System.out.println("\nCliente 1 devuelve el coche alquilado:");
+            Date fechaDevolucion = customer1.devolverCocheAlquiladoEnWeb(nuevoAlquiler);
+            System.out.println("Coche devuelto en la fecha: " + fechaDevolucion);
+
+            // Verificar la oficina asignada del coche tras la devolución
+            System.out.println("Oficina asignada al coche tras devolución: " + car1.getAssignedOffice());
 
         } catch (Exception e) {
             System.err.println("Error en las pruebas: " + e.getMessage());
