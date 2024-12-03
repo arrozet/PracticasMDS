@@ -1,5 +1,4 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Clase que representa una oficina de alquiler de coches.
@@ -62,12 +61,12 @@ class RentalOffice {
     }
 
     /**
-     * Obtiene la lista de todos los alquileres asociados a la oficina.
+     * Obtiene un Enumeration de todos los alquileres asociados a la oficina.
      *
-     * @return Lista de alquileres.
+     * @return Un Enumeration que permite iterar sobre todos los alquileres asociados a la oficina.
      */
-    public List<Rental> getRentals() {
-        return rentals;
+    public Enumeration<Rental> getRentals() {
+        return Collections.enumeration(rentals);
     }
 
     /**
@@ -95,21 +94,21 @@ class RentalOffice {
     }
 
     /**
-     * Obtiene la lista de alquileres web asociados a la oficina.
+     * Obtiene un Enumeration de alquileres web asociados a la oficina.
      *
-     * @return Lista de alquileres web.
+     * @return Un Enumeration que permite iterar sobre alquileres web asociados a la oficina.
      */
-    public List<WebRental> getWebRentals() {
-        return webRentals;
+    public Enumeration<WebRental> getWebRentals() {
+        return Collections.enumeration(webRentals);
     }
 
     /**
-     * Obtiene la lista de coches asignados a la oficina.
+     * Obtiene un Enumeration de los coches asignados a la oficina.
      *
-     * @return Lista de coches.
+     * @return Un Enumeration que permite iterar sobre los coches asignados a la oficina.
      */
-    public List<Car> getCars() {
-        return cars;
+    public Enumeration<Car> getCars() {
+        return Collections.enumeration(cars);
     }
 
     /**

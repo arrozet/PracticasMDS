@@ -1,5 +1,4 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Clase que representa un modelo de coche, incluyendo su nombre, precio por día y coches asociados.
@@ -56,14 +55,13 @@ class Model {
     public void setPricePerDay(int pricePerDay) {
         this.pricePerDay = pricePerDay;
     }
-
     /**
-     * Obtiene la lista de coches asociados al modelo.
+     * Obtiene un Enumeration de los coches asociados al modelo.
      *
-     * @return Lista de coches.
+     * @return Un Enumeration que permite iterar sobre los coches asociados al modelo.
      */
-    public List<Car> getCars() {
-        return cars;
+    public Enumeration<Car> getCars() {
+        return Collections.enumeration(cars);
     }
 
     /**

@@ -1,5 +1,4 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Clase que representa un coche en el sistema de alquiler.
@@ -79,13 +78,14 @@ class Car {
     }
 
     /**
-     * Obtiene la lista de alquileres asociados al coche.
+     * Obtiene un Enumeration de los alquileres asociados al coche.
      *
-     * @return Lista de alquileres.
+     * @return Un Enumeration que permite iterar sobre los alquileres del coche.
      */
-    public List<Rental> getRentals() {
-        return rentals;
+    public Enumeration<Rental> getRentals() {
+        return Collections.enumeration(rentals);
     }
+
 
     /**
      * Añade un alquiler a la lista de alquileres del coche.

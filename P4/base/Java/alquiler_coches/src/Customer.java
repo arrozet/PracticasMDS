@@ -1,5 +1,4 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Clase que representa un cliente que puede realizar alquileres.
@@ -38,14 +37,13 @@ class Customer {
     public String getName() {
         return name;
     }
-
     /**
-     * Obtiene la lista de alquileres realizados por el cliente.
+     * Obtiene un Enumeration de los alquileres realizados por el cliente.
      *
-     * @return Lista de objetos Rental asociados al cliente.
+     * @return Un Enumeration que permite iterar sobre los alquileres del cliente.
      */
-    public List<Rental> getRentals() {
-        return rentals;
+    public Enumeration<Rental> getRentals() {
+        return Collections.enumeration(rentals);
     }
 
     /**

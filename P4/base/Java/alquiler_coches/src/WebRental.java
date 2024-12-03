@@ -21,15 +21,14 @@ class WebRental extends Rental {
                      RentalOffice deliveryOffice) {
         super(startDate, endDate, car, customer, pickUpOffice);
 
-        // Restricción de integridad 4
-        if (!car.getAssignedOffice().equals(deliveryOffice)) {
-            throw new IllegalArgumentException("La oficina de recogida debe ser la misma que la oficina asignada al coche.");
-        }
-
-        if (deliveryOffice != null && deliveryTime != null) {
+        // Restricción 4: Si las oficinas de recogida y entrega son diferentes, validar hora de entrega
+        if (!pickUpOffice.equals(deliveryOffice)) {
+            if (deliveryTime == null) {
+                throw new IllegalArgumentException("La hora de entrega es obligatoria si las oficinas de recogida y entrega son diferentes.");
+            }
             Date limit = new Date(deliveryTime.getYear(), deliveryTime.getMonth(), deliveryTime.getDate(), 13, 0);
             if (deliveryTime.after(limit)) {
-                throw new IllegalArgumentException("La hora de entrega debe ser anterior a las 13:00.");
+                throw new IllegalArgumentException("La hora de entrega debe ser anterior a las 13:00 si las oficinas son diferentes.");
             }
         }
 

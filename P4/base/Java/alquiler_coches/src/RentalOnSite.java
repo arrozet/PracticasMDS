@@ -15,8 +15,8 @@ class RentalOnSite extends Rental {
      * @param customer  Cliente que realiza el alquiler.
      * @param comments  Comentarios adicionales sobre el alquiler.
      */
-    public RentalOnSite(Date startDate, Date endDate, Car car, Customer customer, String comments) {
-        super(startDate, endDate, car, customer);
+    public RentalOnSite(Date startDate, Date endDate, Car car, Customer customer, RentalOffice pickUpOffice, String comments) {
+        super(startDate, endDate, car, customer, pickUpOffice);
         this.comments = comments;
     }
 
