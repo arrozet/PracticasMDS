@@ -36,7 +36,6 @@ class Car {
      * @throws IllegalArgumentException Si no se encuentra un coche con la matrícula proporcionada.
      */
     public static Car findCarByLicensePlate(String licensePlate) {
-        System.out.println(allTheCars.toString());
         return allTheCars.stream()
                 .filter(car -> licensePlate.compareTo(car.getLicensePlate())==0)
                 .findFirst()

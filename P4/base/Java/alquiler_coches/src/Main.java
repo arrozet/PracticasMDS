@@ -104,8 +104,11 @@ public class Main {
             model1.setPricePerDay(55);
             System.out.println("Nuevo precio por día del modelo 1: " + model1);
 
+            /*
             car1.setLicensePlate("9876GHI");
             System.out.println("Nueva matrícula del coche 1: " + car1);
+            */
+
 
             rental2.setDeliveryTime(dateFormat.parse("2024-12-15 11:45"));
             System.out.println("Nueva hora de entrega del alquiler 2: " + rental2.getDeliveryTime());

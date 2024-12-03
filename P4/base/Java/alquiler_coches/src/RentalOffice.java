@@ -152,9 +152,6 @@ class RentalOffice {
         return "RentalOffice{" +
                 "address='" + address + '\'' +
                 ", feeForDelivery=" + feeForDelivery +
-                ", rentals=" + rentals.size() +
-                ", webRentals=" + webRentals.size() +
-                ", cars=" + cars.size() +
                 '}';
     }
 }

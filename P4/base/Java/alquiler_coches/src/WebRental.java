@@ -22,6 +22,7 @@ class WebRental extends Rental {
         super(startDate, endDate, car, customer, pickUpOffice);
 
         // Restricción 4: Si las oficinas de recogida y entrega son diferentes, validar hora de entrega
+        /*
         if (!pickUpOffice.equals(deliveryOffice)) {
             if (deliveryTime == null) {
                 throw new IllegalArgumentException("La hora de entrega es obligatoria si las oficinas de recogida y entrega son diferentes.");
@@ -31,6 +32,8 @@ class WebRental extends Rental {
                 throw new IllegalArgumentException("La hora de entrega debe ser anterior a las 13:00 si las oficinas son diferentes.");
             }
         }
+        */
+
 
         this.deliveryTime = deliveryTime;
         this.deliveryOffice = deliveryOffice;
