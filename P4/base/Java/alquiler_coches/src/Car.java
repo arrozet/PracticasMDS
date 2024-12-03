@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Clase que representa un coche en el sistema de alquiler.
  */
@@ -5,6 +8,7 @@ class Car {
     private String licensePlate; // Matrícula del coche
     private RentalOffice assignedOffice; // Oficina a la que está asignado el coche
     private Model model; // Modelo al que pertenece el coche
+    private List<Rental> rentals; // Lista de alquileres asociados al coche
 
     /**
      * Constructor de la clase Car.
@@ -17,7 +21,7 @@ class Car {
         this.licensePlate = licensePlate;
         this.assignedOffice = assignedOffice;
         this.model = model;
-        model.addCar(this); // Asociar este coche al modelo
+        this.rentals = new ArrayList<>();
     }
 
     /**
@@ -30,16 +34,16 @@ class Car {
     }
 
     /**
-     * Establece una nueva matrícula al coche.
+     * Establece una nueva matrícula para el coche.
      *
-     * @param licensePlate Matrícula nueva.
+     * @param licensePlate Nueva matrícula.
      */
     public void setLicensePlate(String licensePlate) {
         this.licensePlate = licensePlate;
     }
 
     /**
-     * Obtiene la oficina a la que está asignado el coche.
+     * Obtiene la oficina asignada al coche.
      *
      * @return Oficina asignada.
      */
@@ -48,7 +52,7 @@ class Car {
     }
 
     /**
-     * Establece la oficina asignada al coche.
+     * Establece una nueva oficina asignada al coche.
      *
      * @param assignedOffice Nueva oficina asignada.
      */
@@ -66,7 +70,7 @@ class Car {
     }
 
     /**
-     * Asigna un nuevo modelo al coche.
+     * Establece un nuevo modelo para el coche.
      *
      * @param model Nuevo modelo del coche.
      */
@@ -74,13 +78,57 @@ class Car {
         this.model = model;
     }
 
+    /**
+     * Obtiene la lista de alquileres asociados al coche.
+     *
+     * @return Lista de alquileres.
+     */
+    public List<Rental> getRentals() {
+        return rentals;
+    }
+
+    /**
+     * Añade un alquiler a la lista de alquileres del coche.
+     *
+     * @param rental Alquiler que se desea añadir.
+     * @throws IllegalArgumentException Si el alquiler ya está asociado al coche.
+     */
+    public void addRental(Rental rental) {
+        if (rentals.contains(rental)) {
+            throw new IllegalArgumentException("El alquiler ya está asociado a este coche.");
+        }
+        rentals.add(rental);
+    }
+
+    /**
+     * Elimina un alquiler de la lista de alquileres del coche.
+     *
+     * @param rental Alquiler que se desea eliminar.
+     * @throws IllegalArgumentException Si el alquiler no está asociado al coche.
+     */
+    public void removeRental(Rental rental) {
+        if (!rentals.contains(rental)) {
+            throw new IllegalArgumentException("El alquiler no está asociado a este coche.");
+        }
+        rentals.remove(rental);
+    }
+
+    /**
+     * Obtiene el número total de alquileres asociados al coche.
+     *
+     * @return Número de alquileres.
+     */
+    public int getNumberOfRentals() {
+        return rentals.size();
+    }
+
     @Override
     public String toString() {
         return "Car{" +
                 "licensePlate='" + licensePlate + '\'' +
-                ", assignedOffice=" + assignedOffice +
+                ", assignedOffice=" + assignedOffice.getAddress() +
                 ", model=" + model.getName() +
+                ", rentals=" + rentals.size() +
                 '}';
     }
-
 }

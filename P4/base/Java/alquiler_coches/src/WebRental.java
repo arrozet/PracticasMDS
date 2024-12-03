@@ -17,9 +17,9 @@ class WebRental extends Rental {
      * @param deliveryTime   Hora de devolución del coche (puede ser nula).
      * @param deliveryOffice Oficina de entrega del coche.
      */
-    public WebRental(Date startDate, Date endDate, Car car, Customer customer, Date deliveryTime,
+    public WebRental(Date startDate, Date endDate, Car car, Customer customer, RentalOffice pickUpOffice, Date deliveryTime,
                      RentalOffice deliveryOffice) {
-        super(startDate, endDate, car, customer);
+        super(startDate, endDate, car, customer, pickUpOffice);
 
         // Restricción de integridad 4
         if (!car.getAssignedOffice().equals(deliveryOffice)) {

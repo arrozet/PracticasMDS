@@ -9,22 +9,25 @@ public abstract class Rental {
     private Date endDate; // Fecha de finalización del alquiler
     private Car car; // Coche asociado al alquiler
     private Customer customer; // Cliente que realiza el alquiler
+    private RentalOffice pickUpOffice; // Oficina de recogida del coche
 
     /**
      * Constructor de la clase Rental.
      *
-     * @param startDate Fecha de inicio del alquiler.
-     * @param endDate   Fecha de finalización del alquiler.
-     * @param car       Coche asociado al alquiler.
-     * @param customer  Cliente que realiza el alquiler.
+     * @param startDate   Fecha de inicio del alquiler.
+     * @param endDate     Fecha de finalización del alquiler.
+     * @param car         Coche asociado al alquiler.
+     * @param customer    Cliente que realiza el alquiler.
+     * @param pickUpOffice Oficina de recogida del coche.
      */
-    public Rental(Date startDate, Date endDate, Car car, Customer customer) {
-        // Restricción de integridad 2 y 3
+    public Rental(Date startDate, Date endDate, Car car, Customer customer, RentalOffice pickUpOffice) {
+        // Restricción de integridad 2: la fecha de inicio debe ser anterior a la fecha final
         if (!startDate.before(endDate)) {
             throw new IllegalArgumentException("La fecha de inicio debe ser anterior a la fecha final.");
         }
 
-        if (!car.getAssignedOffice().equals(customer.getRentals().isEmpty() ? car.getAssignedOffice() : car.getAssignedOffice())) {
+        // Restricción de integridad 3: la oficina de recogida debe coincidir con la oficina asignada al coche
+        if (!pickUpOffice.equals(car.getAssignedOffice())) {
             throw new IllegalArgumentException("La oficina de recogida debe ser la misma que la oficina asignada al coche.");
         }
 
@@ -32,7 +35,8 @@ public abstract class Rental {
         this.endDate = endDate;
         this.car = car;
         this.customer = customer;
-        customer.addRental(this); // Verifica restricciones de cliente
+        this.pickUpOffice = pickUpOffice;
+        customer.addRental(this); // Verifica restricciones relacionadas con el cliente
     }
 
     /**
@@ -107,6 +111,27 @@ public abstract class Rental {
         this.customer = customer;
     }
 
+    /**
+     * Obtiene la oficina de recogida del coche.
+     *
+     * @return Oficina de recogida.
+     */
+    public RentalOffice getPickUpOffice() {
+        return pickUpOffice;
+    }
+
+    /**
+     * Establece la oficina de recogida del coche.
+     *
+     * @param pickUpOffice Oficina de recogida.
+     */
+    public void setPickUpOffice(RentalOffice pickUpOffice) {
+        if (!pickUpOffice.equals(car.getAssignedOffice())) {
+            throw new IllegalArgumentException("La oficina de recogida debe ser la misma que la oficina asignada al coche.");
+        }
+        this.pickUpOffice = pickUpOffice;
+    }
+
     @Override
     public String toString() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
@@ -115,7 +140,7 @@ public abstract class Rental {
                 ", endDate=" + dateFormat.format(endDate) +
                 ", car=" + car.getLicensePlate() +
                 ", customer=" + customer.getDni() +
+                ", pickUpOffice=" + pickUpOffice.getAddress() +
                 '}';
     }
-
 }
