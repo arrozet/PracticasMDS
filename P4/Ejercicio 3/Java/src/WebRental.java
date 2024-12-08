@@ -6,7 +6,7 @@ import java.util.Date;
 class WebRental extends Rental {
     private Date deliveryTime; // Hora de devolución del coche (opcional)
     private RentalOffice deliveryOffice; // Oficina de entrega
-
+   
     /**
      * Constructor de la clase WebRental.
      *
@@ -38,6 +38,7 @@ class WebRental extends Rental {
         this.deliveryTime = deliveryTime;
         this.deliveryOffice = deliveryOffice;
 
+        
         deliveryOffice.addWebRental(this);
     }
 
@@ -76,6 +77,17 @@ class WebRental extends Rental {
     public void setDeliveryOffice(RentalOffice deliveryOffice) {
         this.deliveryOffice = deliveryOffice;
     }
+    
+    /**
+     * Obtiene el precio final del alquiler
+     * 
+     * @return Precio final
+     */
+    @Override
+    public int getPrice() {
+        return super.getPrice() + getDeliveryOffice().getFeeForDelivery();
+    }
+    
 
     @Override
     public String toString() {
@@ -83,6 +95,7 @@ class WebRental extends Rental {
                 super.toString() +
                 ", deliveryTime=" + deliveryTime +
                 ", deliveryOffice=" + deliveryOffice +
+                ", Price=" + this.getPrice() +
                 '}';
     }
 

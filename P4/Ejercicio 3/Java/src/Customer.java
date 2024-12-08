@@ -88,7 +88,7 @@ class Customer {
 
         // Crear el alquiler web con las restricciones del sistema
         WebRental alquiler = new WebRental(fechaInicial, fechaFinal, coche, this,
-                coche.getAssignedOffice(), null, devolucion);
+                coche.getAssignedOffice() ,null, devolucion);
 
         return alquiler;
     }

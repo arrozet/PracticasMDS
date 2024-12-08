@@ -37,12 +37,24 @@ class RentalOnSite extends Rental {
     public void setComments(String comments) {
         this.comments = comments;
     }
+    
+    /**
+     * Obtiene el precio final del alquiler
+     * 
+     * @return Precio final
+     */
+    @Override
+    public int getPrice() {
+        return super.getPrice();
+    }
+
 
     @Override
     public String toString() {
         return "RentalOnSite{" +
                 super.toString() +
                 ", comments='" + comments + '\'' +
+                ", Price='" + this.getPrice() +
                 '}';
     }
 

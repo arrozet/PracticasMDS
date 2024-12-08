@@ -10,6 +10,7 @@ public abstract class Rental {
     private Car car; // Coche asociado al alquiler
     private Customer customer; // Cliente que realiza el alquiler
     private RentalOffice pickUpOffice; // Oficina de recogida del coche
+    private Promotion promotion;
 
     /**
      * Constructor de la clase Rental.
@@ -135,6 +136,35 @@ public abstract class Rental {
         }
         this.pickUpOffice = pickUpOffice;
     }
+    
+    /**
+     * Actualiza la promoción a la que se va a someter el alquiler
+     * 
+     * @param promotion promoción del alquiler 
+     */
+    public void setPromotion(Promotion promotion) {
+        this.promotion = promotion;
+    }
+    
+    /**
+     * Obtiene el precio final del alquiler
+     * 
+     * @return Precio final
+     */
+    public int getPrice() {
+        long diffInMillis = endDate.getTime() - startDate.getTime();
+        int rentalDays = (int) (diffInMillis / (1000 * 60 * 60 * 24));
+        int basePrice = rentalDays * this.getCar().getModel().getPricePerDay();
+        if (promotion != null) {
+            return promotion.applyPromotion(basePrice);
+        }
+
+        return basePrice; // Sin promoción aplicada
+    }
+
+    
+
+    
 
     @Override
     public String toString() {
@@ -145,6 +175,7 @@ public abstract class Rental {
                 ", car=" + car.getLicensePlate() +
                 ", customer=" + customer.getDni() +
                 ", pickUpOffice=" + pickUpOffice.getAddress() +
+                ", Price=" + this.getPrice() +
                 '}';
     }
 }
