@@ -1,10 +1,11 @@
+import java.time.LocalTime;
 import java.util.Date;
 
 /**
  * Clase que representa un alquiler realizado a través de la aplicación web.
  */
 class WebRental extends Rental {
-    private Date deliveryTime; // Hora de devolución del coche (opcional)
+    private LocalTime deliveryTime; // Hora de devolución del coche (opcional)
     private RentalOffice deliveryOffice; // Oficina de entrega
 
     /**
@@ -17,23 +18,9 @@ class WebRental extends Rental {
      * @param deliveryTime   Hora de devolución del coche (puede ser nula).
      * @param deliveryOffice Oficina de entrega del coche.
      */
-    public WebRental(Date startDate, Date endDate, Car car, Customer customer, RentalOffice pickUpOffice, Date deliveryTime,
+    public WebRental(Date startDate, Date endDate, Car car, Customer customer, RentalOffice pickUpOffice, LocalTime deliveryTime,
                      RentalOffice deliveryOffice) {
         super(startDate, endDate, car, customer, pickUpOffice);
-
-        // Restricción 4: Si las oficinas de recogida y entrega son diferentes, validar hora de entrega
-        /*
-        if (!pickUpOffice.equals(deliveryOffice)) {
-            if (deliveryTime == null) {
-                throw new IllegalArgumentException("La hora de entrega es obligatoria si las oficinas de recogida y entrega son diferentes.");
-            }
-            Date limit = new Date(deliveryTime.getYear(), deliveryTime.getMonth(), deliveryTime.getDate(), 13, 0);
-            if (deliveryTime.after(limit)) {
-                throw new IllegalArgumentException("La hora de entrega debe ser anterior a las 13:00 si las oficinas son diferentes.");
-            }
-        }
-        */
-
 
         this.deliveryTime = deliveryTime;
         this.deliveryOffice = deliveryOffice;
@@ -46,7 +33,7 @@ class WebRental extends Rental {
      *
      * @return Hora de devolución.
      */
-    public Date getDeliveryTime() {
+    public LocalTime getDeliveryTime() {
         return deliveryTime;
     }
 
@@ -55,7 +42,7 @@ class WebRental extends Rental {
      *
      * @param deliveryTime Hora de devolución.
      */
-    public void setDeliveryTime(Date deliveryTime) {
+    public void setDeliveryTime(LocalTime deliveryTime) {
         this.deliveryTime = deliveryTime;
     }
 

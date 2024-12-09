@@ -1,3 +1,4 @@
+import java.time.LocalTime;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.Enumeration;
@@ -40,9 +41,6 @@ public class Main {
             Car car1 = new Car("1234ABC", office1, model1);
             Car car2 = new Car("5678DEF", office2, model2);
 
-            //office1.addCar(car1);
-            //office2.addCar(car2);
-
             System.out.println("\nCoches creados y asignados a oficinas:");
             System.out.println(car1);
             System.out.println(car2);
@@ -75,12 +73,9 @@ public class Main {
                     car2,
                     customer2,
                     office2,
-                    dateFormat.parse("2024-12-15 12:30"),
+                    LocalTime.of(12,30),
                     office1
             );
-
-            //office2.addRental(rental2);
-            //car2.addRental(rental2);
 
             System.out.println("\nAlquileres creados:");
             System.out.println(rental1);
@@ -104,13 +99,8 @@ public class Main {
             model1.setPricePerDay(55);
             System.out.println("Nuevo precio por día del modelo 1: " + model1);
 
-            /*
-            car1.setLicensePlate("9876GHI");
-            System.out.println("Nueva matrícula del coche 1: " + car1);
-            */
 
-
-            rental2.setDeliveryTime(dateFormat.parse("2024-12-15 11:45"));
+            rental2.setDeliveryTime(LocalTime.of(11,45));
             System.out.println("Nueva hora de entrega del alquiler 2: " + rental2.getDeliveryTime());
 
             // === Nuevas funcionalidades ===
@@ -127,8 +117,7 @@ public class Main {
 
             // Probar devolverCocheAlquiladoEnWeb
             System.out.println("\nCliente 1 devuelve el coche alquilado:");
-            Date fechaDevolucion = customer1.devolverCocheAlquiladoEnWeb(nuevoAlquiler);
-            System.out.println("Coche devuelto en la fecha: " + fechaDevolucion);
+            System.out.println(customer1.devolverCocheAlquiladoEnWeb(nuevoAlquiler));
 
             // Verificar la oficina asignada del coche tras la devolución
             System.out.println("Oficina asignada al coche tras devolución: " + car1.getAssignedOffice());
