@@ -31,6 +31,7 @@ public class Main {
 
             int N = 10; // Número de alquileres a añadir
 
+            System.out.println("INTRODUCIENDO " +  N + " ALQUILERES CON DISTINTAS OFICINAS DE RECOGIDA Y ENTREGA...\n");
             for (int i = 0; i < N; i++) {
                 // Fechas dinámicas para cada alquiler
                 Date pickupDate = dateFormat.parse("2024-12-" + String.format("%02d", 1 + i));
@@ -47,7 +48,7 @@ public class Main {
                 // Asignar la oficina de devolución actual para que sea la de recogida del próximo alquiler
             }
 
-
+            System.out.println("INTRODUCIENDO " +  N + " ALQUILERES CON MISMAS OFICINAS DE RECOGIDA Y ENTREGA...\n");
             for (int i = 0; i < N; i++) {
                 // Fechas dinámicas para cada alquiler
                 Date pickupDate = dateFormat.parse("2024-12-" + String.format("%02d", N + 1 + i));
