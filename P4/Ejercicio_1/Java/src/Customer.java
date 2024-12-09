@@ -124,7 +124,7 @@ class Customer {
      */
     public Date devolverCocheAlquiladoEnWeb(WebRental wr) {
         // Registrar la hora de finalización del alquiler
-        wr.setEndDate(Date.from(Instant.now()));
+        wr.setDeliveryTime(Date.from(Instant.now()));
 
         // Actualizar la oficina asignada del coche al devolverlo
         wr.getCar().setAssignedOffice(wr.getDeliveryOffice());
