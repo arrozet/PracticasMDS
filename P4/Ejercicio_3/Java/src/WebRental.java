@@ -1,10 +1,11 @@
+import java.time.LocalTime;
 import java.util.Date;
 
 /**
  * Clase que representa un alquiler realizado a través de la aplicación web.
  */
 class WebRental extends Rental {
-    private Date deliveryTime; // Hora de devolución del coche (opcional)
+    private LocalTime deliveryTime; // Hora de devolución del coche (opcional)
     private RentalOffice deliveryOffice; // Oficina de entrega
    
     /**
@@ -17,7 +18,7 @@ class WebRental extends Rental {
      * @param deliveryTime   Hora de devolución del coche (puede ser nula).
      * @param deliveryOffice Oficina de entrega del coche.
      */
-    public WebRental(Date startDate, Date endDate, Car car, Customer customer, RentalOffice pickUpOffice, Date deliveryTime,
+    public WebRental(Date startDate, Date endDate, Car car, Customer customer, RentalOffice pickUpOffice, LocalTime deliveryTime,
                      RentalOffice deliveryOffice) {
         super(startDate, endDate, car, customer, pickUpOffice);
 
@@ -47,7 +48,7 @@ class WebRental extends Rental {
      *
      * @return Hora de devolución.
      */
-    public Date getDeliveryTime() {
+    public LocalTime getDeliveryTime() {
         return deliveryTime;
     }
 
@@ -56,7 +57,7 @@ class WebRental extends Rental {
      *
      * @param deliveryTime Hora de devolución.
      */
-    public void setDeliveryTime(Date deliveryTime) {
+    public void setDeliveryTime(LocalTime deliveryTime) {
         this.deliveryTime = deliveryTime;
     }
 

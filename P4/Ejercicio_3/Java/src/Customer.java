@@ -1,4 +1,6 @@
+import java.text.SimpleDateFormat;
 import java.time.Instant;
+import java.time.LocalTime;
 import java.util.*;
 
 /**
@@ -96,17 +98,34 @@ class Customer {
     /**
      * Registra la devolución de un coche alquilado en la web.
      *
+     * Este método valida que la hora de devolución sea anterior a las 13:00 si las oficinas
+     * de recogida y entrega son diferentes, conforme a las restricciones del sistema.
+     * También actualiza la oficina asignada al coche y registra la hora de devolución.
+     *
      * @param wr El objeto {@code WebRental} correspondiente al alquiler que se desea finalizar.
-     * @return La fecha de fin del alquiler registrada.
+     * @return Un mensaje que indica la fecha y hora de devolución del coche.
+     * @throws IllegalArgumentException Si las oficinas son diferentes y la hora de devolución
+     *                                  es posterior a las 13:00.
      */
-    public Date devolverCocheAlquiladoEnWeb(WebRental wr) {
+
+    public String devolverCocheAlquiladoEnWeb(WebRental wr) {
+        LocalTime ahora = LocalTime.now();
+        // Restricción 4: Si las oficinas de recogida y entrega son diferentes, validar hora de entrega
+        if (!wr.getPickUpOffice().equals(wr.getDeliveryOffice())) {
+            LocalTime limit = LocalTime.of(15,0);
+            if (ahora.isAfter(limit)) {
+                throw new IllegalArgumentException("La hora de entrega debe ser anterior a las 13:00 si las oficinas son diferentes.");
+            }
+        }
+
         // Registrar la hora de finalización del alquiler
-        wr.setEndDate(Date.from(Instant.now()));
+        wr.setDeliveryTime(ahora);
 
         // Actualizar la oficina asignada del coche al devolverlo
         wr.getCar().setAssignedOffice(wr.getDeliveryOffice());
 
-        return wr.getEndDate();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        return "El coche ha sido devuelto el día " + dateFormat.format(wr.getEndDate()) + " a las " + wr.getDeliveryTime();
     }
 
 

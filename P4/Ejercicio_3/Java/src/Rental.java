@@ -168,7 +168,7 @@ public abstract class Rental {
 
     @Override
     public String toString() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         return "Rental{" +
                 "startDate=" + dateFormat.format(startDate) +
                 ", endDate=" + dateFormat.format(endDate) +

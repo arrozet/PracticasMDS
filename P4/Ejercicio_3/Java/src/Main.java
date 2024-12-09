@@ -1,3 +1,4 @@
+import java.time.LocalTime;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.Enumeration;
@@ -54,7 +55,7 @@ public class Main {
                     car2,
                     customer2,
                     office2,
-                    dateFormat.parse("2024-12-15 12:30"),
+                    LocalTime.of(12,30),
                     office1
             );
 
@@ -85,7 +86,7 @@ public class Main {
                     car1,
                     customer1,
                     office1,
-                    dateFormat.parse("2024-12-25 11:30"),
+                    LocalTime.of(11,30),
                     office2
             );
             newRental.setPromotion(new AmountPromotion(30)); // 30 unidades descuento
