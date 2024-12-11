@@ -9,8 +9,8 @@ class Car {
     private Model model; // Modelo al que pertenece el coche
     private List<Rental> rentals; // Lista de alquileres asociados al coche
     public static List<Car> allTheCars = new ArrayList<>();
-    private CarState state; //Estado actual del coche
-    private Date outOfServiceUntil; //En caso de que esté fuera de servicio, la fecha hasta que lo está
+    private State state; //Estado actual del coche
+
 
     /**
      * Constructor de la clase Car.
@@ -24,7 +24,7 @@ class Car {
         this.assignedOffice = assignedOffice;
         this.model = model;
         this.rentals = new ArrayList<>();
-        this.state = CarState.IN_SERVICE;
+        this.state = new InService(this);
 
         model.addCar(this);
         allTheCars.add(this);
@@ -114,7 +114,7 @@ class Car {
      *
      * @return Un Enumeration que informando del estado del coche
      */
-    public CarState getState() {
+    public State getState() {
         return state;
     }
 
@@ -123,9 +123,7 @@ class Car {
      *
      * @return Un Date indicando la fecha hasta la que está fuera de servicio, o null si no lo está.
      */
-    public Date getOutOfServiceUntil() {
-        return (this.state == CarState.OUT_OF_SERVICE) ? this.outOfServiceUntil : null;
-    }
+
 
 
     /**
@@ -159,55 +157,26 @@ class Car {
      * @param backToService Fecha hasta la cual estará fuera de servicio.
      */
     public void takeOutOfService(Date backToService) {
-        if (state == CarState.OUT_OF_SERVICE) {
-            System.out.println("El coche ya está fuera de servicio.");
-            return;
-        }
-
-        if (state == CarState.SUBSTITUTE) {
-            System.out.println("El coche es un sustituto y no puede ser marcado fuera de servicio.");
-            return;
-        }
-
-        // Buscar un coche sustituto
-        Car substituteCar = findSubstituteCar(model, assignedOffice);
-        if (substituteCar != null) {
-            substituteCar.state = CarState.SUBSTITUTE;
-            System.out.println("Coche sustituto asignado: " + substituteCar.getLicensePlate());
-        } else {
-            System.out.println("No hay coches sustitutos disponibles.");
-        }
-
-        this.state = CarState.OUT_OF_SERVICE;
-        this.outOfServiceUntil = backToService;
-        System.out.println("Coche marcado como fuera de servicio hasta: " + backToService);
+        state.takeOutOfService(backToService);
     }
 
-    /**
-     * Encuentra un coche sustituto en la misma oficina y modelo.
-     *
-     * @param model Modelo del coche.
-     * @param office Oficina asignada.
-     * @return Un coche disponible como sustituto, o null si no hay ninguno.
-     */
-    private Car findSubstituteCar(Model model, RentalOffice office) {
-        return allTheCars.stream()
-                .filter(car -> car.getModel().equals(model) &&
-                        car.getAssignedOffice().equals(office) &&
-                        car.state == CarState.IN_SERVICE)
-                .findFirst()
-                .orElse(null);
-    }
+
 
 
     @Override
     public String toString() {
         return "Car{" +
                 "licensePlate='" + licensePlate + '\'' +
-                ", state=" + state +
+                ", state=" + state.getClass() +
                 ", assignedOffice=" + assignedOffice.getAddress() +
                 ", model=" + model.getName() +
                 ", rentals=" + rentals.size() +
                 '}';
     }
+
+    public void setState(State state) {
+        this.state = state;
+    }
+
+
 }
