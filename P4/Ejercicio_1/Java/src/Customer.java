@@ -17,10 +17,10 @@ class Customer {
      * @param dni  Identificador único del cliente.
      * @param name Nombre del cliente.
      */
-    public Customer(String dni, String name) {
+    public Customer(String dni, String name, Collection<Rental> rentals) {
         this.dni = dni;
         this.name = name;
-        this.rentals = new ArrayList<>(); // Por defecto, usamos ArrayList
+        this.rentals = rentals; // Por defecto, usamos ArrayList
     }
 
     /**
