@@ -1,4 +1,5 @@
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Main {
@@ -19,7 +20,7 @@ public class Main {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
             // Crear cliente
-            Customer customer = new Customer("12345678A", "Juan Pérez");
+            Customer customer = new Customer("12345678A", "Juan Pérez", new ArrayList<>());
 
             // Crear oficinas de alquiler
             RentalOffice office1 = new RentalOffice("Calle Luna 5", 20);
