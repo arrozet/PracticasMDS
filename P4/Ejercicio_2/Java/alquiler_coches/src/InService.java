@@ -24,16 +24,16 @@ public class InService implements State {
     @Override
     public void takeOutOfService(Date backToService) {
         // Buscar un coche sustituto
-        Car substituteCar = findSubstituteCar(car.getModel(), car.getAssignedOffice());
+        Car substituteCar = findSubstituteCar(car.getModel(), car.getAssignedOffice(), car.getLicensePlate());
         if (substituteCar != null) {
-            substituteCar.setState(new Substitute(car));
+            substituteCar.getContext().setState(new Substitute(car));
             System.out.println("Coche sustituto asignado: " + substituteCar.getLicensePlate());
         } else {
             System.out.println("No hay coches sustitutos disponibles.");
         }
 
         // Cambiar el estado del coche a "Fuera de Servicio"
-        car.setState(new OutOfService(car, backToService));
+        car.getContext().setState(new OutOfService(car, backToService));
         System.out.println("Coche marcado como fuera de servicio hasta: " + backToService);
     }
 
@@ -44,11 +44,11 @@ public class InService implements State {
      * @param office Oficina asignada al coche original.
      * @return Un coche sustituto disponible, o null si no se encuentra ninguno.
      */
-    private Car findSubstituteCar(Model model, RentalOffice office) {
+    private Car findSubstituteCar(Model model, RentalOffice office, String LicensePlate) {
         return car.allTheCars.stream()
                 .filter(c -> car.getModel().equals(model) &&
                         c.getAssignedOffice().equals(office) &&
-                        c.getState() instanceof InService)
+                        c.getContext().getState() instanceof InService)
                 .findFirst()
                 .orElse(null);
     }

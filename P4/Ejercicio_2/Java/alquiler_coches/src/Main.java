@@ -122,6 +122,33 @@ public class Main {
             // Verificar la oficina asignada del coche tras la devolución
             System.out.println("Oficina asignada al coche tras devolución: " + car1.getAssignedOffice());
 
+            // Vamos a crear dos coches una oficina y un modelo nuevo
+            System.out.println("\nPruebas del ejercicio 2:");
+
+            RentalOffice office3 = new RentalOffice("Calle Wallaby 42 Sidney", 20);
+
+            Model model3 = new Model("BMW M3 e30", 70);
+
+            Car car3 = new Car("7777VEG", office3, model3);
+            Car car4 = new Car("6666DEM", office3, model3);
+
+            System.out.println("\nCoches asignados a la oficina 3:");
+            printEnumeration(office3.getCars());
+
+            // Ponemos car3 fuera de servicio
+            System.out.println("\nPonemos el primero fuera de servicio");
+            car3.getContext().takeOutOfService(dateFormat.parse("2024-12-25"));
+            System.out.println("\nCoches asignados a la oficina 3:");
+            printEnumeration(office3.getCars());
+
+            // Ponemos car4 fuera de servicio
+            System.out.println("\nY ahora el otro");
+            car4.getContext().takeOutOfService(dateFormat.parse("2024-12-28"));
+            System.out.println("\nCoches asignados a la oficina 3:");
+            printEnumeration(office3.getCars());
+
+
+
         } catch (Exception e) {
             System.err.println("Error en las pruebas: " + e.getMessage());
             e.printStackTrace();

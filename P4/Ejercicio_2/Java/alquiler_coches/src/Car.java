@@ -9,8 +9,7 @@ class Car {
     private Model model; // Modelo al que pertenece el coche
     private List<Rental> rentals; // Lista de alquileres asociados al coche
     public static List<Car> allTheCars = new ArrayList<>();
-    private State state; //Estado actual del coche
-
+    private Context context;
 
     /**
      * Constructor de la clase Car.
@@ -24,7 +23,7 @@ class Car {
         this.assignedOffice = assignedOffice;
         this.model = model;
         this.rentals = new ArrayList<>();
-        this.state = new InService(this);
+        this.context = new Context(new InService(this));
 
         model.addCar(this);
         allTheCars.add(this);
@@ -114,8 +113,8 @@ class Car {
      *
      * @return Un Enumeration que informando del estado del coche
      */
-    public State getState() {
-        return state;
+    public Context getContext() {
+        return context;
     }
 
     /**
@@ -151,31 +150,20 @@ class Car {
         }
         rentals.remove(rental);
     }
-    /**
-     * Cambia el estado del coche a "fuera de servicio".
-     *
-     * @param backToService Fecha hasta la cual estará fuera de servicio.
-     */
-    public void takeOutOfService(Date backToService) {
-        state.takeOutOfService(backToService);
-    }
-
-
-
 
     @Override
     public String toString() {
         return "Car{" +
                 "licensePlate='" + licensePlate + '\'' +
-                ", state=" + state.getClass() +
+                ", state=" + context.getState().getClass() +
                 ", assignedOffice=" + assignedOffice.getAddress() +
                 ", model=" + model.getName() +
                 ", rentals=" + rentals.size() +
                 '}';
     }
 
-    public void setState(State state) {
-        this.state = state;
+    public void setContext(Context context) {
+        this.context = context;
     }
 
 
