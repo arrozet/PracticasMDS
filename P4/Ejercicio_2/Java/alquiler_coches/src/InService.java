@@ -44,11 +44,12 @@ public class InService implements State {
      * @param office Oficina asignada al coche original.
      * @return Un coche sustituto disponible, o null si no se encuentra ninguno.
      */
-    private Car findSubstituteCar(Model model, RentalOffice office, String LicensePlate) {
+    private Car findSubstituteCar(Model model, RentalOffice office, String licensePlate) {
         return car.allTheCars.stream()
                 .filter(c -> car.getModel().equals(model) &&
                         c.getAssignedOffice().equals(office) &&
-                        c.getContext().getState() instanceof InService)
+                        c.getContext().getState() instanceof InService &&
+                        !c.getLicensePlate().equals(licensePlate))
                 .findFirst()
                 .orElse(null);
     }
