@@ -84,10 +84,7 @@ class WebRental extends Rental {
      * 
      * @return Precio final
      */
-    @Override
-    public int getPrice() {
-        return super.getPrice() + getDeliveryOffice().getFeeForDelivery();
-    }
+
     
 
     @Override
@@ -96,7 +93,7 @@ class WebRental extends Rental {
                 super.toString() +
                 ", deliveryTime=" + deliveryTime +
                 ", deliveryOffice=" + deliveryOffice +
-                ", Price=" + this.getPrice() +
+                ", Price=" + this.getContext().getPrice(this) +
                 '}';
     }
 

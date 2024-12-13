@@ -1,7 +1,7 @@
-public class AmountPromotion implements Promotion {
+public class AmountPromotionStrategy implements PromotionStrategy {
     private final int discountAmount;
 
-    public AmountPromotion(int discountAmount) {
+    public AmountPromotionStrategy(int discountAmount) {
         this.discountAmount = discountAmount;
     }
 

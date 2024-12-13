@@ -10,7 +10,7 @@ public abstract class Rental {
     private Car car; // Coche asociado al alquiler
     private Customer customer; // Cliente que realiza el alquiler
     private RentalOffice pickUpOffice; // Oficina de recogida del coche
-    private Promotion promotion;
+    private Context context; // context // C'ontexto de la promoción
 
     /**
      * Constructor de la clase Rental.
@@ -21,7 +21,7 @@ public abstract class Rental {
      * @param customer    Cliente que realiza el alquiler.
      * @param pickUpOffice Oficina de recogida del coche.
      */
-    public Rental(Date startDate, Date endDate, Car car, Customer customer, RentalOffice pickUpOffice) {
+    public Rental(Date startDate, Date endDate, Car car, Customer customer, RentalOffice pickUpOffice ) {
         // Restricción de integridad 2: la fecha de inicio debe ser anterior a la fecha final
         if (!startDate.before(endDate)) {
             throw new IllegalArgumentException("La fecha de inicio debe ser anterior a la fecha final.");
@@ -37,6 +37,7 @@ public abstract class Rental {
         this.car = car;
         this.customer = customer;
         this.pickUpOffice = pickUpOffice;
+        this.context = new Context();
 
         // Añado la relación en todos los lados
         customer.addRental(this);
@@ -69,6 +70,14 @@ public abstract class Rental {
      */
     public Date getEndDate() {
         return endDate;
+    }
+
+    public Context getContext() {
+        return context;
+    }
+
+    public void setContext(Context context) {
+        this.context = context;
     }
 
     /**
@@ -136,35 +145,8 @@ public abstract class Rental {
         }
         this.pickUpOffice = pickUpOffice;
     }
-    
-    /**
-     * Actualiza la promoción a la que se va a someter el alquiler
-     * 
-     * @param promotion promoción del alquiler 
-     */
-    public void setPromotion(Promotion promotion) {
-        this.promotion = promotion;
-    }
-    
-    /**
-     * Obtiene el precio final del alquiler
-     * 
-     * @return Precio final
-     */
-    public int getPrice() {
-        long diffInMillis = endDate.getTime() - startDate.getTime();
-        int rentalDays = (int) (diffInMillis / (1000 * 60 * 60 * 24));
-        int basePrice = rentalDays * this.getCar().getModel().getPricePerDay();
-        if (promotion != null) {
-            return promotion.applyPromotion(basePrice);
-        }
 
-        return basePrice; // Sin promoción aplicada
-    }
 
-    
-
-    
 
     @Override
     public String toString() {
@@ -175,7 +157,7 @@ public abstract class Rental {
                 ", car=" + car.getLicensePlate() +
                 ", customer=" + customer.getDni() +
                 ", pickUpOffice=" + pickUpOffice.getAddress() +
-                ", Price=" + this.getPrice() +
+                ", Price=" + context.getPrice(this) +
                 '}';
     }
 }

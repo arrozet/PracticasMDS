@@ -1,7 +1,7 @@
-public class PercentagePromotion implements Promotion {
+public class PercentagePromotionStrategy implements PromotionStrategy {
     private final double percentage;
 
-    public PercentagePromotion(double percentage) {
+    public PercentagePromotionStrategy(double percentage) {
         this.percentage = percentage;
     }
 

@@ -1,5 +1,5 @@
 
-public interface Promotion {
+public interface PromotionStrategy {
 	/**
 	 *  Función que calcula el precio según la promoción que tenga el alquiler
 	 * 

@@ -1,7 +1,5 @@
 import java.time.LocalTime;
-import java.util.Date;
 import java.text.SimpleDateFormat;
-import java.util.Enumeration;
 
 public class Main {
     public static void main(String[] args) {
@@ -66,17 +64,17 @@ public class Main {
             // === NUEVO: Ejercicio 3 - Cálculo de precios con promociones ===
 
             // Crear promociones
-            Promotion percentagePromotion = new PercentagePromotion(10); // 10% descuento
-            Promotion amountPromotion = new AmountPromotion(20);        // 20€ descuento
+            PromotionStrategy percentagePromotionStrategy = new PercentagePromotionStrategy(10); // 10% descuento
+            PromotionStrategy amountPromotionStrategy = new AmountPromotionStrategy(20);        // 20€ descuento
 
             // Asignar promociones a los alquileres
-            rental1.setPromotion(percentagePromotion);
-            rental2.setPromotion(amountPromotion);
+            rental1.getContext().setPromotionStrategy(percentagePromotionStrategy);
+            rental2.getContext().setPromotionStrategy(amountPromotionStrategy);
 
             // Calcular y mostrar precios finales de los alquileres
             System.out.println("\n=== Cálculo de precios de los alquileres ===");
-            System.out.println("Precio del alquiler 1 (con promoción del 10%): " + rental1.getPrice() + " €");
-            System.out.println("Precio del alquiler 2 (con promoción de 20€): " + rental2.getPrice() + " €");
+            System.out.println("Precio del alquiler 1 (con promoción del 10%): " + rental1.getContext().getPrice(rental1) + " €");
+            System.out.println("Precio del alquiler 2 (con promoción de 20€): " + rental2.getContext().getPrice(rental2) + " €");
 
             // Crear un nuevo alquiler para probar otra promoción
             System.out.println("\nCrear un alquiler nuevo con una promoción:");
@@ -89,8 +87,8 @@ public class Main {
                     LocalTime.of(11,30),
                     office2
             );
-            newRental.setPromotion(new AmountPromotion(30)); // 30 unidades descuento
-            System.out.println("Precio del nuevo alquiler: " + newRental.getPrice() + " €");
+            newRental.getContext().setPromotionStrategy(new AmountPromotionStrategy(30)); // 30 unidades descuento
+            System.out.println("Precio del nuevo alquiler: " + newRental.getContext().getPrice(newRental) + " €");
 
         } catch (Exception e) {
             System.err.println("Error en las pruebas: " + e.getMessage());
