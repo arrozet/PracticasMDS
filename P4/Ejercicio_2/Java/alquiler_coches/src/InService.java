@@ -1,10 +1,26 @@
 import java.util.Date;
 
-public class InService implements State{
+/**
+ * Clase que representa el estado "En Servicio" de un coche.
+ */
+public class InService implements State {
     private Car car;
-    public InService(Car car){
+
+    /**
+     * Constructor de la clase InService.
+     *
+     * @param car El coche que se encuentra en el estado "En Servicio".
+     */
+    public InService(Car car) {
         this.car = car;
     }
+
+    /**
+     * Cambia el estado del coche a "Fuera de Servicio".
+     * Si se encuentra un coche sustituto disponible, se asignará como sustituto.
+     *
+     * @param backToService Fecha hasta la cual el coche estará fuera de servicio.
+     */
     @Override
     public void takeOutOfService(Date backToService) {
         // Buscar un coche sustituto
@@ -16,9 +32,18 @@ public class InService implements State{
             System.out.println("No hay coches sustitutos disponibles.");
         }
 
+        // Cambiar el estado del coche a "Fuera de Servicio"
         car.setState(new OutOfService(car, backToService));
         System.out.println("Coche marcado como fuera de servicio hasta: " + backToService);
     }
+
+    /**
+     * Busca un coche sustituto disponible que pertenezca al mismo modelo y oficina.
+     *
+     * @param model Modelo del coche original.
+     * @param office Oficina asignada al coche original.
+     * @return Un coche sustituto disponible, o null si no se encuentra ninguno.
+     */
     private Car findSubstituteCar(Model model, RentalOffice office) {
         return car.allTheCars.stream()
                 .filter(c -> car.getModel().equals(model) &&
