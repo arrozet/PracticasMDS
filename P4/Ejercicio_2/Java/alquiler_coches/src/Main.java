@@ -137,13 +137,13 @@ public class Main {
 
             // Ponemos car3 fuera de servicio
             System.out.println("\nPonemos el primero fuera de servicio");
-            car3.getContext().takeOutOfService(dateFormat.parse("2024-12-25"));
+            car3.takeOutOfService(dateFormat.parse("2024-12-25"));
             System.out.println("\nCoches asignados a la oficina 3:");
             printEnumeration(office3.getCars());
 
             // Ponemos car4 fuera de servicio
             System.out.println("\nY ahora el otro");
-            car4.getContext().takeOutOfService(dateFormat.parse("2024-12-28"));
+            car4.takeOutOfService(dateFormat.parse("2024-12-28"));
             System.out.println("\nCoches asignados a la oficina 3:");
             printEnumeration(office3.getCars());
 

@@ -9,7 +9,7 @@ class Car {
     private Model model; // Modelo al que pertenece el coche
     private List<Rental> rentals; // Lista de alquileres asociados al coche
     public static List<Car> allTheCars = new ArrayList<>();
-    private Context context;
+    private State state;
 
     /**
      * Constructor de la clase Car.
@@ -23,7 +23,7 @@ class Car {
         this.assignedOffice = assignedOffice;
         this.model = model;
         this.rentals = new ArrayList<>();
-        this.context = new Context(new InService(this));
+        this.state = new InService(this);
 
         model.addCar(this);
         allTheCars.add(this);
@@ -113,8 +113,8 @@ class Car {
      *
      * @return Un Enumeration que informando del estado del coche
      */
-    public Context getContext() {
-        return context;
+    public State getState() {
+        return state;
     }
 
     /**
@@ -155,16 +155,19 @@ class Car {
     public String toString() {
         return "Car{" +
                 "licensePlate='" + licensePlate + '\'' +
-                ", state=" + context.getState().getClass() +
+                ", state=" + state.getClass() +
                 ", assignedOffice=" + assignedOffice.getAddress() +
                 ", model=" + model.getName() +
                 ", rentals=" + rentals.size() +
                 '}';
     }
 
-    public void setContext(Context context) {
-        this.context = context;
+    public void setState(State state) {
+        this.state = state;
     }
 
+    public void takeOutOfService(Date backToService) {
+        state.takeOutOfService(backToService);
+    }
 
 }
