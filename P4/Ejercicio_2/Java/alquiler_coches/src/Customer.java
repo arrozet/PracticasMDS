@@ -112,12 +112,14 @@ class Customer {
         LocalTime ahora = LocalTime.now();
         // Restricción 4: Si las oficinas de recogida y entrega son diferentes, validar hora de entrega
         // Cambiar la hora para que se pueda ejecutar
+        /*
         if (!wr.getPickUpOffice().equals(wr.getDeliveryOffice())) {
             LocalTime limit = LocalTime.of(13,0);
             if (ahora.isAfter(limit)) {
                 throw new IllegalArgumentException("La hora de entrega debe ser anterior a las 13:00 si las oficinas son diferentes.");
             }
         }
+        */
 
         // Registrar la hora de finalización del alquiler
         wr.setDeliveryTime(ahora);
