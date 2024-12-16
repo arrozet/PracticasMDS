@@ -20,15 +20,15 @@ public class Context {
 
         long diffInMillis = rental.getEndDate().getTime() - rental.getStartDate().getTime();
         int rentalDays = (int) (diffInMillis / (1000 * 60 * 60 * 24));
-        int PrecioFinah = rentalDays * rental.getCar().getModel().getPricePerDay();
+        int precioFinah = rentalDays * rental.getCar().getModel().getPricePerDay();
         if (promotionStrategy != null) {
-            PrecioFinah = promotionStrategy.applyPromotion(PrecioFinah);
+            precioFinah = promotionStrategy.applyPromotion(precioFinah);
 
         }
         if(rental instanceof  WebRental){
-            PrecioFinah += ((WebRental)rental).getDeliveryOffice().getFeeForDelivery();
+            precioFinah += ((WebRental)rental).getDeliveryOffice().getFeeForDelivery();
         }
 
-        return PrecioFinah; // Sin promoción aplicada
+        return precioFinah; // Sin promoción aplicada
     }
 }

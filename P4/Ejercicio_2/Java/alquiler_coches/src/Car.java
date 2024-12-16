@@ -166,6 +166,11 @@ class Car {
         this.state = state;
     }
 
+    /**
+     * Cambia el estado del coche a "fuera de servicio".
+     *
+     * @param backToService Fecha hasta la cual estará fuera de servicio.
+     */
     public void takeOutOfService(Date backToService) {
         state.takeOutOfService(backToService);
     }
